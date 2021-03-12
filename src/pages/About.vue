@@ -1,5 +1,5 @@
-<template lang="html">
+<template>
   <div>
-    <h2>Hello World</h2>
+    <h1 class="blue text-center">About Page</h1>
   </div>
 </template>
