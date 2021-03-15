@@ -5,13 +5,15 @@
             <form class="m-5" @submit.prevent="register">
                 <div class="form-group-blue">
                     <input class="form-control-blue" type="text" placeholder="Full Name" v-model.trim="fullname" required>
+                    <br><span class="text-red-600 font-bold">{{ fullnameError }}</span>
                 </div>
                 <div class="form-group-blue">
                     <input class="form-control-blue" type="text" placeholder="Username" v-model.trim="username" required>
+                    <br><span class="text-red-600 font-bold">{{ usernameError }}</span>
                 </div>
                 <div class="form-group-blue">
                     <input class="form-control-blue" type="password" placeholder="Password" v-model.trim="password" required>
-                    <br><span class="text-red">{{ passwordError }}</span>
+                    <br><span class="text-red-600 font-bold">{{ passwordError }}</span>
                 </div>
                 <div class="form-group-blue">
                     <button class="mt-10">Add Admin</button>
@@ -28,14 +30,20 @@ export default {
             fullname: '',
             username: '',
             password: '',
+            fullnameError:'',
+            usernameError:'',
             passwordError:'',
             isValid: true
         }
     },
     methods: {
         validate(){
+
+            this.isValid = true;
+
+            const fullnamePattern = /^[a-zA-Z\\s]*$/;
             const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-            // const passwordPattern = /[A-Za-z]/;
+            const usernamePattern = /[A-Za-z0-9]*/;
 
             if(!passwordPattern.test(this.password)){
                 this.passwordError = '*Please enter a password with minimum eight characters, at least one letter, one number and one special character.';
@@ -43,21 +51,67 @@ export default {
             }
             else{
                 this.passwordError = '';
-                this.isValid = true;
+                return;
+            }
+
+            if(!fullnamePattern.test(this.fullname)){
+                this.fullnameError = '*Please enter a valid name.';
+                this.isValid = false;
+            }
+            else{
+                this.fullnameError = '';
+                return;
+            }
+
+            if(!usernamePattern.test(this.username)){
+                this.usernameError = '*Please enter only letters and numbers.';
+                this.isValid = false;
+            }
+            else{
+                this.usernameError = '';
+                return;
             }
         },
-        register(){
+        async register(){
+            
             this.validate();
-            if(this.isValid){
-                console.log("Full Name: ", this.fullname);
-                console.log("Username: ", this.username);
-                console.log("Password: ", this.password);
-                this.fullname = '';
-                this.username = '';
-                this.password = '';
+
+            if(!this.isValid)
+                return;
+
+            const status  = await this.$store.dispatch('user/register',{
+                body: {
+                    username: this.username,
+                    full_name: this.fullname,
+                    password: this.password 
+                },
+                token: JSON.parse(localStorage.getItem('user')).access_token,
+            });
+            
+            if(status === 201){
+
+                this.resetInputs();
+                this.resetErrors();
+                alert('New admin created!')
+                this.$router.replace('/admin');
+
+            }else if(status === 422){
+                this.passwordError = "Validation Error!";
+            }else{
+                alert("Something went wrong");
             }
+        },
+        resetErrors(){
+            this.usernameError = '';
+            this.fullnameError = '';
+            this.passwordError = '';
+        },
+        resetInputs(){
+            this.username = '';
+            this.fullname = '';
+            this.password = '';
         }
-    }
+    },
 }
 </script>
 
