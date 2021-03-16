@@ -12,7 +12,7 @@ const router = createRouter({
     { path: "/about", component: About },
     { path: "/login", component: Login,
       beforeEnter: (to,from,next) => {
-        if(localStorage.getItem('isAuthenticated') || localStorage.getItem('isAuthenticated') === true){
+        if(localStorage.getItem('isAuthenticated') && localStorage.getItem('isAuthenticated') === true){
             next('/admin');
         }else next();
       },

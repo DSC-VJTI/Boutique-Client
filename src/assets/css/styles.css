@@ -17,11 +17,11 @@
     @apply text-blue-700;
 }
 
-.form-group-blue{
+.form-group{
     @apply p-2;
 }
 
-.form-control-blue{
+.form-control{
     @apply p-3;
     @apply rounded;
     @apply w-2/6;
@@ -33,7 +33,7 @@
     @apply focus:border-transparent;
 }
 
-.form-group-blue button{
+.form-group button{
     @apply bg-blue-700; 
     @apply text-white; 
     @apply pt-2; 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <nav class="p-4 flex flex-wrap content-evenly">
       <router-link to="/"><img src="./assets/logo.png" class="w-7 h-7" alt=""></router-link>
       <router-link to="/">Home</router-link>
