@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    @apply bg-blue-200;
+}
+
+/* *************************** */
+/*           BLUE            */
+/* *************************** */
+
+.blue{
+    @apply font-serif;
+    @apply text-5xl;
+    @apply font-extrabold;
+    @apply text-blue-700;
+}
+
+.form-group{
+    @apply p-2;
+}
+
+.form-control{
+    @apply p-3;
+    @apply rounded;
+    @apply w-2/6;
+    @apply bg-white;
+    @apply shadow-md;
+    @apply focus:outline-none; 
+    @apply focus:ring-2;
+    @apply focus:ring-blue-400; 
+    @apply focus:border-transparent;
+}
+
+.form-group button{
+    @apply bg-blue-700; 
+    @apply text-white; 
+    @apply pt-2; 
+    @apply pb-2; 
+    @apply pr-4; 
+    @apply pl-4; 
+    @apply rounded; 
+    @apply hover:bg-blue-600;
+    @apply shadow-md;
+    @apply hover:shadow-sm;
+}
