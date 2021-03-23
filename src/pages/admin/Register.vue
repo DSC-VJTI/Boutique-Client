@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 text-center">
-    <h1 class="blue mb-10">Admin Register</h1>
+    <h1 class="green mb-10">Admin Register</h1>
     <div>
       <form class="m-5" @submit.prevent="register">
         <div class="form-group">

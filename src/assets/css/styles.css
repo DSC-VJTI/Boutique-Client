@@ -3,18 +3,26 @@
 @tailwind utilities;
 
 *{
-    @apply bg-blue-200;
+    @apply bg-green-200;
 }
 
 /* *************************** */
 /*           BLUE            */
 /* *************************** */
 
-.blue{
+.green{
     @apply font-serif;
     @apply text-5xl;
     @apply font-extrabold;
-    @apply text-blue-700;
+    @apply text-green-700;
+}
+
+.green-blog-headings {
+    @apply font-serif text-5xl font-extrabold text-green-700;
+}
+
+.green-h3{
+    @apply font-serif text-4xl font-semibold text-green-400;
 }
 
 .form-group{
@@ -29,19 +37,57 @@
     @apply shadow-md;
     @apply focus:outline-none; 
     @apply focus:ring-2;
-    @apply focus:ring-blue-400; 
+    @apply focus:ring-green-400; 
     @apply focus:border-transparent;
 }
 
-.form-group button{
-    @apply bg-blue-700; 
+.form-control-blog{
+    @apply p-3;
+    @apply rounded;
+    @apply w-2/3;
+    @apply bg-white;
+    @apply shadow-md;
+    @apply focus:outline-none; 
+    @apply focus:ring-2;
+    @apply focus:ring-green-400; 
+    @apply focus:border-transparent;
+}
+
+.form-group button, .form-group-blog button{
+    @apply bg-green-700; 
     @apply text-white; 
     @apply pt-2; 
     @apply pb-2; 
     @apply pr-4; 
     @apply pl-4; 
     @apply rounded; 
-    @apply hover:bg-blue-600;
+    @apply hover:bg-green-600;
+    @apply shadow-md;
+    @apply hover:shadow-sm;
+}
+
+.update{
+    @apply bg-yellow-400; 
+    @apply text-white; 
+    @apply pt-2; 
+    @apply pb-2; 
+    @apply pr-4; 
+    @apply pl-4; 
+    @apply rounded; 
+    @apply hover:bg-yellow-500;
+    @apply shadow-md;
+    @apply hover:shadow-sm;
+}
+
+.delete{
+    @apply bg-red-500; 
+    @apply text-white; 
+    @apply pt-2; 
+    @apply pb-2; 
+    @apply pr-4; 
+    @apply pl-4; 
+    @apply rounded; 
+    @apply hover:bg-red-600;
     @apply shadow-md;
     @apply hover:shadow-sm;
 }
