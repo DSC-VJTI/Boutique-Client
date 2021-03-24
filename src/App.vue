@@ -25,15 +25,6 @@ export default {
       return JSON.parse(localStorage.getItem("isAuthenticated"));
     },
   },
-  // watch: {
-  //   isAdmin: {
-  //     handler: {
-  //       function(newValue, oldValue) {
-  //        console.log(oldValue, "changed to", newValue)
-  //     }
-  //     }
-  //   }
-  // }
 }
 </script>
 
