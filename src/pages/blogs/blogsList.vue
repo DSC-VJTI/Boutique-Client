@@ -15,8 +15,7 @@
 </template>
 
 <script>
-import blogItem from "./blogItem.vue";
-
+import blogItem from "./BlogItem.vue";
 export default {
   components: { blogItem },
   data() {
@@ -24,12 +23,10 @@ export default {
       blogs: []
     };
   },
-  methods: {},
 
-  created() {
-    this.$store.dispatch("blogs/getAllBlogs").then(promise => {
-      this.blogs = promise.data;
-    });
+  async created() {
+    const promise = await this.$store.dispatch("blogs/getAllBlogs");
+    this.blogs = promise.data;
   }
 };
 </script>

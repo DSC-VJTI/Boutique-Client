@@ -18,14 +18,13 @@
 </template>
 
 <script>
-
 export default {
   computed: {
     isAdmin() {
       return JSON.parse(localStorage.getItem("isAuthenticated"));
-    },
-  },
-}
+    }
+  }
+};
 </script>
 
 <style>

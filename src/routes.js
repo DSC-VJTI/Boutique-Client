@@ -7,10 +7,10 @@ import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";
 import AdminDash from "./pages/admin/AdminDash.vue";
 
-import createBlog from "./pages/blogs/createBlog.vue";
-import blogsList from "./pages/blogs/blogsList.vue";
-import viewBlog from "./pages/blogs/viewBlog.vue";
-import updateBlog from "./pages/blogs/updateBlog.vue";
+import createBlog from "./pages/blogs/CreateBlog.vue";
+import blogsList from "./pages/blogs/BlogsList.vue";
+import viewBlog from "./pages/blogs/ViewBlog.vue";
+import updateBlog from "./pages/blogs/UpdateBlog.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -104,13 +104,15 @@ const router = createRouter({
     {
       name: "seeBlog",
       path: "/blogs/:blogId",
-      component: viewBlog
+      component: viewBlog,
+      props: true
     },
 
     // updating a blog
     {
       path: "/blogs/update/:blogId",
-      component: updateBlog
+      component: updateBlog,
+      props: true
     }
   ]
 });

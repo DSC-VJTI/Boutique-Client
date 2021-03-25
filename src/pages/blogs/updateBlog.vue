@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  props: ["blogId"],
   data() {
     return {
       title: "",
@@ -46,7 +47,7 @@ export default {
   },
   computed: {
     getBlogId() {
-      return this.$route.params.blogId;
+      return this.blogId;
     }
   },
   methods: {
@@ -105,15 +106,12 @@ export default {
     }
   },
 
-  created() {
-    this.$store
-      .dispatch("blogs/getABlog", {
-        blog_id: this.getBlogId
-      })
-      .then(response => {
-        this.title = response.data.title;
-        this.content = response.data.content;
-      });
+  async created() {
+    const response = await this.$store.dispatch("blogs/getABlog", {
+      blog_id: this.getBlogId
+    });
+    this.title = response.data.title;
+    this.content = response.data.content;
   }
 };
 </script>
