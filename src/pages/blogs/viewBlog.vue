@@ -4,9 +4,7 @@
     <p class="mt-4 pb-2 font-sans text-green-600 border-b-4 border-green-700">
       Last Updated on: {{ last_updated }}
     </p>
-    <p class="mt-4 text-lg text-green-800 text-bold">
-      {{ content }}
-    </p>
+    <div class="mt-4 text-lg text-green-800 text-bold" v-html="content"></div>
     <div v-show="isAdmin">
       <button @click="updateBlog" class="mt-10 update">Update</button>
       <button @click="deleteBlog" class="mt-10 delete ml-5">Delete</button>

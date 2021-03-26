@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+body{
     @apply bg-green-200;
 }
 
 /* *************************** */
-/*           BLUE            */
+/*           GREEN            */
 /* *************************** */
 
 .green{

@@ -14,14 +14,11 @@
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
         </div>
         <div class="form-group">
-          <textarea
-            class="form-control-blog"
-            type="text"
-            placeholder="Content"
-            v-model.trim="content"
-            rows="12"
-            required
-          ></textarea>
+          <ckeditor
+            :editor="editor"
+            v-model="editorData"
+            :config="editorConfig"
+          ></ckeditor>
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
         <div class="form-group">
@@ -33,29 +30,36 @@
 </template>
 
 <script>
+import CKEditor from "@ckeditor/ckeditor5-vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 export default {
+  components: {
+    ckeditor: CKEditor.component
+  },
   data() {
     return {
       title: "",
       titleError: "",
-      content: "",
       contentError: "",
-      isValid: true
+      isValid: true,
+      editor: ClassicEditor,
+      editorData: ""
     };
   },
   methods: {
     validate() {
       this.isValid = true;
 
-      const titlePattern = /^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9 ])?[a-zA-Z0-9]*){1,5}$/g;
+      const titlePattern = /^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9 ])?[a-zA-Z0-9]*){1,10}$/g;
 
       if (!titlePattern.test(this.title)) {
         this.titleError =
-          "*Please enter a title which is not empty and has less than 6 words.";
+          "*Please enter a title which is not empty and has not more than 10 words.";
         this.isValid = false;
       } else this.titleError = "";
 
-      if (this.content === "") {
+      if (this.editorData === "") {
         this.contentError = "*You cannot keep the content blank.";
         this.isValid = false;
       } else this.contentError = "";
@@ -68,7 +72,7 @@ export default {
 
       const status = await this.$store.dispatch("blogs/createNewBlog", {
         body: {
-          content: this.content,
+          content: this.editorData,
           title: this.title
         },
         token: JSON.parse(localStorage.getItem("user")).access_token
@@ -91,11 +95,15 @@ export default {
       this.titleError = "";
     },
     resetInputs() {
-      this.content = "";
+      this.editorData = "";
       this.title = "";
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+.ck, .ck p {
+  @apply bg-transparent;
+}
+</style>

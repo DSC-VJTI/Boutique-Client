@@ -7,8 +7,7 @@
       <p class="bg-transparent mt-2 font-sans text-green-900">
         Last Updated on: {{ last_updated }}
       </p>
-      <p class="bg-transparent mt-2 text-l font-mono text-green-600 text-bold">
-        {{ content }}
+      <p v-html="getContent" class="bg-transparent mt-2 text-l font-mono text-green-600 text-bold">
       </p>
     </router-link>
   </div>
@@ -20,6 +19,9 @@ export default {
   computed: {
     blogLink() {
       return "/blogs/" + this.id;
+    },
+    getContent() {
+      return this.content.split(" ").slice(0, 25).join(" ") + `...&nbsp;&nbsp;&nbsp;<router-link style="color: blue" :to="blogLink">See more</router-link>`;
     }
   }
 };
