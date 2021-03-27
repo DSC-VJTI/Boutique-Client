@@ -43,16 +43,6 @@ export default {
       });
 
       if (status === 204) {
-        // const blogs = this.$store.getters['blogs/getBlogs'];
-        // const blogIndex = blogs.findIndex(blog => blog.id == this.blogId);
-        //
-        // if (blogIndex !== -1){
-        //   blogs.splice(blogIndex, 1);
-        //   this.$store.commit('blogs/setBlogs', {
-        //     blogs: blogs
-        //   });
-        // }
-
         this.$router.push({
           name: "seeBlogs"
         });
