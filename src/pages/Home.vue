@@ -3,7 +3,7 @@
     <!-- <img alt="Vue logo" src="@/assets/logo.png" class="inline"/>
     <hello-world msg="Welcome to Your Vue.js App" /> -->
 
-    <h1 class="blue text-center">Landing Page</h1>
+    <h1 class="green text-center">Landing Page</h1>
   </div>
 </template>
 

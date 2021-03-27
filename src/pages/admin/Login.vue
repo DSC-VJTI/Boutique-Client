@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 text-center">
-    <h1 class="blue mb-10">Admin Login</h1>
+    <h1 class="green mb-10">Admin Login</h1>
     <div>
       <form @submit.prevent="login">
         <div class="form-group">
@@ -109,5 +109,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
