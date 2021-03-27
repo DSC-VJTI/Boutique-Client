@@ -88,7 +88,10 @@ export default {
         this.resetInputs();
         this.resetErrors();
 
-        if (this.rememberMe) localStorage.setItem("rememberMe", true);
+        if (this.rememberMe) {
+          this.$store.commit("user/setRememberMe", { rememberMe: true });
+          localStorage.setItem("rememberMe", true);
+        }
         this.$router.replace("/admin");
       } else if (status === 401) {
         this.passwordError = "Incorrect Password!";

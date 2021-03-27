@@ -7,9 +7,12 @@ export default {
   state() {
     return {
       user: {
-        access_token: ""
+        access_token: localStorage.getItem["user"]
+          ? JSON.parse(localStorage.getItem["user"]).access_token
+          : ""
       },
-      isAuthenticated: false
+      isAuthenticated: localStorage.getItem["isAuthenticated"] || null,
+      rememberMe: localStorage.getItem["rememberMe"] || false
     };
   },
   getters: getters,

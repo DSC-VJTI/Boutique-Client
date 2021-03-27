@@ -100,7 +100,7 @@ export default {
       } else if (status === 400) {
         this.usernameError = "*Username already taken.";
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorized");
+        this.$store.dispatch("user/unauthorize");
       } else {
         alert("Something went wrong");
       }

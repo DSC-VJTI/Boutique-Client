@@ -37,9 +37,10 @@ export default {
     }
   },
 
-  unauthorized(context) {
+  unauthorize(context) {
     context.commit("setUser", { access_token: "" });
     context.commit("setAuth", { isAuthenticated: false });
+    context.commit("setRememberMe", { rememberMe: false });
     if (localStorage.getItem("user")) localStorage.removeItem("user");
     if (localStorage.getItem("isAuthenticated"))
       localStorage.removeItem("isAuthenticated");

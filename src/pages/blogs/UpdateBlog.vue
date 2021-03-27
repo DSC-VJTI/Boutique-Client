@@ -93,7 +93,7 @@ export default {
           }
         });
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorized");
+        this.$store.dispatch("user/unauthorize");
       } else {
         console.log(status);
         alert("Something went wrong");

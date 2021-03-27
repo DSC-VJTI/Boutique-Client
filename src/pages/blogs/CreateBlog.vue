@@ -85,7 +85,7 @@ export default {
           name: "seeBlogs"
         });
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorized");
+        this.$store.dispatch("user/unauthorize");
       } else {
         alert("Something went wrong");
       }

@@ -63,20 +63,6 @@ const router = createRouter({
         }
       }
     },
-
-    // logout
-    {
-      path: "/logout",
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("user")) localStorage.removeItem("user");
-        if (localStorage.getItem("isAuthenticated"))
-          localStorage.removeItem("isAuthenticated");
-        if (localStorage.getItem("rememberMe"))
-          localStorage.removeItem("rememberMe");
-        next("/");
-      }
-    },
-
     // viewing blogs
     {
       name: "seeBlogs",
