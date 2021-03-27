@@ -14,11 +14,7 @@
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
         </div>
         <div class="form-group">
-          <ckeditor
-            :editor="editor"
-            v-model="editorData"
-            :config="editorConfig"
-          ></ckeditor>
+          <ckeditor :editor="editor" v-model="editorData"></ckeditor>
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
         <div class="form-group">

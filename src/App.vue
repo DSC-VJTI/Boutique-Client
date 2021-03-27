@@ -27,7 +27,6 @@
 export default {
   computed: {
     isAdmin() {
-      console.log(this.$store.getters["user/isAuthenticated"]);
       return (
         this.$store.getters["user/isAuthenticated"] ||
         JSON.parse(localStorage.getItem("isAuthenticated"))

@@ -110,11 +110,13 @@ export default {
   },
 
   async created() {
-    const response = await this.$store.dispatch("blogs/getABlog", {
+    const blog = await this.$store.dispatch("blogs/getABlog", {
       blog_id: this.blogId
     });
-    this.title = response.title;
-    this.editorData = response.content;
+    this.title = blog.title;
+    setTimeout(() => {
+      this.editorData = blog.content;
+    }, 100);
   }
 };
 </script>

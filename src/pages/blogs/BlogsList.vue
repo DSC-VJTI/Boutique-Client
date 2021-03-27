@@ -25,8 +25,8 @@ export default {
   },
 
   async created() {
-    const promise = await this.$store.dispatch("blogs/getAllBlogs");
-    this.blogs = promise;
+    const blogs = await this.$store.dispatch("blogs/getAllBlogs");
+    this.blogs = blogs;
   }
 };
 </script>

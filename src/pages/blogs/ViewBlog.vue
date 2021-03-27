@@ -25,7 +25,10 @@ export default {
   },
   computed: {
     isAdmin() {
-      return JSON.parse(localStorage.getItem("isAuthenticated"));
+      return (
+        this.$store.getters["user/isAuthenticated"] ||
+        JSON.parse(localStorage.getItem("isAuthenticated"))
+      );
     }
   },
   methods: {
@@ -40,6 +43,16 @@ export default {
       });
 
       if (status === 204) {
+        // const blogs = this.$store.getters['blogs/getBlogs'];
+        // const blogIndex = blogs.findIndex(blog => blog.id == this.blogId);
+        //
+        // if (blogIndex !== -1){
+        //   blogs.splice(blogIndex, 1);
+        //   this.$store.commit('blogs/setBlogs', {
+        //     blogs: blogs
+        //   });
+        // }
+
         this.$router.push({
           name: "seeBlogs"
         });
@@ -47,19 +60,19 @@ export default {
         this.$store.dispatch("user/unauthorize");
       } else {
         console.log(status);
-        alert("Something went wrong. Please try again!");
+        console.log("Something went wrong. Please try again!");
       }
     }
   },
 
   async created() {
-    const response = await this.$store.dispatch("blogs/getABlog", {
+    const blog = await this.$store.dispatch("blogs/getABlog", {
       blog_id: this.blogId
     });
-    this.title = response.title;
-    this.created_on = response.created_on;
-    this.last_updated = response.last_updated;
-    this.content = response.content;
+    this.title = blog.title;
+    this.created_on = blog.created_on;
+    this.last_updated = blog.last_updated;
+    this.content = blog.content;
   }
 };
 </script>
