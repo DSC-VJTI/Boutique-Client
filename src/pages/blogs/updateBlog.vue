@@ -45,13 +45,11 @@ export default {
       contentError: "",
       isValid: true,
       editor: ClassicEditor,
-      editorData: ""
+      editorData: "",
+      editorConfig: {
+        height: "500px"
+      }
     };
-  },
-  computed: {
-    getBlogId() {
-      return this.blogId;
-    }
   },
   methods: {
     validate() {
@@ -82,7 +80,7 @@ export default {
           title: this.title
         },
         token: JSON.parse(localStorage.getItem("user")).access_token,
-        blog_id: this.getBlogId
+        blog_id: this.blogId
       });
 
       if (status === 200) {
@@ -90,7 +88,9 @@ export default {
         this.resetErrors();
         this.$router.push({
           name: "seeBlog",
-          params: this.getBlogId
+          params: {
+            blogId: this.blogId
+          }
         });
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorized");
@@ -111,10 +111,10 @@ export default {
 
   async created() {
     const response = await this.$store.dispatch("blogs/getABlog", {
-      blog_id: this.getBlogId
+      blog_id: this.blogId
     });
-    this.title = response.data.title;
-    this.editorData = response.data.content;
+    this.title = response.title;
+    this.editorData = response.content;
   }
 };
 </script>

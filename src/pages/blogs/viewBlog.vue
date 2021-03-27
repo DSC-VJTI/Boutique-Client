@@ -5,7 +5,7 @@
       Last Updated on: {{ last_updated }}
     </p>
     <div class="mt-4 text-lg text-green-800 text-bold" v-html="content"></div>
-    <div v-show="isAdmin">
+    <div v-if="isAdmin">
       <button @click="updateBlog" class="mt-10 update">Update</button>
       <button @click="deleteBlog" class="mt-10 delete ml-5">Delete</button>
     </div>
@@ -26,22 +26,17 @@ export default {
   computed: {
     isAdmin() {
       return JSON.parse(localStorage.getItem("isAuthenticated"));
-    },
-    getBlogId() {
-      // return this.$route.params.blogId;
-      return this.blogId;
     }
   },
   methods: {
     updateBlog() {
-      this.$router.push({ path: `update/${this.getBlogId}` });
+      this.$router.push({ path: `update/${this.blogId}` });
     },
 
     async deleteBlog() {
-      // ask for confirmation
       const status = await this.$store.dispatch("blogs/deleteCurrentBlog", {
         token: JSON.parse(localStorage.getItem("user")).access_token,
-        blog_id: this.getBlogId
+        blog_id: this.blogId
       });
 
       if (status === 204) {
@@ -59,12 +54,12 @@ export default {
 
   async created() {
     const response = await this.$store.dispatch("blogs/getABlog", {
-      blog_id: this.getBlogId
+      blog_id: this.blogId
     });
-    this.title = response.data.title;
-    this.created_on = response.data.created_on;
-    this.last_updated = response.data.last_updated;
-    this.content = response.data.content;
+    this.title = response.title;
+    this.created_on = response.created_on;
+    this.last_updated = response.last_updated;
+    this.content = response.content;
   }
 };
 </script>

@@ -20,12 +20,16 @@ export default {
   },
 
   async getAllBlogs(context) {
+    const blogs = context.getters.getBlogs;
+    if (blogs.length !== 0) return blogs;
+    //In case store is empty
     try {
       const response = await axios.get(
         context.rootGetters.getUrl + "api/blogs",
         context.rootGetters.getConfig
       );
-      return response;
+      context.commit("setBlogs", response.data);
+      return response.data;
     } catch (error) {
       return error.response;
     }
@@ -33,7 +37,7 @@ export default {
 
   async getABlog(context, payload) {
     try {
-      const response = axios.get(
+      const response = await axios.get(
         context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
         {
           headers: {
@@ -41,7 +45,7 @@ export default {
           }
         }
       );
-      return response;
+      return response.data;
     } catch (error) {
       return error.response;
     }

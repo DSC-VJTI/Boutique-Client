@@ -103,7 +103,11 @@ export default {
 </script>
 
 <style>
-.ck, .ck p {
+.ck,
+.ck p {
   @apply bg-transparent;
+}
+.ck-content {
+  height: 300px;
 }
 </style>
