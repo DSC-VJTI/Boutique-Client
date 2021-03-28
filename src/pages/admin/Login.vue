@@ -91,6 +91,7 @@ export default {
         if (this.rememberMe) {
           this.$store.commit("user/setRememberMe", { rememberMe: true });
           localStorage.setItem("rememberMe", true);
+          localStorage.setItem("isAuthenticated", true);
         }
         this.$router.replace("/admin");
       } else if (status === 401) {
@@ -98,7 +99,7 @@ export default {
       } else if (status === 404) {
         this.usernameError = "User not found!";
       } else {
-        alert("Something went Wrong");
+        console.log("Something went Wrong", status);
       }
     }
   },
