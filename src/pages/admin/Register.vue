@@ -96,7 +96,7 @@ export default {
       if (status === 201) {
         this.resetInputs();
         this.resetErrors();
-        this.$store.dispatch('user/unauthorize');
+        this.$store.dispatch("user/unauthorize");
         this.$router.replace("/admin/login");
       } else if (status === 400) {
         this.usernameError = "*Username already taken.";
@@ -115,6 +115,16 @@ export default {
       this.username = "";
       this.fullname = "";
       this.password = "";
+    }
+  },
+  created() {
+    if (!this.$store.getters["user/isAuthenticated"]) {
+      if (
+        !localStorage.getItem("isAuthenticated") ||
+        localStorage.getItem("isAuthenticated") === false
+      )
+        this.$router.replace("/admin/login");
+      else this.$store.commit("user/setAuth", { isAuthenticated: true });
     }
   }
 };

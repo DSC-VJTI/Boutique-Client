@@ -94,6 +94,16 @@ export default {
       this.editorData = "";
       this.title = "";
     }
+  },
+  created() {
+    if (!this.$store.getters["user/isAuthenticated"]) {
+      if (
+        !localStorage.getItem("isAuthenticated") ||
+        localStorage.getItem("isAuthenticated") === false
+      )
+        this.$router.replace("/admin/login");
+      else this.$store.commit("user/setAuth", { isAuthenticated: true });
+    }
   }
 };
 </script>

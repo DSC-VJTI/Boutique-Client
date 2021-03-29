@@ -104,7 +104,10 @@ export default {
     }
   },
   created() {
-    if (localStorage.getItem("rememberMe")) {
+    if (
+      this.$store.getters["user/isAuthenticated"] ||
+      localStorage.getItem("rememberMe")
+    ) {
       this.$store.commit("user/setAuth", {
         isAuthenticated: true
       });
