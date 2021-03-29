@@ -96,13 +96,14 @@ export default {
       if (status === 201) {
         this.resetInputs();
         this.resetErrors();
-        this.$router.replace("/admin");
+        this.$store.dispatch("user/unauthorize");
+        this.$router.replace("/admin/login");
       } else if (status === 400) {
         this.usernameError = "*Username already taken.";
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorized");
+        this.$store.dispatch("user/unauthorize");
       } else {
-        alert("Something went wrong");
+        console.log("Something went wrong", status);
       }
     },
     resetErrors() {
@@ -114,6 +115,16 @@ export default {
       this.username = "";
       this.fullname = "";
       this.password = "";
+    }
+  },
+  created() {
+    if (!this.$store.getters["user/isAuthenticated"]) {
+      if (
+        !localStorage.getItem("isAuthenticated") ||
+        localStorage.getItem("isAuthenticated") === false
+      )
+        this.$router.replace("/admin/login");
+      else this.$store.commit("user/setAuth", { isAuthenticated: true });
     }
   }
 };

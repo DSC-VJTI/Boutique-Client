@@ -10,7 +10,9 @@ const store = createStore({
   state() {
     return {
       // url: process.env.VUE_APP_API_BASE_URL,
-      url: "https://boutique-server.herokuapp.com/",
+      url:
+        process.env.VUE_APP_API_BASE_URL ||
+        "https://boutique-server.herokuapp.com/",
       config: {
         headers: {
           ContentType: "application/json"

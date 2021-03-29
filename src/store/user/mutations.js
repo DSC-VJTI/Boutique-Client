@@ -3,6 +3,9 @@ export default {
     state.user.access_token = payload.access_token;
   },
   setAuth(state, payload) {
-    state.user.isAuthenticated = payload.isAuthenticated;
+    state.isAuthenticated = payload.isAuthenticated;
+  },
+  setRememberMe(state, payload) {
+    state.rememberMe = payload.rememberMe;
   }
 };

@@ -3,6 +3,9 @@ export default {
     return state.user.access_token;
   },
   isAuthenticated(state) {
-    return state.user.isAuthenticated;
+    return state.isAuthenticated;
+  },
+  rememberMe(state) {
+    return state.rememberMe;
   }
 };

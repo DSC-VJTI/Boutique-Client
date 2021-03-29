@@ -14,7 +14,7 @@ export default {
   },
   mutations: {
     setBlogs(state, payload) {
-      state.blogs = payload;
+      state.blogs = payload.blogs;
     }
   },
   actions: actions

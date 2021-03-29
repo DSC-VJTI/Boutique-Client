@@ -93,7 +93,7 @@ export default {
           }
         });
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorized");
+        this.$store.dispatch("user/unauthorize");
       } else {
         console.log(status);
         alert("Something went wrong");
@@ -110,11 +110,13 @@ export default {
   },
 
   async created() {
-    const response = await this.$store.dispatch("blogs/getABlog", {
+    const blog = await this.$store.dispatch("blogs/getABlog", {
       blog_id: this.blogId
     });
-    this.title = response.title;
-    this.editorData = response.content;
+    this.title = blog.title;
+    setTimeout(() => {
+      this.editorData = blog.content;
+    }, 100);
   }
 };
 </script>

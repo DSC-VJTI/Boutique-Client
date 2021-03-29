@@ -14,11 +14,7 @@
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
         </div>
         <div class="form-group">
-          <ckeditor
-            :editor="editor"
-            v-model="editorData"
-            :config="editorConfig"
-          ></ckeditor>
+          <ckeditor :editor="editor" v-model="editorData"></ckeditor>
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
         <div class="form-group">
@@ -85,7 +81,7 @@ export default {
           name: "seeBlogs"
         });
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorized");
+        this.$store.dispatch("user/unauthorize");
       } else {
         alert("Something went wrong");
       }
@@ -97,6 +93,16 @@ export default {
     resetInputs() {
       this.editorData = "";
       this.title = "";
+    }
+  },
+  created() {
+    if (!this.$store.getters["user/isAuthenticated"]) {
+      if (
+        !localStorage.getItem("isAuthenticated") ||
+        localStorage.getItem("isAuthenticated") === false
+      )
+        this.$router.replace("/admin/login");
+      else this.$store.commit("user/setAuth", { isAuthenticated: true });
     }
   }
 };
