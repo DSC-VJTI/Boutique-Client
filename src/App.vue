@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="p-4 flex flex-wrap content-evenly text-right">
+    <nav class="pr-4 pl-4 pt-4 flex flex-wrap content-evenly text-right">
       <router-link to="/"
         ><img src="./assets/logo.png" class="w-7 h-7" alt=""
       /></router-link>
@@ -12,19 +12,25 @@
       <button
         v-if="isAdmin"
         @click="logout"
-        class="focus:outline-none text-lg text-green-900 p-3 mb-1"
+        class="focus:outline-none font-medium text-green-900 p-3"
       >
         Logout
       </button>
     </nav>
-    <div class="p-5 m-5">
+    <div>
       <router-view></router-view>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from "./components/Footer.vue";
+
 export default {
+  components: {
+    Footer
+  },
   computed: {
     isAdmin() {
       return (

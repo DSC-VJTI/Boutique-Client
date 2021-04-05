@@ -12,6 +12,8 @@ import blogsList from "./pages/blogs/BlogsList.vue";
 import viewBlog from "./pages/blogs/ViewBlog.vue";
 import updateBlog from "./pages/blogs/UpdateBlog.vue";
 
+import Details from "./pages/products/Details.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -46,6 +48,12 @@ const router = createRouter({
       path: "/blogs/update/:blogId",
       component: updateBlog,
       props: true
+    },
+
+    // product details page
+    {
+      path: "/product/:id",
+      component: Details
     }
   ]
 });

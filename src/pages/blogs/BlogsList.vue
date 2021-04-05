@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import blogItem from "./BlogItem.vue";
+import blogItem from "../../components/blogs/BlogItem.vue";
 export default {
   components: { blogItem },
   data() {
