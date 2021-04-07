@@ -12,6 +12,9 @@ import blogsList from "./pages/blogs/BlogsList.vue";
 import viewBlog from "./pages/blogs/ViewBlog.vue";
 import updateBlog from "./pages/blogs/UpdateBlog.vue";
 
+import Products from "./pages/products/Products.vue";
+import SingleProduct from "./pages/products/SingleProduct.vue"
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -46,7 +49,11 @@ const router = createRouter({
       path: "/blogs/update/:blogId",
       component: updateBlog,
       props: true
-    }
+    },
+    // Products Page
+    { path: "/shop", component: Products },
+    // Single Product Page
+    { path: "/shop/singleproduct", component: SingleProduct },
   ]
 });
 
