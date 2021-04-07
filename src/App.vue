@@ -7,6 +7,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
       <router-link to="/blogs">Blogs</router-link>
+      <router-link to="/shop">Shop</router-link>
       <router-link v-if="isAdmin" to="/admin/register">Add Admin</router-link>
       <router-link v-if="isAdmin" to="/blogs/new">Create Blog</router-link>
       <button
@@ -17,7 +18,7 @@
         Logout
       </button>
     </nav>
-    <div>
+    <div class="p-0 m-0">
       <router-view></router-view>
     </div>
     <Footer></Footer>

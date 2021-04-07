@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body{
-    @apply bg-green-200;
+    @apply bg-white;
 }
 
 button {
-    @apply outline-none
+    @apply outline-none;
 }
 
 /* *************************** */
@@ -22,11 +22,17 @@ button {
 }
 
 .green-blog-headings {
-    @apply font-serif text-5xl font-extrabold text-green-700;
+    @apply font-serif;
+    @apply text-5xl;
+    @apply font-extrabold;
+    @apply text-green-700;
 }
 
 .green-h3{
-    @apply font-serif text-4xl font-semibold text-green-400;
+    @apply font-serif;
+    @apply text-4xl;
+    @apply font-semibold;
+    @apply text-green-400;
 }
 
 .form-group{
@@ -94,4 +100,26 @@ button {
     @apply hover:bg-red-600;
     @apply shadow-md;
     @apply hover:shadow-sm;
+}
+
+.lista{
+    @apply text-gray-400;
+    @apply text-base;
+    @apply font-light;
+    @apply transition-all; 
+    @apply duration-300;
+    @apply hover:text-black;
+}
+
+.productImage{
+    @apply absolute;
+    @apply inset-0;
+    @apply bg-cover;
+    @apply bg-center;
+    @apply z-0;
+    @apply hover:scale-105;
+    @apply hover:shadow-md;
+    @apply transform;
+    @apply transition-all;
+    @apply duration-300;
 }
