@@ -13,7 +13,15 @@ import viewBlog from "./pages/blogs/ViewBlog.vue";
 import updateBlog from "./pages/blogs/UpdateBlog.vue";
 
 import Products from "./pages/products/Products.vue";
-import SingleProduct from "./pages/products/SingleProduct.vue"
+import SingleProduct from "./pages/products/SingleProduct.vue";
+
+import Measurements from "./pages/measurements/Measurements.vue";
+import CreateMeasurement from "./pages/measurements/CreateMeasurement.vue";
+import ViewMeasurement from "./pages/measurements/ViewMeasurement.vue";
+
+import Materials from "./pages/materials/Materials.vue";
+import CreateMaterial from "./pages/materials/CreateMaterials.vue";
+import ViewMaterial from "./pages/materials/ViewMaterial.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -54,6 +62,20 @@ const router = createRouter({
     { path: "/shop", component: Products },
     // Single Product Page
     { path: "/shop/singleproduct", component: SingleProduct },
+
+    // Measurements
+    { path: "/admin/measurements", component: Measurements},
+    // Create Measurements
+    { path: "/admin/measurements/new", component: CreateMeasurement},
+    // View & Edit Single Measurement
+    { path: "/admin/measurements/1", component: ViewMeasurement},
+    
+    // Materials
+    { path: "/admin/materials", component: Materials},
+    // Create Material
+    { path: "/admin/materials/new", component: CreateMaterial},
+    // View & Edit Single Material
+    { path: "/admin/materials/1", component: ViewMaterial},
   ]
 });
 
