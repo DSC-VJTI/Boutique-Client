@@ -12,9 +12,10 @@ import blogsList from "./pages/blogs/BlogsList.vue";
 import viewBlog from "./pages/blogs/ViewBlog.vue";
 import updateBlog from "./pages/blogs/UpdateBlog.vue";
 
-import Details from "./pages/products/Details.vue";
-import Products from "./pages/products/Products.vue";
-import SingleProduct from "./pages/products/SingleProduct.vue";
+import products from "./pages/products/Products.vue";
+import singleProduct from "./pages/products/SingleProduct.vue";
+import addProduct from "./pages/products/CreateProduct.vue";
+import updateProduct from "./pages/products/UpdateProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -52,15 +53,30 @@ const router = createRouter({
       props: true
     },
 
-    // product details page
-    {
-      path: "/product/:id",
-      component: Details
-    },
     // Products Page
-    { path: "/shop", component: Products },
+    {
+      name: "viewProducts",
+      path: "/shop",
+      component: products
+    },
     // Single Product Page
-    { path: "/shop/singleproduct", component: SingleProduct },
+    {
+      name: "viewProduct",
+      path: "/shop/:productId",
+      component: singleProduct,
+      props: true
+    },
+    // Add Product Page
+    {
+      path: "/shop/new",
+      component: addProduct
+    },
+    // updating product info
+    {
+      path: "/shop/update/:productId",
+      component: updateProduct,
+      props: true
+    }
   ]
 });
 

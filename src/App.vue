@@ -13,7 +13,7 @@
       <button
         v-if="isAdmin"
         @click="logout"
-        class="focus:outline-none font-medium text-green-900 p-3"
+        class="focus:outline-none font-medium p-3"
       >
         Logout
       </button>
@@ -52,6 +52,5 @@ export default {
 nav a {
   @apply p-3;
   @apply font-medium;
-  @apply text-green-900;
 }
 </style>

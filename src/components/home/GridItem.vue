@@ -1,19 +1,21 @@
 <template>
-  <div class="mb-10 p-5">
-    <router-link to="/product/productId">
+  <div class="mb-10 px-5">
+    <router-link to="/shop/productId">
       <img
-        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Y2xvdGhlc3xlbnwwfDJ8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+        src="https://images.unsplash.com/photo-1606775524496-8ffd63ad2a98?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=765&q=80"
       />
     </router-link>
-    <div class="mt-2">
-      <p class="font-mono text-base text-black mx-2">White Crew Neck T-Shirt</p>
-      <p class="font-sans font-bold text-base text-green-900 mb-2 mx-2">
+    <div class="mt-8">
+      <p class="font-mono font-bold text-base text-black mx-2">
+        Blue Crew Neck T-Shirt
+      </p>
+      <p class="font-sans font-bold text-base mb-2 mx-2">
         Rs. 2500
       </p>
       <button
-        class="bg-green-800 text-white text-sm rounded font-mono p-2 mx-2 hover:shadow-xl"
+        class="font-mono font-bold tracking-wider transform hover:scale-110 text-red-600"
       >
-        ADD TO CART
+        + ADD TO CART
       </button>
     </div>
   </div>
