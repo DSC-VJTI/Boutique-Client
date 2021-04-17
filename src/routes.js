@@ -66,22 +66,26 @@ const router = createRouter({
     { path: "/shop/singleproduct", component: SingleProduct },
 
     // Measurements
-    { path: "/measurements", component: Measurements},
+    { path: "/measurements", component: Measurements, name: "seeMeasurements" },
     // Create Measurements
-    { path: "/measurements/new", component: CreateMeasurement},
+    { path: "/measurements/new", component: CreateMeasurement },
     // Update a Measurement
-    { path: "/measurements/update/1", component: UpdateMeasurement, props: true},
+    {
+      path: "/measurements/:mId/update",
+      component: UpdateMeasurement,
+      props: true
+    },
     // View a single Measurement
-    { path: "/measurements/1", component: ViewMeasurement, props: true},
-    
+    { path: "/measurements/:mId", component: ViewMeasurement, props: true },
+
     // Materials
-    { path: "/materials", component: Materials},
+    { path: "/materials", component: Materials },
     // Create Material
-    { path: "/materials/new", component: CreateMaterial},
+    { path: "/materials/new", component: CreateMaterial },
     // Update a Material
-    { path: "/materials/update/1", component: UpdateMaterial, props: true},
+    { path: "/materials/update/1", component: UpdateMaterial, props: true },
     // View a single Material
-    { path: "/materials/1", component: ViewMaterial, props: true},
+    { path: "/materials/1", component: ViewMaterial, props: true }
   ]
 });
 
