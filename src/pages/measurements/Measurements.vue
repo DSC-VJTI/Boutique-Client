@@ -7,7 +7,7 @@
             </p>
         </div>
         <div class="mx-auto mb-4 w-3/5 sm:w-96">
-            <router-link to="/admin/measurements/new">
+            <router-link to="/measurements/new">
                 <div class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white md:w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">New Measurement</div>
             </router-link>
         </div>
@@ -25,50 +25,19 @@
     </div>
 </template>
 <script>
-    import MeasurementItem from './MeasurementItem.vue'
-    export default {
-        components: { MeasurementItem },
-        data() {
-            return {
-                measurements: [
-                    {
-                        "id" : "1",
-                        "name" : "Lorem Ipsum 1",
-                        "mobileNumber" : 9999999999,
-                        "dateCreated" : "12 April 2021",
-                    },
-                    {
-                        "id" : "1",
-                        "name" : "Lorem Ipsum 2",
-                        "mobileNumber" : 9999999999,
-                        "dateCreated" : "8 April 2021",
-                    },
-                    {
-                        "id" : "1",
-                        "name" : "Lorem Ipsum 3",
-                        "mobileNumber" : 9999999999,
-                        "dateCreated" : "7 April 2021",
-                    },
-                    {
-                        "id" : "1",
-                        "name" : "Lorem Ipsum 4",
-                        "mobileNumber" : 9999999999,
-                        "dateCreated" : "7 April 2021",
-                    },
-                    {
-                        "id" : "1",
-                        "name" : "Lorem Ipsum 5",
-                        "mobileNumber" : 9999999999,
-                        "dateCreated" : "4 April 2021",
-                    },
-                    {
-                        "id" : "1",
-                        "name" : "Lorem Ipsum 6",
-                        "mobileNumber" : 9999999999,
-                        "dateCreated" : "3 April 2021",
-                    },
-                ]
-            }
-        },
+import MeasurementItem from './MeasurementItem.vue'
+export default {
+    components: { MeasurementItem },
+    data() {
+        return {
+            measurements: []
+        }
+    },
+
+    async created() {
+        console.log("Measurements created");
+        const measurements = await this.$store.dispatch("measurements/getAllMeasurements", {token: JSON.parse(localStorage.getItem("user")).access_token});
+        this.measurements = measurements;
     }
+}
 </script>

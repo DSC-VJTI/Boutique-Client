@@ -1,9 +1,9 @@
 <template>
     <div>
-    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4" @submit.prevent="newMeasurement">
+    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4" @submit.prevent="updateMeasurement">
         <div class="space-y-6 bg-white">
             <div class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0">
-                <h2 class="mx-auto text-2xl text-gray-700">Create New Measurement</h2>
+                <h2 class="mx-auto text-2xl text-gray-700">Update Measurement</h2>
             </div>
             <!-- Personal Info -->
             <h2 class="px-8 text-xl text-gray-800">Personal info</h2>
@@ -13,11 +13,11 @@
                     <input type="text" class="measurementInput" style="width: 180px;" placeholder="Name" required v-model="measurement.name"/>
                     <br/><span class="text-red-600 font-bold">{{ nameError }}</span>
                 </div>
-                <!-- <div class="col-span-1 md:inline-block float-right">
+                <div class="col-span-1 md:inline-block float-right">
                     <h2 class="inline-block p-2 w-32 mr-4">Mobile Number</h2>
                     <input type="text" class="measurementInput" style="width: 180px;" placeholder="Mobile Number" required v-model="measurement.mobNum"/>
                     <br/><span class="text-red-600 font-bold">{{ mobnumError }}</span>
-                </div> -->
+                </div>
             </div>
             <hr/>
             <!-- DL AC C -->
@@ -41,15 +41,15 @@
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.l.l_f"/>
+                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.l_f"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">3/4</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="3/4" v-model="measurement.l.l_threebyfour"/>
+                    <input type="text" id="" class="measurementInput" placeholder="3/4" v-model="measurement.l_threebyfour"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="HALF" v-model="measurement.l.l_half"/>
+                    <input type="text" id="" class="measurementInput" placeholder="HALF" v-model="measurement.l_half"/>
                 </div>
             </div>
             <hr/>
@@ -70,12 +70,8 @@
             </div>
             <hr/>
             
-            <!-- H SH ARM -->
+            <!-- SH ARM -->
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
-                <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">H</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="H" v-model="measurement.h"/>
-                </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">SH</h2>
                     <input type="text" id="name" class="measurementInput" placeholder="SH" v-model="measurement.sh"/>
@@ -92,15 +88,15 @@
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.sl.sl_f"/>
+                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.sl_f"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">3/4</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="3/4" v-model="measurement.sl.sl_threebyfour"/>
+                    <input type="text" id="" class="measurementInput" placeholder="3/4" v-model="measurement.sl_threebyfour"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="HALF" v-model="measurement.sl.sl_half"/>
+                    <input type="text" id="" class="measurementInput" placeholder="HALF" v-model="measurement.sl_half"/>
                 </div>
             </div>
             <hr/>
@@ -109,15 +105,15 @@
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">N</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="N" v-model="measurement.n.n_n"/>
+                    <input type="text" id="" class="measurementInput" placeholder="N" v-model="measurement.n"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.n.n_f"/>
+                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.n_f"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">B</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="B" v-model="measurement.n.n_b"/>
+                    <input type="text" id="" class="measurementInput" placeholder="B" v-model="measurement.n_b"/>
                 </div>
             </div>
             <hr/>    
@@ -126,15 +122,15 @@
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.bottom_w.bottom_f"/>
+                    <input type="text" id="" class="measurementInput" placeholder="F" v-model="measurement.bottom_f"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">Ankle</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Ankle" v-model="measurement.bottom_w.bottom_ankle"/>
+                    <input type="text" id="" class="measurementInput" placeholder="Ankle" v-model="measurement.bottom_ankle"/>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
                     <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="HALF" v-model="measurement.bottom_w.bottom_half"/>
+                    <input type="text" id="" class="measurementInput" placeholder="HALF" v-model="measurement.bottom_half"/>
                 </div>
             </div>
             <!-- BOTTOM L - TH - C -->
@@ -198,8 +194,9 @@
 </template>
 
 <script>
-// import axios from "axios"; // for sending the images
+import axios from "axios";
 export default {
+    props: ["measurementId"],
     data() {
         return {
             measurement : {
@@ -222,10 +219,10 @@ export default {
                 },
                 bottom_l: "", bottom_th: "", bottom_c: "", bottom_k: "", bottom_r: ""
             },
-            // files: [],
-            // isValid: true,
-            // nameError: "",
-            // mobnumError: "",
+            files: [],
+            isValid: true,
+            nameError: "",
+            mobnumError: "",
         };
     },
 
@@ -250,10 +247,10 @@ export default {
         //         }
         //     }
         //     ).then(function(){
-        //     console.log('Files Uploaded Successfully!');
+        //         console.log('Files Uploaded Successfully!');
         //     })
         //     .catch(function(){
-        //     console.log('There was an error uploading the files');
+        //         console.log('There was an error uploading the files');
         //     });
         // },
 
@@ -274,23 +271,27 @@ export default {
         //     this.files.splice( key, 1 );
         // },
 
-        // validate() {
-        //     this.isValid = true;
+        validate() {
+            this.isValid = true;
 
-        //     if (this.measurement.name === "") {
-        //         this.nameError = "*Name cannot be empty. Please enter a valid name.";
-        //         this.isValid = false;
-        //     } else this.nameError = "";
+            if (this.measurement.name === "") {
+                this.nameError = "*Name cannot be empty. Please enter a valid name.";
+                this.isValid = false;
+            } else this.nameError = "";
 
-        //     if (this.measurement.mobNum === "") {
-        //         this.mobnumError = "*Mobile Number cannot be empty. Please enter a valid Mobile Number.";
-        //         this.isValid = false;
-        //     } else this.mobnumError = "";
-        // },
+            if (this.measurement.mobNum === "") {
+                this.mobnumError = "*Mobile Number cannot be empty. Please enter a valid Mobile Number.";
+                this.isValid = false;
+            } else this.mobnumError = "";
+        },
 
-        async newMeasurement() {
-            const status = await this.$store.dispatch("measurements/createNewMeasurement", {
-                body: {
+        async updateMeasurement() {
+            this.validate();
+
+            if (!this.isValid) return;
+
+            const status = await this.$store.dispatch("measurements/updateCurrentMeasurement", {
+                measurement: {
                     client_name: this.measurement.name,
                     dl: this.measurement.dl,
                     ac: this.measurement.ac,
@@ -311,12 +312,17 @@ export default {
                     bottom_k: this.measurement.bottom_k,
                     bottom_r: this.measurement.bottom_r
                 },
-                token: JSON.parse(localStorage.getItem("user")).access_token
+                token: JSON.parse(localStorage.getItem("user")).access_token,
+                measurement_Id: this.measurementId
             });
 
             if (status === 201) {
+                this.resetErrors();
                 this.$router.push({
-                    name: "seeMeasurements"
+                    name: "seeMeasurement",
+                    params: {
+                        measurementId: this.measurementId
+                    }
                 });
             } else if (status === 401) {
                 this.$store.dispatch("user/unauthorize");
@@ -324,15 +330,36 @@ export default {
                 alert("Something went wrong");
             }
         },
+
+        resetErrors() {
+            this.nameError = "";
+            this.mobnumError = "";
+        },
     },
-    created() {
-        if (!this.$store.getters["user/isAuthenticated"]) {
-            if (
-                !localStorage.getItem("isAuthenticated") ||
-                localStorage.getItem("isAuthenticated") === false
-            ) this.$router.replace("/admin/login");
-            else this.$store.commit("user/setAuth", { isAuthenticated: true });
-        }
+    
+    async created() {
+        const measurement = await this.$store.dispatch("measurements/getAMeasurement", {
+            measurement_id: this.measurementId
+        });
+        this.client_name = measurement.name,
+        this.dl = measurement.dl,
+        this.ac = measurement.ac,
+        this.c = measurement.c,
+        this.l = measurement.l,
+        this.bc = measurement.bc,
+        this.w = measurement.w,
+        this.lw = measurement.lw,
+        this.h = measurement.h,
+        this.sh = measurement.sh,
+        this.arm = measurement.arm,
+        this.sl = measurement.sl,
+        this.n = measurement.n,
+        this.bottom_w = measurement.bottom_w,
+        this.bottom_l = measurement.bottom_l,
+        this.bottom_th = measurement.bottom_th,
+        this.bottom_c = measurement.bottom_c,
+        this.bottom_k = measurement.bottom_k,
+        this.bottom_r = measurement.bottom_r
     }
 };
 </script>

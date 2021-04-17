@@ -25,7 +25,7 @@
         props: ["id", "name", "mobileNumber", "dateCreated"],
         computed: {
             measurementLink() {
-                return "admin/measurements/" + this.id;
+                return "/measurements/" + this.id;
             },
         }
     };

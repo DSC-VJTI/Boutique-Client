@@ -1,23 +1,34 @@
 <template>
-    <div>
-    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
+    <div class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
         <div class="space-y-6 bg-white">
             <div class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0">
-                <h2 class="mx-auto text-2xl text-gray-700">Name <span class="text-lg text-gray-400 font-normal italic">(MobileNumber)</span></h2>
+                <button @click="updateMeasurement" class="mt-10 update">Update</button>
+                <button @click="deleteMeasurement" class="mt-10 delete ml-5">Delete</button>
             </div>
+            <!-- Personal Info -->
+            <h2 class="px-8 text-xl text-gray-800">Personal info</h2>
+            <div class="w-full grid col-span-1 md:grid-cols-2 px-8 space-y-2 text-gray-500 md:space-y-0">
+                <div class="col-span-1 md:inline-block mr-4">
+                    <h2 class="inline-block p-2 w-32 mr-4">Name:<span>{{ measurement.name }}</span></h2>
+                </div>
+                <div class="col-span-1 md:inline-block float-right">
+                    <h2 class="inline-block p-2 w-32 mr-4">Mobile Number:<span>{{ measurement.mobNum }}</span></h2>
+                </div>
+                <div class="col-span-1 md:inline-block float-right">
+                    <h2 class="inline-block p-2 w-32 mr-4">Date Created:<span>{{ measurement.created_on }}</span></h2>
+                </div>
+            </div>
+            <hr/>
             <!-- DL AC C -->
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block p-2 w-10 mr-4 text-center">DL</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="DL"/>
+                    <h2 class="inline-block p-2 w-10 mr-4 text-center">DL:<span>{{ measurement.dl }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">AC</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="AC"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">AC:<span>{{ measurement.ac }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block p-2 w-10 text-center mr-4">C</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="C"/>
+                    <h2 class="inline-block p-2 w-10 text-center mr-4">C:<span>{{ measurement.c }}</span></h2>
                 </div>
             </div>
             <hr/>
@@ -25,32 +36,26 @@
             <h2 class="px-8 text-xl text-gray-800">L</h2>
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">F:<span>{{ measurement.l.l_f }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">3/4</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="3/4"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">3/4:<span>{{ measurement.l.l_threebyfour }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="HALF"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">Half:<span>{{ measurement.l.l_half }}</span></h2>
                 </div>
             </div>
             <hr/>
             <!-- BC W LW -->
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">BC</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="BC"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">BC:<span>{{ measurement.bc }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">W</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="W"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">W:<span>{{ measurement.w }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">LW</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="LW"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">LW:<span>{{ measurement.lw }}</span></h2>
                 </div>
             </div>
             <hr/>
@@ -58,12 +63,13 @@
             <!-- SH ARM -->
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">SH</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="SH"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">H:<span>{{ measurement.h }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">ARM</h2>
-                    <input type="text" id="name" class="measurementInput" placeholder="ARM"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">SH:<span>{{ measurement.sh }}</span></h2>
+                </div>
+                <div class="col-span-1 md:inline-block mr-4">
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">ARM:<span>{{ measurement.arm }}</span></h2>
                 </div>
             </div>
             <hr/>
@@ -72,16 +78,13 @@
             <h2 class="px-8 text-xl text-gray-800">SL</h2>
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">F:<span>{{ measurement.sl.sl_f }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">3/4</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="3/4"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">3/4:<span>{{ measurement.sl.sl_threebyfour }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="HALF"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">Half:<span>{{ measurement.sl.sl_half }}</span></h2>
                 </div>
             </div>
             <hr/>
@@ -89,142 +92,135 @@
             <h2 class="px-8 text-xl text-gray-800">N</h2>
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">N</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="N"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">N:<span>{{ measurement.n.n_n }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">F:<span>{{ measurement.n.n_f }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">B</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="B"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">B:<span>{{ measurement.n.n_b }}</span></h2>
                 </div>
             </div>
             <hr/>    
-            <!-- BOTTOM_W -->
-            <h2 class="px-8 text-xl text-gray-800">BOTTOM_W</h2>
+            <!-- BOTTOM -->
+            <h2 class="px-8 text-xl text-gray-800">BOTTOM</h2>
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="F"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">F:<span>{{ measurement.bottom_w.bottom_f }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">Ankle</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Ankle"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">Ankle:<span>{{ measurement.bottom_w.bottom_ankle }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="HALF"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">Half:<span>{{ measurement.bottom_w.bottom_half }}</span></h2>
                 </div>
             </div>
             <!-- BOTTOM L - TH - C -->
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">L</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Bottom L"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">L:<span>{{ measurement.bottom_l }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">TH</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Bottom TH"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">TH:<span>{{ measurement.bottom_th }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">C</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Bottom C"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">C:<span>{{ measurement.bottom_c }}</span></h2>
                 </div>
             </div>
             <!-- BOTTOM K - R -->
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">K</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Bottom K"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">K:<span>{{ measurement.bottom_k }}</span></h2>
                 </div>
                 <div class="col-span-1 md:inline-block mr-4">
-                    <h2 class="inline-block text-center p-2 w-10 mr-4">R</h2>
-                    <input type="text" id="" class="measurementInput" placeholder="Bottom R"/>
+                    <h2 class="inline-block text-center p-2 w-10 mr-4">R:<span>{{ measurement.bottom_r }}</span></h2>
                 </div>
             </div>
             <hr/>
             <!-- SKETCH -->
-            <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
+            <!-- <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
             <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
-                <div class="col-span-1">
-                    <input class="hidden" ref="fileInput1" id="files1" type="file" @input="pickFile">
-                    <label class="sketchInput" for="files1">Upload Image</label>
-                    <br>
-                    <div class="sketchPreview" :style="{ 'background-image': `url(${previewImage1})` }" @click="selectImage"></div>
-                </div>
-                <div class="col-span-1">
-                    <input class="hidden" ref="fileInput2" id="files2" type="file" @input="pickFile">
-                    <label class="sketchInput" for="files2">Upload Image</label>
-                    <br>
-                    <div class="sketchPreview" :style="{ 'background-image': `url(${previewImage2})` }" @click="selectImage"></div>
-                </div>
-                <div class="col-span-1">
-                    <input class="hidden" ref="fileInput3" id="files3" type="file" @input="pickFile">
-                    <label class="sketchInput" for="files3">Upload Image</label>
-                    <br>
-                    <div class="sketchPreview" :style="{ 'background-image': `url(${previewImage3})` }" @click="selectImage"></div>
-                </div>
-            </div>
-            <!-- SAVE -->
-            <div class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0">
-                <div class="mx-auto mr-2 w-full md:w-1/3">
-                    <button type="submit" class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Save</button>
-                </div>
-            </div>
+                <div v-for="(file, key) in files" :key="key" class="col-span-1 file-listing sketchPreview" :style="{ 'background-image': `url(${file.name})` }"></div>
+            </div> -->
         </div>
-    </form>
     </div>
 </template>
 
 <script>
 export default {
-  data() {
-      return {
-        previewImage1: null,
-        previewImage2: null,
-        previewImage3: null,
-      };
+    props: ["measurementId"],
+    data() {
+        return {
+            measurement : {
+                name: "",
+                // mobNum: "",
+                dl: "", ac: "", c: "",
+                l: {
+                    l_f:"", l_threebyfour: "", l_half: "",
+                },
+                bc: "", w: "", lw: "",
+                h: "", sh: "", arm: "",
+                sl: {
+                    sl_f: "", sl_threebyfour: "", sl_half: "",
+                },
+                n: {
+                    n_n: "", n_f: "", n_b: "",
+                },
+                bottom_w: {
+                    bottom_f: "", bottom_ankle: "", bottom_half: "",
+                },
+                bottom_l: "", bottom_th: "", bottom_c: "", bottom_k: "", bottom_r: ""
+            },
+        };
     },
-  methods: {
-      selectImage () {
-          this.$refs.fileInput1.click();
-      },
-      pickFile () {
-        let input1 = this.$refs.fileInput1;
-        let file1 = input1.files;
-        let input2 = this.$refs.fileInput2;
-        let file2 = input2.files;
-        let input3 = this.$refs.fileInput3;
-        let file3 = input3.files;
-        if (file1 && file1[0]) {
-          let reader = new FileReader;
-          reader.onload = e => {
-            this.previewImage1 = e.target.result;
-          }
-          reader.readAsDataURL(file1[0]);
-          this.$emit('input', file1[0]);
-        }
+    
+    methods: {
+        updateMeasurement() {
+            this.$router.push({ path: `update/${this.measurementId}` });
+        },
 
-        if (file2 && file2[0]) {
-          let reader = new FileReader;
-          reader.onload = e => {
-            this.previewImage2 = e.target.result;
-          }
-          reader.readAsDataURL(file2[0]);
-          this.$emit('input', file2[0]);
+        async deleteMeasurement() {
+            const status = await this.$store.dispatch("measurements/deleteCurrentMeasurement", {
+                token: JSON.parse(localStorage.getItem("user")).access_token,
+                measurement_id: this.measurementId
+            });
+
+            if (status === 204) {
+                this.$router.push({
+                    name: "seeMeasurements"
+                });
+            } else if (status === 401) {
+                this.$store.dispatch("user/unauthorize");
+            } else {
+                console.log(status);
+                console.log("Something went wrong. Please try again!");
+            }
         }
-        
-        if (file3 && file3[0]) {
-          let reader = new FileReader;
-          reader.onload = e => {
-            this.previewImage3 = e.target.result;
-          }
-          reader.readAsDataURL(file3[0]);
-          this.$emit('input', file3[0]);
-        }
-      }
-  }
-}
+    },
+
+    async created() {
+        const measurement = await this.$store.dispatch("measurements/getAMeasurement", {
+            measurement_id: this.measurementId
+        });
+        this.client_name = measurement.name,
+        this.dl = measurement.dl,
+        this.ac = measurement.ac,
+        this.c = measurement.c,
+        this.l = measurement.l,
+        this.bc = measurement.bc,
+        this.w = measurement.w,
+        this.lw = measurement.lw,
+        this.h = measurement.h,
+        this.sh = measurement.sh,
+        this.arm = measurement.arm,
+        this.sl = measurement.sl,
+        this.n = measurement.n,
+        this.bottom_w = measurement.bottom_w,
+        this.bottom_l = measurement.bottom_l,
+        this.bottom_th = measurement.bottom_th,
+        this.bottom_c = measurement.bottom_c,
+        this.bottom_k = measurement.bottom_k,
+        this.bottom_r = measurement.bottom_r
+    }
+};
 </script>
