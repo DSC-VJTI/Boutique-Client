@@ -372,7 +372,12 @@ export default {
   props: ["mId"],
   data() {
     return {
-      measurement: {},
+      measurement: {
+        l: {},
+        sl: {},
+        n: {},
+        bottom_w: {}
+      },
       nameError: "",
       isValid: true
     };
@@ -448,12 +453,7 @@ export default {
 
       if (status === 200) {
         this.resetErrors();
-        this.$router.push({
-          name: "seeMeasurement",
-          params: {
-            measurementId: this.mId
-          }
-        });
+        this.$router.push(`/measurements/${this.mId}`);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {

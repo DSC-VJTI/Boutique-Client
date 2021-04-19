@@ -48,9 +48,7 @@ export default {
 
   async getAMaterial(context, payload) {
     const materials = context.getters.getMaterials;
-    const material = materials.filter(
-      m => m.id == payload.material_id
-    );
+    const material = materials.filter(m => m.id == payload.material_id);
     if (material.length) return material[0];
 
     try {

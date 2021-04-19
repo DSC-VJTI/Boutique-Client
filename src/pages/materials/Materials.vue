@@ -45,12 +45,10 @@ export default {
   },
 
   async created() {
-    const materials = await this.$store.dispatch(
-      "materials/getAllMaterials",
-      { token: JSON.parse(localStorage.getItem("user")).access_token }
-    );
+    const materials = await this.$store.dispatch("materials/getAllMaterials", {
+      token: JSON.parse(localStorage.getItem("user")).access_token
+    });
     this.materials = materials;
   }
 };
-
 </script>

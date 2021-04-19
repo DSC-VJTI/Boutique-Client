@@ -7,10 +7,10 @@ import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";
 import AdminDash from "./pages/admin/AdminDash.vue";
 
-import createBlog from "./pages/blogs/CreateBlog.vue";
-import blogsList from "./pages/blogs/BlogsList.vue";
-import viewBlog from "./pages/blogs/ViewBlog.vue";
-import updateBlog from "./pages/blogs/UpdateBlog.vue";
+import CreateBlog from "./pages/blogs/CreateBlog.vue";
+import BlogsList from "./pages/blogs/BlogsList.vue";
+import ViewBlog from "./pages/blogs/ViewBlog.vue";
+import UpdateBlog from "./pages/blogs/UpdateBlog.vue";
 
 import Products from "./pages/products/Products.vue";
 import SingleProduct from "./pages/products/SingleProduct.vue";
@@ -40,24 +40,24 @@ const router = createRouter({
     {
       name: "seeBlogs",
       path: "/blogs",
-      component: blogsList
+      component: BlogsList
     },
     // creating a blog
     {
       path: "/blogs/new",
-      component: createBlog
+      component: CreateBlog
     },
     // viewing single blog
     {
       name: "seeBlog",
       path: "/blogs/:blogId",
-      component: viewBlog,
+      component: ViewBlog,
       props: true
     },
     // updating a blog
     {
       path: "/blogs/update/:blogId",
-      component: updateBlog,
+      component: UpdateBlog,
       props: true
     },
     // Products Page
@@ -67,24 +67,22 @@ const router = createRouter({
 
     // Measurements
     { path: "/measurements", component: Measurements, name: "seeMeasurements" },
-    // Create Measurements
     { path: "/measurements/new", component: CreateMeasurement },
-    // Update a Measurement
     {
       path: "/measurements/:mId/update",
       component: UpdateMeasurement,
       props: true
     },
-    // View a single Measurement
     { path: "/measurements/:mId", component: ViewMeasurement, props: true },
 
     // Materials
     { path: "/materials", component: Materials, name: "seeMaterials" },
-    // Create Material
     { path: "/materials/new", component: CreateMaterial },
-    // Update a Material
-    { path: "/materials/:materialId/update", component: UpdateMaterial, props: true },
-    // View a single Material
+    {
+      path: "/materials/:materialId/update",
+      component: UpdateMaterial,
+      props: true
+    },
     { path: "/materials/:materialId", component: ViewMaterial, props: true }
   ]
 });

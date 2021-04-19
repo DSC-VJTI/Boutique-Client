@@ -150,13 +150,10 @@ export default {
     }
   },
   async created() {
-    this.material = await this.$store.dispatch(
-      "materials/getAMaterial",
-      {
-        material_id: this.materialId,
-        token: JSON.parse(localStorage.getItem("user")).access_token
-      }
-    );
+    this.material = await this.$store.dispatch("materials/getAMaterial", {
+      material_id: this.materialId,
+      token: JSON.parse(localStorage.getItem("user")).access_token
+    });
   }
 };
 </script>

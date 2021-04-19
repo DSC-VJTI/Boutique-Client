@@ -223,7 +223,12 @@ export default {
   props: ["mId"],
   data() {
     return {
-      measurement: {}
+      measurement: {
+        l: {},
+        sl: {},
+        n: {},
+        bottom_w: {}
+      }
     };
   },
   methods: {

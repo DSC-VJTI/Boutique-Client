@@ -1,6 +1,9 @@
 <template>
   <div>
-    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4" @submit.prevent="newMaterial">
+    <form
+      class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
+      @submit.prevent="newMaterial"
+    >
       <div class="space-y-6 bg-white">
         <div
           class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -217,7 +220,7 @@ export default {
         buttons: "",
         tailoring: "",
         convayance: "",
-        overheads: "",
+        overheads: ""
       },
       isValid: true,
       nameError: ""
@@ -239,13 +242,10 @@ export default {
 
       if (!this.isValid) return;
 
-      const status = await this.$store.dispatch(
-        "materials/createNewMaterial",
-        {
-          body: this.material,
-          token: JSON.parse(localStorage.getItem("user")).access_token
-        }
-      );
+      const status = await this.$store.dispatch("materials/createNewMaterial", {
+        body: this.material,
+        token: JSON.parse(localStorage.getItem("user")).access_token
+      });
 
       if (status === 201) {
         this.$router.push({

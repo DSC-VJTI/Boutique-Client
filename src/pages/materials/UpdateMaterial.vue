@@ -1,6 +1,9 @@
 <template>
   <div>
-    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4" @submit.prevent="updateMaterial">
+    <form
+      class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
+      @submit.prevent="updateMaterial"
+    >
       <div class="space-y-6 bg-white">
         <div
           class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -24,16 +27,6 @@
             />
             <br /><span class="text-red-600 font-bold">{{ nameError }}</span>
           </div>
-          <!-- <div class="col-span-1 md:inline-block float-right">
-            <h2 class="inline-block p-2 w-32 mr-4">Mobile Number</h2>
-            <input
-              type="text"
-              class="measurementInput"
-              style="width: 180px;"
-              placeholder="Mobile Number"
-              required
-            />
-          </div> -->
         </div>
         <hr />
         <!-- TOP BOTTOM DUPATTA -->
@@ -221,7 +214,7 @@ export default {
       } else this.nameError = "";
     },
 
-    async updateMeasurement() {
+    async updateMaterial() {
       this.validate();
 
       if (!this.isValid) return;
@@ -231,18 +224,13 @@ export default {
         {
           material: this.material,
           token: JSON.parse(localStorage.getItem("user")).access_token,
-          material_id: this.mId
+          material_id: this.materialId
         }
       );
 
       if (status === 200) {
         this.resetErrors();
-        this.$router.push({
-          name: "seeMeasurement",
-          params: {
-            measurementId: this.materialId
-          }
-        });
+        this.$router.push(`/materials/${this.materialId}`);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
@@ -256,14 +244,10 @@ export default {
   },
 
   async created() {
-    this.measurement = await this.$store.dispatch(
-      "materials/getAMaterial",
-      {
-        measurement_id: this.materialId,
-        token: JSON.parse(localStorage.getItem("user")).access_token
-      }
-    );
+    this.material = await this.$store.dispatch("materials/getAMaterial", {
+      material_id: this.materialId,
+      token: JSON.parse(localStorage.getItem("user")).access_token
+    });
   }
 };
 </script>
-

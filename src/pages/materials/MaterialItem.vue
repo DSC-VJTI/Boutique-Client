@@ -9,10 +9,7 @@
       <div class="text-gray-600 pl-12 text-xs">
         {{ dateCreated }}
       </div>
-      <router-link
-        :to="materialLink"
-        class="w-12 text-right flex justify-end"
-      >
+      <router-link :to="materialLink" class="w-12 text-right flex justify-end">
         <svg
           width="12"
           fill="currentColor"
