@@ -26,9 +26,8 @@
         class="border-gray-400 flex flex-row mb-6"
         v-for="material in materials"
         :key="material.id"
-        :name="material.name"
-        :mobileNumber="material.mobileNumber"
-        :dateCreated="material.dateCreated"
+        :name="material.client_name"
+        :dateCreated="material.created_on"
         :id="material.id"
       ></material-item>
     </ul>
@@ -36,50 +35,22 @@
 </template>
 
 <script>
-import MaterialItem from "./MaterialItem";
+import MaterialItem from "./MaterialItem.vue";
 export default {
   components: { MaterialItem },
   data() {
     return {
-      materials: [
-        {
-          id: "1",
-          name: "Lorem Ipsum 1",
-          mobileNumber: 9999999999,
-          dateCreated: "12 April 2021"
-        },
-        {
-          id: "1",
-          name: "Lorem Ipsum 2",
-          mobileNumber: 9999999999,
-          dateCreated: "8 April 2021"
-        },
-        {
-          id: "1",
-          name: "Lorem Ipsum 3",
-          mobileNumber: 9999999999,
-          dateCreated: "7 April 2021"
-        },
-        {
-          id: "1",
-          name: "Lorem Ipsum 4",
-          mobileNumber: 9999999999,
-          dateCreated: "7 April 2021"
-        },
-        {
-          id: "1",
-          name: "Lorem Ipsum 5",
-          mobileNumber: 9999999999,
-          dateCreated: "4 April 2021"
-        },
-        {
-          id: "1",
-          name: "Lorem Ipsum 6",
-          mobileNumber: 9999999999,
-          dateCreated: "3 April 2021"
-        }
-      ]
+      materials: []
     };
+  },
+
+  async created() {
+    const materials = await this.$store.dispatch(
+      "materials/getAllMaterials",
+      { token: JSON.parse(localStorage.getItem("user")).access_token }
+    );
+    this.materials = materials;
   }
 };
+
 </script>

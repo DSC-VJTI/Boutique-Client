@@ -79,13 +79,13 @@ const router = createRouter({
     { path: "/measurements/:mId", component: ViewMeasurement, props: true },
 
     // Materials
-    { path: "/materials", component: Materials },
+    { path: "/materials", component: Materials, name: "seeMaterials" },
     // Create Material
     { path: "/materials/new", component: CreateMaterial },
     // Update a Material
-    { path: "/materials/update/1", component: UpdateMaterial, props: true },
+    { path: "/materials/:materialId/update", component: UpdateMaterial, props: true },
     // View a single Material
-    { path: "/materials/1", component: ViewMaterial, props: true }
+    { path: "/materials/:materialId", component: ViewMaterial, props: true }
   ]
 });
 

@@ -1,16 +1,18 @@
 <template>
-  <router-link to="/admin/materials/1">
+  <router-link :to="materialLink">
     <div class="measurementItem">
       <div class="flex-1 pl-1 md:mr-16">
         <div class="font-medium">
           {{ name }}
         </div>
-        <div class="text-gray-600 text-sm">+91 {{ mobileNumber }}</div>
       </div>
       <div class="text-gray-600 pl-12 text-xs">
         {{ dateCreated }}
       </div>
-      <router-link :to="materialLink" class="w-12 text-right flex justify-end">
+      <router-link
+        :to="materialLink"
+        class="w-12 text-right flex justify-end"
+      >
         <svg
           width="12"
           fill="currentColor"
@@ -29,9 +31,9 @@
 </template>
 <script>
 export default {
-  props: ["id", "name", "mobileNumber", "dateCreated"],
+  props: ["id", "name", "dateCreated"],
   computed: {
-    measurementLink() {
+    materialLink() {
       return "/materials/" + this.id;
     }
   }

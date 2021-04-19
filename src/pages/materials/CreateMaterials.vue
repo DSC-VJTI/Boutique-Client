@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
+    <form class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4" @submit.prevent="newMaterial">
       <div class="space-y-6 bg-white">
         <div
           class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -20,9 +20,11 @@
               style="width: 180px;"
               placeholder="Name"
               required
+              v-model="material.client_name"
             />
+            <br /><span class="text-red-600 font-bold">{{ nameError }}</span>
           </div>
-          <div class="col-span-1 md:inline-block float-right">
+          <!-- <div class="col-span-1 md:inline-block float-right">
             <h2 class="inline-block p-2 w-32 mr-4">Mobile Number</h2>
             <input
               type="text"
@@ -31,7 +33,7 @@
               placeholder="Mobile Number"
               required
             />
-          </div>
+          </div> -->
         </div>
         <hr />
         <!-- TOP BOTTOM DUPATTA -->
@@ -45,6 +47,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="TOP"
+              v-model="material.top"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -54,6 +57,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="BOTTOM"
+              v-model="material.bottom"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -63,6 +67,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="DUPATTA"
+              v-model="material.dupatta"
             />
           </div>
         </div>
@@ -78,6 +83,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="LINING"
+              v-model="material.lining"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -87,6 +93,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="LACES"
+              v-model="material.laces"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -96,6 +103,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="EMROIDERY"
+              v-model="material.emroidery"
             />
           </div>
         </div>
@@ -111,6 +119,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="PIPING"
+              v-model="material.piping"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -120,6 +129,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="ZIP"
+              v-model="material.zip"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -129,6 +139,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="BUTTONS"
+              v-model="material.buttons"
             />
           </div>
         </div>
@@ -145,6 +156,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="TAILORING"
+              v-model="material.tailoring"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -154,6 +166,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="CONVAYANCE"
+              v-model="material.convayance"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4 ">
@@ -163,6 +176,7 @@
               class="measurementInput"
               style="width: 120px;"
               placeholder="OVERHEADS"
+              v-model="material.overheads"
             />
           </div>
         </div>
@@ -185,3 +199,74 @@
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      material: {
+        client_name: "",
+        top: "",
+        bottom: "",
+        dupatta: "",
+        lining: "",
+        laces: "",
+        emroidery: "",
+        piping: "",
+        zip: "",
+        buttons: "",
+        tailoring: "",
+        convayance: "",
+        overheads: "",
+      },
+      isValid: true,
+      nameError: ""
+    };
+  },
+
+  methods: {
+    validate() {
+      this.isValid = true;
+
+      if (this.material.client_name === "") {
+        this.nameError = "*Name cannot be empty. Please enter a valid name.";
+        this.isValid = false;
+      } else this.nameError = "";
+    },
+
+    async newMaterial() {
+      this.validate();
+
+      if (!this.isValid) return;
+
+      const status = await this.$store.dispatch(
+        "materials/createNewMaterial",
+        {
+          body: this.material,
+          token: JSON.parse(localStorage.getItem("user")).access_token
+        }
+      );
+
+      if (status === 201) {
+        this.$router.push({
+          name: "seeMaterials"
+        });
+      } else if (status === 401) {
+        this.$store.dispatch("user/unauthorize");
+      } else {
+        console.log("Something went wrong");
+      }
+    }
+  },
+  created() {
+    if (!this.$store.getters["user/isAuthenticated"]) {
+      if (
+        !localStorage.getItem("isAuthenticated") ||
+        localStorage.getItem("isAuthenticated") === false
+      )
+        this.$router.replace("/admin/login");
+      else this.$store.commit("user/setAuth", { isAuthenticated: true });
+    }
+  }
+};
+</script>
