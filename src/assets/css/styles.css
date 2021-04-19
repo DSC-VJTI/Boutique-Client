@@ -123,3 +123,78 @@ button {
     @apply transition-all;
     @apply duration-300;
 }
+
+.measurementItem{
+    @apply transition;
+    @apply duration-300;
+    @apply shadow;
+    @apply ease-in-out;
+    @apply transform;
+    @apply hover:-translate-y-1;
+    @apply hover:scale-105;
+    @apply hover:shadow-lg;
+    @apply select-none;
+    @apply cursor-pointer;
+    @apply bg-white;
+    @apply rounded-md;
+    @apply flex;
+    @apply flex-1;
+    @apply items-center;
+    @apply p-4;
+}
+
+.measurementInput{
+    @apply rounded-lg;
+    @apply border-transparent;
+    @apply flex-1;
+    @apply appearance-none;
+    @apply border;
+    @apply border-gray-300;
+    @apply w-36;
+    @apply py-2;
+    @apply px-4;
+    @apply bg-white;
+    @apply text-gray-700;
+    @apply placeholder-gray-400;
+    @apply shadow-sm;
+    @apply text-sm;
+    @apply focus:outline-none;
+    @apply focus:ring-2;
+    @apply focus:ring-purple-600;
+    @apply focus:border-transparent;
+}
+
+.sketchPreview {
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 30px auto 0px;
+    background-size: cover;
+    background-position: center center;
+    @apply relative;
+}
+
+.sketchInput {
+    width: 250px;
+    @apply absolute;
+    @apply py-2;
+    @apply px-4;
+    @apply bg-blue-600;
+    @apply hover:bg-blue-700;
+    @apply focus:ring-blue-500;
+    @apply focus:ring-offset-blue-200;
+    @apply text-white;
+    @apply transition;
+    @apply ease-in;
+    @apply duration-200;
+    @apply text-center;
+    @apply text-base;
+    @apply font-semibold;
+    @apply shadow-md;
+    @apply focus:outline-none;
+    @apply focus:ring-2;
+    @apply focus:ring-offset-2;
+    @apply rounded-lg;
+    @apply cursor-pointer;
+}
