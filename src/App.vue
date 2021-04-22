@@ -8,6 +8,8 @@
       <router-link to="/about">About</router-link>
       <router-link to="/blogs">Blogs</router-link>
       <router-link to="/shop">Shop</router-link>
+      <router-link v-if="isAdmin" to="/measurements">Measurements</router-link>
+      <router-link v-if="isAdmin" to="/materials">Materials</router-link>
       <router-link v-if="isAdmin" to="/admin/register">Add Admin</router-link>
       <router-link v-if="isAdmin" to="/blogs/new">Create Blog</router-link>
       <button
