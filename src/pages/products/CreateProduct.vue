@@ -52,13 +52,17 @@
           />
         </div>
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Category that it belongs to"
-            v-model.trim="category_name"
-            required
-          />
+          <label class="my-15">Category that it belongs to:</label><br />
+          <div v-for="cat in available_categories" :key="cat">
+            <input
+              type="radio"
+              class="check"
+              :id="cat"
+              :value="cat"
+              v-model="category_name"
+            />
+            <label :for="cat">{{ cat }}</label>
+          </div>
         </div>
         <div class="form-group">
           <label class="my-15">Sub-categories that it belongs to:</label><br />
@@ -92,26 +96,24 @@ export default {
       discount_price: 0,
       category_name: "",
       sub_categories: [],
-      available_subcategories: [
-        "Women's Clothing",
-        "Men's Clothing",
-        "Winter Clothing",
-        "Earings"
-      ]
+      available_subcategories: [],
+      available_categories: []
     };
   },
   methods: {
     async newProduct() {
+      const body = {
+        name: this.name,
+        description: this.description,
+        info: this.info,
+        price: this.price,
+        discount_price: this.discount_price,
+        category_name: this.category_name,
+        sub_categories: this.sub_categories
+      };
+      console.log(body);
       const status = await this.$store.dispatch("products/createNewProduct", {
-        body: {
-          name: this.name,
-          description: this.description,
-          info: this.info,
-          price: this.price,
-          discount_price: this.discount_price,
-          category_name: this.category_name,
-          sub_categories: this.sub_categories
-        },
+        body: body,
         token: JSON.parse(localStorage.getItem("user")).access_token
       });
 
@@ -136,7 +138,7 @@ export default {
       this.sub_categories = [];
     }
   },
-  created() {
+  async created() {
     if (!this.$store.getters["user/isAuthenticated"]) {
       if (
         !localStorage.getItem("isAuthenticated") ||
@@ -145,6 +147,16 @@ export default {
         this.$router.replace("/admin/login");
       else this.$store.commit("user/setAuth", { isAuthenticated: true });
     }
+
+    const allSubcategories = await this.$store.dispatch(
+      "categories/getAllSubcategories"
+    );
+    const allCategories = await this.$store.dispatch(
+      "categories/getAllCategories"
+    );
+
+    this.available_subcategories = allSubcategories.map(obj => obj.name);
+    this.available_categories = allCategories.map(obj => obj.name);
   }
 };
 </script>

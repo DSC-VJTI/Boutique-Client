@@ -1,23 +1,19 @@
 import { createStore } from "vuex";
 import userModule from "./user/index";
 import blogsModule from "./blogs/index";
-<<<<<<< HEAD
 import productsModule from "./products/index";
-=======
 import measurementsModule from "./measurements/index";
 import materialsModule from "./materials/index";
->>>>>>> upstream/main
+import categoriesModule from "./categories/index"
 
 const store = createStore({
   modules: {
     user: userModule,
     blogs: blogsModule,
-<<<<<<< HEAD
-    products: productsModule
-=======
+    products: productsModule,
     measurements: measurementsModule,
-    materials: materialsModule
->>>>>>> upstream/main
+    materials: materialsModule,
+    categories: categoriesModule
   },
   state() {
     return {
