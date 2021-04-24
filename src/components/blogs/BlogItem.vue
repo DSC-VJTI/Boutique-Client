@@ -4,7 +4,7 @@
     <h3 class="green-h3 bg-transparent">
       <router-link :to="blogLink">{{ title }}</router-link>
     </h3>
-    <p class="bg-transparent mt-2 font-sans text-green-900">
+    <p class="bg-transparent mt-2 font-sans">
       Last Updated on: {{ last_updated }}
     </p>
     <p

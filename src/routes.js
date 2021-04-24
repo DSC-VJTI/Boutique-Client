@@ -12,8 +12,10 @@ import BlogsList from "./pages/blogs/BlogsList.vue";
 import ViewBlog from "./pages/blogs/ViewBlog.vue";
 import UpdateBlog from "./pages/blogs/UpdateBlog.vue";
 
-import Products from "./pages/products/Products.vue";
-import SingleProduct from "./pages/products/SingleProduct.vue";
+import products from "./pages/products/Products.vue";
+import singleProduct from "./pages/products/SingleProduct.vue";
+import addProduct from "./pages/products/CreateProduct.vue";
+import updateProduct from "./pages/products/UpdateProduct.vue";
 
 import Measurements from "./pages/measurements/Measurements.vue";
 import CreateMeasurement from "./pages/measurements/CreateMeasurement.vue";
@@ -60,10 +62,6 @@ const router = createRouter({
       component: UpdateBlog,
       props: true
     },
-    // Products Page
-    { path: "/shop", component: Products },
-    // Single Product Page
-    { path: "/shop/singleproduct", component: SingleProduct },
 
     // Measurements
     { path: "/measurements", component: Measurements, name: "seeMeasurements" },
@@ -83,7 +81,32 @@ const router = createRouter({
       component: UpdateMaterial,
       props: true
     },
-    { path: "/materials/:materialId", component: ViewMaterial, props: true }
+    { path: "/materials/:materialId", component: ViewMaterial, props: true },
+
+    // Products Page
+    {
+      name: "viewProducts",
+      path: "/shop",
+      component: products
+    },
+    // Single Product Page
+    {
+      name: "viewProduct",
+      path: "/shop/:productId",
+      component: singleProduct,
+      props: true
+    },
+    // Add Product Page
+    {
+      path: "/shop/new",
+      component: addProduct
+    },
+    // updating product info
+    {
+      path: "/shop/update/:productId",
+      component: updateProduct,
+      props: true
+    }
   ]
 });
 
