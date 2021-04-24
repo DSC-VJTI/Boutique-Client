@@ -23,13 +23,14 @@
           />
         </div>
         <div class="form-group">
-          <input
+          <textarea
+            rows="8"
             class="form-control"
             type="text"
             placeholder="Detailed Info"
             v-model.trim="info"
             required
-          />
+          ></textarea>
         </div>
         <div class="form-group">
           <label>Original Price: </label>

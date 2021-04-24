@@ -75,17 +75,12 @@
       </p>
 
       <div class="my-4">
-        <h5 class="mx-2 font-thin text-gray-300 text-lg sm:text-2xl mb-6 block">
-          ----
-          <span class="text-gray-800 font-bold ">Guaranteed Safe Checkout</span>
-          ----
-        </h5>
         <!-- Whatsapp icon with link to msg for buying -->
         <a
           style="width:350px;"
           class="px-2 mx-auto mb-5 relative block justify-self-center text-2xl text-white transform transition-all duration-300 py-2 uppercase font-semibold hover:text-green-700 bg-gray-800 hover:scale-103 hover:border-green-800 hover:bg-green-100 border rounded border-transparent"
           target="_blank"
-          href="http://wa.me/919594116911"
+          href="http://wa.me/91xxxxxxxxxx"
         >
           <img
             class="inline-block mr-2"
@@ -112,8 +107,13 @@
               class="text-gray-400 uppercase font-normal text-base"
               >Sub Category:</span
             >
-            <span class="mx-2" v-for="item in sub_categories" :key="item">
-              {{ item }},</span
+            <span
+              class="mx-1"
+              v-for="(item, index) in sub_categories"
+              :key="index"
+            >
+              {{ item
+              }}<span v-if="index + 1 !== sub_categories.length">,</span></span
             >
           </li>
         </ul>
@@ -131,19 +131,6 @@
         <p class="font-bold text-gray-800 text-lg py-4">
           {{ info }}
         </p>
-
-        <div class="mb-2 pt-4">
-          <h5 class="font-bold text-gray-800 text-lg mb-4">Material used</h5>
-          <p class="font-light text-base text-gray-600">
-            Polyester is deemed lower quality due to its none natural quality’s.
-            Made from synthetic materials, not natural like wool. Polyester
-            suits become creased easily and are known for not being breathable.
-            Polyester suits tend to have a shine to them compared to wool and
-            cotton suits, this can make the suit look cheap. The texture of
-            velvet is luxurious and breathable. Velvet is a great choice for
-            dinner party jacket and can be worn all year round.
-          </p>
-        </div>
       </div>
     </div>
     <div v-if="isAdmin">

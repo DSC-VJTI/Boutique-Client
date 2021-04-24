@@ -75,11 +75,11 @@
                       <input
                         type="checkbox"
                         class="check lista"
-                        :id="category"
+                        :id="category.name"
                         :value="category"
                         v-model="filters.selected_categories"
                       />
-                      <label :for="category">{{ category.name }}</label>
+                      <label :for="category.name">{{ category.name }}</label>
                     </li>
                   </ul>
                 </div>
@@ -114,11 +114,13 @@
                       <input
                         type="checkbox"
                         class="check lista"
-                        :id="subcategory"
+                        :id="subcategory.name"
                         :value="subcategory"
                         v-model="filters.selected_subcategories"
                       />
-                      <label :for="subcategory">{{ subcategory.name }}</label>
+                      <label :for="subcategory.name">{{
+                        subcategory.name
+                      }}</label>
                     </li>
                   </ul>
                 </div>
@@ -155,12 +157,6 @@
                       placeholder="max"
                       v-model="filters.max_price"
                     />
-                    <!-- <ul>
-                    <li class="mb-3 mt-3">
-                      <a class="lista" @click="">$0.00 - $50.00</a>
-                    </li>
-                    
-                  </ul> -->
                   </div>
                 </div>
               </div>
@@ -197,8 +193,7 @@
 
 <script>
 import productItem from "../../components/shop/ProductItem.vue";
-// import products from '../../store/products';
-// import products from '../../store/products';
+
 export default {
   components: {
     productItem
@@ -219,12 +214,13 @@ export default {
   },
   methods: {
     filter() {
-      if (this.filters.min_price === "") this.filters.min_price = 0;
-      if (this.filters.max_price === "") this.filters.max_price = 25000;
+      let min_price = this.filters.min_price;
+      let max_price = this.filters.max_price;
+      if (min_price === "") min_price = 0;
+      if (max_price === "") max_price = 25000;
+
       this.products = this.allProducts.filter(
-        p =>
-          p.discount_price >= this.filters.min_price &&
-          p.discount_price <= this.filters.max_price
+        p => p.discount_price >= min_price && p.discount_price <= max_price
       );
 
       if (this.filters.selected_categories.length) {
@@ -242,14 +238,12 @@ export default {
         this.products = this.products.filter(p => {
           for (let subcat of subcats) {
             for (let s of p.sub_categories) {
-              console.log(s, "===", subcat.name);
               if (s === subcat.name) return true;
             }
           }
           return false;
         });
       }
-      console.log(this.products);
     }
   },
   async created() {
