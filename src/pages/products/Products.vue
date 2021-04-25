@@ -1,5 +1,6 @@
 <template lang="html">
   <!-- Address -->
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="grid grid-cols-1 m-0 bg-gray-200">
     <div class="col-span-1">
       <div class="my-7 ml-1 sm:ml-5 inline-block">
@@ -209,7 +210,8 @@ export default {
       allProducts: [],
       products: [],
       categories: [],
-      subcategories: []
+      subcategories: [],
+      isLoading: false
     };
   },
   methods: {
@@ -247,6 +249,7 @@ export default {
     }
   },
   async created() {
+    this.isLoading = true;
     const products = await this.$store.dispatch("products/getAllProducts");
     const categories = await this.$store.dispatch(
       "categories/getAllCategories"
@@ -259,6 +262,7 @@ export default {
     this.products = products;
     this.categories = categories;
     this.subcategories = subcategories;
+    this.isLoading = false;
   }
 };
 </script>

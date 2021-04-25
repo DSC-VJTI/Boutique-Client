@@ -1,5 +1,6 @@
 <template>
   <!-- Address -->
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="grid grid-cols-1 m-0 justify-items-center bg-gray-200">
     <div class="col-span-1">
       <div class="my-7 ml-1 sm:ml-5 inline-block">
@@ -189,7 +190,8 @@ export default {
           imageURL:
             "https://preview.colorlib.com/theme/malefashion/img/shop-details/thumb-3.png"
         }
-      ]
+      ],
+      isLoading: false
     };
   },
   methods: {
@@ -197,6 +199,7 @@ export default {
       this.$router.push({ path: `update/${this.productId}` });
     },
     async deleteProduct() {
+      this.isLoading = true;
       const status = await this.$store.dispatch(
         "products/deleteCurrentProduct",
         {
@@ -206,6 +209,7 @@ export default {
       );
 
       if (status === 204) {
+        this.isLoading = false;
         this.$router.push({
           name: "viewProducts"
         });
@@ -215,9 +219,11 @@ export default {
         console.log(status);
         console.log("Something went wrong. Please try again!");
       }
+      this.isLoading = false;
     }
   },
   async created() {
+    this.isLoading = true;
     const product = await this.$store.dispatch("products/getAProduct", {
       product_id: this.productId
     });
@@ -228,6 +234,7 @@ export default {
     this.sub_categories = product.sub_categories;
     this.price = product.price;
     this.discount_price = product.discount_price;
+    this.isLoading = false;
   }
 };
 </script>

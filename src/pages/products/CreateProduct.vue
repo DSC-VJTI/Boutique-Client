@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Add Product</h1>
     <div>
@@ -98,11 +99,13 @@ export default {
       category_name: "",
       sub_categories: [],
       available_subcategories: [],
-      available_categories: []
+      available_categories: [],
+      isLoading: false
     };
   },
   methods: {
     async newProduct() {
+      this.isLoading = true;
       const body = {
         name: this.name,
         description: this.description,
@@ -112,7 +115,7 @@ export default {
         category_name: this.category_name,
         sub_categories: this.sub_categories
       };
-      console.log(body);
+      // console.log(body);
       const status = await this.$store.dispatch("products/createNewProduct", {
         body: body,
         token: JSON.parse(localStorage.getItem("user")).access_token
@@ -120,14 +123,16 @@ export default {
 
       if (status === 201) {
         this.resetInputs();
+        this.isLoading = false;
         this.$router.push({
           name: "viewProducts"
         });
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        alert("Something went wrong");
+        console.log("Something went wrong");
       }
+      this.isLoading = false;
     },
     resetInputs() {
       this.name = "";

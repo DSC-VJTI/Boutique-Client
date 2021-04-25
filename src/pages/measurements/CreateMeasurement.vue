@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
@@ -424,7 +425,8 @@ export default {
       },
       // files: [],
       isValid: true,
-      nameError: ""
+      nameError: "",
+      isLoading: false
     };
   },
 
@@ -483,9 +485,13 @@ export default {
     },
 
     async newMeasurement() {
+      this.isLoading = true;
       this.validate();
 
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch(
         "measurements/createNewMeasurement",
@@ -496,6 +502,7 @@ export default {
       );
 
       if (status === 201) {
+        this.isLoading = false;
         this.$router.push({
           name: "seeMeasurements"
         });
@@ -504,6 +511,7 @@ export default {
       } else {
         console.log("Something went wrong");
       }
+      this.isLoading = false;
     }
   },
   created() {

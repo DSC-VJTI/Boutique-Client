@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div
     class="container flex flex-col mx-auto w-full items-center justify-center"
   >
@@ -40,15 +41,18 @@ export default {
   components: { MaterialItem },
   data() {
     return {
-      materials: []
+      materials: [],
+      isLoading: false
     };
   },
 
   async created() {
+    this.isLoading = true;
     const materials = await this.$store.dispatch("materials/getAllMaterials", {
       token: JSON.parse(localStorage.getItem("user")).access_token
     });
     this.materials = materials;
+    this.isLoading = false;
   }
 };
 </script>

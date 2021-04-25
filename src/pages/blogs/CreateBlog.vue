@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Create Blog</h1>
     <div>
@@ -40,7 +41,8 @@ export default {
       contentError: "",
       isValid: true,
       editor: ClassicEditor,
-      editorData: ""
+      editorData: "",
+      isLoading: false
     };
   },
   methods: {
@@ -62,9 +64,13 @@ export default {
     },
 
     async newBlog() {
+      this.isLoading = true;
       this.validate();
 
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch("blogs/createNewBlog", {
         body: {
@@ -77,6 +83,7 @@ export default {
       if (status === 201) {
         this.resetInputs();
         this.resetErrors();
+        this.isLoading = false;
         this.$router.push({
           name: "seeBlogs"
         });
@@ -85,6 +92,7 @@ export default {
       } else {
         alert("Something went wrong");
       }
+      this.isLoading = false;
     },
     resetErrors() {
       this.contentError = "";
