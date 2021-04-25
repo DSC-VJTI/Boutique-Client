@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div
     class="container flex flex-col mx-auto w-full items-center justify-center"
   >
@@ -39,16 +40,19 @@ export default {
   components: { MeasurementItem },
   data() {
     return {
-      measurements: []
+      measurements: [],
+      isLoading: false
     };
   },
 
   async created() {
+    this.isLoading = true;
     const measurements = await this.$store.dispatch(
       "measurements/getAllMeasurements",
       { token: JSON.parse(localStorage.getItem("user")).access_token }
     );
     this.measurements = measurements;
+    this.isLoading = false;
   }
 };
 </script>

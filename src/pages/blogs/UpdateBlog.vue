@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Update Blog</h1>
     <div>
@@ -48,7 +49,8 @@ export default {
       editorData: "",
       editorConfig: {
         height: "500px"
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
@@ -70,9 +72,13 @@ export default {
     },
 
     async updateBlog() {
+      this.isLoading = true;
       this.validate();
 
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch("blogs/updateCurrentBlog", {
         body: {
@@ -86,6 +92,7 @@ export default {
       if (status === 200) {
         this.resetInputs();
         this.resetErrors();
+        this.isLoading = false;
         this.$router.push({
           name: "seeBlog",
           params: {
@@ -98,6 +105,7 @@ export default {
         console.log(status);
         alert("Something went wrong");
       }
+      this.isLoading = false;
     },
     resetErrors() {
       this.contentError = "";

@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
@@ -98,11 +99,13 @@ export default {
         "Men's Clothing",
         "Winter Clothing",
         "Earings"
-      ]
+      ],
+      isLoading: false
     };
   },
   methods: {
     async updateProduct() {
+      this.isLoading = true;
       const status = await this.$store.dispatch(
         "products/updateCurrentProduct",
         {
@@ -122,6 +125,7 @@ export default {
 
       if (status === 200) {
         this.resetInputs();
+        this.isLoading = false;
         this.$router.push({
           name: "viewProduct",
           params: {
@@ -131,8 +135,9 @@ export default {
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        alert("Something went wrong");
+        console.log("Something went wrong");
       }
+      this.isLoading = false;
     },
     resetInputs() {
       this.name = "";
@@ -153,7 +158,7 @@ export default {
         this.$router.replace("/admin/login");
       else this.$store.commit("user/setAuth", { isAuthenticated: true });
     }
-
+    this.isLoading = true;
     const product = await this.$store.dispatch("products/getAProduct", {
       product_id: this.productId
     });
@@ -164,6 +169,7 @@ export default {
     this.sub_categories = product.sub_categories;
     this.price = product.price;
     this.discount_price = product.discount_price;
+    this.isLoading = false;
   }
 };
 </script>

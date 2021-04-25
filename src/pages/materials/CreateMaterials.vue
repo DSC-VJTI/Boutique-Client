@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
@@ -223,7 +224,8 @@ export default {
         overheads: ""
       },
       isValid: true,
-      nameError: ""
+      nameError: "",
+      isLoading: false
     };
   },
 
@@ -238,9 +240,13 @@ export default {
     },
 
     async newMaterial() {
+      this.isLoading = true;
       this.validate();
 
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch("materials/createNewMaterial", {
         body: this.material,
@@ -248,6 +254,7 @@ export default {
       });
 
       if (status === 201) {
+        this.isLoading = false;
         this.$router.push({
           name: "seeMaterials"
         });
@@ -256,6 +263,7 @@ export default {
       } else {
         console.log("Something went wrong");
       }
+      this.isLoading = false;
     }
   },
   created() {

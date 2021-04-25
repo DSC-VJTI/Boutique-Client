@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Admin Register</h1>
     <div>
@@ -51,7 +52,8 @@ export default {
       fullnameError: "",
       usernameError: "",
       passwordError: "",
-      isValid: true
+      isValid: true,
+      isLoading: false
     };
   },
   methods: {
@@ -80,9 +82,13 @@ export default {
     },
 
     async register() {
+      this.isLoading = true;
       this.validate();
 
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch("user/register", {
         body: {
@@ -97,6 +103,7 @@ export default {
         this.resetInputs();
         this.resetErrors();
         this.$store.dispatch("user/unauthorize");
+        this.isLoading = false;
         this.$router.replace("/admin/login");
       } else if (status === 400) {
         this.usernameError = "*Username already taken.";
@@ -105,6 +112,7 @@ export default {
       } else {
         console.log("Something went wrong", status);
       }
+      this.isLoading = false;
     },
     resetErrors() {
       this.usernameError = "";

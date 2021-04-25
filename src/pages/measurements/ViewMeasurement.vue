@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
     <div class="space-y-6 bg-white">
       <div
@@ -228,7 +229,8 @@ export default {
         sl: {},
         n: {},
         bottom_w: {}
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
@@ -237,6 +239,7 @@ export default {
     },
 
     async deleteMeasurement() {
+      this.isLoading = true;
       const status = await this.$store.dispatch(
         "measurements/deleteCurrentMeasurement",
         {
@@ -246,6 +249,7 @@ export default {
       );
 
       if (status === 204) {
+        this.isLoading = false;
         this.$router.push({
           name: "seeMeasurements"
         });
@@ -255,9 +259,11 @@ export default {
         console.log(status);
         console.log("Something went wrong. Please try again!");
       }
+      this.isLoading = false;
     }
   },
   async created() {
+    this.isLoading = true;
     this.measurement = await this.$store.dispatch(
       "measurements/getAMeasurement",
       {
@@ -265,6 +271,7 @@ export default {
         token: JSON.parse(localStorage.getItem("user")).access_token
       }
     );
+    this.isLoading = false;
   }
 };
 </script>

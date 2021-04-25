@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Blogs</h1>
     <blog-item
@@ -20,13 +21,16 @@ export default {
   components: { blogItem },
   data() {
     return {
-      blogs: []
+      blogs: [],
+      isLoading: false
     };
   },
 
   async created() {
+    this.isLoading = true;
     const blogs = await this.$store.dispatch("blogs/getAllBlogs");
     this.blogs = blogs;
+    this.isLoading = false;
   }
 };
 </script>

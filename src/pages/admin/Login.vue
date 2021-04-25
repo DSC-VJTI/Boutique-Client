@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Admin Login</h1>
     <div>
@@ -44,7 +45,8 @@ export default {
       usernameError: "",
       passwordError: "",
       isValid: true,
-      rememberMe: false
+      rememberMe: false,
+      isLoading: false
     };
   },
   methods: {
@@ -75,8 +77,12 @@ export default {
     },
 
     async login() {
+      this.isLoading = true;
       this.validate();
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch("user/login", {
         body: {
@@ -93,6 +99,7 @@ export default {
           localStorage.setItem("rememberMe", true);
           localStorage.setItem("isAuthenticated", true);
         }
+        this.isLoading = false;
         this.$router.replace("/admin");
       } else if (status === 401) {
         this.passwordError = "Incorrect Password!";
@@ -101,6 +108,7 @@ export default {
       } else {
         console.log("Something went Wrong", status);
       }
+      this.isLoading = false;
     }
   },
   created() {

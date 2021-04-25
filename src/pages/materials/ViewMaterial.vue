@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
     <div class="space-y-6 bg-white">
       <div
@@ -120,7 +121,8 @@ export default {
   props: ["materialId"],
   data() {
     return {
-      material: {}
+      material: {},
+      isLoading: false
     };
   },
   methods: {
@@ -129,6 +131,7 @@ export default {
     },
 
     async deleteMaterial() {
+      this.isLoading = true;
       const status = await this.$store.dispatch(
         "materials/deleteCurrentMaterial",
         {
@@ -138,6 +141,7 @@ export default {
       );
 
       if (status === 204) {
+        this.isLoading = false;
         this.$router.push({
           name: "seeMaterials"
         });
@@ -147,13 +151,16 @@ export default {
         console.log(status);
         console.log("Something went wrong. Please try again!");
       }
+      this.isLoading = false;
     }
   },
   async created() {
+    this.isLoading = true;
     this.material = await this.$store.dispatch("materials/getAMaterial", {
       material_id: this.materialId,
       token: JSON.parse(localStorage.getItem("user")).access_token
     });
+    this.isLoading = false;
   }
 };
 </script>

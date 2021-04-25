@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
@@ -200,7 +201,8 @@ export default {
     return {
       material: {},
       nameError: "",
-      isValid: true
+      isValid: true,
+      isLoading: false
     };
   },
 
@@ -215,9 +217,13 @@ export default {
     },
 
     async updateMaterial() {
+      this.isLoading = true;
       this.validate();
 
-      if (!this.isValid) return;
+      if (!this.isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       const status = await this.$store.dispatch(
         "materials/updateCurrentMaterial",
@@ -230,12 +236,14 @@ export default {
 
       if (status === 200) {
         this.resetErrors();
+        this.isLoading = false;
         this.$router.push(`/materials/${this.materialId}`);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
         console.log("Something went wrong");
       }
+      this.isLoading = false;
     },
 
     resetErrors() {
@@ -244,10 +252,12 @@ export default {
   },
 
   async created() {
+    this.isLoading = true;
     this.material = await this.$store.dispatch("materials/getAMaterial", {
       material_id: this.materialId,
       token: JSON.parse(localStorage.getItem("user")).access_token
     });
+    this.isLoading = false;
   }
 };
 </script>

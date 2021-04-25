@@ -1,4 +1,5 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div>
     <h1 class="green-blog-headings">{{ title }}</h1>
     <p class="mt-4 pb-2 font-sans text-green-600 border-b-4 border-green-700">
@@ -20,7 +21,8 @@ export default {
       title: "",
       content: "",
       created_on: "",
-      last_updated: ""
+      last_updated: "",
+      isLoading: false
     };
   },
   computed: {
@@ -37,12 +39,14 @@ export default {
     },
 
     async deleteBlog() {
+      this.isLoading = true;
       const status = await this.$store.dispatch("blogs/deleteCurrentBlog", {
         token: JSON.parse(localStorage.getItem("user")).access_token,
         blog_id: this.blogId
       });
 
       if (status === 204) {
+        this.isLoading = false;
         this.$router.push({
           name: "seeBlogs"
         });
@@ -52,10 +56,12 @@ export default {
         console.log(status);
         console.log("Something went wrong. Please try again!");
       }
+      this.isLoading = false;
     }
   },
 
   async created() {
+    this.isLoading = true;
     const blog = await this.$store.dispatch("blogs/getABlog", {
       blog_id: this.blogId
     });
@@ -63,6 +69,7 @@ export default {
     this.created_on = blog.created_on;
     this.last_updated = blog.last_updated;
     this.content = blog.content;
+    this.isLoading = false;
   }
 };
 </script>
