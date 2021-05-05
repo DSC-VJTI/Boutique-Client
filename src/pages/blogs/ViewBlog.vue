@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <h1 class="green-blog-headings">{{ title }}</h1>
-    <p class="mt-4 pb-2 font-sans text-green-600 border-b-4 border-green-700">
-      Last Updated on: {{ last_updated }}
+  <div class="w-10/12 md:w-2/3 lg:w-3/5 mx-auto my-10">
+    <h1 class="text-gray-800 text-3xl md:text-5xl font-bold font-serif mb-12">{{ title }}</h1>
+    <p class="mb-20 text-base font-sans italic text-gray-500 border-b-2 border-gray-300">
+      Last Updated on: <span class="text-gray-700">{{ last_updated }}</span>
     </p>
-    <div class="mt-4 text-lg text-green-800 text-bold" v-html="content"></div>
-    <div v-if="isAdmin">
-      <button @click="updateBlog" class="mt-10 update">Update</button>
-      <button @click="deleteBlog" class="mt-10 delete ml-5">Delete</button>
+    <div class="text-lg text-gray-800 text-bold" v-html="content"></div>
+    <div v-if="isAdmin" class="my-10">
+      <button @click="updateBlog" class="update">Update</button>
+      <button @click="deleteBlog" class="delete ml-5">Delete</button>
     </div>
   </div>
 </template>

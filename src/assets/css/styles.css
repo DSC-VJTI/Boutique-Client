@@ -198,3 +198,26 @@ button {
     @apply rounded-lg;
     @apply cursor-pointer;
 }
+
+.blogItem{
+    @apply w-4/5;
+    @apply md:w-3/5;
+    @apply mx-auto;
+    @apply transition;
+    @apply duration-300;
+    @apply shadow-md;
+    @apply ease-in-out;
+    @apply transform;
+    @apply hover:-translate-y-1;
+    @apply hover:scale-105;
+    @apply hover:shadow-xl;
+    @apply select-none;
+    @apply cursor-pointer;
+    @apply bg-gray-50;
+    @apply rounded-md;
+    @apply flex;
+    @apply flex-1;
+    @apply items-center;
+    @apply p-4;
+    @apply block;
+}
