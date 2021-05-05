@@ -1,9 +1,8 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
-    <h1 class="green mb-10">Blogs</h1>
+    <h1 class="text-gray-800 text-5xl font-bold font-serif mb-10">Blogs</h1>
     <blog-item
-      class="shadow-md hover:translate-y-4"
       v-for="blog in blogs"
       :key="blog.id"
       :title="blog.title"

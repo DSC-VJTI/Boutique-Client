@@ -37,13 +37,20 @@ button {
 
 .form-group{
     @apply p-2;
+    @apply block;
+    @apply w-11/12;
+    @apply md:w-3/4;
+    @apply mx-auto;
 }
 
 .form-control{
     @apply p-3;
+    @apply w-full;
+    @apply float-left;
     @apply rounded;
-    @apply w-2/6;
-    @apply shadow-md;
+    @apply border;
+    @apply border-solid;
+    @apply border-gray-300;
     @apply focus:outline-none; 
     @apply focus:ring-2;
     @apply focus:ring-green-400; 
@@ -52,9 +59,12 @@ button {
 
 .form-control-blog{
     @apply p-3;
+    @apply w-full;
+    @apply float-left;
     @apply rounded;
-    @apply w-2/3;
-    @apply shadow-md;
+    @apply border;
+    @apply border-solid;
+    @apply border-gray-300;
     @apply focus:outline-none; 
     @apply focus:ring-2;
     @apply focus:ring-green-400; 
@@ -63,11 +73,11 @@ button {
 
 .form-group button, .form-group-blog button{
     @apply bg-green-700; 
-    @apply text-white; 
-    @apply pt-2; 
-    @apply pb-2; 
-    @apply pr-4; 
-    @apply pl-4; 
+    @apply text-white;
+    @apply w-full;
+    @apply md:w-96;
+    @apply py-2; 
+    @apply px-4; 
     @apply rounded; 
     @apply hover:bg-green-600;
     @apply shadow-md;
@@ -195,4 +205,27 @@ button {
     @apply focus:ring-offset-2;
     @apply rounded-lg;
     @apply cursor-pointer;
+}
+
+.blogItem{
+    @apply w-4/5;
+    @apply md:w-3/5;
+    @apply mx-auto;
+    @apply transition;
+    @apply duration-300;
+    @apply shadow-md;
+    @apply ease-in-out;
+    @apply transform;
+    @apply hover:-translate-y-1;
+    @apply hover:scale-105;
+    @apply hover:shadow-xl;
+    @apply select-none;
+    @apply cursor-pointer;
+    @apply bg-gray-50;
+    @apply rounded-md;
+    @apply flex;
+    @apply flex-1;
+    @apply items-center;
+    @apply p-4;
+    @apply block;
 }

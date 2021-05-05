@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col h-full">
     <nav class="pr-4 pl-4 pt-4 flex flex-wrap content-evenly text-right">
       <router-link to="/"
         ><img src="./assets/logo.png" class="w-7 h-7" alt=""
@@ -28,7 +28,7 @@
         Logout
       </button>
     </nav>
-    <div class="p-0 m-0">
+    <div class="p-0 m-0 flex-1">
       <router-view></router-view>
     </div>
     <Footer></Footer>

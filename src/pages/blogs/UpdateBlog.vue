@@ -1,10 +1,12 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
-    <h1 class="green mb-10">Update Blog</h1>
+    <h1 class="text-gray-800 text-5xl font-serif font-bold mb-10">
+      Update Blog
+    </h1>
     <div>
       <form class="m-5" @submit.prevent="updateBlog">
-        <div class="form-group">
+        <div class="form-group mb-8">
           <input
             class="form-control"
             type="text"
