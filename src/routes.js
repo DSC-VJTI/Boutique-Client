@@ -12,10 +12,10 @@ import BlogsList from "./pages/blogs/BlogsList.vue";
 import ViewBlog from "./pages/blogs/ViewBlog.vue";
 import UpdateBlog from "./pages/blogs/UpdateBlog.vue";
 
-import products from "./pages/products/Products.vue";
-import singleProduct from "./pages/products/SingleProduct.vue";
-import addProduct from "./pages/products/CreateProduct.vue";
-import updateProduct from "./pages/products/UpdateProduct.vue";
+import Products from "./pages/products/Products.vue";
+import SingleProduct from "./pages/products/SingleProduct.vue";
+import CreateProduct from "./pages/products/CreateProduct.vue";
+import UpdateProduct from "./pages/products/UpdateProduct.vue";
 
 import Measurements from "./pages/measurements/Measurements.vue";
 import CreateMeasurement from "./pages/measurements/CreateMeasurement.vue";
@@ -87,24 +87,24 @@ const router = createRouter({
     {
       name: "viewProducts",
       path: "/shop",
-      component: products
+      component: Products
     },
     // Single Product Page
     {
       name: "viewProduct",
       path: "/shop/:productId",
-      component: singleProduct,
+      component: SingleProduct,
       props: true
     },
     // Add Product Page
     {
       path: "/shop/new",
-      component: addProduct
+      component: CreateProduct
     },
     // updating product info
     {
       path: "/shop/update/:productId",
-      component: updateProduct,
+      component: UpdateProduct,
       props: true
     }
   ]
