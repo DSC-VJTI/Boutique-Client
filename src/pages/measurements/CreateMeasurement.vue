@@ -344,27 +344,45 @@
         </div>
         <hr />
         <!-- SKETCH -->
-        <!-- <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
-            <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
-                <div class="container">
-                    <div>
-                        <label class="cursor-pointer">Files
-                            <input type="file" id="files" class="hidden" ref="files" multiple v-on:change="handleFilesUpload()"/>
-                        </label>
-                    </div>
-                    <div>
-                        <div v-for="(file, key) in files" :key="key" class="col-span-1 file-listing sketchPreview" :style="{ 'background-image': `url(${file.name})` }">
-                            {{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span>
-                        </div>
-                    </div><br>
-                    <div>
-                        <button v-on:click="addFiles()">Add More Files</button>
-                    </div><br>
-                    <div>
-                        <button v-on:click="submitFiles()">Submit</button>
-                    </div>
-                </div>
-            </div> -->
+        <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
+        <div
+          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
+          <div class="container">
+            <div>
+              <label class="cursor-pointer"
+                >Files
+                <input
+                  type="file"
+                  id="files"
+                  class="hidden"
+                  ref="files"
+                  multiple
+                  v-on:change="handleFilesUpload()"
+                />
+              </label>
+            </div>
+            <div>
+              <div
+                v-for="(file, key) in fileData"
+                :key="key"
+                class="col-span-3 file-listing sketchPreview"
+                :style="{ 'background-image': `url(${file})` }"
+              >
+                <span
+                  class="rounded p-2 bg-red-500 text-white"
+                  v-on:click="removeFile(key)"
+                  >Remove</span
+                >
+              </div>
+            </div>
+            <br />
+            <div>
+              <button v-on:click="addFiles()">Add More Files</button>
+            </div>
+            <br />
+          </div>
+        </div>
         <!-- SAVE -->
         <div
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -384,6 +402,8 @@
 </template>
 
 <script>
+// import axios from "axios";
+
 export default {
   data() {
     return {
@@ -423,7 +443,8 @@ export default {
         bottom_k: "",
         bottom_r: ""
       },
-      // files: [],
+      files: [],
+      fileData: [],
       isValid: true,
       nameError: "",
       isLoading: false
@@ -431,49 +452,40 @@ export default {
   },
 
   methods: {
-    /* Submits all of the files to the server */
-    // submitFiles(){
-    //     /* Initialize the form data */
-    //     let formData = new FormData();
+    /* Handles a change on the file upload */
+    handleFilesUpload() {
+      this.fileData = [];
 
-    //     /* Iteate over any file sent over appending the files to the form data. */
-    //     for( var i = 0; i < this.files.length; i++ ){
-    //         let file = this.files[i];
-    //         formData.append('files[' + i + ']', file);
-    //     }
+      let uploadedFiles = this.$refs.files.files;
+      /* Adds the uploaded file to the files array */
+      for (var i = 0; i < uploadedFiles.length; i++) {
+        this.files.push(uploadedFiles[i]);
+      }
 
-    //     /* Make the request to the POST /multiple-files URL */
-    //     axios.post( '/multiple-files',
-    //     formData,
-    //     {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
-    //         }
-    //     }
-    //     ).then(function(){
-    //     console.log('Files Uploaded Successfully!');
-    //     })
-    //     .catch(function(){
-    //     console.log('There was an error uploading the files');
-    //     });
-    // },
+      for (let img of this.files) {
+        if (img && img.name) {
+          let reader = new FileReader();
+          reader.addEventListener(
+            "load",
+            function() {
+              this.fileData.push(reader.result);
+            }.bind(this),
+            false
+          );
 
-    // /* Handles a change on the file upload */
-    // handleFilesUpload(){
-    //     let uploadedFiles = this.$refs.files.files;
-    //     /* Adds the uploaded file to the files array */
-    //     for( var i = 0; i < uploadedFiles.length; i++ ){
-    //         this.files.push( uploadedFiles[i] );
-    //     }
-    // },
+          reader.readAsDataURL(img);
+        }
+      }
+    },
 
-    // addFiles(){
-    //     this.$refs.files.click();
-    // },
+    addFiles() {
+      this.$refs.files.click();
+    },
 
-    // removeFile( key ){
-    //     this.files.splice( key, 1 );
-    // },
+    removeFile(key) {
+      this.files.splice(key, 1);
+      this.fileData.splice(key, 1);
+    },
 
     validate() {
       this.isValid = true;
@@ -497,7 +509,8 @@ export default {
         "measurements/createNewMeasurement",
         {
           body: this.measurement,
-          token: JSON.parse(localStorage.getItem("user")).access_token
+          token: JSON.parse(localStorage.getItem("user")).access_token,
+          images: this.files
         }
       );
 

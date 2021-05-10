@@ -3,6 +3,28 @@
   <div class="p-5 text-center">
     <h1 class="green mb-10">Add Product</h1>
     <div>
+      <div class="w-20 h-20 text-center mb-3">
+        <label for="file-input">Upload</label>
+        <input
+          id="file-input"
+          type="file"
+          class="hidden cursor-pointer"
+          accept="image/jpg, image/png"
+          @change="selectImage()"
+          ref="files"
+          multiple
+        />
+      </div>
+      <div>
+        <div
+          v-for="(img, key) in imageData"
+          :key="key"
+          class="col-span-3 file-listing sketchPreview"
+          :style="{ 'background-image': `url(${img})` }"
+        >
+          <!-- <span class="rounded p-2 bg-red-500 text-white" @click="removeFile( key )">Remove</span> -->
+        </div>
+      </div>
       <form class="m-5" @submit.prevent="newProduct">
         <div class="form-group">
           <input
@@ -20,7 +42,6 @@
             type="text"
             placeholder="Short Description"
             v-model.trim="description"
-            required
           />
         </div>
         <div class="form-group">
@@ -30,7 +51,6 @@
             type="text"
             placeholder="Detailed Info"
             v-model.trim="info"
-            required
           ></textarea>
         </div>
         <div class="form-group">
@@ -40,7 +60,6 @@
             type="number"
             placeholder="MRP"
             v-model.trim="price"
-            required
           />
         </div>
         <div class="form-group">
@@ -50,7 +69,6 @@
             type="number"
             placeholder="Discounted Price"
             v-model.trim="discount_price"
-            required
           />
         </div>
         <div class="form-group">
@@ -100,10 +118,41 @@ export default {
       sub_categories: [],
       available_subcategories: [],
       available_categories: [],
-      isLoading: false
+      isLoading: false,
+      images: [],
+      imageData: []
     };
   },
   methods: {
+    // removeFile(key) {
+    //   this.images.splice(key, 1);
+    //   this.imageData.splice(key, 1)
+    // },
+    selectImage() {
+      this.images = [];
+      this.imageData = [];
+
+      let uploadedFiles = this.$refs.files.files;
+      /* Adds the uploaded file to the files array */
+      for (var i = 0; i < uploadedFiles.length; i++) {
+        this.images.push(uploadedFiles[i]);
+      }
+
+      for (let img of this.images) {
+        if (img && img.name) {
+          let reader = new FileReader();
+          reader.addEventListener(
+            "load",
+            function() {
+              this.imageData.push(reader.result);
+            }.bind(this),
+            false
+          );
+
+          reader.readAsDataURL(img);
+        }
+      }
+    },
     async newProduct() {
       this.isLoading = true;
       const body = {
@@ -115,10 +164,11 @@ export default {
         category_name: this.category_name,
         sub_categories: this.sub_categories
       };
-      // console.log(body);
+
       const status = await this.$store.dispatch("products/createNewProduct", {
         body: body,
-        token: JSON.parse(localStorage.getItem("user")).access_token
+        token: JSON.parse(localStorage.getItem("user")).access_token,
+        images: this.images
       });
 
       if (status === 201) {

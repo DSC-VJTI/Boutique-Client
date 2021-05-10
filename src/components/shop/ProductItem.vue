@@ -4,7 +4,7 @@
       <router-link :to="`/shop/${id}`">
         <div
           class="productImage"
-          style="background-image: url('https://preview.colorlib.com/theme/malefashion/img/product/product-2.jpg')"
+          :style="{ backgroundImage: `url(${images[0]})` }"
         ></div>
       </router-link>
     </div>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: ["id", "name", "price", "discount_price"],
+  props: ["id", "name", "price", "discount_price", "images"],
   computed: {
     isDiscounted() {
       return this.price !== this.discount_price;

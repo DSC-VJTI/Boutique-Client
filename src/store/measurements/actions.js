@@ -1,8 +1,81 @@
 import axios from "axios";
+import crypto from "crypto";
+
+function getSignature(input) {
+  return crypto.createHash('sha256').update(input).digest('hex');
+}
+
+async function uploadToCloudinary(images, name) {
+  console.log("in uploadToCloudinary")
+  let url = process.env.VUE_APP_CLOUDINARY_URL;
+  let timeStamp = Math.round(new Date() / 1000);
+  let preset = process.env.VUE_APP_PRESET;
+  let api_key = process.env.VUE_APP_API_KEY;      
+  
+  let count = 0;
+  let productRequests = [];
+  
+  for(let img of images) {
+    count += 1;
+    let public_id = "measurements/" + name + count;
+    let signature = `overwrite=true&public_id=${public_id}&tags=product_image&timestamp=${timeStamp}&upload_preset=${preset}${process.env.VUE_APP_API_SECRET}`;
+
+    const formData = new FormData();
+    formData.append('file', img);
+    formData.append('tags', 'product_image');
+    formData.append('public_id', public_id);
+    formData.append('overwrite', true);
+    formData.append('signature', getSignature(signature));
+    formData.append('api_key', api_key);
+    formData.append('timestamp', timeStamp);
+    formData.append('upload_preset', preset);
+    
+    productRequests.push(
+      axios.post(
+        url,
+        formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }  
+      )
+    )
+  }
+  console.log("productRequests", productRequests)
+  try{
+    let files = [];
+    let response = await Promise.all(productRequests)
+    for(let res of response) {
+      files.push(res.data.secure_url);
+    }
+    console.log("secure urls", files)
+    return files;
+  }catch(error){
+    console.log("error occured here", error)
+    return error.response.status;
+  }
+}
 
 export default {
   async createNewMeasurement(context, payload) {
+
+    let imgs = null;
+
+    if(payload.images && payload.images[0]) {
+      imgs = await uploadToCloudinary(payload.images, payload.body.client_name)
+      console.log(imgs)
+      if(imgs && imgs[0]) payload.body.images = imgs;
+      else return imgs;
+    }
+    else {
+      payload.body.images = null;
+    }
+
+    console.log("payload", payload)
+
     try {
+      console.log("sending request to server");
       const response = await axios.post(
         context.rootGetters.getUrl + "api/admin/measurements",
         payload.body,
@@ -13,6 +86,7 @@ export default {
           }
         }
       );
+      console.log("status", response.status)
       if (response.status == 201 && response.data) {
         const measurements = context.getters.getMeasurements;
         measurements.push(response.data);
@@ -22,6 +96,7 @@ export default {
       }
       return response.status;
     } catch (error) {
+      console.log("error here aaaaaaaa", error)
       return error.response.status;
     }
   },
@@ -73,7 +148,20 @@ export default {
   },
 
   async updateCurrentMeasurement(context, payload) {
+
+    let imgs = null;
+
+    if(payload.images && payload.images[0]) {
+      imgs = await uploadToCloudinary(payload.images, payload.measurement.client_name)
+      console.log(imgs)
+      if(imgs && imgs[0]) payload.measurement.images = imgs;
+      else return imgs;
+    }
+
+    console.log("payload", payload)
+
     try {
+
       const response = await axios.put(
         context.rootGetters.getUrl +
           `api/admin/measurements/${payload.measurement_id}`,

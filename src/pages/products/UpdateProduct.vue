@@ -3,6 +3,27 @@
   <div class="p-5 text-center">
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
+      <div class="w-20 h-20 text-center mb-3">
+        <label for="files">Upload:</label>
+        <input
+          id="files"
+          type="file"
+          accept="image/jpg, image/png"
+          ref="files"
+          @change="selectImage($event)"
+          multiple
+        />
+      </div>
+      <div>
+        <div
+          v-for="(img, key) in imageData"
+          :key="key"
+          class="col-span-3 file-listing sketchPreview"
+          :style="{ 'background-image': `url(${img})` }"
+        >
+          <!-- <span class="rounded p-2 bg-red-500 text-white" @click="removeFile( key )">Remove</span> -->
+        </div>
+      </div>
       <form class="m-5" @submit.prevent="updateProduct">
         <div class="form-group">
           <input
@@ -100,10 +121,42 @@ export default {
         "Winter Clothing",
         "Earings"
       ],
-      isLoading: false
+      isLoading: false,
+      images: [],
+      imageData: [],
+      files: []
     };
   },
   methods: {
+    // removeFile(key) {
+    //   this.images.splice(key, 1);
+    //   this.imageData.splice(key, 1)
+    // },
+    selectImage() {
+      this.files = [];
+      this.imageData = [];
+
+      let uploadedFiles = this.$refs.files.files;
+      /* Adds the uploaded file to the files array */
+      for (var i = 0; i < uploadedFiles.length; i++) {
+        this.files.push(uploadedFiles[i]);
+      }
+
+      for (let img of this.files) {
+        if (img && img.name) {
+          let reader = new FileReader();
+          reader.addEventListener(
+            "load",
+            function() {
+              this.imageData.push(reader.result);
+            }.bind(this),
+            false
+          );
+
+          reader.readAsDataURL(img);
+        }
+      }
+    },
     async updateProduct() {
       this.isLoading = true;
       const status = await this.$store.dispatch(
@@ -116,9 +169,11 @@ export default {
             price: this.price,
             discount_price: this.discount_price,
             category_name: this.category_name,
-            sub_categories: this.sub_categories
+            sub_categories: this.sub_categories,
+            images: this.images
           },
           token: JSON.parse(localStorage.getItem("user")).access_token,
+          images: this.files,
           product_id: this.productId
         }
       );
@@ -170,6 +225,8 @@ export default {
     this.price = product.price;
     this.discount_price = product.discount_price;
     this.isLoading = false;
+    this.images = product.images;
+    this.imageData = product.images;
   }
 };
 </script>

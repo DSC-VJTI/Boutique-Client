@@ -1,4 +1,12 @@
 import axios from "axios";
+import crypto from "crypto";
+
+function getSignature(input) {
+  return crypto
+    .createHash("sha256")
+    .update(input)
+    .digest("hex");
+}
 
 export default {
   async getAllProducts(context) {
@@ -17,10 +25,53 @@ export default {
     }
   },
   async createNewProduct(context, payload) {
+    if (payload.images.length != 0) {
+      let url = process.env.VUE_APP_CLOUDINARY_URL;
+      let timeStamp = Math.round(new Date() / 1000);
+      let preset = process.env.VUE_APP_PRESET;
+      let api_key = process.env.VUE_APP_API_KEY;
+
+      let count = 0;
+      let productRequests = [];
+
+      for (let img of payload.images) {
+        count += 1;
+        let public_id = "products/" + payload.body.name + count;
+        let signature = `overwrite=true&public_id=${public_id}&tags=product_image&timestamp=${timeStamp}&upload_preset=${preset}${process.env.VUE_APP_API_SECRET}`;
+
+        const formData = new FormData();
+        formData.append("file", img);
+        formData.append("tags", "product_image");
+        formData.append("public_id", public_id);
+        formData.append("overwrite", true);
+        formData.append("signature", getSignature(signature));
+        formData.append("api_key", api_key);
+        formData.append("timestamp", timeStamp);
+        formData.append("upload_preset", preset);
+
+        productRequests.push(
+          axios.post(url, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+        );
+      }
+      try {
+        let images = [];
+        let response = await Promise.all(productRequests);
+        for (let res of response) {
+          images.push(res.data.secure_url);
+        }
+        payload.body.images = images;
+      } catch (error) {
+        return error.response.status;
+      }
+    } else {
+      payload.body.images = null;
+    }
+
     try {
-      console.log(context.rootGetters.getUrl + "api/admin/products");
-      console.log(payload.body);
-      console.log(payload.token);
       const response = await axios.post(
         context.rootGetters.getUrl + "api/admin/products",
         payload.body,
@@ -31,7 +82,7 @@ export default {
           }
         }
       );
-      console.log("hello", response);
+
       if (response.status == 201 && response.data) {
         const products = context.getters.getProducts;
         products.push(response.data);
@@ -41,7 +92,6 @@ export default {
       }
       return response.status;
     } catch (error) {
-      console.log(error);
       return error.response.status;
     }
   },
@@ -67,6 +117,50 @@ export default {
   },
 
   async updateCurrentProduct(context, payload) {
+    if (payload.images.length != 0) {
+      let url = process.env.VUE_APP_CLOUDINARY_URL;
+      let timeStamp = Math.round(new Date() / 1000);
+      let preset = process.env.VUE_APP_PRESET;
+      let api_key = process.env.VUE_APP_API_KEY;
+
+      let count = 0;
+      let productRequests = [];
+
+      for (let img of payload.images) {
+        count += 1;
+        let public_id = "products/" + payload.body.name + count;
+        let signature = `overwrite=true&public_id=${public_id}&tags=product_image&timestamp=${timeStamp}&upload_preset=${preset}${process.env.VUE_APP_API_SECRET}`;
+
+        const formData = new FormData();
+        formData.append("file", img);
+        formData.append("tags", "product_image");
+        formData.append("public_id", public_id);
+        formData.append("overwrite", true);
+        formData.append("signature", getSignature(signature));
+        formData.append("api_key", api_key);
+        formData.append("timestamp", timeStamp);
+        formData.append("upload_preset", preset);
+
+        productRequests.push(
+          axios.post(url, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+        );
+      }
+      try {
+        let images = [];
+        let response = await Promise.all(productRequests);
+        for (let res of response) {
+          images.push(res.data.secure_url);
+        }
+        payload.body.images = images;
+      } catch (error) {
+        return error.response.status;
+      }
+    }
+
     try {
       const response = await axios.put(
         context.rootGetters.getUrl + `api/admin/products/${payload.product_id}`,

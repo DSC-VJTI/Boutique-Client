@@ -36,21 +36,17 @@
         style="height:160px; @media(min-width:768px){ height:550px; };"
         class="align-middle col-span-1 md:grid md:grid-rows-3 justify-items-center md:col-span-2"
       >
-        <div style="width:348px;" class="m-auto">
+        <div class="m-auto">
           <thumbnail
-            v-for="item in thumbnails"
+            v-for="item in images"
             :key="item"
-            :imageURL="item.imageURL"
+            :imageURL="item"
           ></thumbnail>
         </div>
       </div>
 
       <div style="height:533px;" class="col-span-1 md:col-span-10">
-        <img
-          class="mx-auto h-auto"
-          src="https://preview.colorlib.com/theme/malefashion/img/shop-details/product-big-2.png"
-          alt=""
-        />
+        <img class="mx-auto h-auto" :src="images[0]" alt="" />
       </div>
     </div>
   </div>
@@ -174,6 +170,7 @@ export default {
       discount_price: 0,
       category_name: "",
       sub_categories: [],
+      images: [],
       thumbnails: [
         {
           id: 1,
@@ -235,6 +232,7 @@ export default {
     this.price = product.price;
     this.discount_price = product.discount_price;
     this.isLoading = false;
+    this.images = product.images;
   }
 };
 </script>
