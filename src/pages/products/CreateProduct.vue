@@ -22,9 +22,9 @@
           :style="{ 'background-image': `url(${img})` }"
         >
           <span
-            class="rounded p-2 bg-red-500 text-white"
+            class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
             @click="removeFile(key)"
-            >Remove</span
+            >X</span
           >
         </div>
       </div>
