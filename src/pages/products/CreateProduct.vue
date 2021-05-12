@@ -8,8 +8,7 @@
         <input
           id="file-input"
           type="file"
-          class="hidden cursor-pointer"
-          accept="image/jpg, image/png"
+          class="hidden cursor-pointer text-gray-500"
           @change="selectImage()"
           ref="files"
           multiple
@@ -22,7 +21,7 @@
           class="col-span-3 file-listing sketchPreview"
           :style="{ 'background-image': `url(${img})` }"
         >
-          <!-- <span class="rounded p-2 bg-red-500 text-white" @click="removeFile( key )">Remove</span> -->
+          <span class="rounded p-2 bg-red-500 text-white" @click="removeFile( key )">Remove</span>
         </div>
       </div>
       <form class="m-5" @submit.prevent="newProduct">
@@ -124,12 +123,13 @@ export default {
     };
   },
   methods: {
-    // removeFile(key) {
-    //   this.images.splice(key, 1);
-    //   this.imageData.splice(key, 1)
-    // },
+    removeFile(key) {
+      console.log("key", key);
+      this.images.splice(key, 1);
+      this.imageData.splice(key, 1)
+    },
     selectImage() {
-      this.images = [];
+      // this.images = [];
       this.imageData = [];
 
       let uploadedFiles = this.$refs.files.files;

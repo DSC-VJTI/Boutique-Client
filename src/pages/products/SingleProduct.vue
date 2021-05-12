@@ -33,20 +33,21 @@
   <div class="bg-gray-200 px-2 sm:px-10">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
       <div
-        style="height:160px; @media(min-width:768px){ height:550px; };"
-        class="align-middle col-span-1 md:grid md:grid-rows-3 justify-items-center md:col-span-2"
+        style="height:480px; @media(min-width:768px){ height:550px; };"
+        class="align-middle col-span-1 md:grid md:grid-rows-3 justify-items-center md:col-span-2 overflow-y-scroll overflow-x-hidden"
       >
         <div class="m-auto">
           <thumbnail
-            v-for="item in images"
-            :key="item"
+            v-for="(item, key) in images"
+            :key="key"
             :imageURL="item"
+            @click="showImgChange(key)"
           ></thumbnail>
         </div>
       </div>
 
       <div style="height:533px;" class="col-span-1 md:col-span-10">
-        <img class="mx-auto h-auto" :src="images[0]" alt="" />
+        <img class="mx-auto h-full w-auto" :src="imageShow" alt="" />
       </div>
     </div>
   </div>
@@ -102,16 +103,19 @@
             <span
               v-if="hasSubcategories"
               class="text-gray-400 uppercase font-normal text-base"
-              >Sub Category:</span
             >
+              Sub Category:
+            </span>
             <span
               class="mx-1"
               v-for="(item, index) in sub_categories"
               :key="index"
             >
-              {{ item
-              }}<span v-if="index + 1 !== sub_categories.length">,</span></span
-            >
+              {{ item }}
+              <span v-if="index + 1 !== sub_categories.length">
+                ,
+              </span>
+            </span>
           </li>
         </ul>
       </div>
@@ -171,27 +175,14 @@ export default {
       category_name: "",
       sub_categories: [],
       images: [],
-      thumbnails: [
-        {
-          id: 1,
-          imageURL:
-            "https://preview.colorlib.com/theme/malefashion/img/shop-details/thumb-1.png"
-        },
-        {
-          id: 2,
-          imageURL:
-            "https://preview.colorlib.com/theme/malefashion/img/shop-details/thumb-2.png"
-        },
-        {
-          id: 3,
-          imageURL:
-            "https://preview.colorlib.com/theme/malefashion/img/shop-details/thumb-3.png"
-        }
-      ],
+      imageShow: null,
       isLoading: false
     };
   },
   methods: {
+    showImgChange(key) {
+      this.imageShow = this.images[key];
+    },
     updateProduct() {
       this.$router.push({ path: `update/${this.productId}` });
     },
@@ -233,6 +224,7 @@ export default {
     this.discount_price = product.discount_price;
     this.isLoading = false;
     this.images = product.images;
+    this.imageShow = this.images[0];
   }
 };
 </script>

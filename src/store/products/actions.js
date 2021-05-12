@@ -155,7 +155,7 @@ export default {
         for (let res of response) {
           images.push(res.data.secure_url);
         }
-        payload.body.images = images;
+        payload.body.images.push(...images);
       } catch (error) {
         return error.response.status;
       }
