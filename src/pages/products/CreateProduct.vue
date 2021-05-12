@@ -4,11 +4,11 @@
     <h1 class="green mb-10">Add Product</h1>
     <div>
       <div class="w-20 h-20 text-center mb-3">
-        <label for="file-input">Upload</label>
+        <label for="file-input" class="cursor-pointer">Upload</label>
         <input
           id="file-input"
           type="file"
-          class="hidden cursor-pointer text-gray-500"
+          class="hidden text-gray-500"
           @change="selectImage()"
           ref="files"
           multiple
@@ -21,7 +21,11 @@
           class="col-span-3 file-listing sketchPreview"
           :style="{ 'background-image': `url(${img})` }"
         >
-          <span class="rounded p-2 bg-red-500 text-white" @click="removeFile( key )">Remove</span>
+          <span
+            class="rounded p-2 bg-red-500 text-white"
+            @click="removeFile(key)"
+            >Remove</span
+          >
         </div>
       </div>
       <form class="m-5" @submit.prevent="newProduct">
@@ -124,12 +128,10 @@ export default {
   },
   methods: {
     removeFile(key) {
-      console.log("key", key);
       this.images.splice(key, 1);
-      this.imageData.splice(key, 1)
+      this.imageData.splice(key, 1);
     },
     selectImage() {
-      // this.images = [];
       this.imageData = [];
 
       let uploadedFiles = this.$refs.files.files;

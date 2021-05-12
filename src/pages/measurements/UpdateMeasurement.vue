@@ -30,6 +30,56 @@
           </div>
         </div>
         <hr />
+        <!-- SKETCH -->
+        <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
+        <div
+          class="w-full justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
+          <div class="container">
+            <div class="w-20 h-20 text-center">
+              <label for="files"
+                >Add Files
+                <input
+                  id="files"
+                  type="file"
+                  ref="files"
+                  @change="selectImage()"
+                  class="hidden cursor-pointer"
+                  multiple
+                />
+              </label>
+              <br />
+            </div>
+            <div>
+              <div
+                v-for="(img, key) in imageData"
+                :key="key"
+                class="col-span-3 file-listing sketchPreview ml-5"
+                :style="{ 'background-image': `url(${img})` }"
+              ></div>
+              <br />
+              <div class="mt-5 mb-10">
+                <span
+                  class="rounded p-2 bg-red-500 text-white m-3"
+                  @click="removeAllFiles()"
+                  >Remove All</span
+                >
+                <span
+                  class="rounded p-2 bg-red-500 text-white m-3"
+                  @click="removeOldFiles()"
+                  >Remove Old</span
+                >
+                <span
+                  class="rounded p-2 bg-red-500 text-white m-3"
+                  @click="removeNewFiles()"
+                  >Remove New</span
+                >
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+        <hr />
         <!-- DL AC C -->
         <div
           class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
@@ -328,46 +378,6 @@
           </div>
         </div>
         <hr />
-        <!-- SKETCH -->
-        <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
-        <div
-          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
-        >
-          <div class="container">
-            <div>
-              <label class="cursor-pointer"
-                >Files
-                <input
-                  type="file"
-                  id="files"
-                  class="hidden"
-                  ref="files"
-                  multiple
-                  v-on:change="handleFilesUpload()"
-                />
-              </label>
-            </div>
-            <div>
-              <div
-                v-for="(file, key) in fileData"
-                :key="key"
-                class="col-span-3 file-listing sketchPreview"
-                :style="{ 'background-image': `url(${file})` }"
-              >
-                <span
-                  class="rounded p-2 bg-red-500 text-white"
-                  v-on:click="removeFile(key)"
-                  >Remove</span
-                >
-              </div>
-            </div>
-            <br />
-            <div>
-              <button v-on:click="addFiles()">Add More Files</button>
-            </div>
-            <br />
-          </div>
-        </div>
         <!-- SAVE -->
         <div
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -404,18 +414,31 @@ export default {
       nameError: "",
       isValid: true,
       isLoading: false,
+      imageData: [],
       files: [],
-      fileData: [],
       imagesUpdated: false
     };
   },
 
   methods: {
-    /* Handles a change on the file upload */
-    handleFilesUpload() {
-      this.fileData = [];
-      this.imagesUpdated = true;
+    removeAllFiles() {
+      this.measurement.images = []; // Array of old images
+      this.files = []; // Array of newly added images
+      this.imageData = []; // Array of images previewed (old + new images)
+    },
+    removeOldFiles() {
+      this.imageData.splice(0, this.measurement.images.length);
+      this.measurement.images = [];
+    },
+    removeNewFiles() {
+      this.files = [];
+      this.imageData = this.measurement.images;
+    },
+    selectImage() {
+      this.imageData = [];
+
       let uploadedFiles = this.$refs.files.files;
+      this.$refs.files = [];
       /* Adds the uploaded file to the files array */
       for (var i = 0; i < uploadedFiles.length; i++) {
         this.files.push(uploadedFiles[i]);
@@ -427,7 +450,7 @@ export default {
           reader.addEventListener(
             "load",
             function() {
-              this.fileData.push(reader.result);
+              this.imageData.push(reader.result);
             }.bind(this),
             false
           );
@@ -435,17 +458,8 @@ export default {
           reader.readAsDataURL(img);
         }
       }
+      this.imageData.push(...this.measurement.images);
     },
-
-    addFiles() {
-      this.$refs.files.click();
-    },
-
-    removeFile(key) {
-      this.files.splice(key, 1);
-      this.fileData.splice(key, 1);
-    },
-
     validate() {
       this.isValid = true;
 
@@ -470,7 +484,7 @@ export default {
           measurement: this.measurement,
           token: JSON.parse(localStorage.getItem("user")).access_token,
           measurement_id: this.mId,
-          imagesUpdated: this.imagesUpdated,
+          imagesUpdated: this.measurement.imagesUpdated,
           images: this.files
         }
       );
@@ -503,7 +517,7 @@ export default {
     );
     console.log(this.measurement);
     this.isLoading = false;
-    this.fileData = this.measurement.images;
+    this.imageData = this.measurement.images;
   }
 };
 </script>

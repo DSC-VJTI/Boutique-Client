@@ -346,7 +346,7 @@
         <!-- SKETCH -->
         <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
         <div
-          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+          class="w-full justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
         >
           <div class="container">
             <div>
@@ -358,27 +358,21 @@
                   class="hidden"
                   ref="files"
                   multiple
-                  v-on:change="handleFilesUpload()"
+                  v-on:change="selectImage()"
                 />
               </label>
             </div>
-            <div>
-              <div
-                v-for="(file, key) in fileData"
-                :key="key"
-                class="col-span-3 file-listing sketchPreview"
-                :style="{ 'background-image': `url(${file})` }"
+            <div
+              v-for="(img, key) in imageData"
+              :key="key"
+              class="col-span-3 file-listing sketchPreview"
+              :style="{ 'background-image': `url(${img})` }"
+            >
+              <span
+                class="rounded p-2 bg-red-500 text-white"
+                @click="removeFile(key)"
+                >Remove</span
               >
-                <span
-                  class="rounded p-2 bg-red-500 text-white"
-                  v-on:click="removeFile(key)"
-                  >Remove</span
-                >
-              </div>
-            </div>
-            <br />
-            <div>
-              <button v-on:click="addFiles()">Add More Files</button>
             </div>
             <br />
           </div>
@@ -443,8 +437,8 @@ export default {
         bottom_k: "",
         bottom_r: ""
       },
-      files: [],
-      fileData: [],
+      images: [],
+      imageData: [],
       isValid: true,
       nameError: "",
       isLoading: false
@@ -452,23 +446,26 @@ export default {
   },
 
   methods: {
-    /* Handles a change on the file upload */
-    handleFilesUpload() {
-      this.fileData = [];
+    removeFile(key) {
+      this.images.splice(key, 1);
+      this.imageData.splice(key, 1);
+    },
+    selectImage() {
+      this.imageData = [];
 
       let uploadedFiles = this.$refs.files.files;
       /* Adds the uploaded file to the files array */
       for (var i = 0; i < uploadedFiles.length; i++) {
-        this.files.push(uploadedFiles[i]);
+        this.images.push(uploadedFiles[i]);
       }
 
-      for (let img of this.files) {
+      for (let img of this.images) {
         if (img && img.name) {
           let reader = new FileReader();
           reader.addEventListener(
             "load",
             function() {
-              this.fileData.push(reader.result);
+              this.imageData.push(reader.result);
             }.bind(this),
             false
           );
@@ -477,16 +474,6 @@ export default {
         }
       }
     },
-
-    addFiles() {
-      this.$refs.files.click();
-    },
-
-    removeFile(key) {
-      this.files.splice(key, 1);
-      this.fileData.splice(key, 1);
-    },
-
     validate() {
       this.isValid = true;
 
@@ -510,7 +497,7 @@ export default {
         {
           body: this.measurement,
           token: JSON.parse(localStorage.getItem("user")).access_token,
-          images: this.files
+          images: this.images
         }
       );
 

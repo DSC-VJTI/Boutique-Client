@@ -4,7 +4,8 @@
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
       <div class="w-20 h-20 text-center">
-        <label for="files">Upload
+        <label for="files"
+          >Upload
           <input
             id="files"
             type="file"
@@ -21,13 +22,24 @@
           :key="key"
           class="col-span-3 file-listing sketchPreview"
           :style="{ 'background-image': `url(${img})` }"
-        >
-        </div>
-        <br>
+        ></div>
+        <br />
         <div class="mt-5 mb-10">
-          <span class="rounded p-2 bg-red-500 text-white m-3" @click="removeAllFiles()">Remove All</span>
-          <span class="rounded p-2 bg-red-500 text-white m-3" @click="removeOldFiles()">Remove Old</span>
-          <span class="rounded p-2 bg-red-500 text-white m-3" @click="removeNewFiles()">Remove New</span>
+          <span
+            class="rounded p-2 bg-red-500 text-white m-3"
+            @click="removeAllFiles()"
+            >Remove All</span
+          >
+          <span
+            class="rounded p-2 bg-red-500 text-white m-3"
+            @click="removeOldFiles()"
+            >Remove Old</span
+          >
+          <span
+            class="rounded p-2 bg-red-500 text-white m-3"
+            @click="removeNewFiles()"
+            >Remove New</span
+          >
         </div>
       </div>
       <form class="m-5" @submit.prevent="updateProduct">
@@ -135,12 +147,12 @@ export default {
   },
   methods: {
     removeAllFiles() {
-      this.images = [];                   // Array of old images
-      this.files = [];                    // Array of newly added images
-      this.imageData = [];                // Array of images previewed (old + new images)
+      this.images = []; // Array of old images
+      this.files = []; // Array of newly added images
+      this.imageData = []; // Array of images previewed (old + new images)
     },
     removeOldFiles() {
-      this.imageData.splice(0, this.images.length)
+      this.imageData.splice(0, this.images.length);
       this.images = [];
     },
     removeNewFiles() {
@@ -171,7 +183,7 @@ export default {
           reader.readAsDataURL(img);
         }
       }
-      this.imageData.push(...this.images)
+      this.imageData.push(...this.images);
     },
     async updateProduct() {
       this.isLoading = true;
