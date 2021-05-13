@@ -4,18 +4,20 @@
     <h1 class="green mb-10">Add Product</h1>
     <div>
       <div class="p-5 text-center">
-        <span
+        <label
           class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
           style="width: 100%;"
+          for="file-input"
           >Add Photos
           <input
+            id="file-input"
             type="file"
             ref="files"
             @change="selectImage()"
             class="hidden"
             multiple
           />
-        </span>
+        </label>
       </div>
       <div>
         <div

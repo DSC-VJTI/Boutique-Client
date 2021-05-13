@@ -13,18 +13,20 @@
         ></div>
         <br />
         <div class="mt-5 mb-10">
-          <span
+          <label
             class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             style="width: 100%;"
-            >Add Files
+            for="file-input"
+            >Add Photos
             <input
+              id="file-input"
               type="file"
               ref="files"
               @change="selectImage()"
               class="hidden"
               multiple
             />
-          </span>
+          </label>
           <span
             class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             @click="removeAllFiles()"

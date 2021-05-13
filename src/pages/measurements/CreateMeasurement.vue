@@ -350,18 +350,20 @@
         >
           <div class="container">
             <div>
-              <span
-                class="py-2 px-8 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+              <label
+                class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                 style="width: 100%;"
+                for="file-input"
                 >Add Files
                 <input
+                  id="file-input"
                   type="file"
                   ref="files"
                   @change="selectImage()"
                   class="hidden"
                   multiple
                 />
-              </span>
+              </label>
             </div>
             <div
               v-for="(img, key) in imageData"
