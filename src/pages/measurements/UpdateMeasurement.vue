@@ -30,6 +30,56 @@
           </div>
         </div>
         <hr />
+        <!-- SKETCH -->
+        <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
+        <div
+          class="w-full justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
+          <div class="container">
+            <div>
+              <div
+                v-for="(img, key) in imageData"
+                :key="key"
+                class="col-span-3 file-listing sketchPreview ml-5"
+                :style="{ 'background-image': `url(${img})` }"
+              ></div>
+              <br />
+              <div class="mt-5 mb-10">
+                <label
+                  class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  style="width: 100%;"
+                  for="file-input"
+                  >Add Files
+                  <input
+                    id="file-input"
+                    type="file"
+                    ref="files"
+                    @change="selectImage()"
+                    class="hidden"
+                    multiple
+                  />
+                </label>
+                <span
+                  class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  @click="removeAllFiles()"
+                  >Remove All</span
+                >
+                <span
+                  class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  @click="removeOldFiles()"
+                  >Remove Old</span
+                >
+                <span
+                  class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  @click="removeNewFiles()"
+                  >Remove New</span
+                >
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+        <hr />
         <!-- DL AC C -->
         <div
           class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
@@ -328,28 +378,6 @@
           </div>
         </div>
         <hr />
-        <!-- SKETCH -->
-        <!-- <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
-            <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
-                <div class="container">
-                    <div>
-                        <label class="cursor-pointer">Files
-                            <input type="file" id="files" class="hidden" ref="files" multiple v-on:change="handleFilesUpload()"/>
-                        </label>
-                    </div>
-                    <div>
-                        <div v-for="(file, key) in files" :key="key" class="col-span-1 file-listing sketchPreview" :style="{ 'background-image': `url(${file.name})` }">
-                            {{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span>
-                        </div>
-                    </div><br>
-                    <div>
-                        <button v-on:click="addFiles()">Add More Files</button>
-                    </div><br>
-                    <div>
-                        <button v-on:click="submitFiles()">Submit</button>
-                    </div>
-                </div>
-            </div> -->
         <!-- SAVE -->
         <div
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -357,7 +385,7 @@
           <div class="mx-auto md:mr-2 w-4/5 md:w-1/4">
             <button
               type="submit"
-              class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             >
               Save
             </button>
@@ -369,67 +397,69 @@
 </template>
 
 <script>
+// import axios from "axios";
+
 export default {
   props: ["mId"],
   data() {
     return {
       measurement: {
+        client_name: "",
         l: {},
         sl: {},
         n: {},
-        bottom_w: {}
+        bottom_w: {},
+        images: []
       },
       nameError: "",
       isValid: true,
-      isLoading: false
+      isLoading: false,
+      imageData: [],
+      files: [],
+      imagesUpdated: false
     };
   },
 
   methods: {
-    /* Submits all of the files to the server */
-    // submitFiles(){
-    //     /* Initialize the form data */
-    //     let formData = new FormData();
+    removeAllFiles() {
+      this.measurement.images = []; // Array of old images
+      this.files = []; // Array of newly added images
+      this.imageData = []; // Array of images previewed (old + new images)
+    },
+    removeOldFiles() {
+      this.imageData.splice(0, this.measurement.images.length);
+      this.measurement.images = [];
+    },
+    removeNewFiles() {
+      this.files = [];
+      this.imageData = this.measurement.images;
+    },
+    selectImage() {
+      this.imageData = [];
 
-    //     /* Iteate over any file sent over appending the files to the form data. */
-    //     for( var i = 0; i < this.files.length; i++ ){
-    //         let file = this.files[i];
-    //         formData.append('files[' + i + ']', file);
-    //     }
+      let uploadedFiles = this.$refs.files.files;
+      this.$refs.files = [];
+      /* Adds the uploaded file to the files array */
+      for (var i = 0; i < uploadedFiles.length; i++) {
+        this.files.push(uploadedFiles[i]);
+      }
 
-    //     /* Make the request to the POST /multiple-files URL */
-    //     axios.post( '/multiple-files',
-    //     formData,
-    //     {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
-    //         }
-    //     }
-    //     ).then(function(){
-    //         console.log('Files Uploaded Successfully!');
-    //     })
-    //     .catch(function(){
-    //         console.log('There was an error uploading the files');
-    //     });
-    // },
+      for (let img of this.files) {
+        if (img && img.name) {
+          let reader = new FileReader();
+          reader.addEventListener(
+            "load",
+            function() {
+              this.imageData.push(reader.result);
+            }.bind(this),
+            false
+          );
 
-    // /* Handles a change on the file upload */
-    // handleFilesUpload(){
-    //     let uploadedFiles = this.$refs.files.files;
-    //     /* Adds the uploaded file to the files array */
-    //     for( var i = 0; i < uploadedFiles.length; i++ ){
-    //         this.files.push( uploadedFiles[i] );
-    //     }
-    // },
-
-    // addFiles(){
-    //     this.$refs.files.click();
-    // },
-
-    // removeFile( key ){
-    //     this.files.splice( key, 1 );
-    // },
-
+          reader.readAsDataURL(img);
+        }
+      }
+      this.imageData.push(...this.measurement.images);
+    },
     validate() {
       this.isValid = true;
 
@@ -453,7 +483,9 @@ export default {
         {
           measurement: this.measurement,
           token: JSON.parse(localStorage.getItem("user")).access_token,
-          measurement_id: this.mId
+          measurement_id: this.mId,
+          imagesUpdated: this.measurement.imagesUpdated,
+          images: this.files
         }
       );
 
@@ -483,7 +515,9 @@ export default {
         token: JSON.parse(localStorage.getItem("user")).access_token
       }
     );
+    console.log(this.measurement);
     this.isLoading = false;
+    this.imageData = this.measurement.images;
   }
 };
 </script>

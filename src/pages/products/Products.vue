@@ -183,6 +183,7 @@
             :name="product.name"
             :price="product.price"
             :discount_price="product.discount_price"
+            :images="product.images"
             :key="product.id"
           ></product-item>
         </div>

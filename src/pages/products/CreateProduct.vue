@@ -3,6 +3,36 @@
   <div class="p-5 text-center">
     <h1 class="green mb-10">Add Product</h1>
     <div>
+      <div class="p-5 text-center">
+        <label
+          class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+          style="width: 100%;"
+          for="file-input"
+          >Add Photos
+          <input
+            id="file-input"
+            type="file"
+            ref="files"
+            @change="selectImage()"
+            class="hidden"
+            multiple
+          />
+        </label>
+      </div>
+      <div>
+        <div
+          v-for="(img, key) in imageData"
+          :key="key"
+          class="col-span-3 file-listing sketchPreview"
+          :style="{ 'background-image': `url(${img})` }"
+        >
+          <span
+            class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
+            @click="removeFile(key)"
+            >X</span
+          >
+        </div>
+      </div>
       <form class="m-5" @submit.prevent="newProduct">
         <div class="form-group">
           <input
@@ -20,7 +50,6 @@
             type="text"
             placeholder="Short Description"
             v-model.trim="description"
-            required
           />
         </div>
         <div class="form-group">
@@ -30,7 +59,6 @@
             type="text"
             placeholder="Detailed Info"
             v-model.trim="info"
-            required
           ></textarea>
         </div>
         <div class="form-group">
@@ -40,7 +68,6 @@
             type="number"
             placeholder="MRP"
             v-model.trim="price"
-            required
           />
         </div>
         <div class="form-group">
@@ -50,21 +77,24 @@
             type="number"
             placeholder="Discounted Price"
             v-model.trim="discount_price"
-            required
           />
         </div>
+        <br /><br />
         <div class="form-group">
-          <label class="my-15">Category that it belongs to:</label><br />
-          <div v-for="cat in available_categories" :key="cat">
-            <input
-              type="radio"
-              class="check"
-              :id="cat"
-              :value="cat"
-              v-model="category_name"
-            />
-            <label :for="cat">{{ cat }}</label>
-          </div>
+          <label>Category that it belongs to:</label><br />
+          <select
+            v-model="category_name"
+            class="px-5 py-2 border-2 rounded w-2/3 outline-none"
+          >
+            <option
+              class="py-5"
+              v-for="(cat, key) in available_categories"
+              :key="key"
+            >
+              {{ cat }}
+            </option>
+          </select>
+          <br />
         </div>
         <div class="form-group">
           <label class="my-15">Sub-categories that it belongs to:</label><br />
@@ -79,8 +109,12 @@
             <label :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group">
-          <button class="mt-10">Add Product</button>
+        <div class="form-group" style="width: 20%">
+          <input
+            type="submit"
+            class="py-2 px-4 bg-green-600 cursor-pointer hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+            value="Add Product"
+          />
         </div>
       </form>
     </div>
@@ -100,10 +134,40 @@ export default {
       sub_categories: [],
       available_subcategories: [],
       available_categories: [],
-      isLoading: false
+      isLoading: false,
+      images: [],
+      imageData: []
     };
   },
   methods: {
+    removeFile(key) {
+      this.images.splice(key, 1);
+      this.imageData.splice(key, 1);
+    },
+    selectImage() {
+      this.imageData = [];
+
+      let uploadedFiles = this.$refs.files.files;
+      /* Adds the uploaded file to the files array */
+      for (var i = 0; i < uploadedFiles.length; i++) {
+        this.images.push(uploadedFiles[i]);
+      }
+
+      for (let img of this.images) {
+        if (img && img.name) {
+          let reader = new FileReader();
+          reader.addEventListener(
+            "load",
+            function() {
+              this.imageData.push(reader.result);
+            }.bind(this),
+            false
+          );
+
+          reader.readAsDataURL(img);
+        }
+      }
+    },
     async newProduct() {
       this.isLoading = true;
       const body = {
@@ -115,10 +179,11 @@ export default {
         category_name: this.category_name,
         sub_categories: this.sub_categories
       };
-      // console.log(body);
+
       const status = await this.$store.dispatch("products/createNewProduct", {
         body: body,
-        token: JSON.parse(localStorage.getItem("user")).access_token
+        token: JSON.parse(localStorage.getItem("user")).access_token,
+        images: this.images
       });
 
       if (status === 201) {
