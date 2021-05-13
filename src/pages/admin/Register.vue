@@ -1,10 +1,10 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
-  <div class="p-5 text-center">
+  <div class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:mt-20">
     <h1 class="green mb-10">Admin Register</h1>
     <div>
       <form class="m-5" @submit.prevent="register">
-        <div class="form-group">
+        <div class="form-group mb-10" style="width:370px;">
           <input
             class="form-control"
             type="text"
@@ -14,7 +14,7 @@
           />
           <br /><span class="text-red-600 font-bold">{{ fullnameError }}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-10" style="width:370px;">
           <input
             class="form-control"
             type="text"
@@ -24,7 +24,7 @@
           />
           <br /><span class="text-red-600 font-bold">{{ usernameError }}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-10" style="width:370px;">
           <input
             class="form-control"
             type="password"
@@ -34,8 +34,8 @@
           />
           <br /><span class="text-red-600 font-bold">{{ passwordError }}</span>
         </div>
-        <div class="form-group">
-          <button class="mt-10">Add Admin</button>
+        <div class="form-group" style="width:370px;">
+          <button class="mt-5">Add Admin</button>
         </div>
       </form>
     </div>
