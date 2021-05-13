@@ -3,16 +3,19 @@
   <div class="p-5 text-center">
     <h1 class="green mb-10">Add Product</h1>
     <div>
-      <div class="w-20 h-20 text-center mb-3">
-        <label for="file-input" class="cursor-pointer">Upload</label>
-        <input
-          id="file-input"
-          type="file"
-          class="hidden text-gray-500"
-          @change="selectImage()"
-          ref="files"
-          multiple
-        />
+      <div class="p-5 text-center">
+        <span
+          class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+          style="width: 100%;"
+          >Add Photos
+          <input
+            type="file"
+            ref="files"
+            @change="selectImage()"
+            class="hidden"
+            multiple
+          />
+        </span>
       </div>
       <div>
         <div
@@ -74,18 +77,22 @@
             v-model.trim="discount_price"
           />
         </div>
+        <br /><br />
         <div class="form-group">
-          <label class="my-15">Category that it belongs to:</label><br />
-          <div v-for="cat in available_categories" :key="cat">
-            <input
-              type="radio"
-              class="check"
-              :id="cat"
-              :value="cat"
-              v-model="category_name"
-            />
-            <label :for="cat">{{ cat }}</label>
-          </div>
+          <label>Category that it belongs to:</label><br />
+          <select
+            v-model="category_name"
+            class="px-5 py-2 border-2 rounded w-2/3 outline-none"
+          >
+            <option
+              class="py-5"
+              v-for="(cat, key) in available_categories"
+              :key="key"
+            >
+              {{ cat }}
+            </option>
+          </select>
+          <br />
         </div>
         <div class="form-group">
           <label class="my-15">Sub-categories that it belongs to:</label><br />
@@ -100,8 +107,12 @@
             <label :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group">
-          <button class="mt-10">Add Product</button>
+        <div class="form-group" style="width: 20%">
+          <input
+            type="submit"
+            class="py-2 px-4 bg-green-600 cursor-pointer hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+            value="Add Product"
+          />
         </div>
       </form>
     </div>

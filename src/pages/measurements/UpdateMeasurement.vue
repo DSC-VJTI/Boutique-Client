@@ -36,20 +36,6 @@
           class="w-full justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
         >
           <div class="container">
-            <div class="w-20 h-20 text-center">
-              <label for="files"
-                >Add Files
-                <input
-                  id="files"
-                  type="file"
-                  ref="files"
-                  @change="selectImage()"
-                  class="hidden cursor-pointer"
-                  multiple
-                />
-              </label>
-              <br />
-            </div>
             <div>
               <div
                 v-for="(img, key) in imageData"
@@ -60,17 +46,29 @@
               <br />
               <div class="mt-5 mb-10">
                 <span
-                  class="rounded p-2 bg-red-500 text-white m-3"
+                  class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  style="width: 100%;"
+                  >Add Files
+                  <input
+                    type="file"
+                    ref="files"
+                    @change="selectImage()"
+                    class="hidden"
+                    multiple
+                  />
+                </span>
+                <span
+                  class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   @click="removeAllFiles()"
                   >Remove All</span
                 >
                 <span
-                  class="rounded p-2 bg-red-500 text-white m-3"
+                  class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   @click="removeOldFiles()"
                   >Remove Old</span
                 >
                 <span
-                  class="rounded p-2 bg-red-500 text-white m-3"
+                  class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   @click="removeNewFiles()"
                   >Remove New</span
                 >
@@ -385,7 +383,7 @@
           <div class="mx-auto md:mr-2 w-4/5 md:w-1/4">
             <button
               type="submit"
-              class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             >
               Save
             </button>

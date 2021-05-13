@@ -3,20 +3,8 @@
   <div class="p-5 text-center">
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
-      <div class="w-20 h-20 text-center">
-        <label for="files"
-          >Upload
-          <input
-            id="files"
-            type="file"
-            ref="files"
-            @change="selectImage()"
-            class="hidden cursor-pointer"
-            multiple
-          />
-        </label>
-      </div>
       <div>
+        <h2 class="px-8 text-xl text-gray-800">Product Images</h2>
         <div
           v-for="(img, key) in imageData"
           :key="key"
@@ -26,17 +14,29 @@
         <br />
         <div class="mt-5 mb-10">
           <span
-            class="rounded p-2 bg-red-500 text-white m-3"
+            class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+            style="width: 100%;"
+            >Add Files
+            <input
+              type="file"
+              ref="files"
+              @change="selectImage()"
+              class="hidden"
+              multiple
+            />
+          </span>
+          <span
+            class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             @click="removeAllFiles()"
             >Remove All</span
           >
           <span
-            class="rounded p-2 bg-red-500 text-white m-3"
+            class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             @click="removeOldFiles()"
             >Remove Old</span
           >
           <span
-            class="rounded p-2 bg-red-500 text-white m-3"
+            class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
             @click="removeNewFiles()"
             >Remove New</span
           >
@@ -91,14 +91,22 @@
             required
           />
         </div>
+        <br /><br />
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Category that it belongs to"
-            v-model.trim="category_name"
-            required
-          />
+          <label>Category that it belongs to:</label><br />
+          <select
+            v-model="category_name"
+            class="px-5 py-2 border-2 rounded w-2/3 outline-none"
+          >
+            <option
+              class="py-5"
+              v-for="(cat, key) in available_categories"
+              :key="key"
+            >
+              {{ cat }}
+            </option>
+          </select>
+          <br />
         </div>
         <div class="form-group">
           <label class="my-15">Sub-categories that it belongs to:</label><br />
@@ -113,8 +121,12 @@
             <label :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group">
-          <button class="mt-10">Modify Product</button>
+        <div class="form-group" style="width: 20%">
+          <input
+            type="submit"
+            class="py-2 px-4 bg-green-600 cursor-pointer hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+            value="Modify Product"
+          />
         </div>
       </form>
     </div>
@@ -133,12 +145,8 @@ export default {
       discount_price: 0,
       category_name: "",
       sub_categories: [],
-      available_subcategories: [
-        "Women's Clothing",
-        "Men's Clothing",
-        "Winter Clothing",
-        "Earings"
-      ],
+      available_subcategories: [],
+      available_categories: [],
       isLoading: false,
       images: [],
       imageData: [],
@@ -255,6 +263,16 @@ export default {
     this.isLoading = false;
     this.images = product.images;
     this.imageData = product.images;
+
+    const allSubcategories = await this.$store.dispatch(
+      "categories/getAllSubcategories"
+    );
+    const allCategories = await this.$store.dispatch(
+      "categories/getAllCategories"
+    );
+
+    this.available_subcategories = allSubcategories.map(obj => obj.name);
+    this.available_categories = allCategories.map(obj => obj.name);
   }
 };
 </script>
