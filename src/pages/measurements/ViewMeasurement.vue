@@ -2,13 +2,13 @@
   <base-spinner :show="isLoading"></base-spinner>
   <div class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
     <div class="space-y-6 bg-white">
-      <div
-        class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
-      >
-        <button @click="updateMeasurement" class="mt-10 update">Update</button>
-        <button @click="deleteMeasurement" class="mt-10 delete ml-5 py-0">
-          Delete
-        </button>
+      <div class="p-4 bg-gray-50">
+        <div class="p-2 inline-block w-11/12 md:w-3/4 mx-0" style="width:150px;">
+          <button @click="updateMeasurement" class="bg-gray-800 text-yellow-200 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm">Update</button>
+        </div>
+        <div class="p-2 inline-block w-11/12 md:w-3/4 mx-0" style="width:150px;">
+          <button @click="deleteMeasurement" class="bg-gray-800 text-red-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm">Delete</button>
+        </div>
       </div>
       <!-- Personal Info -->
       <h2 class="px-8 text-xl text-gray-800">Personal info</h2>

@@ -191,10 +191,7 @@
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
         >
           <div class="mx-auto md:mr-2 w-4/5 md:w-1/4">
-            <button
-              type="submit"
-              class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-            >
+            <button type="submit" class="form-group" style="width:370px;">
               Save
             </button>
           </div>

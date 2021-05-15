@@ -109,12 +109,8 @@
             <label :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group" style="width: 20%">
-          <input
-            type="submit"
-            class="py-2 px-4 bg-green-600 cursor-pointer hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
-            value="Add Product"
-          />
+        <div class="form-group">
+          <button class="mt-10" style="width:370px;">Add Product</button>
         </div>
       </form>
     </div>

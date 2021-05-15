@@ -1,7 +1,7 @@
 <template lang="html">
   <!-- Address -->
   <base-spinner :show="isLoading"></base-spinner>
-  <div class="grid grid-cols-1 m-0 bg-gray-200">
+  <div class="flex-1 grid grid-cols-1 m-0 bg-gray-200">
     <div class="col-span-1">
       <div class="my-7 ml-1 sm:ml-5 inline-block">
         <router-link
@@ -163,7 +163,7 @@
               </div>
             </div>
             <button
-              class="py-2 px-5 bg-green-600 text-white rounded hover:no-outline"
+              class="bg-gray-800 text-white w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 transform transition duration-200 hover:shadow-xl hover:-translate-y-1"
               type="submit"
             >
               Go

@@ -15,21 +15,18 @@ button {
 /* *************************** */
 
 .green{
-    @apply font-serif;
     @apply text-5xl;
     @apply font-extrabold;
     @apply text-gray-800;
 }
 
 .green-blog-headings {
-    @apply font-serif;
     @apply text-5xl;
     @apply font-extrabold;
     @apply text-green-700;
 }
 
 .green-h3{
-    @apply font-serif;
     @apply text-4xl;
     @apply font-semibold;
     @apply text-green-400;
@@ -47,13 +44,12 @@ button {
     @apply p-3;
     @apply w-full;
     @apply float-left;
-    @apply rounded;
     @apply border;
     @apply border-solid;
     @apply border-gray-300;
     @apply focus:outline-none; 
     @apply focus:ring-2;
-    @apply focus:ring-green-400; 
+    @apply focus:ring-gray-600; 
     @apply focus:border-transparent;
 }
 
@@ -72,15 +68,19 @@ button {
 }
 
 .form-group button, .form-group-blog button{
-    @apply bg-green-700; 
+    @apply bg-gray-900; 
     @apply text-white;
     @apply w-full;
-    @apply md:w-96;
     @apply py-2; 
-    @apply px-4; 
-    @apply rounded; 
-    @apply hover:bg-green-600;
+    @apply px-4;
+    @apply hover:bg-gray-50;
+    @apply hover:text-gray-900;
+    @apply border;
+    @apply hover:border-gray-700;
     @apply shadow-md;
+    @apply transform;
+    @apply transition;
+    @apply duration-200;
     @apply hover:shadow-sm;
 }
 

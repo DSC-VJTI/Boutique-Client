@@ -1,32 +1,45 @@
 <template>
   <div class="flex flex-col h-full">
-    <nav class="pr-4 pl-4 pt-4 flex flex-wrap content-evenly text-right">
-      <router-link to="/"
-        ><img src="./assets/logo.png" class="w-7 h-7" alt=""
-      /></router-link>
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/blogs">Blogs</router-link>
-      <router-link to="/shop">Shop</router-link>
-      <div v-if="isAdmin" class="dropdown">
-        <button class="mt-3">
-          <router-link to="/admin">Admin</router-link>
-        </button>
-        <div class="dropdown-content">
-          <router-link to="/shop/new">Add Product</router-link>
-          <router-link to="/measurements">Measurements</router-link>
-          <router-link to="/materials">Materials</router-link>
-          <router-link to="/admin/register">Add Admin</router-link>
-          <router-link to="/blogs/new">Create Blog</router-link>
+    <nav class="pt-4 relative flex-none flex-wrap content-evenly text-right">
+      <div class="container sm:px-20 mx-auto flex flex-wrap items-center justify-between">
+        <div class="w-full relative flex flex-no-shrink justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
+          <router-link to="/">
+            <img src="./assets/logo.png" class="w-7 h-7" alt=""/>
+          </router-link>
+          <button class="text-gray-800 cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none" type="button" @click="toggleNavbar">
+            <svg viewBox="0 0 100 80" width="30" height="30" class="text-gray-800 hover:-translate-y-0.5 transform transition duration-300 hover:rotate-180">
+              <rect width="100" height="12"></rect>
+              <rect y="33" width="100" height="12"></rect>
+              <rect y="66" width="100" height="12"></rect>
+            </svg>
+          </button>
+        </div>
+        <div :class="showMenu ? 'flex': 'hidden'" class="flex-col sm:flex-row pb-4 list-none sm:flex-grow w-full sm:flex sm:w-4/5 bg-gray-50 sm:bg-transparent">
+          <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/">Home</router-link>
+          <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/about">About</router-link>
+          <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/blogs">Blogs</router-link>
+          <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/shop">Shop</router-link>
+          <div v-if="isAdmin" class="dropdown px-3 py-2 mx-auto sm:mx-0">
+            <router-link class="text-center" to="/admin">Admin</router-link>
+            <div class="dropdown-content">
+              <router-link class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/shop/new">Add Product</router-link>
+              <router-link class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/measurements">Measurements</router-link>
+              <router-link class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/materials">Materials</router-link>
+              <router-link class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/admin/register">Add Admin</router-link>
+              <router-link class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/blogs/new">Create Blog</router-link>
+            </div>
+          </div>
+          <div class="mx-auto sm:mr-0 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl">
+            <button
+              v-if="isAdmin"
+              @click="logout"
+              class="focus:outline-none font-medium px-3 py-2 text-white bg-gray-800 hover:bg-gray-50 hover:text-gray-800 transform transition duration-200 border hover:border-gray-800 float-right w-full sm:w-24"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
-      <button
-        v-if="isAdmin"
-        @click="logout"
-        class="focus:outline-none font-medium p-3"
-      >
-        Logout
-      </button>
     </nav>
     <div class="p-0 m-0 flex-1">
       <router-view></router-view>
@@ -39,6 +52,11 @@
 import Footer from "./components/Footer.vue";
 
 export default {
+  data() {
+    return {
+      showMenu: false,
+    }
+  },
   components: {
     Footer
   },
@@ -48,9 +66,13 @@ export default {
         this.$store.getters["user/isAuthenticated"] ||
         JSON.parse(localStorage.getItem("isAuthenticated"))
       );
-    }
+    },
   },
   methods: {
+    toggleNavbar() {
+      this.showMenu = !this.showMenu;
+    },
+
     logout() {
       this.$store.dispatch("user/unauthorize");
     }
@@ -59,11 +81,6 @@ export default {
 </script>
 
 <style>
-nav a {
-  @apply p-3;
-  @apply font-medium;
-}
-
 .dropdown {
   float: left;
   overflow: hidden;
@@ -93,9 +110,9 @@ nav a {
   text-align: left;
 }
 
-.dropdown-content a:hover {
+/* .dropdown-content a:hover {
   background-color: #ddd;
-}
+} */
 
 .dropdown:hover .dropdown-content {
   display: block;
