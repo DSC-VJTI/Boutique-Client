@@ -177,7 +177,7 @@ button {
     height: 250px;
     display: inline-block;
     cursor: pointer;
-    margin: 30px auto 0px;
+    /* margin: 30px auto 0px; */
     background-size: cover;
     background-position: center center;
     @apply relative;

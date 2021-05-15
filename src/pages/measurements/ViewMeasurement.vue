@@ -27,6 +27,19 @@
         </div>
       </div>
       <hr />
+      <!-- SKETCH -->
+      <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
+      <div
+        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+      >
+        <div
+          v-for="(file, key) in measurement.images"
+          :key="key"
+          class="col-span-1 file-listing sketchPreview"
+          :style="{ 'background-image': `url(${file})` }"
+        ></div>
+      </div>
+      <hr />
       <!-- DL AC C -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
@@ -210,11 +223,6 @@
         </div>
       </div>
       <hr />
-      <!-- SKETCH -->
-      <!-- <h2 class="px-8 text-xl text-gray-800">SKETCHES</h2>
-            <div class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0">
-                <div v-for="(file, key) in files" :key="key" class="col-span-1 file-listing sketchPreview" :style="{ 'background-image': `url(${file.name})` }"></div>
-            </div> -->
     </div>
   </div>
 </template>
@@ -228,7 +236,8 @@ export default {
         l: {},
         sl: {},
         n: {},
-        bottom_w: {}
+        bottom_w: {},
+        images: []
       },
       isLoading: false
     };
