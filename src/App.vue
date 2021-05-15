@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <nav class="py-4 relative flex flex-wrap content-evenly text-right">
+  <div class="flex flex-col h-full">
+    <nav class="pt-4 relative flex-none flex-wrap content-evenly text-right">
       <div class="container sm:px-20 mx-auto flex flex-wrap items-center justify-between">
         <div class="w-full relative flex flex-no-shrink justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
           <router-link to="/">
             <img src="./assets/logo.png" class="w-7 h-7" alt=""/>
           </router-link>
-          <button class="text-gray-800 cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none" type="button" @click="toggleNavbar">
+          <button class="text-gray-800 cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none" type="button" @click="toggleNavbar">
             <svg viewBox="0 0 100 80" width="30" height="30" class="text-gray-800 hover:-translate-y-0.5 transform transition duration-300 hover:rotate-180">
               <rect width="100" height="12"></rect>
               <rect y="33" width="100" height="12"></rect>
@@ -14,7 +14,7 @@
             </svg>
           </button>
         </div>
-        <div :class="showMenu ? 'flex': 'hidden'" class="flex-col pb-4 sm:flex-row list-none sm:flex-grow w-full sm:flex sm:w-4/5 bg-gray-50 sm:bg-transparent">
+        <div :class="showMenu ? 'flex': 'hidden'" class="flex-col sm:flex-row pb-4 list-none sm:flex-grow w-full sm:flex sm:w-4/5 bg-gray-50 sm:bg-transparent">
           <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/">Home</router-link>
           <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/about">About</router-link>
           <router-link class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl" to="/blogs">Blogs</router-link>

@@ -80,7 +80,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="mt-10">Add Product</button>
+          <button class="mt-10" style="width:370px;">Add Product</button>
         </div>
       </form>
     </div>

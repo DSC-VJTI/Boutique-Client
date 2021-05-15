@@ -20,7 +20,7 @@
           <ckeditor :editor="editor" v-model="editorData"></ckeditor>
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width:370px;">
           <button class="mt-10">Create Blog</button>
         </div>
       </form>
