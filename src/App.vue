@@ -7,9 +7,9 @@
         <div
           class="w-full relative flex flex-no-shrink justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start"
         >
-          <router-link to="/">
+          <!-- <router-link to="/">
             <img src="./assets/logo.png" class="w-7 h-7" alt="" />
-          </router-link>
+          </router-link> -->
           <button
             class="text-gray-800 cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none"
             type="button"
@@ -32,9 +32,15 @@
           class="flex-col sm:flex-row pb-4 list-none sm:flex-grow w-full sm:flex sm:w-4/5 bg-gray-50 sm:bg-transparent"
         >
           <router-link
-            class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+            class="text-center px-3 py-2 mr-8 font-bold text-xl"
             to="/"
-            >Home</router-link
+            ><span>THE </span>
+            <span class="text-green-500">BOUTIQUE</span></router-link
+          >
+          <router-link
+            class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+            to="/shop"
+            >Shop</router-link
           >
           <router-link
             class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
@@ -46,11 +52,7 @@
             to="/blogs"
             >Blogs</router-link
           >
-          <router-link
-            class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
-            to="/shop"
-            >Shop</router-link
-          >
+
           <div v-if="isAdmin" class="dropdown px-3 py-2 mx-auto sm:mx-0">
             <router-link class="text-center" to="/admin">Admin</router-link>
             <div class="dropdown-content">
