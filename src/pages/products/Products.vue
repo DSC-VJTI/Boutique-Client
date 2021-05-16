@@ -213,18 +213,18 @@ export default {
       products: [],
       categories: [],
       subcategories: [],
-      searchQuery: '',
+      searchQuery: "",
       isLoading: false
     };
   },
   watch: {
-    searchQuery: function (val) {
+    searchQuery: function(val) {
       let items = [];
       let filter = val.toUpperCase();
-      for(let i=0; i<this.allProducts.length; i++) {
+      for (let i = 0; i < this.allProducts.length; i++) {
         let name = this.allProducts[i].name.toUpperCase();
-        if(name.indexOf(filter) > -1) {
-          items.push(this.allProducts[i])
+        if (name.indexOf(filter) > -1) {
+          items.push(this.allProducts[i]);
         }
       }
       this.products = items;

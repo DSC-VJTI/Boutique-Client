@@ -170,6 +170,14 @@ export default {
   },
 
   async created() {
+    if (!this.$store.getters["user/getRole"]) {
+      const payload = JSON.parse(localStorage.getItem("user"));
+      if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
+      else {
+        this.$store.commit("user/setAuth", { isAuthenticated: true });
+        this.$store.commit("user/setUser", payload);
+      }
+    }
     const blog = await this.$store.dispatch("blogs/getABlog", {
       blog_id: this.blogId
     });

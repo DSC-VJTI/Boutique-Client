@@ -32,8 +32,8 @@ export default {
   computed: {
     isAdmin() {
       return (
-        this.$store.getters["user/isAuthenticated"] ||
-        JSON.parse(localStorage.getItem("isAuthenticated"))
+        this.$store.getters["user/getRole"] ||
+        JSON.parse(localStorage.getItem("user")).is_admin
       );
     }
   },
