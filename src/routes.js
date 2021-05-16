@@ -33,8 +33,6 @@ const router = createRouter({
     { path: "/about", component: About },
     // admin login
     { path: "/admin/login", component: Login },
-    // admin
-    { path: "/admin", redirect: "/" },
     // creating new admin
     { path: "/admin/register", component: Register },
     // viewing blogs
