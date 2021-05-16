@@ -1,11 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
-  <div class="p-5 text-center">
-    <h1 class="text-gray-800 text-5xl font-serif font-bold mb-10">
+  <div class="mb-5 text-center">
+    <h1 class="text-gray-800 text-2xl font-serif font-bold mb-4">
       Update Blog
     </h1>
     <div>
-      <form class="m-5" @submit.prevent="updateBlog">
+      <form class="mx-5" @submit.prevent="updateBlog">
         <div class="form-group mb-8">
           <input
             class="form-control"
@@ -25,7 +25,7 @@
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
         <div class="form-group">
-          <button class="mt-10">Update</button>
+          <button class="mt-3">Update</button>
         </div>
       </form>
     </div>
@@ -33,13 +33,24 @@
 </template>
 
 <script>
-import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
+import Autoformat from "@ckeditor/ckeditor5-autoformat/src/autoformat";
+import BlockQuote from "@ckeditor/ckeditor5-block-quote/src/blockquote";
+import Heading from "@ckeditor/ckeditor5-heading/src/heading";
+import Font from "@ckeditor/ckeditor5-font/src/font";
+import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
+import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic";
+import Underline from "@ckeditor/ckeditor5-basic-styles/src/underline";
+import Strikethrough from "@ckeditor/ckeditor5-basic-styles/src/strikethrough";
+import Link from "@ckeditor/ckeditor5-link/src/link";
+import List from "@ckeditor/ckeditor5-list/src/list";
+import ListStyle from "@ckeditor/ckeditor5-list/src/liststyle";
+import TodoList from "@ckeditor/ckeditor5-list/src/todolist";
+import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
+import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
 
 export default {
-  components: {
-    ckeditor: CKEditor.component
-  },
   props: ["blogId"],
   data() {
     return {
@@ -50,7 +61,49 @@ export default {
       editor: ClassicEditor,
       editorData: "",
       editorConfig: {
-        height: "500px"
+        plugins: [
+          Essentials,
+          Autoformat,
+          BlockQuote,
+          Heading,
+          List,
+          ListStyle,
+          TodoList,
+          Alignment,
+          Font,
+          Bold,
+          Italic,
+          Underline,
+          Strikethrough,
+          Link,
+          Paragraph
+        ],
+        toolbar: {
+          items: [
+            "heading",
+            "|",
+            "fontFamily",
+            "fontColor",
+            "fontBackgroundColor",
+            "|",
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "alignment",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "todoList",
+            "|",
+            "link",
+            "blockQuote",
+            "|",
+            "undo",
+            "redo"
+          ],
+          shouldNotGroupWhenFull: true
+        }
       },
       isLoading: false
     };
@@ -131,4 +184,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.ck,
+.ck p {
+  @apply bg-transparent;
+}
+.ck-content {
+  height: 450px;
+}
+</style>
