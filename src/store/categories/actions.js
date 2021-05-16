@@ -13,7 +13,7 @@ export default {
       context.commit("setCategories", { categories: response.data });
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
   async getAllSubcategories(context) {
@@ -28,7 +28,7 @@ export default {
       context.commit("setSubcategories", { subcategories: response.data });
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
   async getSubcategory(context, payload) {
@@ -41,7 +41,7 @@ export default {
       return response.data;
     } catch (error) {
       console.log(error);
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
   async getCategory(context, payload) {
@@ -53,7 +53,7 @@ export default {
       return response.data;
     } catch (error) {
       console.log(error);
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
   async createNewSubcategory(context, payload) {
@@ -79,7 +79,7 @@ export default {
       return response.status;
     } catch (error) {
       console.log(error);
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
   async createNewCategory(context, payload) {
@@ -104,7 +104,7 @@ export default {
       return response.status;
     } catch (error) {
       console.log(error);
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
   async updateCategory(context, payload) {
@@ -131,7 +131,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
   async updateSubcategory(context, payload) {
@@ -161,7 +161,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   }
 };
