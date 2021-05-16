@@ -1,11 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
-  <div class="p-5 text-center">
-    <h1 class="text-gray-800 text-5xl font-serif font-bold mb-10">
-      Create Blog
+  <div class="mb-5 text-center">
+    <h1 class="text-gray-800 text-2xl font-serif font-bold mb-4">
+      New Blog
     </h1>
     <div>
-      <form class="m-5" @submit.prevent="newBlog">
+      <form class="mx-5" @submit.prevent="newBlog">
         <div class="form-group mb-8">
           <input
             class="form-control-blog"
@@ -17,11 +17,15 @@
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
         </div>
         <div class="form-group">
-          <ckeditor :editor="editor" v-model="editorData"></ckeditor>
+          <ckeditor
+            :editor="editor"
+            v-model="editorData"
+            :config="editorConfig"
+          ></ckeditor>
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
         <div class="form-group" style="width:370px;">
-          <button class="mt-10">Create Blog</button>
+          <button class="mt-3">Create Blog</button>
         </div>
       </form>
     </div>
@@ -29,13 +33,23 @@
 </template>
 
 <script>
-import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
+import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
+import Autoformat from "@ckeditor/ckeditor5-autoformat/src/autoformat";
+import BlockQuote from "@ckeditor/ckeditor5-block-quote/src/blockquote";
+import Heading from "@ckeditor/ckeditor5-heading/src/heading";
+import Font from "@ckeditor/ckeditor5-font/src/font";
+import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
+import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic";
+import Underline from "@ckeditor/ckeditor5-basic-styles/src/underline";
+import Strikethrough from "@ckeditor/ckeditor5-basic-styles/src/strikethrough";
+import Link from "@ckeditor/ckeditor5-link/src/link";
+import List from "@ckeditor/ckeditor5-list/src/list";
+import ListStyle from "@ckeditor/ckeditor5-list/src/liststyle";
+import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
+import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
 
 export default {
-  components: {
-    ckeditor: CKEditor.component
-  },
   data() {
     return {
       title: "",
@@ -44,6 +58,49 @@ export default {
       isValid: true,
       editor: ClassicEditor,
       editorData: "",
+      editorConfig: {
+        plugins: [
+          Essentials,
+          Autoformat,
+          BlockQuote,
+          Heading,
+          List,
+          ListStyle,
+          Alignment,
+          Font,
+          Bold,
+          Italic,
+          Underline,
+          Strikethrough,
+          Link,
+          Paragraph
+        ],
+        toolbar: {
+          items: [
+            "heading",
+            "|",
+            "fontFamily",
+            "fontColor",
+            "fontBackgroundColor",
+            "|",
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "alignment",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "|",
+            "link",
+            "blockQuote",
+            "|",
+            "undo",
+            "redo"
+          ],
+          shouldNotGroupWhenFull: true
+        }
+      },
       isLoading: false
     };
   },
@@ -124,6 +181,6 @@ export default {
   @apply bg-transparent;
 }
 .ck-content {
-  height: 300px;
+  height: 450px;
 }
 </style>

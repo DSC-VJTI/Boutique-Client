@@ -9,7 +9,7 @@
     >
       Last Updated on: <span class="text-gray-700">{{ last_updated }}</span>
     </p>
-    <div class="text-lg text-gray-800 text-bold" v-html="content"></div>
+    <div class="my-container" v-html="content"></div>
     <div v-if="isAdmin" class="my-10">
       <button @click="updateBlog" class="update">Update</button>
       <button @click="deleteBlog" class="delete ml-5">Delete</button>
@@ -77,3 +77,63 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.my-container {
+  /* Remove the background color to make it transparent */
+  background-color: #fff;
+  @apply text-xl;
+}
+
+.my-container::v-deep(blockquote) {
+  overflow: hidden;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  border-left: solid 5px hsl(0, 0%, 80%);
+}
+
+.my-container::v-deep(a) {
+  @apply text-green-500;
+}
+
+.my-container::v-deep(ul),
+.my-container::v-deep(ol),
+.my-container::v-deep(dl) {
+  /* IE7: reset rtl list margin. (#7334) */
+  *margin-right: 0px;
+  /* preserved spaces for list items with text direction other than the list.    (#6249,#8049)*/
+  padding: 0 40px;
+}
+
+.my-container::v-deep(h2) {
+  @apply text-4xl;
+  @apply font-bold;
+}
+
+.my-container::v-deep(hr) {
+  border: 0px;
+  border-top: 1px solid #ccc;
+}
+
+.my-container::v-deep(img.right) {
+  border: 1px solid #ccc;
+  float: right;
+  margin-left: 15px;
+  padding: 5px;
+}
+
+.my-container::v-deep(img.left) {
+  border: 1px solid #ccc;
+  float: left;
+  margin-right: 15px;
+  padding: 5px;
+}
+
+.my-container::v-deep(re) {
+  white-space: pre-wrap; /* CSS 2.1 */
+  word-wrap: break-word; /* IE7 */
+}
+</style>
