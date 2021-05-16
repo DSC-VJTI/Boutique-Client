@@ -46,7 +46,6 @@ import Strikethrough from "@ckeditor/ckeditor5-basic-styles/src/strikethrough";
 import Link from "@ckeditor/ckeditor5-link/src/link";
 import List from "@ckeditor/ckeditor5-list/src/list";
 import ListStyle from "@ckeditor/ckeditor5-list/src/liststyle";
-import TodoList from "@ckeditor/ckeditor5-list/src/todolist";
 import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
 
@@ -93,7 +92,6 @@ export default {
             "|",
             "bulletedList",
             "numberedList",
-            "todoList",
             "|",
             "link",
             "blockQuote",
