@@ -1,5 +1,16 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
+  <div class="mx-8 sm:ml-5 inline-block">
+    <router-link
+      class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+      :to="`/materials/${materialId}`"
+    >
+      <img
+        class="transform rotate-90 inline-block"
+        src="https://img.icons8.com/android/20/000000/expand-arrow.png"
+      />
+    </router-link>
+  </div>
   <div>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
@@ -181,7 +192,10 @@
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
         >
           <div class="mx-auto md:mr-2 w-4/5 md:w-1/4">
-            <button type="submit" class="form-group" style="width:370px;">
+            <button
+              type="submit"
+              class="bg-gray-800 text-blue-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+            >
               Save
             </button>
           </div>

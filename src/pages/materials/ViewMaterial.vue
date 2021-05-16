@@ -1,5 +1,16 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
+  <div class="mx-8 sm:ml-5 inline-block">
+    <router-link
+      class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+      to="/materials"
+    >
+      <img
+        class="transform rotate-90 inline-block"
+        src="https://img.icons8.com/android/20/000000/expand-arrow.png"
+      />
+    </router-link>
+  </div>
   <div class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
     <div class="space-y-6 bg-white">
       <div class="p-4 bg-gray-50">

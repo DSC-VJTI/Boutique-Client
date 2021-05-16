@@ -1,7 +1,18 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
+  <div class="mx-8 sm:ml-5 inline-block">
+    <router-link
+      class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+      :to="`/blogs/${blogId}`"
+    >
+      <img
+        class="transform rotate-90 inline-block"
+        src="https://img.icons8.com/android/20/000000/expand-arrow.png"
+      />
+    </router-link>
+  </div>
   <div class="mb-5 text-center">
-    <h1 class="text-gray-800 text-2xl font-serif font-bold mb-4">
+    <h1 class="text-gray-800 text-3xl md:text-5xl font-bold font-serif mb-12">
       Update Blog
     </h1>
     <div>
