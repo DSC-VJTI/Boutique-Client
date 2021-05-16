@@ -67,7 +67,6 @@ export default {
           Heading,
           List,
           ListStyle,
-          TodoList,
           Alignment,
           Font,
           Bold,
