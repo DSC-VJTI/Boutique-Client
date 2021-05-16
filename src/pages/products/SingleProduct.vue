@@ -135,8 +135,28 @@
       </div>
     </div>
     <div v-if="isAdmin">
-      <button @click="updateProduct" class="mt-10 update">Update</button>
-      <button @click="deleteProduct" class="mt-10 delete ml-5">Delete</button>
+      <div
+        class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
+        style="width:150px;"
+      >
+        <button
+          @click="updateProduct"
+          class="bg-gray-800 text-yellow-200 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+        >
+          Update
+        </button>
+      </div>
+      <div
+        class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
+        style="width:150px;"
+      >
+        <button
+          @click="deleteProduct"
+          class="bg-gray-800 text-red-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 

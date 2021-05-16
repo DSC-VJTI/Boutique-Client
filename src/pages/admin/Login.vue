@@ -102,7 +102,7 @@ export default {
           localStorage.setItem("isAuthenticated", true);
         }
         this.isLoading = false;
-        this.$router.replace("/admin");
+        this.$router.replace("/");
       } else if (status === 401) {
         this.passwordError = "Incorrect Password!";
       } else if (status === 404) {
@@ -121,7 +121,7 @@ export default {
       this.$store.commit("user/setAuth", {
         isAuthenticated: true
       });
-      this.$router.replace("/admin");
+      this.$router.replace("/");
     }
   }
 };

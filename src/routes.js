@@ -5,7 +5,6 @@ import About from "@/pages/About.vue";
 
 import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";
-import AdminDash from "./pages/admin/AdminDash.vue";
 
 import CreateBlog from "./pages/blogs/CreateBlog.vue";
 import BlogsList from "./pages/blogs/BlogsList.vue";
@@ -34,8 +33,8 @@ const router = createRouter({
     { path: "/about", component: About },
     // admin login
     { path: "/admin/login", component: Login },
-    // admin dashboard
-    { path: "/admin", component: AdminDash },
+    // admin
+    { path: "/admin", redirect: "/" },
     // creating new admin
     { path: "/admin/register", component: Register },
     // viewing blogs

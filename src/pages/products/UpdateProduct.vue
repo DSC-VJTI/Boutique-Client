@@ -1,5 +1,16 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
+  <div class="m-8 sm:ml-5 inline-block">
+    <router-link
+      class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+      :to="`/shop/${productId}`"
+    >
+      <img
+        class="transform rotate-90 inline-block"
+        src="https://img.icons8.com/android/20/000000/expand-arrow.png"
+      />
+    </router-link>
+  </div>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
@@ -124,11 +135,12 @@
           </div>
         </div>
         <div class="form-group" style="width: 20%">
-          <input
+          <button
             type="submit"
-            class="py-2 px-4 bg-green-600 cursor-pointer hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
-            value="Modify Product"
-          />
+            class="bg-gray-800 text-blue-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+          >
+            Modify Product
+          </button>
         </div>
       </form>
     </div>
