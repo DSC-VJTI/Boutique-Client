@@ -22,7 +22,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -38,7 +38,7 @@ export default {
       context.commit("setBlogs", { blogs: response.data });
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -58,7 +58,7 @@ export default {
       );
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -86,7 +86,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -116,7 +116,7 @@ export default {
 
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   }
 };

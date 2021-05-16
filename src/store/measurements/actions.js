@@ -52,7 +52,7 @@ async function uploadToCloudinary(images, name) {
     return files;
   } catch (error) {
     console.log("error occured here", error);
-    return error.response.status;
+    return error.response ? error.response.status : 500;
   }
 }
 
@@ -94,7 +94,7 @@ export default {
       return response.status;
     } catch (error) {
       console.log("error here aaaaaaaa", error);
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -116,7 +116,7 @@ export default {
       context.commit("setMeasurements", { measurements: response.data });
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -140,7 +140,7 @@ export default {
       );
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -185,7 +185,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -217,7 +217,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   }
 };
