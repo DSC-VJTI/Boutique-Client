@@ -12,7 +12,7 @@
     </router-link>
   </div>
   <div class="w-10/12 md:w-2/3 lg:w-3/5 mx-auto my-10 bg-white p-7 shadow-2xl">
-    <h1 class="text-gray-800 text-3xl md:text-5xl font-bold font-serif mb-12">
+    <h1 class="text-gray-800 text-3xl md:text-5xl font-bold font-serif mb-5">
       {{ title }}
     </h1>
     <p
@@ -20,12 +20,13 @@
     >
       Last Updated on: <span class="text-gray-700">{{ last_updated }}</span>
     </p>
-    <div class="my-container" v-html="content"></div>
+    <div
+      class="col-span-3 file-listing blogCover"
+      :style="{ 'background-image': `url(${cover_photo})` }"
+    ></div>
+    <div class="my-container my-5" v-html="content"></div>
     <div v-if="isAdmin">
-      <div
-        class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
-        style="width:150px;"
-      >
+      <div class="p-2 inline-block w-11/12 md:w-3/4 mx-0" style="width:150px;">
         <button
           @click="updateBlog"
           class="bg-gray-800 text-yellow-200 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
@@ -33,10 +34,7 @@
           Update
         </button>
       </div>
-      <div
-        class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
-        style="width:150px;"
-      >
+      <div class="p-2 inline-block w-11/12 md:w-3/4 mx-0" style="width:150px;">
         <button
           @click="deleteBlog"
           class="bg-gray-800 text-red-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
@@ -57,15 +55,16 @@ export default {
       content: "",
       created_on: "",
       last_updated: "",
+      cover_photo: "",
       isLoading: false
     };
   },
   computed: {
     isAdmin() {
-      return (
-        this.$store.getters["user/getRole"] ||
-        JSON.parse(localStorage.getItem("user")).is_admin
-      );
+      return (JSON.parse(localStorage.getItem("user"))) ? (
+          this.$store.getters["user/getRole"] ||
+          JSON.parse(localStorage.getItem("user")).is_admin
+        ) : false;
     }
   },
   methods: {
@@ -104,6 +103,7 @@ export default {
     this.created_on = blog.created_on;
     this.last_updated = blog.last_updated;
     this.content = blog.content;
+    this.cover_photo = blog.image;
     this.isLoading = false;
   }
 };

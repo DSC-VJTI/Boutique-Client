@@ -135,10 +135,7 @@
       </div>
     </div>
     <div v-if="isAdmin">
-      <div
-        class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
-        style="width:150px;"
-      >
+      <div class="p-2 inline-block w-11/12 md:w-3/4 mx-0" style="width:150px;">
         <button
           @click="updateProduct"
           class="bg-gray-800 text-yellow-200 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
@@ -146,10 +143,7 @@
           Update
         </button>
       </div>
-      <div
-        class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
-        style="width:150px;"
-      >
+      <div class="p-2 inline-block w-11/12 md:w-3/4 mx-0" style="width:150px;">
         <button
           @click="deleteProduct"
           class="bg-gray-800 text-red-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
@@ -172,10 +166,10 @@ export default {
   },
   computed: {
     isAdmin() {
-      return (
-        this.$store.getters["user/getRole"] ||
-        JSON.parse(localStorage.getItem("user")).is_admin
-      );
+      return (JSON.parse(localStorage.getItem("user"))) ? (
+          this.$store.getters["user/getRole"] ||
+          JSON.parse(localStorage.getItem("user")).is_admin
+        ) : false;
     },
     isDiscounted() {
       return this.price !== this.discount_price;
