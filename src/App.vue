@@ -57,7 +57,7 @@
             v-if="isAuthenticated"
             class="dropdown px-3 py-2 mx-auto sm:mx-0"
           >
-            <router-link class="text-center" to="/admin">Admin</router-link>
+            <router-link class="text-center" to="/">Admin</router-link>
             <div class="dropdown-content">
               <router-link
                 class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"

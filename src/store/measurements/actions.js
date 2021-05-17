@@ -9,7 +9,6 @@ function getSignature(input) {
 }
 
 async function uploadToCloudinary(images, name) {
-  console.log("in uploadToCloudinary");
   let url = process.env.VUE_APP_CLOUDINARY_URL;
   let timeStamp = Math.round(new Date() / 1000);
   let preset = process.env.VUE_APP_PRESET;
@@ -41,17 +40,14 @@ async function uploadToCloudinary(images, name) {
       })
     );
   }
-  console.log("productRequests", productRequests);
   try {
     let files = [];
     let response = await Promise.all(productRequests);
     for (let res of response) {
       files.push(res.data.secure_url);
     }
-    console.log("secure urls", files);
     return files;
   } catch (error) {
-    console.log("error occured here", error);
     return error.response ? error.response.status : 500;
   }
 }
@@ -69,10 +65,7 @@ export default {
       payload.body.images = null;
     }
 
-    console.log("payload", payload);
-
     try {
-      console.log("sending request to server");
       const response = await axios.post(
         context.rootGetters.getUrl + "api/admin/measurements",
         payload.body,
@@ -83,7 +76,6 @@ export default {
           }
         }
       );
-      console.log("status", response.status);
       if (response.status == 201 && response.data) {
         const measurements = context.getters.getMeasurements;
         measurements.push(response.data);
@@ -93,7 +85,6 @@ export default {
       }
       return response.status;
     } catch (error) {
-      console.log("error here aaaaaaaa", error);
       return error.response ? error.response.status : 500;
     }
   },
@@ -102,7 +93,6 @@ export default {
     const measurements = context.getters.getMeasurements;
     if (measurements.length !== 0) return measurements;
     //In case store is empty
-    // console.log(payload.token);
     try {
       const response = await axios.get(
         context.rootGetters.getUrl + "api/admin/measurements",
@@ -156,8 +146,6 @@ export default {
       if (imgs && imgs[0]) payload.measurement.images.push(...imgs);
       else return imgs;
     }
-
-    console.log("payload", payload);
 
     try {
       const response = await axios.put(

@@ -16,6 +16,32 @@
       Update Blog
     </h1>
     <div>
+      <div class="p-5 text-center">
+        <label
+          class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+          style="width: 100%;"
+          for="file-input"
+          >Add Cover Photo
+          <input
+            id="file-input"
+            type="file"
+            ref="files"
+            @change="selectImage()"
+            class="hidden"
+          />
+        </label>
+      </div>
+      <div
+        class="col-span-3 file-listing sketchPreview"
+        :style="{ 'background-image': `url(${imageData})` }"
+      >
+        <span
+          v-if="imageData"
+          class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
+          @click="removeFile()"
+          >X</span
+        >
+      </div>
       <form class="mx-5" @submit.prevent="updateBlog">
         <div class="form-group mb-8">
           <input
@@ -113,10 +139,39 @@ export default {
           shouldNotGroupWhenFull: true
         }
       },
+      file: null,
+      image: null,
+      imageData: null,
       isLoading: false
     };
   },
   methods: {
+    removeFile() {
+      this.file = null;
+      this.image = null;
+      this.imageData = null;
+    },
+    selectImage() {
+      this.file = null;
+      this.imageData = null;
+
+      let uploadedFile = this.$refs.files.files[0];
+      this.file = uploadedFile;
+
+      // for (let img of this.images) {
+      if (uploadedFile && uploadedFile.name) {
+        let reader = new FileReader();
+        reader.addEventListener(
+          "load",
+          function() {
+            this.imageData = reader.result;
+          }.bind(this),
+          false
+        );
+
+        reader.readAsDataURL(uploadedFile);
+      }
+    },
     validate() {
       this.isValid = true;
 
@@ -146,8 +201,10 @@ export default {
       const status = await this.$store.dispatch("blogs/updateCurrentBlog", {
         body: {
           content: this.editorData,
-          title: this.title
+          title: this.title,
+          image: this.image
         },
+        image: this.file,
         token: JSON.parse(localStorage.getItem("user")).access_token,
         blog_id: this.blogId
       });
@@ -196,6 +253,8 @@ export default {
     setTimeout(() => {
       this.editorData = blog.content;
     }, 100);
+    this.image = blog.image;
+    this.imageData = blog.image;
   }
 };
 </script>

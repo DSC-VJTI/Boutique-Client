@@ -173,12 +173,21 @@ button {
     @apply focus:border-transparent;
 }
 
+.blogCover {
+    width: 100%;
+    height: 400px;
+    display: inline-block;
+    background-size: cover;
+    background-position: center center;
+    margin-bottom: 15px;
+    @apply relative;
+}
+
 .sketchPreview {
     width: 250px;
     height: 250px;
     display: inline-block;
     cursor: pointer;
-    /* margin: 30px auto 0px; */
     background-size: cover;
     background-position: center center;
     @apply relative;
