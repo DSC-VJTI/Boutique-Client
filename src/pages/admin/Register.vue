@@ -143,13 +143,13 @@ export default {
         this.$router.replace("/admin/login");
       else {
         const payload = JSON.parse(localStorage.getItem("user"));
-        if (!payload.is_admin) this.$router.replace("/admin/login");
+        if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
         this.$store.commit("user/setAuth", { isAuthenticated: true });
         this.$store.commit("user/setUser", payload);
       }
     } else {
-      if (!JSON.parse(localStorage.getItem("user")).is_admin)
-        this.$router.replace("/admin/login");
+      const payload = JSON.parse(localStorage.getItem("user"));
+        if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
     }
   }
 };

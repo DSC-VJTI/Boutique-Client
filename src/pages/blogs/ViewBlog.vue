@@ -61,10 +61,10 @@ export default {
   },
   computed: {
     isAdmin() {
-      return (
-        this.$store.getters["user/getRole"] ||
-        JSON.parse(localStorage.getItem("user")).is_admin
-      );
+      return (JSON.parse(localStorage.getItem("user"))) ? (
+          this.$store.getters["user/getRole"] ||
+          JSON.parse(localStorage.getItem("user")).is_admin
+        ) : false;
     }
   },
   methods: {
