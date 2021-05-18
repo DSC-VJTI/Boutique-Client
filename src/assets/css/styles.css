@@ -85,29 +85,39 @@ button {
 }
 
 .update{
-    @apply bg-yellow-400; 
-    @apply text-white; 
-    @apply pt-2; 
-    @apply pb-2; 
-    @apply pr-4; 
-    @apply pl-4; 
-    @apply rounded; 
-    @apply hover:bg-yellow-500;
+    @apply bg-gray-900;
+    @apply text-yellow-300;
+    @apply w-full;
+    @apply py-2;
+    @apply px-4;
+    @apply hover:bg-gray-50;
+    @apply hover:text-gray-900;
+    @apply border;
+    @apply hover:border-gray-900;
     @apply shadow-md;
+    @apply transform;
+    @apply transition;
+    @apply hover:-translate-y-1;
+    @apply duration-200;
     @apply hover:shadow-sm;
 }
 
 .delete{
-    @apply bg-red-500; 
-    @apply text-white; 
-    @apply pt-2; 
-    @apply pb-2; 
-    @apply pr-4; 
-    @apply pl-4; 
-    @apply rounded; 
-    @apply hover:bg-red-600;
+    @apply bg-gray-900;
+    @apply text-red-500;
+    @apply w-full;
+    @apply py-2;
+    @apply px-4;
+    @apply hover:bg-gray-50;
+    @apply hover:text-gray-900;
+    @apply border;
+    @apply hover:border-gray-900;
     @apply shadow-md;
-    @apply hover:shadow-sm;
+    @apply transform;
+    @apply transition;
+    @apply hover:-translate-y-1;
+    @apply duration-200;
+    @apply hover:shadow-xl;
 }
 
 .lista{
@@ -152,7 +162,6 @@ button {
 }
 
 .measurementInput{
-    @apply rounded-lg;
     @apply border-transparent;
     @apply flex-1;
     @apply appearance-none;
@@ -228,4 +237,24 @@ button {
     @apply items-center;
     @apply p-4;
     @apply block;
+}
+
+.blackButton{
+    @apply py-2;
+    @apply px-4;
+    @apply bg-gray-900;
+    @apply hover:bg-gray-50;
+    @apply text-white;
+    @apply hover:text-gray-800;
+    @apply md:w-full;
+    @apply transition;
+    @apply duration-200;
+    @apply text-center;
+    @apply text-xl;
+    @apply font-semibold;
+    @apply transform;
+    @apply hover:-translate-y-1;
+    @apply hover:shadow-lg;
+    @apply border;
+    @apply hover:border-gray-800;
 }

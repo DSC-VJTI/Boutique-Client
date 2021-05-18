@@ -4,7 +4,7 @@
       <div v-if="show" class="backdrop"></div>
       <div
         v-if="show"
-        class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-20 w-20"
+        class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"
       ></div>
     </teleport>
   </div>
@@ -22,6 +22,7 @@ export default {
   z-index: 100;
   overflow: hidden;
   top: 40vh;
+  left: 45vw;
   background-color: transparent;
   border-top-color: rgba(52, 211, 153, 1);
   -webkit-animation: spinner 1.5s linear infinite;

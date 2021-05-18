@@ -1,7 +1,7 @@
 <template lang="html">
-  <div>
+  <div class="w-full">
     <!-- Carousel -->
-    <div>
+    <div class="w-full">
       <flickity ref="flickity" :options="flickityOptions">
         <carousel-cell
           v-for="cell in carouselCells"
@@ -11,30 +11,30 @@
       </flickity>
     </div>
 
-    <div class="grid grid-flow-col grid-cols-2 grid-rows-2 gap-4 m-10">
+    <div class="grid sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 gap-4 my-10 mx-6">
       <div class="justify-self-center">
         <img
-          class="h-screen"
+          class="h-screen w-auto"
           src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
         />
       </div>
-      <div class="pt-52 pl-20">
-        <h1 class="font-extrabold font-serif text-5xl text-black mb-5">
+      <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-10">
+        <h1 class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4">
           Spring - Summer Collection 2021
         </h1>
         <button
-          class="text-black text-sm font-bold font-mono p-1 tracking-widest border-b-2 hover:shadow-xl"
+          class="blackButton" style="width:160px;"
         >
           SHOP NOW
         </button>
       </div>
       <div>
-        <div class="pt-52 pl-20">
-          <h1 class="font-extrabold font-serif text-5xl text-black mb-5">
+        <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-10">
+          <h1 class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4">
             Spring - Summer Collection 2021
           </h1>
           <button
-            class="text-black text-sm font-bold font-mono p-1 tracking-widest border-b-2 hover:shadow-xl"
+            class="blackButton" style="width:160px;"
           >
             SHOP NOW
           </button>
@@ -48,14 +48,14 @@
       </div>
     </div>
 
-    <section class="bg-gray-200 p-5">
+    <section class="bg-gray-200 p-5 sm:px-40">
       <h1
-        class="font-extrabold font-serif text-4xl text-center text-black my-5 py-5"
+        class="font-extrabold font-serif text-4xl text-center text-black my-5"
       >
         New Arrivals
       </h1>
       <div
-        class="grid grid-flow-col lg:grid-cols-4 lg:grid-rows-2 md:grid-cols-2 md:grid-rows-4 grid-cols-1 grid-rows-8 gap-4 m-5 px-5"
+        class="grid grid-flow-row grid-rows-1 lg:grid-cols-4 lg:grid-rows-2 md:grid-cols-2 md:grid-rows-4 grid-rows-8 gap-4"
       >
         <grid-item></grid-item>
         <grid-item></grid-item>
@@ -68,13 +68,13 @@
       </div>
     </section>
 
-    <div class="grid lg:grid-cols-3 lg:grid-rows-1 mt-10">
-      <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 m-5">
+    <div class="grid lg:grid-cols-3 lg:grid-rows-1 sm:px-40">
+      <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 m-5 sm:m-0">
         <div v-for="image in gridImages" :key="image.id">
           <img :src="image.url" />
         </div>
       </div>
-      <div class="self-center md:m-10 sm:m-10">
+      <div class="self-center md:m-10 m-5 sm:m-10">
         <h1 class="font-extrabold font-serif text-5xl mb-5">
           Instagram
         </h1>

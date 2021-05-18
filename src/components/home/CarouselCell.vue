@@ -1,7 +1,7 @@
 <template>
   <div class="carousel-cell">
     <img :src="imageURL" />
-    <div class="absolute inset-y-1/3 left-10 w-6/12">
+    <div class="absolute inset-y-1/3 left-50 md:left-10 w-1/3 sm:w-6/12">
       <p class="text-red-300 text-base font-mono p-2 tracking-widest">
         CLOTHING COLLECTION
       </p>

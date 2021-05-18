@@ -4,7 +4,7 @@
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
       <div>
-        <h2 class="px-8 text-xl text-gray-800">Product Images</h2>
+        <h2 class="px-8 mb-3 text-gray-800 text-xl font-semibold">Product Images</h2>
         <div
           v-for="(img, key) in imageData"
           :key="key"
@@ -13,41 +13,50 @@
         ></div>
         <br />
         <div class="mt-5 mb-10">
-          <label
-            class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
-            style="width: 100%;"
-            for="file-input"
-            >Add Photos
-            <input
-              id="file-input"
-              type="file"
-              ref="files"
-              @change="selectImage()"
-              class="hidden"
-              multiple
-            />
-          </label>
-          <span
-            class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
-            @click="removeAllFiles()"
-            >Remove All</span
-          >
-          <span
-            class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
-            @click="removeOldFiles()"
-            >Remove Old</span
-          >
-          <span
-            class="py-2 px-4 ml-5 bg-red-500 cursor-pointer hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
-            @click="removeNewFiles()"
-            >Remove New</span
-          >
+          <div class="block sm:inline-block p-3 sm:mr-5">
+            <label
+              class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 border hover:border-green-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+              style="width: 100%;"
+              for="file-input"
+              >Add Photos
+              <input
+                id="file-input"
+                type="file"
+                ref="files"
+                @change="selectImage()"
+                class="hidden"
+                multiple
+              />
+            </label>
+          </div>
+          <div class="block sm:inline-block p-3 sm:mr-5">
+            <span
+              class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+              @click="removeAllFiles()"
+              >Remove All</span
+            >
+          </div>
+          <div class="block sm:inline-block p-3 sm:mr-5">
+            <span
+              class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+              @click="removeOldFiles()"
+              >Remove Old</span
+            >
+          </div>
+          <div class="block sm:inline-block p-3"> 
+            <span
+              class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+              @click="removeNewFiles()"
+              >Remove New</span
+            >
+          </div>
         </div>
       </div>
-      <form class="m-5" @submit.prevent="updateProduct">
-        <div class="form-group">
+      <form class="m-5 px-5 md:px-40" @submit.prevent="updateProduct">
+        <div class="w-full mt-5">
           <input
-            class="form-control"
+            class="measurementInput"
+            style="width:100%;"
             type="text"
             placeholder="Name of the Product"
             v-model.trim="name"
@@ -55,64 +64,69 @@
           />
           <br /><span class="text-red-600 font-bold">{{ nameError }}</span>
         </div>
-        <div class="form-group">
+        <div class="w-full mt-5">
           <input
-            class="form-control"
+            class="measurementInput"
+            style="width:100%;"
             type="text"
             placeholder="Short Description"
             v-model.trim="description"
             required
           />
         </div>
-        <div class="form-group">
+        <div class="w-full mt-5">
           <input
-            class="form-control"
+            class="measurementInput"
+            style="width:100%;"
             type="text"
             placeholder="Detailed Info"
             v-model.trim="info"
             required
           />
         </div>
-        <div class="form-group">
-          <label>Original Price: </label>
-          <input
-            class="form-control"
-            type="number"
-            placeholder="MRP"
-            v-model.trim="price"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Discounted Price: </label>
-          <input
-            class="form-control"
-            type="number"
-            placeholder="Discounted Price"
-            v-model.trim="discount_price"
-            required
-          />
-        </div>
-        <br /><br />
-        <div class="form-group">
-          <label>Category that it belongs to:</label><br />
-          <select
-            v-model="category_name"
-            class="px-5 py-2 border-2 rounded w-2/3 outline-none"
-          >
-            <option
-              class="py-5"
-              v-for="(cat, key) in available_categories"
-              :key="key"
+        <div class="w-full block sm:grid grid-flow-col grid-cols-1 sm:grid-cols-3">
+          <div class="w-auto mt-5 col-span-1">
+            <label class="mr-5 text-xl font-semibold">Original Price</label>
+            <input
+              class="measurementInput"
+              style="width:100px;"
+              type="number"
+              placeholder="MRP"
+              v-model.trim="price"
+              required
+            />
+          </div>
+          <div class="w-auto mt-5 col-span-1">
+            <label class="mr-5 text-xl font-semibold">Discounted Price</label>
+            <input
+              class="measurementInput"
+              style="width:100px;"
+              type="number"
+              placeholder="Discounted Price"
+              v-model.trim="discount_price"
+              required
+            />
+          </div>
+          <div class="w-auto mt-5 col-span-1">
+            <label class="mr-5 text-xl font-semibold">Category</label>
+            <select
+              v-model="category_name"
+              class="px-5 py-2 border-2 rounded w-40 outline-none"
             >
-              {{ cat }}
-            </option>
-          </select>
-          <br />
+              <option
+                class="py-5 text-gray-700 text-base font-light"
+                v-for="(cat, key) in available_categories"
+                :key="key"
+              >
+                {{ cat }}
+              </option>
+            </select>
+            <br />
+          </div>
         </div>
-        <div class="form-group">
-          <label class="my-15">Sub-categories that it belongs to:</label><br />
-          <div v-for="subcat in available_subcategories" :key="subcat">
+        <div class="mt-6">
+          <label class="my-15 mr-5 text-xl font-semibold">Sub-categories</label>
+          <div class="sm:inline-block block px-4 bg-gray-300" v-for="subcat in available_subcategories" :key="subcat">
             <input
               type="checkbox"
               class="check"
@@ -120,13 +134,13 @@
               :value="subcat"
               v-model="sub_categories"
             />
-            <label :for="subcat">{{ subcat }}</label>
+            <label class="text-gray-700 text-base font-light" :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group" style="width: 20%">
+        <div class="form-group mt-5" style="width:320px;">
           <input
             type="submit"
-            class="py-2 px-4 bg-green-600 cursor-pointer hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+            class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
             value="Modify Product"
           />
         </div>

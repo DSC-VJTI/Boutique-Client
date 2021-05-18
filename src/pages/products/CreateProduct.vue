@@ -5,7 +5,7 @@
     <div>
       <div class="p-5 text-center">
         <label
-          class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+          class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
           style="width: 100%;"
           for="file-input"
           >Add Photos
@@ -33,10 +33,11 @@
           >
         </div>
       </div>
-      <form class="m-5" @submit.prevent="newProduct">
-        <div class="form-group">
+      <form class="m-5 px-5 md:px-40" @submit.prevent="newProduct">
+        <div class="w-full mt-5">
           <input
-            class="form-control"
+            class="measurementInput"
+            style="width:100%;"
             type="text"
             placeholder="Name of the Product"
             v-model.trim="name"
@@ -44,61 +45,65 @@
           />
           <br /><span class="text-red-600 font-bold">{{ nameError }}</span>
         </div>
-        <div class="form-group">
+        <div class="w-full mt-5">
           <input
-            class="form-control"
+            class="measurementInput"
+            style="width:100%;"
             type="text"
             placeholder="Short Description"
             v-model.trim="description"
           />
         </div>
-        <div class="form-group">
+        <div class="w-full mt-5">
           <textarea
-            rows="8"
-            class="form-control"
+            class="measurementInput"
+            style="width:100%;"
             type="text"
             placeholder="Detailed Info"
             v-model.trim="info"
           ></textarea>
         </div>
-        <div class="form-group">
-          <label>Original Price: </label>
-          <input
-            class="form-control"
-            type="number"
-            placeholder="MRP"
-            v-model.trim="price"
-          />
-        </div>
-        <div class="form-group">
-          <label>Discounted Price: </label>
-          <input
-            class="form-control"
-            type="number"
-            placeholder="Discounted Price"
-            v-model.trim="discount_price"
-          />
-        </div>
-        <br /><br />
-        <div class="form-group">
-          <label>Category that it belongs to:</label><br />
-          <select
-            v-model="category_name"
-            class="px-5 py-2 border-2 rounded w-2/3 outline-none"
-          >
-            <option
-              class="py-5"
-              v-for="(cat, key) in available_categories"
-              :key="key"
+        <div class="w-full block sm:grid grid-flow-col grid-cols-1 sm:grid-cols-3">
+          <div class="w-auto mt-5 col-span-1">
+            <label class="mr-5 text-xl font-semibold">Original Price</label>
+            <input
+              class="measurementInput"
+              style="width:100px;"
+              type="number"
+              placeholder="MRP"
+              v-model.trim="price"
+            />
+          </div>
+          <div class="w-auto mt-5 col-span-1">
+            <label class="mr-5 text-xl font-semibold">Discounted Price</label>
+            <input
+              class="measurementInput"
+              style="width:100px;"
+              type="number"
+              placeholder="Discounted Price"
+              v-model.trim="discount_price"
+            />
+          </div>
+          <div class="w-auto mt-5 col-span-1">
+            <label class="mr-5 text-xl font-semibold">Category</label>
+            <select
+              v-model="category_name"
+              class="px-5 py-2 border-2 rounded w-40 outline-none"
             >
-              {{ cat }}
-            </option>
-          </select>
-          <br />
+              <option
+                class="py-5 text-gray-700 text-base font-light"
+                v-for="(cat, key) in available_categories"
+                :key="key"
+              >
+                {{ cat }}
+              </option>
+            </select>
+            <br />
+          </div>
         </div>
-        <div class="form-group">
-          <label class="my-15">Sub-categories that it belongs to:</label><br />
-          <div v-for="subcat in available_subcategories" :key="subcat">
+        <div class="mt-6">
+          <label class="my-15 mr-5 text-xl font-semibold">Sub-categories</label>
+          <div class="sm:inline-block block px-4 bg-gray-300" v-for="subcat in available_subcategories" :key="subcat">
             <input
               type="checkbox"
               class="check"
@@ -106,11 +111,11 @@
               :value="subcat"
               v-model="sub_categories"
             />
-            <label :for="subcat">{{ subcat }}</label>
+            <label class="text-gray-700 text-base font-light" :for="subcat">{{ subcat }}</label>
           </div>
         </div>
         <div class="form-group">
-          <button class="mt-10" style="width:370px;">Add Product</button>
+          <button class="mt-10" style="width:320px;">Add Product</button>
         </div>
       </form>
     </div>

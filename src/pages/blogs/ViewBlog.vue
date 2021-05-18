@@ -11,8 +11,18 @@
     </p>
     <div class="text-lg text-gray-800 text-bold" v-html="content"></div>
     <div v-if="isAdmin" class="my-10">
-      <button @click="updateBlog" class="update">Update</button>
-      <button @click="deleteBlog" class="delete ml-5">Delete</button>
+      <div
+          class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
+          style="width:150px;"
+        >
+        <button @click="updateBlog" class="update">Update</button>
+      </div>
+      <div
+          class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
+          style="width:150px;"
+        >
+        <button @click="deleteBlog" class="delete">Delete</button>
+      </div>
     </div>
   </div>
 </template>
