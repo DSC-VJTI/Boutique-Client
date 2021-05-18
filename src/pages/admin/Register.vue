@@ -149,7 +149,7 @@ export default {
       }
     } else {
       const payload = JSON.parse(localStorage.getItem("user"));
-        if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
+      if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
     }
   }
 };

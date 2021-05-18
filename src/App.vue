@@ -130,11 +130,11 @@ export default {
       );
     },
     isAdmin() {
-      return (JSON.parse(localStorage.getItem("user"))) ? (
-          this.$store.getters["user/getRole"] ||
-          JSON.parse(localStorage.getItem("user")).is_admin
-        ) : false;
-    },
+      return JSON.parse(localStorage.getItem("user"))
+        ? this.$store.getters["user/getRole"] ||
+            JSON.parse(localStorage.getItem("user")).is_admin
+        : false;
+    }
   },
   methods: {
     toggleNavbar() {

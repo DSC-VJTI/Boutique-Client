@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import About from "@/pages/About.vue";
+import Error404 from "@/pages/Error404.vue";
 
 import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";
@@ -31,6 +32,8 @@ const router = createRouter({
   routes: [
     { path: "/", component: Home },
     { path: "/about", component: About },
+    { path: "/404", component: Error404 },
+
     // admin login
     { path: "/admin/login", component: Login },
     // creating new admin
