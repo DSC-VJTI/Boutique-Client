@@ -20,7 +20,7 @@
         >
           <button
             @click="updateMeasurement"
-            class="bg-gray-800 text-yellow-200 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+            class="update"
           >
             Update
           </button>
@@ -31,7 +31,7 @@
         >
           <button
             @click="deleteMeasurement"
-            class="bg-gray-800 text-red-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+            class="delete"
           >
             Delete
           </button>

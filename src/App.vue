@@ -32,7 +32,7 @@
           class="flex-col sm:flex-row pb-4 list-none sm:flex-grow w-full sm:flex sm:w-4/5 bg-gray-50 sm:bg-transparent"
         >
           <router-link
-            class="text-center px-3 py-2 mr-8 font-bold text-xl"
+            class="text-center px-3 py-2 mr-0 md:mr-8 font-bold text-xl"
             to="/"
             ><span>THE </span>
             <span class="text-green-500">BOUTIQUE</span></router-link
@@ -95,7 +95,7 @@
             <button
               v-if="isAuthenticated"
               @click="logout"
-              class="focus:outline-none font-medium px-3 py-2 text-white bg-gray-800 hover:bg-gray-50 hover:text-gray-800 transform transition duration-200 border hover:border-gray-800 float-right w-full sm:w-24"
+              class="focus:outline-none font-medium px-3 py-2 text-white bg-gray-800 hover:bg-gray-50 hover:text-gray-800 transform transition duration-200 border hover:border-gray-800 float-right w-full h-full sm:w-24"
             >
               Logout
             </button>

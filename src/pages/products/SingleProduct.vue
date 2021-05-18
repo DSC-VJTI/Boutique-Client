@@ -209,7 +209,6 @@ export default {
           product_id: this.productId
         }
       );
-
       if (status === 204) {
         this.isLoading = false;
         this.$router.push({
