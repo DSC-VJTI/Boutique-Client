@@ -21,7 +21,7 @@ export default {
       context.commit("setProducts", { products: response.data });
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
   async createNewProduct(context, payload) {
@@ -65,7 +65,7 @@ export default {
         }
         payload.body.images = images;
       } catch (error) {
-        return error.response.status;
+        return error.response ? error.response.status : 500;
       }
     } else {
       payload.body.images = null;
@@ -92,7 +92,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -112,7 +112,7 @@ export default {
       );
       return response.data;
     } catch (error) {
-      return error.response;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -157,7 +157,7 @@ export default {
         }
         payload.body.images.push(...images);
       } catch (error) {
-        return error.response.status;
+        return error.response ? error.response.status : 500;
       }
     }
 
@@ -186,7 +186,7 @@ export default {
       }
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -218,7 +218,7 @@ export default {
 
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   }
 };

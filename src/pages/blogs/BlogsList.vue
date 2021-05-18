@@ -7,6 +7,7 @@
       :key="blog.id"
       :title="blog.title"
       :content="blog.content"
+      :cover_photo="blog.image"
       :last_updated="blog.last_updated"
       :id="blog.id"
     >

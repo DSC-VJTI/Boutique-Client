@@ -14,7 +14,7 @@ export default {
       localStorage.setItem("user", JSON.stringify(response.data));
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 
@@ -32,7 +32,7 @@ export default {
       );
       return response.status;
     } catch (error) {
-      return error.response.status;
+      return error.response ? error.response.status : 500;
     }
   },
 

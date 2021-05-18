@@ -36,6 +36,10 @@
           />
           <br /><span class="text-red-600 font-bold">{{ passwordError }}</span>
         </div>
+        <div class="form-group text-left">
+          <input type="checkbox" id="checkbox" class="mr-2" v-model="isAdmin" />
+          <label for="checkbox">Give Admin Permissions</label>
+        </div>
         <div class="form-group" style="width:370px;">
           <button class="mt-5">Add Admin</button>
         </div>
@@ -54,6 +58,7 @@ export default {
       fullnameError: "",
       usernameError: "",
       passwordError: "",
+      isAdmin: false,
       isValid: true,
       isLoading: false
     };
@@ -96,7 +101,8 @@ export default {
         body: {
           username: this.username,
           full_name: this.fullname,
-          password: this.password
+          password: this.password,
+          is_admin: this.isAdmin
         },
         token: JSON.parse(localStorage.getItem("user")).access_token
       });
@@ -125,6 +131,7 @@ export default {
       this.username = "";
       this.fullname = "";
       this.password = "";
+      this.isAdmin = false;
     }
   },
   created() {
@@ -134,7 +141,15 @@ export default {
         localStorage.getItem("isAuthenticated") === false
       )
         this.$router.replace("/admin/login");
-      else this.$store.commit("user/setAuth", { isAuthenticated: true });
+      else {
+        const payload = JSON.parse(localStorage.getItem("user"));
+        if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
+        this.$store.commit("user/setAuth", { isAuthenticated: true });
+        this.$store.commit("user/setUser", payload);
+      }
+    } else {
+      const payload = JSON.parse(localStorage.getItem("user"));
+      if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
     }
   }
 };

@@ -37,6 +37,7 @@
               type="text"
               class="h-full w-11/12 text-lg outline-none"
               placeholder="Search..."
+              v-model="searchQuery"
             />
             <button class="absolute float-right" type="submit">
               <img src="https://img.icons8.com/android/24/000000/search.png" />
@@ -212,8 +213,22 @@ export default {
       products: [],
       categories: [],
       subcategories: [],
+      searchQuery: "",
       isLoading: false
     };
+  },
+  watch: {
+    searchQuery: function(val) {
+      let items = [];
+      let filter = val.toUpperCase();
+      for (let i = 0; i < this.allProducts.length; i++) {
+        let name = this.allProducts[i].name.toUpperCase();
+        if (name.indexOf(filter) > -1) {
+          items.push(this.allProducts[i]);
+        }
+      }
+      this.products = items;
+    }
   },
   methods: {
     filter() {

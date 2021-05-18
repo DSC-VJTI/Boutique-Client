@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import About from "@/pages/About.vue";
+import NotFound from "@/pages/Error404.vue";
 
 import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";
-import AdminDash from "./pages/admin/AdminDash.vue";
 
 import CreateBlog from "./pages/blogs/CreateBlog.vue";
 import BlogsList from "./pages/blogs/BlogsList.vue";
@@ -32,10 +32,9 @@ const router = createRouter({
   routes: [
     { path: "/", component: Home },
     { path: "/about", component: About },
+
     // admin login
     { path: "/admin/login", component: Login },
-    // admin dashboard
-    { path: "/admin", component: AdminDash },
     // creating new admin
     { path: "/admin/register", component: Register },
     // viewing blogs
@@ -106,7 +105,8 @@ const router = createRouter({
       path: "/shop/update/:productId",
       component: UpdateProduct,
       props: true
-    }
+    },
+    { path: "/:pathMatch(.*)*", component: NotFound }
   ]
 });
 

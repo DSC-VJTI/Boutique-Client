@@ -385,7 +385,10 @@
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
         >
           <div class="mx-auto md:mr-2 w-4/5 md:w-1/4">
-            <button type="submit" class="form-group" style="width:370px;">
+            <button
+              type="submit"
+              class="bg-gray-800 text-blue-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+            >
               Save
             </button>
           </div>

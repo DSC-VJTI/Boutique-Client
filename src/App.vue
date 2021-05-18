@@ -53,14 +53,12 @@
             >Blogs</router-link
           >
 
-          <div v-if="isAdmin" class="dropdown px-3 py-2 mx-auto sm:mx-0">
-            <router-link class="text-center" to="/admin">Admin</router-link>
+          <div
+            v-if="isAuthenticated"
+            class="dropdown px-3 py-2 mx-auto sm:mx-0"
+          >
+            <router-link class="text-center" to="/">Admin</router-link>
             <div class="dropdown-content">
-              <router-link
-                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
-                to="/shop/new"
-                >Add Product</router-link
-              >
               <router-link
                 class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
                 to="/measurements"
@@ -72,11 +70,19 @@
                 >Materials</router-link
               >
               <router-link
+                v-if="isAdmin"
+                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+                to="/shop/new"
+                >Add Product</router-link
+              >
+              <router-link
+                v-if="isAdmin"
                 class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
                 to="/admin/register"
                 >Add Admin</router-link
               >
               <router-link
+                v-if="isAdmin"
                 class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
                 to="/blogs/new"
                 >Create Blog</router-link
@@ -87,7 +93,7 @@
             class="mx-auto sm:mr-0 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
           >
             <button
-              v-if="isAdmin"
+              v-if="isAuthenticated"
               @click="logout"
               class="focus:outline-none font-medium px-3 py-2 text-white bg-gray-800 hover:bg-gray-50 hover:text-gray-800 transform transition duration-200 border hover:border-gray-800 float-right w-full h-full sm:w-24"
             >
@@ -117,11 +123,17 @@ export default {
     Footer
   },
   computed: {
-    isAdmin() {
+    isAuthenticated() {
       return (
         this.$store.getters["user/isAuthenticated"] ||
         JSON.parse(localStorage.getItem("isAuthenticated"))
       );
+    },
+    isAdmin() {
+      return JSON.parse(localStorage.getItem("user"))
+        ? this.$store.getters["user/getRole"] ||
+            JSON.parse(localStorage.getItem("user")).is_admin
+        : false;
     }
   },
   methods: {

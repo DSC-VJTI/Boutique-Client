@@ -1,5 +1,16 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
+  <div class="m-8 sm:ml-5 inline-block">
+    <router-link
+      class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+      :to="`/shop/${productId}`"
+    >
+      <img
+        class="transform rotate-90 inline-block"
+        src="https://img.icons8.com/android/20/000000/expand-arrow.png"
+      />
+    </router-link>
+  </div>
   <div class="p-5 text-center">
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
@@ -137,12 +148,13 @@
             <label class="text-gray-700 text-base font-light" :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group mt-5" style="width:320px;">
-          <input
+        <div class="form-group" style="width: 20%">
+          <button
             type="submit"
-            class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
-            value="Modify Product"
-          />
+            class="bg-gray-800 text-blue-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
+          >
+            Modify Product
+          </button>
         </div>
       </form>
     </div>
@@ -257,13 +269,13 @@ export default {
     }
   },
   async created() {
-    if (!this.$store.getters["user/isAuthenticated"]) {
-      if (
-        !localStorage.getItem("isAuthenticated") ||
-        localStorage.getItem("isAuthenticated") === false
-      )
-        this.$router.replace("/admin/login");
-      else this.$store.commit("user/setAuth", { isAuthenticated: true });
+    if (!this.$store.getters["user/getRole"]) {
+      const payload = JSON.parse(localStorage.getItem("user"));
+      if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
+      else {
+        this.$store.commit("user/setAuth", { isAuthenticated: true });
+        this.$store.commit("user/setUser", payload);
+      }
     }
     this.isLoading = true;
     const product = await this.$store.dispatch("products/getAProduct", {
