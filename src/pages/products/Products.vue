@@ -1,11 +1,11 @@
 <template lang="html">
   <!-- Address -->
   <base-spinner :show="isLoading"></base-spinner>
-  <div class="flex-1 grid grid-cols-1 m-0 bg-gray-200">
-    <div class="col-span-1">
-      <div class="my-7 ml-1 sm:ml-5 inline-block">
+  <div class="flex-1 grid grid-cols-1 bg-gray-200">
+    <div class="col-span-1 my-5">
+      <div class="px-5 mx-5 md:px-10 md:mx-10 sm:ml-5 inline-block">
         <router-link
-          class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+          class="text-sm text-gray-500 mx-4 inline-block relative hover:text-gray-800"
           to="/"
           >Home</router-link
         >
@@ -14,7 +14,7 @@
           src="https://img.icons8.com/android/20/000000/expand-arrow.png"
         />
         <router-link
-          class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
+          class="text-sm text-gray-800 mx-4 inline-block relative"
           to="/shop"
           >Shop</router-link
         >

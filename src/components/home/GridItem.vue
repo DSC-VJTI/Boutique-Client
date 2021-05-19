@@ -6,10 +6,10 @@
       />
     </router-link>
     <div class="mt-8">
-      <p class="font-mono font-bold text-base text-black mx-2">
+      <p class="font-bold text-base text-black mx-2">
         Blue Crew Neck T-Shirt
       </p>
-      <p class="font-sans font-bold text-base mb-2 mx-2">
+      <p class="font-bold text-base mb-2 mx-2">
         Rs. 2500
       </p>
       <div class="form-group" style="margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; width: 100%;">

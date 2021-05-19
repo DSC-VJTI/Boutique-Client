@@ -110,7 +110,8 @@ export default {
         initialIndex: 2,
         prevNextButtons: true,
         pageDots: true,
-        wrapAround: true
+        wrapAround: true,
+        autoPlay: 2500
       },
       carouselCells: [
         {
@@ -184,5 +185,9 @@ export default {
   height: 520px;
   justify-content: center;
   width: 1050px;
+}
+
+.is-selected .carousel-text {
+  display: block;
 }
 </style>

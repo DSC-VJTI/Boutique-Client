@@ -33,10 +33,10 @@
   <div class="bg-gray-200 px-2 sm:px-10">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
       <div
-        style="height:480px; @media(min-width:768px){ height:550px; };"
-        class="align-middle col-span-1 md:grid md:grid-rows-3 justify-items-center md:col-span-2 overflow-y-scroll overflow-x-hidden"
+        style="@media(max-width:600px){ height:180px; }; @media(min-width:600px){ height:550px; };"
+        class="align-middle col-span-1 md:gridjustify-items-center md:col-span-2 overflow-y-scroll overflow-x-hidden"
       >
-        <div class="m-auto">
+        <div class="m-auto flex sm:block justify-around">
           <thumbnail
             v-for="(item, key) in images"
             :key="key"
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div style="height:533px;" class="col-span-1 md:col-span-10">
+      <div style="height:576px;" class="col-span-1 md:col-span-10">
         <img class="mx-auto h-full w-auto" :src="imageShow" alt="" />
       </div>
     </div>

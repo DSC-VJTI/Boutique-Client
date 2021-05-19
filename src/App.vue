@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <nav class="pt-4 relative flex-none flex-wrap content-evenly text-right">
+    <nav class="py-4 relative flex-none flex-wrap content-evenly text-right bg-gray-50">
       <div
         class="container sm:px-20 mx-auto flex flex-wrap items-center justify-between"
       >
@@ -29,7 +29,7 @@
         </div>
         <div
           :class="showMenu ? 'flex' : 'hidden'"
-          class="flex-col sm:flex-row pb-4 list-none sm:flex-grow w-full sm:flex sm:w-4/5 bg-gray-50 sm:bg-transparent"
+          class="flex-col sm:flex-row list-none sm:flex-grow w-full sm:flex sm:w-4/5 sm:bg-transparent"
         >
           <router-link
             class="text-center px-3 py-2 mr-0 md:mr-8 font-bold text-xl"
