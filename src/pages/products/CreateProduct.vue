@@ -114,8 +114,8 @@
             <label class="text-gray-700 text-base font-light" :for="subcat">{{ subcat }}</label>
           </div>
         </div>
-        <div class="form-group">
-          <button class="mt-10" style="width:320px;">Add Product</button>
+        <div class="mx-auto w-4/5 md:w-1/4 mt-10">
+          <button class="bg-gray-800 text-blue-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-900 transform transition duration-200 hover:shadow-lg">Add Product</button>
         </div>
       </form>
     </div>

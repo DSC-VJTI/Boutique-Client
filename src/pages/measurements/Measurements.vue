@@ -22,7 +22,7 @@
         </div>
       </router-link>
     </div>
-    <ul class="flex flex-col mx-auto mb-4 w-3/5 sm:w-96">
+    <ul class="flex flex-col mx-auto mb-4 w-full sm:w-96">
       <measurement-item
         class="border-gray-400 flex flex-row mb-6 w-full"
         v-for="measurement in measurements"

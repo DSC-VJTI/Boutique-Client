@@ -1,6 +1,6 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
-  <div class="mx-8 sm:ml-5 inline-block">
+  <div class="m-5 sm:ml-5 inline-block">
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       :to="`/materials/${materialId}`"

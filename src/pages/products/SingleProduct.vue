@@ -33,10 +33,9 @@
   <div class="bg-gray-200 px-2 sm:px-10">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
       <div
-        style="height:480px; @media(min-width:768px){ height:550px; };"
-        class="align-middle col-span-1 md:grid md:grid-rows-3 justify-items-center md:col-span-2 overflow-y-scroll overflow-x-hidden"
+        class="align-middle col-span-1 md:col-span-2 overflow-y-scroll overflow-x-scroll"
       >
-        <div class="m-auto">
+        <div class="m-auto flex thumbnail md:block">
           <thumbnail
             v-for="(item, key) in images"
             :key="key"
@@ -46,8 +45,8 @@
         </div>
       </div>
 
-      <div style="height:533px;" class="col-span-1 md:col-span-10">
-        <img class="mx-auto h-full w-auto" :src="imageShow" alt="" />
+      <div style="height:576px;" class="col-span-1 md:col-span-10">
+        <img class="mx-auto object-cover h-full" :src="imageShow" alt="" />
       </div>
     </div>
   </div>
