@@ -38,17 +38,17 @@
             <span class="text-green-500">BOUTIQUE</span></router-link
           >
           <router-link
-            class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+            class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/shop"
             >Shop</router-link
           >
           <router-link
-            class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+            class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/about"
             >About</router-link
           >
           <router-link
-            class="text-center px-3 py-2 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+            class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/blogs"
             >Blogs</router-link
           >
@@ -60,30 +60,30 @@
             <router-link class="text-center" to="/">Admin</router-link>
             <div class="dropdown-content">
               <router-link
-                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/measurements"
                 >Measurements</router-link
               >
               <router-link
-                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/materials"
                 >Materials</router-link
               >
               <router-link
                 v-if="isAdmin"
-                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/shop/new"
                 >Add Product</router-link
               >
               <router-link
                 v-if="isAdmin"
-                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/admin/register"
                 >Add Admin</router-link
               >
               <router-link
                 v-if="isAdmin"
-                class="bg-gray-50 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/blogs/new"
                 >Create Blog</router-link
               >

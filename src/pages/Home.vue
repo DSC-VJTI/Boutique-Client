@@ -18,7 +18,7 @@
           src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
         />
       </div>
-      <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-10">
+      <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
         <h1 class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4">
           Spring - Summer Collection 2021
         </h1>
@@ -29,7 +29,7 @@
         </button>
       </div>
       <div>
-        <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-10">
+        <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
           <h1 class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4">
             Spring - Summer Collection 2021
           </h1>

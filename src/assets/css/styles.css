@@ -228,7 +228,7 @@ button {
 
 .blogItem{
     @apply w-4/5;
-    @apply md:w-3/5;
+    @apply lg:w-3/5;
     @apply mx-auto;
     @apply transition;
     @apply duration-300;
@@ -245,7 +245,6 @@ button {
     @apply flex;
     @apply flex-1;
     @apply items-center;
-    @apply p-4;
     @apply block;
 }
 
@@ -268,3 +267,26 @@ button {
     @apply border;
     @apply hover:border-gray-800;
 }
+
+body::-webkit-scrollbar {
+	width: 6px;
+}
+body {
+	scrollbar-width: 6px;
+	scrollbar-color: rgba(31, 41, 55, 1);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: rgba(31, 41, 55, 1);
+	border-radius: 0px;
+}
+
+.thumbnail{
+    height:180px;
+
+    @media(min-width:768px){ height:550px; };
+}
+
+.scrollable-element {
+    scrollbar-color: dark;
+  }
