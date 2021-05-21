@@ -69,7 +69,7 @@
     </section>
 
     <div class="grid lg:grid-cols-3 lg:grid-rows-1 sm:px-40">
-      <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 m-5 sm:m-0">
+      <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 m-0">
         <div v-for="image in gridImages" :key="image.id">
           <img :src="image.url" />
         </div>

@@ -34,22 +34,26 @@
           <router-link
             class="text-center px-3 py-2 mr-0 md:mr-8 font-bold text-xl"
             to="/"
+            @click="toggleNavbar"
             ><span>THE </span>
             <span class="text-green-500">BOUTIQUE</span></router-link
           >
           <router-link
             class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/shop"
+            @click="toggleNavbar"
             >Shop</router-link
           >
           <router-link
             class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/about"
+            @click="toggleNavbar"
             >About</router-link
           >
           <router-link
             class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/blogs"
+            @click="toggleNavbar"
             >Blogs</router-link
           >
 
@@ -62,29 +66,34 @@
               <router-link
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/measurements"
+                @click="toggleNavbar"
                 >Measurements</router-link
               >
               <router-link
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/materials"
+                @click="toggleNavbar"
                 >Materials</router-link
               >
               <router-link
                 v-if="isAdmin"
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/shop/new"
+                @click="toggleNavbar"
                 >Add Product</router-link
               >
               <router-link
                 v-if="isAdmin"
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/admin/register"
+                @click="toggleNavbar"
                 >Add Admin</router-link
               >
               <router-link
                 v-if="isAdmin"
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/blogs/new"
+                @click="toggleNavbar"
                 >Create Blog</router-link
               >
             </div>
