@@ -18,10 +18,7 @@
           class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
           style="width:150px;"
         >
-          <button
-            @click="updateMeasurement"
-            class="update"
-          >
+          <button @click="updateMeasurement" class="update">
             Update
           </button>
         </div>
@@ -29,10 +26,7 @@
           class="p-2 inline-block w-11/12 md:w-3/4 mx-0"
           style="width:150px;"
         >
-          <button
-            @click="deleteMeasurement"
-            class="delete"
-          >
+          <button @click="deleteMeasurement" class="delete">
             Delete
           </button>
         </div>

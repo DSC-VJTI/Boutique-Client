@@ -63,7 +63,9 @@
             v-model.trim="info"
           ></textarea>
         </div>
-        <div class="w-full block sm:grid grid-flow-col grid-cols-1 sm:grid-cols-3">
+        <div
+          class="w-full block sm:grid grid-flow-col grid-cols-1 sm:grid-cols-3"
+        >
           <div class="w-auto mt-5 col-span-1">
             <label class="mr-5 text-xl font-semibold">Original Price</label>
             <input
@@ -103,7 +105,11 @@
         </div>
         <div class="mt-6">
           <label class="my-15 mr-5 text-xl font-semibold">Sub-categories</label>
-          <div class="sm:inline-block block px-4 bg-gray-300" v-for="subcat in available_subcategories" :key="subcat">
+          <div
+            class="sm:inline-block block px-4 bg-gray-300"
+            v-for="subcat in available_subcategories"
+            :key="subcat"
+          >
             <input
               type="checkbox"
               class="check"
@@ -111,11 +117,13 @@
               :value="subcat"
               v-model="sub_categories"
             />
-            <label class="text-gray-700 text-base font-light" :for="subcat">{{ subcat }}</label>
+            <label class="text-gray-700 text-base font-light" :for="subcat">{{
+              subcat
+            }}</label>
           </div>
         </div>
-        <div class="mx-auto w-4/5 md:w-1/4 mt-10">
-          <button class="bg-gray-800 text-blue-500 w-full py-2 px-4 hover:bg-gray-50 hover:text-gray-900 border hover:border-gray-900 transform transition duration-200 hover:shadow-lg">Add Product</button>
+        <div class="mx-auto w-4/5 md:w-1/4 form-group">
+          <button class="mt-10" type="submit">Save</button>
         </div>
       </form>
     </div>

@@ -58,7 +58,6 @@ export default {
   },
   async createNewSubcategory(context, payload) {
     try {
-      console.log("here as well");
       const response = await axios.post(
         context.rootGetters.getUrl + "api/admin/sub_categories",
         payload.body,

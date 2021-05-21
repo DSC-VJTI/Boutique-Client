@@ -17,6 +17,9 @@ import SingleProduct from "./pages/products/SingleProduct.vue";
 import CreateProduct from "./pages/products/CreateProduct.vue";
 import UpdateProduct from "./pages/products/UpdateProduct.vue";
 
+import CreateCategory from "./components/categories/CreateCategory.vue";
+import CreateSubcategory from "./components/categories/CreateSubCategory.vue";
+
 import Measurements from "./pages/measurements/Measurements.vue";
 import CreateMeasurement from "./pages/measurements/CreateMeasurement.vue";
 import UpdateMeasurement from "./pages/measurements/UpdateMeasurement.vue";
@@ -106,6 +109,16 @@ const router = createRouter({
       component: UpdateProduct,
       props: true
     },
+    {
+      path: "/category/new",
+      component: CreateCategory
+    },
+    {
+      path: "/subcategory/new",
+      component: CreateSubcategory
+    },
+
+    // 404
     { path: "/:pathMatch(.*)*", component: NotFound }
   ]
 });

@@ -15,7 +15,9 @@
     <h1 class="green mb-10">Edit Product Info</h1>
     <div>
       <div>
-        <h2 class="px-8 mb-3 text-gray-800 text-xl font-semibold">Product Images</h2>
+        <h2 class="px-8 mb-3 text-gray-800 text-xl font-semibold">
+          Product Images
+        </h2>
         <div
           v-for="(img, key) in imageData"
           :key="key"
@@ -54,7 +56,7 @@
               >Remove Old</span
             >
           </div>
-          <div class="block sm:inline-block p-3"> 
+          <div class="block sm:inline-block p-3">
             <span
               class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
               @click="removeNewFiles()"
@@ -95,7 +97,9 @@
             required
           />
         </div>
-        <div class="w-full block sm:grid grid-flow-col grid-cols-1 sm:grid-cols-3">
+        <div
+          class="w-full block sm:grid grid-flow-col grid-cols-1 sm:grid-cols-3"
+        >
           <div class="w-auto mt-5 col-span-1">
             <label class="mr-5 text-xl font-semibold">Original Price</label>
             <input
@@ -137,7 +141,11 @@
         </div>
         <div class="mt-6">
           <label class="my-15 mr-5 text-xl font-semibold">Sub-categories</label>
-          <div class="sm:inline-block block px-4 bg-gray-300" v-for="subcat in available_subcategories" :key="subcat">
+          <div
+            class="sm:inline-block block px-4 bg-gray-300"
+            v-for="subcat in available_subcategories"
+            :key="subcat"
+          >
             <input
               type="checkbox"
               class="check"
@@ -145,7 +153,9 @@
               :value="subcat"
               v-model="sub_categories"
             />
-            <label class="text-gray-700 text-base font-light" :for="subcat">{{ subcat }}</label>
+            <label class="text-gray-700 text-base font-light" :for="subcat">{{
+              subcat
+            }}</label>
           </div>
         </div>
         <div class="mx-auto w-4/5 md:w-1/4 mt-10">
