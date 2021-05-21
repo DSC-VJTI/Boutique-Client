@@ -55,16 +55,15 @@ button {
 }
 
 .form-control-blog{
-    @apply p-3;
+    @apply p-2;
     @apply w-full;
     @apply float-left;
-    @apply rounded;
     @apply border;
     @apply border-solid;
-    @apply border-gray-300;
+    @apply border-gray-500;
     @apply focus:outline-none; 
     @apply focus:ring-2;
-    @apply focus:ring-green-400; 
+    @apply focus:ring-gray-800; 
     @apply focus:border-transparent;
 }
 
@@ -178,7 +177,7 @@ button {
     @apply text-sm;
     @apply focus:outline-none;
     @apply focus:ring-2;
-    @apply focus:ring-purple-600;
+    @apply focus:ring-gray-800;
     @apply focus:border-transparent;
 }
 
@@ -200,30 +199,6 @@ button {
     background-size: cover;
     background-position: center center;
     @apply relative;
-}
-
-.sketchInput {
-    width: 250px;
-    @apply absolute;
-    @apply py-2;
-    @apply px-4;
-    @apply bg-blue-600;
-    @apply hover:bg-blue-700;
-    @apply focus:ring-blue-500;
-    @apply focus:ring-offset-blue-200;
-    @apply text-white;
-    @apply transition;
-    @apply ease-in;
-    @apply duration-200;
-    @apply text-center;
-    @apply text-base;
-    @apply font-semibold;
-    @apply shadow-md;
-    @apply focus:outline-none;
-    @apply focus:ring-2;
-    @apply focus:ring-offset-2;
-    @apply rounded-lg;
-    @apply cursor-pointer;
 }
 
 .blogItem{

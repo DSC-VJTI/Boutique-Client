@@ -17,8 +17,11 @@ import SingleProduct from "./pages/products/SingleProduct.vue";
 import CreateProduct from "./pages/products/CreateProduct.vue";
 import UpdateProduct from "./pages/products/UpdateProduct.vue";
 
-import CreateCategory from "./components/categories/CreateCategory.vue";
-import CreateSubcategory from "./components/categories/CreateSubCategory.vue";
+import CreateCategory from "./pages/categories/CreateCategory.vue";
+import CreateSubcategory from "./pages/categories/CreateSubCategory.vue";
+import ViewCatSubcat from "./pages/categories/ViewCatSubcat.vue";
+import UpdateCategory from "./pages/categories/UpdateCategory.vue";
+import UpdateSubcategory from "./pages/categories/UpdateSubcategory.vue";
 
 import Measurements from "./pages/measurements/Measurements.vue";
 import CreateMeasurement from "./pages/measurements/CreateMeasurement.vue";
@@ -110,12 +113,28 @@ const router = createRouter({
       props: true
     },
     {
+      path: "/categories",
+      component: ViewCatSubcat
+    },
+    {
       path: "/category/new",
       component: CreateCategory
     },
     {
       path: "/subcategory/new",
       component: CreateSubcategory
+    },
+    {
+      name: "ModifyCat",
+      path: "/category/update/:cat_id",
+      component: UpdateCategory,
+      props: true
+    },
+    {
+      name: "ModifySubcat",
+      path: "/subcategory/update/:subcat_id",
+      component: UpdateSubcategory,
+      props: true
     },
 
     // 404

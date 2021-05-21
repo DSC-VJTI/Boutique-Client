@@ -1,8 +1,9 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
-    <h1 class="green mb-10">Create Category</h1>
+    <h1 class="green mb-10">Update Category</h1>
     <div class="lg:p-10">
-      <form class="lg:m-5" @submit.prevent="newCategory">
+      <form class="lg:m-5" @submit.prevent="updateCategory">
         <div class="form-group">
           <input
             class="form-control"
@@ -22,34 +23,36 @@
 
 <script>
 export default {
+  props: ["cat_id"],
   data() {
     return {
-      name: ""
+      name: "",
+      isLoading: false
     };
   },
   methods: {
-    async newCategory() {
-      const status = await this.$store.dispatch(
-        "categories/createNewCategory",
-        {
-          body: {
-            name: this.name
-          },
-          token: JSON.parse(localStorage.getItem("user")).access_token
-        }
-      );
+    async updateCategory() {
+      this.isLoading = true;
+      const status = await this.$store.dispatch("categories/updateCategory", {
+        body: {
+          name: this.name
+        },
+        token: JSON.parse(localStorage.getItem("user")).access_token,
+        cat_id: this.cat_id
+      });
 
-      if (status === 201) {
-        this.resetInput();
-        alert("New category created!");
+      if (status === 200) {
+        this.isLoading = false;
+        this.name = "";
+        alert("Category name updated successfully!");
+        this.$router.replace("/categories");
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
+        console.log(status);
         alert("Something went wrong");
       }
-    },
-    resetInput() {
-      this.name = "";
+      this.isLoading = false;
     }
   },
   async created() {
@@ -61,6 +64,12 @@ export default {
         this.$store.commit("user/setUser", payload);
       }
     }
+    this.isLoading = true;
+    const cat = await this.$store.dispatch("categories/getCategory", {
+      cat_id: this.cat_id
+    });
+    this.name = cat.name;
+    this.isLoading = false;
   }
 };
 </script>

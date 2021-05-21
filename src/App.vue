@@ -92,14 +92,8 @@
               <router-link
                 v-if="isAdmin"
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
-                to="/category/new"
-                >Create Category</router-link
-              >
-              <router-link
-                v-if="isAdmin"
-                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
-                to="/subcategory/new"
-                >Create Subcategory</router-link
+                to="/categories"
+                >Categories</router-link
               >
             </div>
           </div>

@@ -26,9 +26,16 @@
           />
           <br /><span class="text-red-600 font-bold">{{ passwordError }}</span>
         </div>
-        <div class="form-group" style="width:370px;">
-          <input type="checkbox" class="outline-none" v-model="rememberMe" />
-          <span class="ml-3 text-gray-500">Remember Me</span>
+        <div class="form-group text-left" style="width:370px;">
+          <input
+            id="remember"
+            type="checkbox"
+            class="outline-none cursor-pointer"
+            v-model="rememberMe"
+          />
+          <label for="remember" class="ml-3 text-gray-500 cursor-pointer"
+            >Remember Me</label
+          >
         </div>
         <div class="form-group" style="width:370px;">
           <button class="mt-5">Sign In</button>

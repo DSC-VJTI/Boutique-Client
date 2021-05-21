@@ -1,8 +1,9 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
-    <h1 class="green mb-10">New Subcategory</h1>
+    <h1 class="green mb-10">Update Subcategory</h1>
     <div class="lg:p-10">
-      <form class="lg:m-5" @submit.prevent="newSubcategory">
+      <form class="lg:m-5" @submit.prevent="updateSubcategory">
         <div class="form-group">
           <input
             class="form-control"
@@ -28,7 +29,7 @@
           </select>
         </div>
         <div class="mx-auto w-4/5 md:w-1/4 form-group">
-          <button class="mt-10">Save</button>
+          <button class="mt-10" type="submit">Save</button>
         </div>
       </form>
     </div>
@@ -37,37 +38,42 @@
 
 <script>
 export default {
+  props: ["subcat_id"],
   data() {
     return {
       name: "",
       category_name: "",
-      available_categories: []
+      available_categories: [],
+      isLoading: false
     };
   },
   methods: {
-    async newSubcategory() {
+    async updateSubcategory() {
+      this.isLoading = true;
       const status = await this.$store.dispatch(
-        "categories/createNewSubcategory",
+        "categories/updateSubcategory",
         {
           body: {
             name: this.name,
             category_name: this.category_name
           },
-          token: JSON.parse(localStorage.getItem("user")).access_token
+          token: JSON.parse(localStorage.getItem("user")).access_token,
+          subcat_id: this.subcat_id
         }
       );
 
-      if (status === 201) {
-        this.resetInput();
-        alert("New subcategory created!");
+      if (status === 200) {
+        this.isLoading = false;
+        this.name = "";
+        alert("Subcategory name updated successfully!");
+        this.$router.replace("/categories");
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
+        console.log(status);
         alert("Something went wrong");
       }
-    },
-    resetInput() {
-      this.name = "";
+      this.isLoading = false;
     }
   },
   async created() {
@@ -79,12 +85,19 @@ export default {
         this.$store.commit("user/setUser", payload);
       }
     }
+    this.isLoading = true;
+    const subcat = await this.$store.dispatch("categories/getSubcategory", {
+      subcat_id: this.subcat_id
+    });
+    this.name = subcat.name;
+    this.category_name = subcat.category_name;
 
     const allCategories = await this.$store.dispatch(
       "categories/getAllCategories"
     );
-
     this.available_categories = allCategories.map(obj => obj.name);
+
+    this.isLoading = false;
   }
 };
 </script>
