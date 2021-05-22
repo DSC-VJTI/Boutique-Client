@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-10 sm:px-5 px-20">
+  <div class="mb-10 sm:px-5 px-8">
     <router-link to="/shop/productId">
       <img
         src="https://images.unsplash.com/photo-1606775524496-8ffd63ad2a98?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=765&q=80"

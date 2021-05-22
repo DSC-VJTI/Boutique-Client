@@ -1,11 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div
-    class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:mt-20"
+    class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:my-20"
   >
     <h1 class="green mb-10">Admin Register</h1>
     <div>
-      <form class="m-5" @submit.prevent="register">
+      <form @submit.prevent="register">
         <div class="form-group mb-10" style="width:370px;">
           <input
             class="form-control"
@@ -37,8 +37,10 @@
           <br /><span class="text-red-600 font-bold">{{ passwordError }}</span>
         </div>
         <div class="form-group text-left">
-          <input type="checkbox" id="checkbox" class="mr-2" v-model="isAdmin" />
-          <label for="checkbox">Give Admin Permissions</label>
+          <div class="mx-auto w-52">
+            <input type="checkbox" id="checkbox" class="mr-2" v-model="isAdmin" />
+            <label for="checkbox">Give Admin Permissions</label>
+          </div>
         </div>
         <div class="form-group" style="width:370px;">
           <button class="mt-5">Add Admin</button>

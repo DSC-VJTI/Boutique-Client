@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full text-center text-white p-3 tracking-wider font-semibold bg-gray-800 bottom-0"
+    class="w-full text-center text-white p-3 tracking-wider font-semibold bg-gray-900 bottom-0"
   >
     <h1>
       Copyright © 2021 | All Rights Reserved
