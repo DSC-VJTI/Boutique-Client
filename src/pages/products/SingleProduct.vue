@@ -82,7 +82,9 @@
           style="width:350px;"
           class="px-2 mx-auto mb-5 relative block justify-self-center text-2xl text-white transform transition-all duration-300 py-2 uppercase font-semibold hover:text-green-700 bg-gray-800 hover:scale-103 hover:border-green-800 hover:bg-green-100 border rounded border-transparent"
           target="_blank"
-          href="http://wa.me/91xxxxxxxxxx"
+          :href="
+            `http://wa.me/${whatsappNumber}/?text=Message%20Sent%20Via%20Website`
+          "
         >
           <img
             class="inline-block mr-2"
@@ -179,6 +181,9 @@ export default {
     hasSubcategories() {
       if (this.sub_categories[0]) return true;
       else return false;
+    },
+    whatsappNumber() {
+      return process.env.VUE_APP_WHATSAPP_NUMBER;
     }
   },
   data() {

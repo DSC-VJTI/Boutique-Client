@@ -36,19 +36,17 @@
           />
           <br /><span class="text-red-600 font-bold">{{ passwordError }}</span>
         </div>
-        <div class="form-group text-left">
-          <div class="mx-auto w-52">
-            <input
-              type="checkbox"
-              id="checkbox"
-              class="mr-2"
-              v-model="isAdmin"
-            />
-            <label for="checkbox">Give Admin Permissions</label>
-          </div>
+        <div class="form-group text-left" style="width:370px;">
+          <input
+            type="checkbox"
+            id="checkbox"
+            class="mr-2 outline-none cursor-pointer"
+            v-model="isAdmin"
+          />
+          <label for="checkbox">Give Admin Permissions</label>
         </div>
         <div class="form-group" style="width:370px;">
-          <button class="mt-5">Add Admin</button>
+          <button class="text-gray-500 cursor-pointer">Add Admin</button>
         </div>
       </form>
     </div>
