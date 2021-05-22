@@ -12,7 +12,10 @@
       <p class="font-bold text-base mb-2 mx-2">
         Rs. 2500
       </p>
-      <div class="form-group" style="margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; width: 100%;">
+      <div
+        class="form-group"
+        style="margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; width: 100%;"
+      >
         <button>+ ADD TO CART</button>
       </div>
     </div>

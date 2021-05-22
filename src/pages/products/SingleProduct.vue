@@ -4,19 +4,19 @@
   <div class="grid grid-cols-1 m-0 justify-items-center bg-gray-200">
     <div class="col-span-1">
       <div class="my-7 ml-1 sm:ml-5 inline-block">
-        <a
+        <router-link
           class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
-          href="/"
-          >Home</a
+          to="/"
+          >Home</router-link
         >
         <img
           class="transform -rotate-90 inline-block"
           src="https://img.icons8.com/android/20/000000/expand-arrow.png"
         />
-        <a
+        <router-link
           class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
-          href="/shop"
-          >Shop</a
+          to="/shop"
+          >Shop</router-link
         >
         <img
           class="transform -rotate-90 inline-block"

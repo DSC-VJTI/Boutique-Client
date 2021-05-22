@@ -45,6 +45,9 @@ export default {
     }
   },
   async getCategory(context, payload) {
+    const cats = context.getters.getCategories;
+    const cat = cats.filter(c => c.id == payload.cat_id);
+    if (cat.length) return cat[0];
     try {
       const response = await axios.get(
         context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}`,
@@ -58,7 +61,6 @@ export default {
   },
   async createNewSubcategory(context, payload) {
     try {
-      console.log("here as well");
       const response = await axios.post(
         context.rootGetters.getUrl + "api/admin/sub_categories",
         payload.body,
@@ -131,6 +133,8 @@ export default {
       }
       return response.status;
     } catch (error) {
+      console.log(error);
+      console.log(error.response.status);
       return error.response ? error.response.status : 500;
     }
   },
@@ -138,11 +142,11 @@ export default {
     try {
       const response = await axios.put(
         context.rootGetters.getUrl +
-          `api/admin/subcategories/${payload.subcat_id}`,
+          `api/admin/sub_categories/${payload.subcat_id}`,
         payload.body,
         {
           headers: {
-            ContentType: "applisubcation/json",
+            ContentType: "application/json",
             Authorization: "Bearer " + payload.token
           }
         }
@@ -158,6 +162,71 @@ export default {
         context.commit("setSubcategories", {
           subcategories: subcategories
         });
+      }
+      return response.status;
+    } catch (error) {
+      return error.response ? error.response.status : 500;
+    }
+  },
+  async deleteCategory(context, payload) {
+    const cats = context.getters.getCategories;
+    const catIndex = cats.findIndex(c => c.id == payload.cat_id);
+
+    // if products of that category exist, it cannot be deleted
+    if (catIndex !== -1 && cats[catIndex].products.length !== 0) return 800;
+
+    try {
+      const response = await axios.delete(
+        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}`,
+        {
+          headers: {
+            ContentType: "application/json",
+            Authorization: "Bearer " + payload.token
+          }
+        }
+      );
+      if (response.status == 204) {
+        if (catIndex !== -1) {
+          cats.splice(catIndex, 1);
+          context.commit("setCategories", {
+            categories: cats
+          });
+        }
+      }
+      return response.status;
+    } catch (error) {
+      return error.response ? error.response.status : 500;
+    }
+  },
+  async deleteSubcategory(context, payload) {
+    const subcats = context.getters.getSubcategories;
+    const subcatIndex = subcats.findIndex(c => c.id == payload.subcat_id);
+
+    // if products of that category exist, it cannot be deleted
+    if (subcatIndex !== -1 && subcats[subcatIndex].products.length !== 0)
+      return 800;
+
+    try {
+      const response = await axios.delete(
+        context.rootGetters.getUrl +
+          `api/admin/sub_categories/${payload.subcat_id}`,
+        {
+          headers: {
+            ContentType: "application/json",
+            Authorization: "Bearer " + payload.token
+          }
+        }
+      );
+      if (response.status == 204) {
+        const subcats = context.getters.getSubcategories;
+        const subcatIndex = subcats.findIndex(s => s.id == payload.subcat_id);
+
+        if (subcatIndex !== -1) {
+          subcats.splice(subcatIndex, 1);
+          context.commit("setSubcategories", {
+            subcategories: subcats
+          });
+        }
       }
       return response.status;
     } catch (error) {

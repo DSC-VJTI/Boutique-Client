@@ -85,7 +85,7 @@
                     >Remove Old</span
                   >
                 </div>
-                <div class="block sm:inline-block p-3"> 
+                <div class="block sm:inline-block p-3">
                   <span
                     class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
                     @click="removeNewFiles()"

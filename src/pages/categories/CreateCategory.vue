@@ -1,8 +1,9 @@
 <template>
+  <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
-    <h1 class="green mb-10">New Category</h1>
-    <div class="grid grid-cols-2 gap-4">
-      <form class="m-5" @submit.prevent="newCategory">
+    <h1 class="green mb-10">Create Category</h1>
+    <div class="lg:p-10">
+      <form class="lg:m-5" @submit.prevent="newCategory">
         <div class="form-group">
           <input
             class="form-control"
@@ -12,8 +13,8 @@
             required
           />
         </div>
-        <div class="form-group">
-          <button class="mt-10">Add Category</button>
+        <div class="mx-auto w-4/5 md:w-1/4 form-group">
+          <button class="mt-10" type="submit">Save</button>
         </div>
       </form>
     </div>
@@ -24,11 +25,13 @@
 export default {
   data() {
     return {
-      name: ""
+      name: "",
+      isLoading: false
     };
   },
   methods: {
     async newCategory() {
+      this.isLoading = true;
       const status = await this.$store.dispatch(
         "categories/createNewCategory",
         {
@@ -40,26 +43,29 @@ export default {
       );
 
       if (status === 201) {
+        this.isLoading = false;
         this.resetInput();
         alert("New category created!");
+        this.$router.replace("/categories");
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
         alert("Something went wrong");
       }
+      this.isLoading = false;
     },
     resetInput() {
       this.name = "";
     }
   },
-  created() {
-    if (!this.$store.getters["user/isAuthenticated"]) {
-      if (
-        !localStorage.getItem("isAuthenticated") ||
-        localStorage.getItem("isAuthenticated") === false
-      )
-        this.$router.replace("/admin/login");
-      else this.$store.commit("user/setAuth", { isAuthenticated: true });
+  async created() {
+    if (!this.$store.getters["user/getRole"]) {
+      const payload = JSON.parse(localStorage.getItem("user"));
+      if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
+      else {
+        this.$store.commit("user/setAuth", { isAuthenticated: true });
+        this.$store.commit("user/setUser", payload);
+      }
     }
   }
 };

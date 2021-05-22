@@ -18,7 +18,7 @@
     <div>
       <div class="p-5 text-center">
         <label
-          class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+          class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
           style="width: 100%;"
           for="file-input"
           >Add Cover Photo
@@ -246,6 +246,7 @@ export default {
         this.$store.commit("user/setUser", payload);
       }
     }
+    this.isLoading = true;
     const blog = await this.$store.dispatch("blogs/getABlog", {
       blog_id: this.blogId
     });
@@ -255,6 +256,7 @@ export default {
     }, 100);
     this.image = blog.image;
     this.imageData = blog.image;
+    this.isLoading = false;
   }
 };
 </script>

@@ -11,7 +11,9 @@
       </flickity>
     </div>
 
-    <div class="grid sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 gap-4 my-10 mx-6">
+    <div
+      class="grid sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 gap-4 my-10 mx-6"
+    >
       <div class="justify-self-center">
         <img
           class="h-screen w-auto"
@@ -19,23 +21,23 @@
         />
       </div>
       <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
-        <h1 class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4">
+        <h1
+          class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4"
+        >
           Spring - Summer Collection 2021
         </h1>
-        <button
-          class="blackButton" style="width:160px;"
-        >
+        <button class="blackButton" style="width:160px;">
           SHOP NOW
         </button>
       </div>
       <div>
         <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
-          <h1 class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4">
+          <h1
+            class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4"
+          >
             Spring - Summer Collection 2021
           </h1>
-          <button
-            class="blackButton" style="width:160px;"
-          >
+          <button class="blackButton" style="width:160px;">
             SHOP NOW
           </button>
         </div>

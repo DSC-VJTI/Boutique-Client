@@ -12,13 +12,13 @@
     </router-link>
   </div>
   <div class="mb-5 text-center">
-    <h1 class="text-gray-800 text-2xl font-serif font-bold mb-4">
+    <h1 class="text-gray-800 text-2xl md:text-4xl font-serif font-bold mb-4">
       New Blog
     </h1>
     <div>
       <div class="p-5 text-center">
         <label
-          class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+          class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
           style="width: 100%;"
           for="file-input"
           >Add Cover Photo
@@ -61,8 +61,8 @@
           ></ckeditor>
           <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
         </div>
-        <div class="form-group" style="width:370px;">
-          <button class="mt-3">Create Blog</button>
+        <div class="mx-auto w-4/5 md:w-1/4 form-group">
+          <button type="submit">Save</button>
         </div>
       </form>
     </div>
