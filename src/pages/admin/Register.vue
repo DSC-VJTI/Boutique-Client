@@ -1,7 +1,7 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div
-    class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:mt-20"
+    class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:my-20"
   >
     <h1 class="green mb-10">Admin Register</h1>
     <div>
