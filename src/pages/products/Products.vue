@@ -30,7 +30,7 @@
         <!-- search bar -->
         <div class="mb-8 p-0 text-sm text-gray-700">
           <form
-            action="#"
+            @submit.prevent="null"
             class="px-4 py-2 relative border border-gray-400 rounded-md"
           >
             <input
@@ -39,15 +39,15 @@
               placeholder="Search..."
               v-model="searchQuery"
             />
-            <button class="absolute float-right" type="submit">
+            <div class="absolute float-right inline">
               <img src="https://img.icons8.com/android/24/000000/search.png" />
-            </button>
+            </div>
           </form>
         </div>
 
         <!-- Filtering -->
         <div class="">
-          <form @submit.prevent="filter()">
+          <form @submit.prevent="filter">
             <!-- By Category -->
             <div class="rounded-none mb-6">
               <div class="mb-3">
@@ -77,11 +77,11 @@
                       <input
                         type="checkbox"
                         class="check lista"
-                        :id="category.name"
+                        :id="category.id"
                         :value="category"
                         v-model="filters.selected_categories"
                       />
-                      <label :for="category.name">{{ category.name }}</label>
+                      <label :for="category.id">{{ category.name }}</label>
                     </li>
                   </ul>
                 </div>
@@ -116,11 +116,11 @@
                       <input
                         type="checkbox"
                         class="check lista"
-                        :id="subcategory.name"
+                        :id="subcategory.id"
                         :value="subcategory"
                         v-model="filters.selected_subcategories"
                       />
-                      <label :for="subcategory.name">{{
+                      <label :for="subcategory.id">{{
                         subcategory.name
                       }}</label>
                     </li>
@@ -135,7 +135,7 @@
                   data-toggle="collapse"
                   data-target="#collapseThree"
                   class="text-black text-xl font-bold uppercase block"
-                  >Filter Price</a
+                  >Filter Price (₹)</a
                 >
               </div>
               <div
@@ -145,16 +145,14 @@
               >
                 <div class="pt-2 pb-4 border-gray-500 border-b">
                   <div class="shop__sidebar__price">
-                    Rs.
                     <input
-                      class="p-3 rounded bg-gray-100 m-2"
+                      class="p-3 rounded bg-gray-100 my-2 w-full"
                       type="number"
                       placeholder="min"
                       v-model="filters.min_price"
                     /><br />
-                    Rs.
                     <input
-                      class="p-3 rounded bg-gray-100 m-2"
+                      class="p-3 rounded bg-gray-100 my-2 w-full"
                       type="number"
                       placeholder="max"
                       v-model="filters.max_price"
@@ -183,7 +181,11 @@
             :id="product.id"
             :name="product.name"
             :price="product.price"
-            :discount_price="product.discount_price"
+            :discount_price="
+              product.discount_price !== 0
+                ? product.discount_price
+                : product.price
+            "
             :images="product.images"
             :key="product.id"
           ></product-item>
@@ -195,11 +197,11 @@
 </template>
 
 <script>
-import productItem from "../../components/shop/ProductItem.vue";
+import ProductItem from "../../components/shop/ProductItem.vue";
 
 export default {
   components: {
-    productItem
+    ProductItem
   },
   data() {
     return {
