@@ -16,11 +16,11 @@
         >{{ name }}</router-link
       >
       <h5 class="text-gray-800 text-xl font-bold">
-        Rs. {{ discount_price
+        ₹ {{ discount_price
         }}<strike
           v-if="isDiscounted"
           class="text-gray-400 text-lg ml-5 font-light"
-          >Rs. {{ price }}</strike
+          >₹ {{ price }}</strike
         >
       </h5>
     </div>

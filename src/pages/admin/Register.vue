@@ -38,7 +38,12 @@
         </div>
         <div class="form-group text-left">
           <div class="mx-auto w-52">
-            <input type="checkbox" id="checkbox" class="mr-2" v-model="isAdmin" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              class="mr-2"
+              v-model="isAdmin"
+            />
             <label for="checkbox">Give Admin Permissions</label>
           </div>
         </div>

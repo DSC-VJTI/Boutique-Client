@@ -56,20 +56,25 @@
     class="grid justify-items-center grid-cols-1 px-5 pb-5 pt-0 mb-5 mt-0 md:px-10 md:py-5 md:mx-10 mx-5"
   >
     <div class="col-span-1 justify-items-center text-center">
-      <h4 class="font-bold text-3xl text-gray-900 p-4 pt-0">
+      <h4 class="font-bold text-3xl text-gray-900 p-4 pt-3 md:pt-0">
         {{ name }}
       </h4>
-      <h3 class="font-semibold text-4xl text-gray-700 p-2 pt-6">
-        Rs. {{ discount_price }}
-        <strike
-          v-if="isDiscounted"
-          class="ml-10 text-xl self-center text-gray-400"
-          >Rs. {{ price }}</strike
-        >
-      </h3>
-      <p class="text-base font-normal text-gray-500 p-6 mx-6 md:mx-16 lg:mx-48">
+      <p class="text-lg font-normal text-gray-500 mx-6 md:mx-16 lg:mx-48">
         {{ description }}
       </p>
+      <h3
+        class="font-semibold text-xl text-center text-gray-700 p-2 md:text-3xl"
+      >
+        <strike
+          v-if="isDiscounted"
+          class="self-center text-xl text-left text-gray-400"
+          >M.R.P: ₹ {{ price }}</strike
+        >
+        <div class="self-center">
+          {{ isDiscounted ? "Discount Price" : "M.R.P" }}: ₹
+          {{ discount_price }}
+        </div>
+      </h3>
 
       <div class="my-4">
         <!-- Whatsapp icon with link to msg for buying -->
@@ -86,24 +91,22 @@
           <p class="align-middle inline-block">Contact us to Order</p>
         </a>
         <ul>
-          <li class="p-2 text-black text-xl font-semibold">
+          <!-- <li class="p-2 text-black text-xl font-semibold">
             <span class="text-gray-400 uppercase font-normal text-base"
               >Product ID:</span
             >
             {{ productId }}
-          </li>
+          </li> -->
           <li class="p-2 text-black text-xl font-semibold">
-            <span class="text-gray-400 uppercase font-normal text-base"
-              >Category:</span
-            >
+            <span class="text-gray-400 font-normal text-base">Category:</span>
             {{ category_name }}
           </li>
           <li class="p-2 text-black text-xl font-semibold">
             <span
               v-if="hasSubcategories"
-              class="text-gray-400 uppercase font-normal text-base"
+              class="text-gray-400 font-normal text-base"
             >
-              Sub Category:
+              Sub-Category:
             </span>
             <span
               class="mx-1"
@@ -120,15 +123,15 @@
       </div>
     </div>
 
-    <div class="col-span-1 mt-6 justify-items-center">
+    <div class="col-span-1 w-full mt-4 justify-items-center">
       <p
-        class="font-normal justify-self-center text-center w-40 text-gray-400 border-red-500 border-b-2 text-3xl py-3"
+        class="font-normal justify-self-center text-center w-40 text-gray-600 border-red-500 border-b-2 text-3xl py-3"
       >
         Description
       </p>
       <hr />
       <div class="">
-        <p class="font-bold text-gray-800 text-lg py-4">
+        <p class="font-normal text-gray-900 text-lg py-4">
           {{ info }}
         </p>
       </div>
@@ -233,7 +236,8 @@ export default {
     this.category_name = product.category_name;
     this.sub_categories = product.sub_categories;
     this.price = product.price;
-    this.discount_price = product.discount_price;
+    this.discount_price =
+      product.discount_price !== 0 ? product.discount_price : product.price;
     this.isLoading = false;
     this.images = product.images;
     this.imageShow = this.images[0];
