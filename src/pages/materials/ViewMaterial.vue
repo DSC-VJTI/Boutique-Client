@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="m-5 sm:ml-5 inline-block">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       to="/materials"
@@ -149,7 +154,10 @@ export default {
   data() {
     return {
       material: {},
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -169,14 +177,18 @@ export default {
 
       if (status === 204) {
         this.isLoading = false;
-        this.$router.push({
-          name: "seeMaterials"
-        });
+        this.resetInput();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Deletion successful.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        console.log(status);
-        console.log("Something went wrong. Please try again!");
+        this.isSuccessMsg = false;
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     }
