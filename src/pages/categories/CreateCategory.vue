@@ -1,6 +1,7 @@
 <template>
-  <base-spinner :show="isLoading"></base-spinner>
+<base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
+  <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
     <h1 class="green mb-10">Create Category</h1>
     <div class="lg:p-10">
       <form class="lg:m-5" @submit.prevent="newCategory">
@@ -25,8 +26,11 @@
 export default {
   data() {
     return {
-      name: "",
-      isLoading: false
+      name: '',
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: '',
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -45,12 +49,17 @@ export default {
       if (status === 201) {
         this.isLoading = false;
         this.resetInput();
-        alert("New category created!");
-        this.$router.replace("/categories");
+        this.isSuccessMsg = true;
+        this.toastMsg = "New category created!";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$router.replace("/categories");
+        }, 10000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        alert("Something went wrong");
+        this.callToast("Something went wrong.")
       }
       this.isLoading = false;
     },
