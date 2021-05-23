@@ -1,15 +1,24 @@
 <template>
   <div>
     <teleport to="body">
-      <div id="snackbar" :class="[{'show': show}, {'successToast': type}, {'failureToast': !type}]">{{ msg }}</div>
+      <div
+        id="snackbar"
+        :class="[
+          { show: show },
+          { successToast: type },
+          { failureToast: !type }
+        ]"
+      >
+        {{ msg }}
+      </div>
     </teleport>
   </div>
 </template>
 
 <script>
 export default {
-    props: ["show", "msg", "type"]
-}
+  props: ["show", "msg", "type"]
+};
 </script>
 
 <style scoped>
@@ -39,26 +48,50 @@ export default {
 }
 
 .failureToast {
-  background-color: #DC2626;
+  background-color: #dc2626;
 }
 
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;} 
-  to {top: 30px; opacity: 1;}
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
 }
 
 @keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 30px; opacity: 1;}
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 30px;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeout {
-  from {top: 30px; opacity: 1;} 
-  to {top: 0; opacity: 0;}
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
 
 @keyframes fadeout {
-  from {top: 30px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
 </style>

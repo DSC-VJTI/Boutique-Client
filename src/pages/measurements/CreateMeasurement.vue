@@ -1,6 +1,7 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div>
+    <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
       @submit.prevent="newMeasurement"
@@ -444,7 +445,10 @@ export default {
       imageData: [],
       isValid: true,
       nameError: "",
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
 
@@ -506,13 +510,20 @@ export default {
 
       if (status === 201) {
         this.isLoading = false;
-        this.$router.push({
-          name: "seeMeasurements"
-        });
+        this.resetInput();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Insertion successful.";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$router.push({ name: "seeMeasurements" });
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        console.log("Something went wrong");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     }
