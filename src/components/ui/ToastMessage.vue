@@ -1,7 +1,7 @@
 <template>
   <div>
     <teleport to="body">
-      <div id="snackbar" :class="[{'show': show}, {'successToast': type}]">{{ msg }}</div>
+      <div id="snackbar" :class="[{'show': show}, {'successToast': type}, {'failureToast': !type}]">{{ msg }}</div>
     </teleport>
   </div>
 </template>
@@ -15,18 +15,17 @@ export default {
 <style scoped>
 #snackbar {
   visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
-  background-color: red;
   color: #fff;
   text-align: center;
   border-radius: 2px;
   padding: 16px;
   position: fixed;
   z-index: 1;
-  left: 50%;
+  left: 30%;
+  width: 40%;
   top: 30px;
   font-size: 17px;
+  opacity: 0.9;
 }
 
 #snackbar.show {
@@ -36,7 +35,11 @@ export default {
 }
 
 .successToast {
-  background-color: green;
+  background-color: #059669;
+}
+
+.failureToast {
+  background-color: #DC2626;
 }
 
 @-webkit-keyframes fadein {

@@ -55,11 +55,17 @@ export default {
         setTimeout(() => {
           this.errorOccured = false;
           this.$router.replace("/categories");
-        }, 10000);
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
+      } else if (status === 400) {
+        this.toastMsg = "Category with this name already exists. Please choose a new name.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       } else {
-        this.callToast("Something went wrong.")
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       }
       this.isLoading = false;
     },

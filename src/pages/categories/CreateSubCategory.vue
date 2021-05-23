@@ -1,6 +1,7 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
+    <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
     <h1 class="green mb-10">New Subcategory</h1>
     <div class="lg:p-10">
       <form class="lg:m-5" @submit.prevent="newSubcategory">
@@ -43,7 +44,10 @@ export default {
       name: "",
       category_name: "",
       available_categories: [],
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: '',
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -63,12 +67,23 @@ export default {
       if (status === 201) {
         this.isLoading = false;
         this.resetInput();
-        alert("New subcategory created!");
-        this.$router.replace("/categories");
+        this.isSuccessMsg = true;
+        this.toastMsg = "New subcategory created!";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$router.replace("/categories");
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
+      } else if (status === 400) {
+        this.toastMsg = "Subcategory with this name already exists. Please choose a new name.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       } else {
-        alert("Something went wrong");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       }
       this.isLoading = false;
     },

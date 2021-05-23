@@ -1,6 +1,7 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
+    <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
     <h1 class="green mb-10">Update Category</h1>
     <div class="lg:p-10">
       <form class="lg:m-5" @submit.prevent="updateCategory">
@@ -27,7 +28,10 @@ export default {
   data() {
     return {
       name: "",
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: '',
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -43,14 +47,24 @@ export default {
 
       if (status === 200) {
         this.isLoading = false;
-        this.name = "";
-        alert("Category name updated successfully!");
-        this.$router.replace("/categories");
+        this.resetInput();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Ccategory updated successfully.";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$router.replace("/categories");
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
+      } else if (status === 400) {
+        this.toastMsg = "Category with this name already exists. Please choose a new name.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       } else {
-        console.log(status);
-        alert("Something went wrong");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       }
       this.isLoading = false;
     }

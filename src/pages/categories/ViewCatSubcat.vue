@@ -18,7 +18,7 @@
         :key="index"
         class="grid grid-cols-2"
       >
-        <h4 class="text-gray-900 lg:text-2xl lg:font-light flex items-center">
+        <h4 class="text-gray-900 lg:text-xl lg:font-light flex items-center">
           {{ cat.name }}
         </h4>
         <div>
@@ -67,7 +67,7 @@
         :key="index"
         class="grid grid-cols-2"
       >
-        <h4 class="text-gray-900 lg:text-2xl lg:font-light flex items-center">
+        <h4 class="text-gray-900 lg:text-xl lg:font-light flex items-center">
           {{ subcat.name }}
         </h4>
         <div>
@@ -106,7 +106,10 @@ export default {
     return {
       categories: [],
       subcategories: [],
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: '',
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -130,15 +133,21 @@ export default {
       });
       if (status === 204) {
         this.isLoading = false;
+        this.resetInput();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Category deleted successfully.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else if (status === 800) {
-        alert(
-          "Products of this category still exist. Please delete them before deleting this category."
-        );
+        this.toastMsg = "Products of this category still exist. Please delete them before deleting this category.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       } else {
-        console.log(status);
-        console.log("Something went wrong. Please try again!");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       }
       this.isLoading = false;
     },
@@ -153,15 +162,21 @@ export default {
       );
       if (status === 204) {
         this.isLoading = false;
+        this.resetInput();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Subcategory deleted successfully.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else if (status === 800) {
-        alert(
-          "Products of this subcategory still exist. Please delete them before deleting this subcategory."
-        );
+        this.toastMsg = "Products of this subcategory still exist. Please delete them before deleting this subcategory.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       } else {
-        console.log(status);
-        console.log("Something went wrong. Please try again!");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => this.errorOccured = false, 3000);
       }
       this.isLoading = false;
     }
