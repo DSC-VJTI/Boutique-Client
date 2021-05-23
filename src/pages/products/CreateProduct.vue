@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Add Product</h1>
     <div>
       <div class="p-5 text-center">
@@ -149,6 +154,9 @@ export default {
       available_subcategories: [],
       available_categories: [],
       isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false,
       images: [],
       imageData: []
     };
@@ -201,15 +209,21 @@ export default {
       });
 
       if (status === 201) {
-        this.resetInputs();
         this.isLoading = false;
-        this.$router.push({
-          name: "viewProducts"
-        });
+        this.resetInputs();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Insertion successful.";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$router.push({ name: "viewProducts" });
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        console.log("Something went wrong");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     },

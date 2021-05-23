@@ -138,7 +138,6 @@ export default {
       });
       if (status === 204) {
         this.isLoading = false;
-        this.resetInput();
         this.isSuccessMsg = true;
         this.toastMsg = "Category deleted successfully.";
         this.errorOccured = true;

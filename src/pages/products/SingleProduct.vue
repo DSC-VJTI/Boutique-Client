@@ -2,6 +2,11 @@
   <!-- Address -->
   <base-spinner :show="isLoading"></base-spinner>
   <div class="grid grid-cols-1 m-0 justify-items-center bg-gray-200">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <div class="col-span-1">
       <div class="my-7 ml-1 sm:ml-5 inline-block">
         <router-link
@@ -93,12 +98,6 @@
           <p class="align-middle inline-block">Contact us to Order</p>
         </a>
         <ul>
-          <!-- <li class="p-2 text-black text-xl font-semibold">
-            <span class="text-gray-400 uppercase font-normal text-base"
-              >Product ID:</span
-            >
-            {{ productId }}
-          </li> -->
           <li class="p-2 text-black text-xl font-semibold">
             <span class="text-gray-400 font-normal text-base">Category:</span>
             {{ category_name }}
@@ -197,7 +196,10 @@ export default {
       sub_categories: [],
       images: [],
       imageShow: null,
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -218,14 +220,22 @@ export default {
       );
       if (status === 204) {
         this.isLoading = false;
-        this.$router.push({
-          name: "viewProducts"
-        });
+        this.isSuccessMsg = true;
+        this.toastMsg = "Deletion successful.";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false
+          this.$router.push({
+            name: "viewProducts"
+          })
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        console.log(status);
-        console.log("Something went wrong. Please try again!");
+        this.isSuccessMsg = false;
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     }

@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="m-8 sm:ml-5 inline-block">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       :to="`/shop/${productId}`"
@@ -186,6 +191,9 @@ export default {
       available_subcategories: [],
       available_categories: [],
       isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false,
       images: [],
       imageData: [],
       files: []
@@ -253,18 +261,22 @@ export default {
       );
 
       if (status === 200) {
-        this.resetInputs();
         this.isLoading = false;
-        this.$router.push({
-          name: "viewProduct",
-          params: {
-            productId: this.productId
-          }
+        this.resetInputs();
+        this.isSuccessMsg = true;
+        this.toastMsg = "Updation successful.";
+        this.errorOccured = true;
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$router.push({ name: "viewProduct", params: { productId: this.productId }
         });
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        console.log("Something went wrong");
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     },

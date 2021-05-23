@@ -177,11 +177,15 @@ export default {
 
       if (status === 204) {
         this.isLoading = false;
-        this.resetInput();
         this.isSuccessMsg = true;
         this.toastMsg = "Deletion successful.";
         this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 2000);
+        setTimeout(() => {
+          this.errorOccured = false
+          this.$router.push({
+            name: "seeMaterials"
+          });
+        }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
