@@ -135,6 +135,9 @@ button {
     @apply bg-cover;
     @apply bg-center;
     @apply z-0;
+}
+
+.productCard{
     @apply hover:scale-105;
     @apply hover:shadow-md;
     @apply transform;
