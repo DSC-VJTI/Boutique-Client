@@ -1,7 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
-    <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Update Category</h1>
     <div class="lg:p-10">
       <form class="lg:m-5" @submit.prevent="updateCategory">
@@ -30,7 +34,7 @@ export default {
       name: "",
       isLoading: false,
       errorOccured: false,
-      toastMsg: '',
+      toastMsg: "",
       isSuccessMsg: false
     };
   },
@@ -49,7 +53,7 @@ export default {
         this.isLoading = false;
         this.resetInput();
         this.isSuccessMsg = true;
-        this.toastMsg = "Ccategory updated successfully.";
+        this.toastMsg = "Category updated successfully.";
         this.errorOccured = true;
         setTimeout(() => {
           this.errorOccured = false;
@@ -58,13 +62,14 @@ export default {
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else if (status === 400) {
-        this.toastMsg = "Category with this name already exists. Please choose a new name.";
+        this.toastMsg =
+          "Category with this name already exists. Please choose a new name.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 3000);
+        setTimeout(() => (this.errorOccured = false), 3000);
       } else {
         this.toastMsg = "Something went wrong.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 3000);
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     }

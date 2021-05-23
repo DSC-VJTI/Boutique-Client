@@ -3,6 +3,11 @@
   <div
     class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:my-20"
   >
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Admin Register</h1>
     <div>
       <form @submit.prevent="register">
@@ -65,7 +70,10 @@ export default {
       passwordError: "",
       isAdmin: false,
       isValid: true,
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -119,11 +127,15 @@ export default {
         this.isLoading = false;
         this.$router.replace("/admin/login");
       } else if (status === 400) {
-        this.usernameError = "*Username already taken.";
+        this.toastMsg = "Username already taken.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else {
-        console.log("Something went wrong", status);
+        this.toastMsg = "Something went wrong.";
+        this.errorOccured = true;
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     },

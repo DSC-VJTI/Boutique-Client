@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="flex flex-col items-center p-5">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <!-- CATEGORIES -->
     <h1 class="green mb-10">Categories</h1>
     <div class="mx-auto mb-10 w-3/5 sm:w-96">
@@ -108,7 +113,7 @@ export default {
       subcategories: [],
       isLoading: false,
       errorOccured: false,
-      toastMsg: '',
+      toastMsg: "",
       isSuccessMsg: false
     };
   },
@@ -137,17 +142,20 @@ export default {
         this.isSuccessMsg = true;
         this.toastMsg = "Category deleted successfully.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 2000);
+        setTimeout(() => (this.errorOccured = false), 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else if (status === 800) {
-        this.toastMsg = "Products of this category still exist. Please delete them before deleting this category.";
+        this.isSuccessMsg = false;
+        this.toastMsg =
+          "Products of this category still exist. Please delete them before deleting this category.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 3000);
+        setTimeout(() => (this.errorOccured = false), 3000);
       } else {
+        this.isSuccessMsg = false;
         this.toastMsg = "Something went wrong.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 3000);
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     },
@@ -166,17 +174,18 @@ export default {
         this.isSuccessMsg = true;
         this.toastMsg = "Subcategory deleted successfully.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 2000);
+        setTimeout(() => (this.errorOccured = false), 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
       } else if (status === 800) {
-        this.toastMsg = "Products of this subcategory still exist. Please delete them before deleting this subcategory.";
+        this.toastMsg =
+          "Products of this subcategory still exist. Please delete them before deleting this subcategory.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 3000);
+        setTimeout(() => (this.errorOccured = false), 3000);
       } else {
         this.toastMsg = "Something went wrong.";
         this.errorOccured = true;
-        setTimeout(() => this.errorOccured = false, 3000);
+        setTimeout(() => (this.errorOccured = false), 3000);
       }
       this.isLoading = false;
     }
