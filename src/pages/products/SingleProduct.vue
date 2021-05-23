@@ -224,10 +224,10 @@ export default {
         this.toastMsg = "Deletion successful.";
         this.errorOccured = true;
         setTimeout(() => {
-          this.errorOccured = false
+          this.errorOccured = false;
           this.$router.push({
             name: "viewProducts"
-          })
+          });
         }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");

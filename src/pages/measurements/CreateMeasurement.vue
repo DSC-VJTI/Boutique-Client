@@ -1,7 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div>
-    <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
       @submit.prevent="newMeasurement"

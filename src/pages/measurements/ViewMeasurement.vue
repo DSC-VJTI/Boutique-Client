@@ -1,7 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="m-5 sm:ml-5 inline-block">
-    <toast-message :type="isSuccessMsg" :msg="toastMsg" :show="errorOccured"></toast-message>
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       to="/measurements"
@@ -288,7 +292,7 @@ export default {
         this.toastMsg = "Deletion successful.";
         this.errorOccured = true;
         setTimeout(() => {
-          this.errorOccured = false
+          this.errorOccured = false;
           this.$router.push({
             name: "seeMeasurements"
           });

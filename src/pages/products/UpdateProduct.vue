@@ -268,8 +268,10 @@ export default {
         this.errorOccured = true;
         setTimeout(() => {
           this.errorOccured = false;
-          this.$router.push({ name: "viewProduct", params: { productId: this.productId }
-        });
+          this.$router.push({
+            name: "viewProduct",
+            params: { productId: this.productId }
+          });
         }, 2000);
       } else if (status === 401) {
         this.$store.dispatch("user/unauthorize");
