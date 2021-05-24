@@ -22,7 +22,7 @@
         </div>
       </router-link>
     </div>
-    <ul class="flex flex-col mx-auto mb-4 w-full sm:w-96">
+    <ul v-if="materials.length!==0" class="flex flex-col mx-auto mb-4 w-full sm:w-96">
       <material-item
         class="border-gray-400 flex flex-row mb-6 w-full"
         v-for="material in materials"
@@ -32,6 +32,7 @@
         :id="material.id"
       ></material-item>
     </ul>
+    <h3 v-if="materials.length===0" class="text-2xl mt-8 font-light text-gray-900">You haven't added any materials yet! Add some..</h3>
   </div>
 </template>
 

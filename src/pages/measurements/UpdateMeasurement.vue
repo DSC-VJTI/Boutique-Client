@@ -63,7 +63,7 @@
               <div class="my-5 w-40 sm:w-full mx-auto">
                 <div class="block sm:inline-block p-3 sm:mr-5">
                   <label
-                    class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 border hover:border-green-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md w-full"
+                    class="bg-gray-900 cursor-pointer text-green-500 py-2 px-4 hover:bg-gray-50 border hover:border-green-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md w-full"
                     for="file-input"
                     >Add Files
                     <input
@@ -78,21 +78,21 @@
                 </div>
                 <div class="block sm:inline-block p-3 sm:mr-5">
                   <span
-                    class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+                    class="bg-gray-900 cursor-pointer text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
                     @click="removeAllFiles()"
                     >Remove All</span
                   >
                 </div>
                 <div class="block sm:inline-block p-3 sm:mr-5">
                   <span
-                    class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+                    class="bg-gray-900 cursor-pointer text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
                     @click="removeOldFiles()"
                     >Remove Old</span
                   >
                 </div>
                 <div class="block sm:inline-block p-3">
                   <span
-                    class="bg-gray-900 text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+                    class="bg-gray-900 cursor-pointer text-red-500 py-2 px-4 hover:bg-gray-50 border hover:border-red-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
                     @click="removeNewFiles()"
                     >Remove New</span
                   >
@@ -496,6 +496,11 @@ export default {
         this.nameError = "*Name cannot be empty. Please enter a valid name.";
         this.isValid = false;
       } else this.nameError = "";
+
+      if(this.imageData.length === 0) {
+        this.isValid = false;
+        this.displayToast(false, "Please add sketches to measurement.");
+      }
     },
 
     async updateMeasurement() {

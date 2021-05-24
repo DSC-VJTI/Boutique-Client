@@ -22,7 +22,7 @@
         </div>
       </router-link>
     </div>
-    <ul class="flex flex-col mx-auto mb-4 w-full sm:w-96">
+    <ul v-if="measurements.length!==0" class="flex flex-col mx-auto mb-4 w-full sm:w-96">
       <measurement-item
         class="border-gray-400 flex flex-row mb-6 w-full"
         v-for="measurement in measurements"
@@ -32,6 +32,7 @@
         :id="measurement.id"
       ></measurement-item>
     </ul>
+    <h3 v-if="measurements.length===0" class="text-2xl mt-8 font-light text-gray-900">You haven't added any measurements yet! Add some..</h3>
   </div>
 </template>
 <script>

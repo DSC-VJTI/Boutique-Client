@@ -246,6 +246,10 @@ export default {
       this.imageData.push(...this.images);
     },
     async updateProduct() {
+      if(this.imageData.length === 0) {
+        this.displayToast(false, "Please add photos to the product.");
+        return;
+      }
       this.isLoading = true;
       const status = await this.$store.dispatch(
         "products/updateCurrentProduct",
