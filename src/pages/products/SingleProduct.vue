@@ -197,9 +197,9 @@ export default {
       else return false;
     },
     whatsappLink() {
-      let link = `http://wa.me/${process.env.VUE_APP_WHATSAPP_NUMBER}/?text=`
-      let text = `${process.env.VUE_APP_API_BASE_URL}/shop/${this.productId}%0A%0AHello,%0AI%20am%20interested%20in%20${this.name}.%0AHow%20do%20I%20order?`
-      return link+text;
+      let link = `http://wa.me/${process.env.VUE_APP_WHATSAPP_NUMBER}/?text=`;
+      let text = `${process.env.VUE_APP_API_BASE_URL}shop/${this.productId}%0A%0AHello,%0AI%20am%20interested%20in%20${this.name}.%0AHow%20do%20I%20order?`;
+      return link + text;
     }
   },
   methods: {

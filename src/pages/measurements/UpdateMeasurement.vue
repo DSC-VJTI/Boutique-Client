@@ -497,7 +497,7 @@ export default {
         this.isValid = false;
       } else this.nameError = "";
 
-      if(this.imageData.length === 0) {
+      if (this.imageData.length === 0) {
         this.isValid = false;
         this.displayToast(false, "Please add sketches to measurement.");
       }

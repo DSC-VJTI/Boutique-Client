@@ -196,23 +196,19 @@ export default {
         this.isValid = false;
       } else this.contentError = "";
     },
-
     displayToast(isSuccessMsg, msg) {
       this.isSuccessMsg = isSuccessMsg;
       this.toastMsg = msg;
       this.errorOccured = true;
       setTimeout(() => (this.errorOccured = false), 3000);
     },
-
     async updateBlog() {
       this.isLoading = true;
       this.validate();
-
       if (!this.isValid) {
         this.isLoading = false;
         return;
       }
-
       const status = await this.$store.dispatch("blogs/updateCurrentBlog", {
         body: {
           content: this.editorData,

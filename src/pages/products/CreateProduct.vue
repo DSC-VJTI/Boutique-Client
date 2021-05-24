@@ -197,7 +197,7 @@ export default {
       }
     },
     async newProduct() {
-      if(this.imageData.length === 0) {
+      if (this.imageData.length === 0) {
         this.displayToast(false, "Please add photos to the product.");
         return;
       }

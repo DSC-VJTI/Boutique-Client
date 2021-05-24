@@ -191,6 +191,12 @@
             :key="product.id"
           ></product-item>
         </div>
+        <h3
+          v-if="products.length === 0"
+          class="text-3xl m-10 font-light text-gray-900 flex justify-center"
+        >
+          No products found. Search something else?
+        </h3>
       </div>
       <!-- PRODUCTS ENDS -->
     </div>

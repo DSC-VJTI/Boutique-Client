@@ -41,12 +41,12 @@
       <div
         class="w-full grid sm:grid-cols-1 md:grid-cols-2 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-          <h2 class="inline-block text-lg p-2 mr-4">
-            Name:&nbsp;<span>{{ measurement.client_name }}</span>
-          </h2>
-          <h2 class="inline-block text-lg p-2 mr-4">
-            Date Created:&nbsp;<span> {{ measurement.created_on }}</span>
-          </h2>
+        <h2 class="inline-block text-lg p-2 mr-4">
+          Name:&nbsp;<span>{{ measurement.client_name }}</span>
+        </h2>
+        <h2 class="inline-block text-lg p-2 mr-4">
+          Date Created:&nbsp;<span> {{ measurement.created_on }}</span>
+        </h2>
       </div>
       <hr />
       <!-- SKETCH -->

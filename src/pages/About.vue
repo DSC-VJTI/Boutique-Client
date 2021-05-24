@@ -1,6 +1,8 @@
 <template>
   <div class="flex-none">
-    <h1 class="green text-center">About Us</h1>
+    <h1 class="text-gray-800 text-center text-5xl font-bold font-serif my-8">
+      About Us
+    </h1>
     <div
       class="w-5/6 sm:w-2/3 lg:w-1/2 md:flex mx-auto my-5 sm:my-20 shadow-2xl"
     >

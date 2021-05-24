@@ -20,7 +20,8 @@
           {{ description.substring(0, 30) + "..." }}
         </div>
         <div>
-          <span class="text-3xl font-light">₹ {{ discount_price }}</span> &nbsp;&nbsp;
+          <span class="text-3xl font-light">₹ {{ discount_price }}</span>
+          &nbsp;&nbsp;
           <strike v-if="isDiscounted" class="text-gray-400 text-md font-light">
             ₹ {{ price }}
           </strike>

@@ -246,7 +246,7 @@ export default {
       this.imageData.push(...this.images);
     },
     async updateProduct() {
-      if(this.imageData.length === 0) {
+      if (this.imageData.length === 0) {
         this.displayToast(false, "Please add photos to the product.");
         return;
       }

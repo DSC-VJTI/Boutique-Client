@@ -14,9 +14,9 @@
         A specialist label creating luxury essentials. Ethically crafted with an
         unwavering commitment to exceptional quality.
       </p>
-      <button class="bg-black text-white text-sm font-mono p-3 hover:shadow-xl">
-        SHOP NOW ->
-      </button>
+      <router-link to="/shop" class="blackButton">
+        SHOP NOW
+      </router-link>
     </div>
   </div>
 </template>
