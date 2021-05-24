@@ -444,6 +444,12 @@ export default {
   },
 
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeAllFiles() {
       this.measurement.images = []; // Array of old images
       this.files = []; // Array of newly added images
@@ -514,20 +520,13 @@ export default {
 
       if (status === 200) {
         this.isLoading = false;
-        this.resetErrors();
-        this.isSuccessMsg = true;
-        this.toastMsg = "Updation successful.";
-        this.errorOccured = true;
-        setTimeout(() => {
-          this.errorOccured = false;
-          this.$router.push(`/measurements/${this.mId}`);
-        }, 2000);
+        this.displayToast(true, "Measurement updated successfully.");
+        setTimeout(() => this.$router.push(`/measurements/${this.mId}`), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

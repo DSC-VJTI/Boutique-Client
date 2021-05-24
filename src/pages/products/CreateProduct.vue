@@ -162,6 +162,12 @@ export default {
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeFile(key) {
       this.images.splice(key, 1);
       this.imageData.splice(key, 1);
@@ -211,19 +217,13 @@ export default {
       if (status === 201) {
         this.isLoading = false;
         this.resetInputs();
-        this.isSuccessMsg = true;
-        this.toastMsg = "Insertion successful.";
-        this.errorOccured = true;
-        setTimeout(() => {
-          this.errorOccured = false;
-          this.$router.push({ name: "viewProducts" });
-        }, 2000);
+        this.displayToast(true, "Product created successfully.");
+        setTimeout(() => this.$router.push({ name: "viewProducts" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

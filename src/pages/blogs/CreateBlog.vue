@@ -152,6 +152,12 @@ export default {
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeFile() {
       this.image = null;
       this.imageData = null;
@@ -214,19 +220,13 @@ export default {
         this.resetInputs();
         this.resetErrors();
         this.isLoading = false;
-        this.isSuccessMsg = true;
-        this.toastMsg = "Insertion successful.";
-        this.errorOccured = true;
-        setTimeout(() => {
-          this.errorOccured = false;
-          this.$router.push({ name: "seeBlogs" });
-        }, 2000);
+        this.displayToast(true, "Blog created successfully.");
+        setTimeout(() => this.$router.push({ name: "seeBlogs" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

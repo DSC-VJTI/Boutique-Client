@@ -161,10 +161,15 @@ export default {
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     updateMaterial() {
       this.$router.push({ path: `${this.materialId}/update` });
     },
-
     async deleteMaterial() {
       this.isLoading = true;
       const status = await this.$store.dispatch(
@@ -177,22 +182,13 @@ export default {
 
       if (status === 204) {
         this.isLoading = false;
-        this.isSuccessMsg = true;
-        this.toastMsg = "Deletion successful.";
-        this.errorOccured = true;
-        setTimeout(() => {
-          this.errorOccured = false;
-          this.$router.push({
-            name: "seeMaterials"
-          });
-        }, 2000);
+        this.displayToast(true, "Material deleted successfully.");
+        setTimeout(() => this.$router.push({ name: "seeMaterials" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        this.isSuccessMsg = false;
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

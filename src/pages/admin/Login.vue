@@ -92,7 +92,12 @@ export default {
         this.isValid = false;
       } else this.usernameError = "";
     },
-
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     async login() {
       this.isLoading = true;
       this.validate();
@@ -119,17 +124,11 @@ export default {
         this.isLoading = false;
         this.$router.replace("/");
       } else if (status === 401) {
-        this.toastMsg = "Incorrect password.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Incorrect password.");
       } else if (status === 404) {
-        this.toastMsg = "User not found.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "User not found.");
       } else {
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

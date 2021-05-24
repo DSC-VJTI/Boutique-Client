@@ -39,6 +39,12 @@ export default {
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     async updateCategory() {
       this.isLoading = true;
       const status = await this.$store.dispatch("categories/updateCategory", {
@@ -52,24 +58,18 @@ export default {
       if (status === 200) {
         this.isLoading = false;
         this.resetInput();
-        this.isSuccessMsg = true;
-        this.toastMsg = "Category updated successfully.";
-        this.errorOccured = true;
-        setTimeout(() => {
-          this.errorOccured = false;
-          this.$router.replace("/categories");
-        }, 2000);
+        this.displayToast(true, "Category updated successfully.");
+        setTimeout(() => this.$router.replace("/categories"), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else if (status === 400) {
-        this.toastMsg =
-          "Category with this name already exists. Please choose a new name.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(
+          false,
+          "Category with this name already exists. Please choose a new name."
+        );
       } else {
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

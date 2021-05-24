@@ -118,6 +118,12 @@ export default {
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     updateCategory(id) {
       this.$router.push({
         name: "ModifyCat",
@@ -136,25 +142,20 @@ export default {
         cat_id: id,
         token: JSON.parse(localStorage.getItem("user")).access_token
       });
+
       if (status === 204) {
         this.isLoading = false;
-        this.isSuccessMsg = true;
-        this.toastMsg = "Category deleted successfully.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 2000);
+        this.displayToast(true, "Category deleted successfully.");
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
-      } else if (status === 800) {
-        this.isSuccessMsg = false;
-        this.toastMsg =
-          "Products of this category still exist. Please delete them before deleting this category.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
+      } else if (status === 403) {
+        this.displayToast(
+          false,
+          "Products or subcategories of this category still exist. Please delete them before deleting this category."
+        );
       } else {
-        this.isSuccessMsg = false;
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },
@@ -170,21 +171,22 @@ export default {
       if (status === 204) {
         this.isLoading = false;
         this.resetInput();
-        this.isSuccessMsg = true;
-        this.toastMsg = "Subcategory deleted successfully.";
-        this.errorOccured = true;
+        this.displayToast(true, "Subcategory deleted successfully.");
         setTimeout(() => (this.errorOccured = false), 2000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
-      } else if (status === 800) {
-        this.toastMsg =
-          "Products of this subcategory still exist. Please delete them before deleting this subcategory.";
-        this.errorOccured = true;
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => {
+          this.errorOccured = false;
+          this.$store.dispatch("user/unauthorize");
+        }, 3000);
+      } else if (status === 403) {
+        this.displayToast(
+          false,
+          "Products of this subcategory still exist. Please delete them before deleting this subcategory."
+        );
         setTimeout(() => (this.errorOccured = false), 3000);
       } else {
-        this.toastMsg = "Something went wrong.";
-        this.errorOccured = true;
-        setTimeout(() => (this.errorOccured = false), 3000);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

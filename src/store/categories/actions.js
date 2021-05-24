@@ -172,8 +172,15 @@ export default {
     const cats = context.getters.getCategories;
     const catIndex = cats.findIndex(c => c.id == payload.cat_id);
 
+    // category does not exist
+    if (catIndex == -1) return 404;
+
     // if products of that category exist, it cannot be deleted
-    if (catIndex !== -1 && cats[catIndex].products.length !== 0) return 800;
+    if (
+      cats[catIndex].products.length !== 0 ||
+      cats[catIndex].sub_categories.length !== 0
+    )
+      return 403;
 
     try {
       const response = await axios.delete(
@@ -204,7 +211,7 @@ export default {
 
     // if products of that category exist, it cannot be deleted
     if (subcatIndex !== -1 && subcats[subcatIndex].products.length !== 0)
-      return 800;
+      return 403;
 
     try {
       const response = await axios.delete(
