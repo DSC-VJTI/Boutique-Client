@@ -15,7 +15,7 @@ export default {
     //In case store is empty
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + "api/admin/products",
+        context.rootGetters.getUrl + "api/admin/products/",
         context.rootGetters.getConfig
       );
       context.commit("setProducts", { products: response.data });
@@ -73,7 +73,7 @@ export default {
 
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/admin/products",
+        context.rootGetters.getUrl + "api/admin/products/",
         payload.body,
         {
           headers: {
@@ -103,7 +103,8 @@ export default {
 
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + `api/admin/products/${payload.product_id}`,
+        context.rootGetters.getUrl +
+          `api/admin/products/${payload.product_id}/`,
         {
           headers: {
             ContentType: "application/json"
@@ -163,7 +164,8 @@ export default {
 
     try {
       const response = await axios.put(
-        context.rootGetters.getUrl + `api/admin/products/${payload.product_id}`,
+        context.rootGetters.getUrl +
+          `api/admin/products/${payload.product_id}/`,
         payload.body,
         {
           headers: {
@@ -193,7 +195,8 @@ export default {
   async deleteCurrentProduct(context, payload) {
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/admin/products/${payload.product_id}`,
+        context.rootGetters.getUrl +
+          `api/admin/products/${payload.product_id}/`,
         {
           headers: {
             ContentType: "application/json",

@@ -51,7 +51,7 @@ export default {
 
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/blogs",
+        context.rootGetters.getUrl + "api/blogs/",
         payload.body,
         {
           headers: {
@@ -79,7 +79,7 @@ export default {
     //In case store is empty
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + "api/blogs",
+        context.rootGetters.getUrl + "api/blogs/",
         context.rootGetters.getConfig
       );
       context.commit("setBlogs", { blogs: response.data });
@@ -96,7 +96,7 @@ export default {
 
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
+        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}/`,
         {
           headers: {
             ContentType: "application/json"
@@ -117,7 +117,7 @@ export default {
     }
     try {
       const response = await axios.put(
-        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
+        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}/`,
         payload.body,
         {
           headers: {
@@ -145,7 +145,7 @@ export default {
   async deleteCurrentBlog(context, payload) {
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
+        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}/`,
         {
           headers: {
             ContentType: "application/json",

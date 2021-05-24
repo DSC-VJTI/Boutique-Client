@@ -5,7 +5,7 @@ export default {
   async login(context, payload) {
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/admin/login",
+        context.rootGetters.getUrl + "api/admin/login/",
         payload.body,
         context.rootGetters.getConfig
       );
@@ -21,7 +21,7 @@ export default {
   async register(context, payload) {
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/admin/register",
+        context.rootGetters.getUrl + "api/admin/register/",
         payload.body,
         {
           headers: {

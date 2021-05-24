@@ -67,7 +67,7 @@ export default {
 
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/admin/measurements",
+        context.rootGetters.getUrl + "api/admin/measurements/",
         payload.body,
         {
           headers: {
@@ -96,7 +96,7 @@ export default {
     //In case store is empty
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + "api/admin/measurements",
+        context.rootGetters.getUrl + "api/admin/measurements/",
         {
           headers: {
             ContentType: "application/json",
@@ -121,7 +121,7 @@ export default {
     try {
       const response = await axios.get(
         context.rootGetters.getUrl +
-          `api/admin/measurements/${payload.measurement_id}`,
+          `api/admin/measurements/${payload.measurement_id}/`,
         {
           headers: {
             ContentType: "application/json",
@@ -151,7 +151,7 @@ export default {
     try {
       const response = await axios.put(
         context.rootGetters.getUrl +
-          `api/admin/measurements/${payload.measurement_id}`,
+          `api/admin/measurements/${payload.measurement_id}/`,
         payload.measurement,
         {
           headers: {
@@ -182,7 +182,7 @@ export default {
     try {
       const response = await axios.delete(
         context.rootGetters.getUrl +
-          `api/admin/measurements/${payload.measurement_id}`,
+          `api/admin/measurements/${payload.measurement_id}/`,
         {
           headers: {
             ContentType: "application/json",

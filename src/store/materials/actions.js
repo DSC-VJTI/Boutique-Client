@@ -4,7 +4,7 @@ export default {
   async createNewMaterial(context, payload) {
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/admin/materials",
+        context.rootGetters.getUrl + "api/admin/materials/",
         payload.body,
         {
           headers: {
@@ -31,7 +31,7 @@ export default {
     if (materials.length !== 0) return materials;
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + "api/admin/materials",
+        context.rootGetters.getUrl + "api/admin/materials/",
         {
           headers: {
             ContentType: "application/json",
@@ -54,7 +54,7 @@ export default {
     try {
       const response = await axios.get(
         context.rootGetters.getUrl +
-          `api/admin/materials/${payload.material_id}`,
+          `api/admin/materials/${payload.material_id}/`,
         {
           headers: {
             ContentType: "application/json",
@@ -72,7 +72,7 @@ export default {
     try {
       const response = await axios.put(
         context.rootGetters.getUrl +
-          `api/admin/materials/${payload.material_id}`,
+          `api/admin/materials/${payload.material_id}/`,
         payload.material,
         {
           headers: {
@@ -103,7 +103,7 @@ export default {
     try {
       const response = await axios.delete(
         context.rootGetters.getUrl +
-          `api/admin/materials/${payload.material_id}`,
+          `api/admin/materials/${payload.material_id}/`,
         {
           headers: {
             ContentType: "application/json",
