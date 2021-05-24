@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="m-5 sm:ml-5 inline-block">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       to="/blogs"
@@ -140,10 +145,19 @@ export default {
       },
       image: null,
       imageData: null,
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeFile() {
       this.image = null;
       this.imageData = null;
@@ -206,13 +220,13 @@ export default {
         this.resetInputs();
         this.resetErrors();
         this.isLoading = false;
-        this.$router.push({
-          name: "seeBlogs"
-        });
+        this.displayToast(true, "Blog created successfully.");
+        setTimeout(() => this.$router.push({ name: "seeBlogs" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        alert("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

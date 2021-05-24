@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Update Category</h1>
     <div class="lg:p-10">
       <form class="lg:m-5" @submit.prevent="updateCategory">
@@ -27,10 +32,19 @@ export default {
   data() {
     return {
       name: "",
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     async updateCategory() {
       this.isLoading = true;
       const status = await this.$store.dispatch("categories/updateCategory", {
@@ -43,14 +57,19 @@ export default {
 
       if (status === 200) {
         this.isLoading = false;
-        this.name = "";
-        alert("Category name updated successfully!");
-        this.$router.replace("/categories");
+        this.resetInput();
+        this.displayToast(true, "Category updated successfully.");
+        setTimeout(() => this.$router.replace("/categories"), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
+      } else if (status === 400) {
+        this.displayToast(
+          false,
+          "Category with this name already exists. Please choose a new name."
+        );
       } else {
-        console.log(status);
-        alert("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

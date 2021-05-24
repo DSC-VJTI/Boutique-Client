@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="m-5 sm:ml-5 inline-block">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       :to="`/measurements/${mId}`"
@@ -414,8 +419,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-
 export default {
   props: ["mId"],
   data() {
@@ -431,6 +434,9 @@ export default {
       nameError: "",
       isValid: true,
       isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false,
       imageData: [],
       files: [],
       imagesUpdated: false
@@ -438,6 +444,12 @@ export default {
   },
 
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeAllFiles() {
       this.measurement.images = []; // Array of old images
       this.files = []; // Array of newly added images
@@ -507,13 +519,14 @@ export default {
       );
 
       if (status === 200) {
-        this.resetErrors();
         this.isLoading = false;
-        this.$router.push(`/measurements/${this.mId}`);
+        this.displayToast(true, "Measurement updated successfully.");
+        setTimeout(() => this.$router.push(`/measurements/${this.mId}`), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

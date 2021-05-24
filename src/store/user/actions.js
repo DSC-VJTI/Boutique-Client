@@ -45,6 +45,6 @@ export default {
       localStorage.removeItem("isAuthenticated");
     if (localStorage.getItem("rememberMe"))
       localStorage.removeItem("rememberMe");
-    router.push("/admin/login");
+    router.push("/");
   }
 };

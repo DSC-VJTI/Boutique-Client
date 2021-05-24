@@ -3,6 +3,11 @@
   <div
     class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto pb-10 md:mt-20"
   >
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Admin Login</h1>
     <div>
       <form @submit.prevent="login">
@@ -55,7 +60,10 @@ export default {
       passwordError: "",
       isValid: true,
       rememberMe: false,
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -84,7 +92,12 @@ export default {
         this.isValid = false;
       } else this.usernameError = "";
     },
-
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     async login() {
       this.isLoading = true;
       this.validate();
@@ -111,11 +124,11 @@ export default {
         this.isLoading = false;
         this.$router.replace("/");
       } else if (status === 401) {
-        this.passwordError = "Incorrect Password!";
+        this.displayToast(false, "Incorrect password.");
       } else if (status === 404) {
-        this.usernameError = "User not found!";
+        this.displayToast(false, "User not found.");
       } else {
-        console.log("Something went Wrong", status);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

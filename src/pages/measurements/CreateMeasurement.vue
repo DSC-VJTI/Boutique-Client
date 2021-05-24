@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div>
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
       @submit.prevent="newMeasurement"
@@ -444,11 +449,20 @@ export default {
       imageData: [],
       isValid: true,
       nameError: "",
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
 
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeFile(key) {
       this.images.splice(key, 1);
       this.imageData.splice(key, 1);
@@ -485,7 +499,6 @@ export default {
         this.isValid = false;
       } else this.nameError = "";
     },
-
     async newMeasurement() {
       this.isLoading = true;
       this.validate();
@@ -505,14 +518,13 @@ export default {
       );
 
       if (status === 201) {
-        this.isLoading = false;
-        this.$router.push({
-          name: "seeMeasurements"
-        });
+        this.displayToast(true, "Measurement created successfully.");
+        setTimeout(() => this.$router.push({ name: "seeMeasurements" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }

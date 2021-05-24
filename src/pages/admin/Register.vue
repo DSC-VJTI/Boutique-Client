@@ -3,6 +3,11 @@
   <div
     class="p-5 text-center md:bg-gray-50 md:shadow-2xl w-full md:w-3/5 lg:w-2/5 mx-auto md:my-20"
   >
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Admin Register</h1>
     <div>
       <form @submit.prevent="register">
@@ -65,10 +70,19 @@ export default {
       passwordError: "",
       isAdmin: false,
       isValid: true,
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     validate() {
       this.isValid = true;
 
@@ -119,11 +133,12 @@ export default {
         this.isLoading = false;
         this.$router.replace("/admin/login");
       } else if (status === 400) {
-        this.usernameError = "*Username already taken.";
+        this.displayToast(false, "Username already taken.");
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log("Something went wrong", status);
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

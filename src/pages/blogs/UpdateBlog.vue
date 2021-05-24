@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="m-5 sm:ml-5 inline-block">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
       :to="`/blogs/${blogId}`"
@@ -142,7 +147,10 @@ export default {
       file: null,
       image: null,
       imageData: null,
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
   methods: {
@@ -189,6 +197,13 @@ export default {
       } else this.contentError = "";
     },
 
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
+
     async updateBlog() {
       this.isLoading = true;
       this.validate();
@@ -213,17 +228,20 @@ export default {
         this.resetInputs();
         this.resetErrors();
         this.isLoading = false;
-        this.$router.push({
-          name: "seeBlog",
-          params: {
-            blogId: this.blogId
-          }
-        });
+        this.displayToast(true, "Blog updated successfully.");
+        setTimeout(
+          () =>
+            this.$router.push({
+              name: "seeBlog",
+              params: { blogId: this.blogId }
+            }),
+          3000
+        );
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log(status);
-        alert("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

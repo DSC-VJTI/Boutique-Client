@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div class="p-5 text-center">
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <h1 class="green mb-10">Add Product</h1>
     <div>
       <div class="p-5 text-center">
@@ -149,11 +154,20 @@ export default {
       available_subcategories: [],
       available_categories: [],
       isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false,
       images: [],
       imageData: []
     };
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     removeFile(key) {
       this.images.splice(key, 1);
       this.imageData.splice(key, 1);
@@ -201,15 +215,15 @@ export default {
       });
 
       if (status === 201) {
-        this.resetInputs();
         this.isLoading = false;
-        this.$router.push({
-          name: "viewProducts"
-        });
+        this.resetInputs();
+        this.displayToast(true, "Product created successfully.");
+        setTimeout(() => this.$router.push({ name: "viewProducts" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     },

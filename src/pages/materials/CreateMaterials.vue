@@ -1,6 +1,11 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div>
+    <toast-message
+      :type="isSuccessMsg"
+      :msg="toastMsg"
+      :show="errorOccured"
+    ></toast-message>
     <form
       class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
       @submit.prevent="newMaterial"
@@ -28,16 +33,6 @@
             />
             <br /><span class="text-red-600 font-bold">{{ nameError }}</span>
           </div>
-          <!-- <div class="col-span-1 md:inline-block float-right">
-            <h2 class="inline-block p-2 w-32 mr-4">Mobile Number</h2>
-            <input
-              type="text"
-              class="measurementInput"
-              style="width: 180px;"
-              placeholder="Mobile Number"
-              required
-            />
-          </div> -->
         </div>
         <hr />
         <!-- TOP BOTTOM DUPATTA -->
@@ -225,11 +220,20 @@ export default {
       },
       isValid: true,
       nameError: "",
-      isLoading: false
+      isLoading: false,
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false
     };
   },
 
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     validate() {
       this.isValid = true;
 
@@ -238,7 +242,6 @@ export default {
         this.isValid = false;
       } else this.nameError = "";
     },
-
     async newMaterial() {
       this.isLoading = true;
       this.validate();
@@ -255,13 +258,13 @@ export default {
 
       if (status === 201) {
         this.isLoading = false;
-        this.$router.push({
-          name: "seeMaterials"
-        });
+        this.displayToast(true, "Material created successfully.");
+        setTimeout(() => this.$router.push({ name: "seeMaterials" }), 3000);
       } else if (status === 401) {
-        this.$store.dispatch("user/unauthorize");
+        this.displayToast(false, "You are not authorized.");
+        setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log("Something went wrong");
+        this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
     }
