@@ -12,6 +12,12 @@
       :id="blog.id"
     >
     </blog-item>
+    <h3
+      v-if="blogs.length === 0"
+      class="text-2xl mt-8 font-light text-gray-900"
+    >
+      Blogs on their way, Stay Tuned...
+    </h3>
   </div>
 </template>
 

@@ -16,7 +16,7 @@
       />
     </router-link>
   </div>
-  <div class="w-10/12 md:w-2/3 lg:w-3/5 mx-auto my-10 bg-white p-7 shadow-2xl">
+  <div class="w-10/12 md:w-2/3 lg:w-3/5 mx-auto mb-10 bg-white p-7 shadow-2xl">
     <h1 class="text-gray-800 text-3xl md:text-5xl font-bold font-serif mb-5">
       {{ title }}
     </h1>
@@ -76,22 +76,24 @@ export default {
     }
   },
   methods: {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
     updateBlog() {
       this.$router.push({ path: `update/${this.blogId}` });
     },
-
     async deleteBlog() {
       this.isLoading = true;
       const status = await this.$store.dispatch("blogs/deleteCurrentBlog", {
         token: JSON.parse(localStorage.getItem("user")).access_token,
         blog_id: this.blogId
       });
-
       if (status === 204) {
         this.isLoading = false;
-        this.isSuccessMsg = true;
-        this.toastMsg = "Insertion successful.";
-        this.errorOccured = true;
+        this.displayToast(true, "Blog deleted successfully.");
         setTimeout(() => this.$router.push({ name: "seeBlogs" }), 3000);
       } else if (status === 401) {
         this.displayToast(false, "You are not authorized.");
@@ -146,6 +148,7 @@ export default {
   *margin-right: 0px;
   /* preserved spaces for list items with text direction other than the list.    (#6249,#8049)*/
   padding: 0 40px;
+  list-style-type: disc;
 }
 
 .my-container::v-deep(h2) {

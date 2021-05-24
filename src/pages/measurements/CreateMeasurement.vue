@@ -33,11 +33,6 @@
             />
             <br /><span class="text-red-600 font-bold">{{ nameError }}</span>
           </div>
-          <!-- <div class="col-span-1 md:inline-block float-right">
-                    <h2 class="inline-block p-2 w-32 mr-4">Mobile Number</h2>
-                    <input type="text" class="measurementInput" style="width: 180px;" placeholder="Mobile Number" required v-model="measurement.mobNum"/>
-                    <br/><span class="text-red-600 font-bold">{{ mobnumError }}</span>
-                </div> -->
         </div>
         <hr />
         <!-- DL AC C -->
@@ -354,9 +349,9 @@
           class="w-full justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
         >
           <div class="container">
-            <div>
+            <div class="mb-8">
               <label
-                class="py-2 px-4 bg-green-500 cursor-pointer hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in w-full duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                class="bg-gray-900 cursor-pointer text-green-500 py-2 px-4 hover:bg-gray-50 border hover:border-green-500 transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
                 style="width: 100%;"
                 for="file-input"
                 >Add Files
@@ -377,7 +372,7 @@
               :style="{ 'background-image': `url(${img})` }"
             >
               <span
-                class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
+                class="float-right px-2 m-2 text-white bg-red-500 rounded-full hover:bg-red-600 hover:border-red-800"
                 @click="removeFile(key)"
                 >X</span
               >
@@ -404,8 +399,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-
 export default {
   data() {
     return {
@@ -455,7 +448,6 @@ export default {
       isSuccessMsg: false
     };
   },
-
   methods: {
     displayToast(isSuccessMsg, msg) {
       this.isSuccessMsg = isSuccessMsg;
@@ -498,6 +490,11 @@ export default {
         this.nameError = "*Name cannot be empty. Please enter a valid name.";
         this.isValid = false;
       } else this.nameError = "";
+
+      if (this.images.length === 0) {
+        this.isValid = false;
+        this.displayToast(false, "Please add sketches to measurement.");
+      }
     },
     async newMeasurement() {
       this.isLoading = true;

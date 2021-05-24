@@ -1,15 +1,15 @@
 <template>
-  <div class="mb-10 sm:px-5 px-8">
+  <div class="mb-10 px-5">
     <router-link to="/shop/productId">
       <img
         src="https://images.unsplash.com/photo-1606775524496-8ffd63ad2a98?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=765&q=80"
       />
     </router-link>
-    <div class="mt-8">
-      <p class="font-bold text-base text-black mx-2">
+    <div class="mt-4">
+      <p class="font-medium text-xl text-black mx-2">
         Blue Crew Neck T-Shirt
       </p>
-      <p class="font-bold text-base mb-2 mx-2">
+      <p class="font-light text-2xl mb-2 mx-2">
         Rs. 2500
       </p>
       <div

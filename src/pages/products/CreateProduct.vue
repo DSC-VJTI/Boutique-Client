@@ -197,6 +197,10 @@ export default {
       }
     },
     async newProduct() {
+      if (this.imageData.length === 0) {
+        this.displayToast(false, "Please add photos to the product.");
+        return;
+      }
       this.isLoading = true;
       const body = {
         name: this.name,

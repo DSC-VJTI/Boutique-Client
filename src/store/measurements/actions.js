@@ -85,6 +85,7 @@ export default {
       }
       return response.status;
     } catch (error) {
+      console.log(error);
       return error.response ? error.response.status : 500;
     }
   },

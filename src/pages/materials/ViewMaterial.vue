@@ -45,18 +45,14 @@
       <!-- Personal Info -->
       <h2 class="px-8 text-xl text-gray-800">Personal info</h2>
       <div
-        class="w-full grid col-span-1 md:grid-cols-2 px-8 space-y-2 text-gray-500 md:space-y-0"
+        class="w-full grid grid-cols-1 md:grid-cols-2 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block p-2 w-32 mr-4">
-            Name:<span>{{ material.client_name }}</span>
-          </h2>
-        </div>
-        <div class="col-span-1 md:inline-block float-right">
-          <h2 class="inline-block p-2 w-32 mr-4">
-            Date Created:<span>{{ material.created_on }}</span>
-          </h2>
-        </div>
+        <h2 class="inline-block p-2 mr-4 text-lg">
+          Name:&nbsp;<span>{{ material.client_name }}</span>
+        </h2>
+        <h2 class="inline-block p-2 mr-4 text-lg">
+          Date Created:&nbsp;<span>{{ material.created_on }}</span>
+        </h2>
       </div>
       <hr />
       <!-- TOP BOTTOM DUPATTA -->

@@ -184,11 +184,8 @@ export default {
     validate() {
       this.isValid = true;
 
-      const titlePattern = /^[a-zA-Z0-9]+(([',. -][a-zA-Z0-9 ])?[a-zA-Z0-9]*){1,10}$/g;
-
-      if (!titlePattern.test(this.title)) {
-        this.titleError =
-          "*Please enter a title which is not empty and has not more than 10 words.";
+      if (this.title.length == 0) {
+        this.titleError = "Title cannot be empty.";
         this.isValid = false;
       } else this.titleError = "";
 

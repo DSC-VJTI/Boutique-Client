@@ -26,9 +26,9 @@
         >
           Spring - Summer Collection 2021
         </h1>
-        <button class="blackButton" style="width:160px;">
+        <router-link to="/shop" class="blackButton" style="width:160px;">
           SHOP NOW
-        </button>
+        </router-link>
       </div>
       <div>
         <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
@@ -37,9 +37,9 @@
           >
             Spring - Summer Collection 2021
           </h1>
-          <button class="blackButton" style="width:160px;">
+          <router-link to="/shop" class="blackButton" style="width:160px;">
             SHOP NOW
-          </button>
+          </router-link>
         </div>
       </div>
       <div class="justify-self-center">
@@ -50,14 +50,14 @@
       </div>
     </div>
 
-    <section class="bg-gray-200 p-5 sm:px-40">
+    <section class="bg-gray-200 p-5">
       <h1
-        class="font-extrabold font-serif text-4xl text-center text-black my-5"
+        class="font-extrabold font-serif sm:text-3xl md:text-5xl text-center text-black my-5"
       >
         New Arrivals
       </h1>
       <div
-        class="grid grid-flow-row grid-rows-1 lg:grid-cols-4 lg:grid-rows-2 md:grid-cols-2 md:grid-rows-4 grid-rows-8 gap-4"
+        class="grid grid-flow-row grid-rows-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-8 gap-4"
       >
         <grid-item></grid-item>
         <grid-item></grid-item>
@@ -85,7 +85,7 @@
           scelerisque rutrum ultrices.
         </p>
         <h1 class="font-extrabold font-mono text-4xl text-gray-500 my-10">
-          #Boutique_Name
+          #The_Boutique
         </h1>
       </div>
     </div>

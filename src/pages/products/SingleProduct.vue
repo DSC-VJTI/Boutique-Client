@@ -87,9 +87,7 @@
           style="width:350px;"
           class="px-2 mx-auto mb-5 relative block justify-self-center text-2xl text-white transform transition-all duration-300 py-2 uppercase font-semibold hover:text-green-700 bg-gray-800 hover:scale-103 hover:border-green-800 hover:bg-green-100 border rounded border-transparent"
           target="_blank"
-          :href="
-            `http://wa.me/${whatsappNumber}/?text=Message%20Sent%20Via%20Website`
-          "
+          :href="whatsappLink"
         >
           <img
             class="inline-block mr-2"
@@ -167,24 +165,6 @@ export default {
   components: {
     Thumbnail
   },
-  computed: {
-    isAdmin() {
-      return JSON.parse(localStorage.getItem("user"))
-        ? this.$store.getters["user/getRole"] ||
-            JSON.parse(localStorage.getItem("user")).is_admin
-        : false;
-    },
-    isDiscounted() {
-      return this.price !== this.discount_price;
-    },
-    hasSubcategories() {
-      if (this.sub_categories[0]) return true;
-      else return false;
-    },
-    whatsappNumber() {
-      return process.env.VUE_APP_WHATSAPP_NUMBER;
-    }
-  },
   data() {
     return {
       name: "",
@@ -201,6 +181,26 @@ export default {
       toastMsg: "",
       isSuccessMsg: false
     };
+  },
+  computed: {
+    isAdmin() {
+      return JSON.parse(localStorage.getItem("user"))
+        ? this.$store.getters["user/getRole"] ||
+            JSON.parse(localStorage.getItem("user")).is_admin
+        : false;
+    },
+    isDiscounted() {
+      return this.price !== this.discount_price;
+    },
+    hasSubcategories() {
+      if (this.sub_categories[0]) return true;
+      else return false;
+    },
+    whatsappLink() {
+      let link = `http://wa.me/${process.env.VUE_APP_WHATSAPP_NUMBER}/?text=`;
+      let text = `${process.env.VUE_APP_API_BASE_URL}shop/${this.productId}%0A%0AHello,%0AI%20am%20interested%20in%20${this.name}.%0AHow%20do%20I%20order?`;
+      return link + text;
+    }
   },
   methods: {
     displayToast(isSuccessMsg, msg) {
