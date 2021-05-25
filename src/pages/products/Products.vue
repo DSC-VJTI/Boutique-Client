@@ -246,9 +246,11 @@ export default {
       if (min_price === "") min_price = 0;
       if (max_price === "") max_price = 25000;
 
-      this.products = this.allProducts.filter(
-        p => p.discount_price >= min_price && p.discount_price <= max_price
-      );
+      this.products = this.allProducts.filter(p => {
+        if (p.discount_price !== 0)
+          return p.discount_price >= min_price && p.discount_price <= max_price;
+        return p.price >= min_price && p.price <= max_price;
+      });
 
       if (this.filters.selected_categories.length) {
         const cats = this.filters.selected_categories;
