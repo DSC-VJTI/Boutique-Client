@@ -4,9 +4,13 @@
     <div class="w-full">
       <flickity ref="flickity" :options="flickityOptions">
         <carousel-cell
-          v-for="cell in carouselCells"
-          :imageURL="cell.url"
-          :key="cell.id"
+          v-for="(cell, i) in carouselCells"
+          :id="cell.id"
+          :imageURL="cell.image"
+          :title="cell.title"
+          :tag="cell.tag"
+          :description="cell.description"
+          :key="i"
         ></carousel-cell>
       </flickity>
     </div>
@@ -89,8 +93,6 @@
         </h1>
       </div>
     </div>
-
-    <!-- <div></div> -->
   </div>
 </template>
 
@@ -109,39 +111,13 @@ export default {
   data() {
     return {
       flickityOptions: {
-        initialIndex: 2,
+        initialIndex: 0,
         prevNextButtons: true,
         pageDots: true,
         wrapAround: true,
         autoPlay: 2500
       },
-      carouselCells: [
-        {
-          id: 1,
-          url:
-            "https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-        },
-        {
-          id: 2,
-          url:
-            "https://images.unsplash.com/photo-1560243563-062bfc001d68?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80"
-        },
-        {
-          id: 3,
-          url:
-            "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80"
-        },
-        {
-          id: 4,
-          url:
-            "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80"
-        },
-        {
-          id: 5,
-          url:
-            "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-        }
-      ],
+      carouselCells: [{}, {}, {}, {}],
       gridImages: [
         {
           id: 1,
@@ -175,6 +151,11 @@ export default {
         }
       ]
     };
+  },
+  async created() {
+    const slides = await this.$store.dispatch("carousel/getAllSlides");
+    this.carouselCells = slides;
+    console.log(this.carouselCells);
   }
 };
 </script>
