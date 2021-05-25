@@ -1,9 +1,17 @@
 <template lang="html">
+  <base-spinner :show="isLoading"></base-spinner>
+  <toast-message
+    :type="isSuccessMsg"
+    :msg="toastMsg"
+    :show="errorOccured"
+  ></toast-message>
   <div class="w-full">
     <!-- Carousel -->
     <div class="w-full">
       <flickity ref="flickity" :options="flickityOptions">
         <carousel-cell
+          @loading="setIsLoading"
+          @toast="displayToast"
           v-for="(cell, i) in carouselCells"
           :id="cell.id"
           :imageURL="cell.image"
@@ -110,6 +118,10 @@ export default {
   },
   data() {
     return {
+      errorOccured: false,
+      toastMsg: "",
+      isSuccessMsg: false,
+      isLoading: false,
       flickityOptions: {
         initialIndex: 0,
         prevNextButtons: true,
@@ -117,7 +129,7 @@ export default {
         wrapAround: true,
         autoPlay: 2500
       },
-      carouselCells: [{}, {}, {}, {}],
+      carouselCells: [],
       gridImages: [
         {
           id: 1,
@@ -152,10 +164,26 @@ export default {
       ]
     };
   },
+  methods: {
+    setIsLoading(value) {
+      this.isLoading = value;
+    },
+    displayToast({ isSuccessMsg, msg }) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+      this.$refs.flickity.destroy();
+      this.$refs.flickity.init();
+    }
+  },
   async created() {
     const slides = await this.$store.dispatch("carousel/getAllSlides");
     this.carouselCells = slides;
-    console.log(this.carouselCells);
+    this.$nextTick(() => {
+      this.$refs.flickity.destroy();
+      this.$refs.flickity.init();
+    });
   }
 };
 </script>
