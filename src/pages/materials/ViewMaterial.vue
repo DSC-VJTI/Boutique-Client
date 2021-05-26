@@ -8,7 +8,7 @@
     ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
-      to="/materials"
+      to="/costlist"
     >
       <img
         class="transform rotate-90 inline-block"
@@ -57,42 +57,41 @@
       <hr />
       <!-- TOP BOTTOM DUPATTA -->
       <div
-        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        class="w-full grid col-span-1 text-center justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block p-2 w-10 mr-4 text-center">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             TOP:<span>{{ material.top }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             BOTTOM:<span>{{ material.bottom }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block p-2 w-10 text-center mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             DUPATTA:<span>{{ material.dupatta }}</span>
           </h2>
         </div>
       </div>
       <hr />
       <!-- LINING LACES EMROIDERY -->
-      <h2 class="px-8 text-xl text-gray-800">L</h2>
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             LINING:<span>{{ material.lining }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             LACES:<span>{{ material.laces }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             EMROIDERY:<span>{{ material.emroidery }}</span>
           </h2>
         </div>
@@ -102,18 +101,18 @@
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             PIPING:<span>{{ material.piping }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             ZIP:<span>{{ material.zip }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             BUTTONS:<span>{{ material.buttons }}</span>
           </h2>
         </div>
@@ -124,21 +123,32 @@
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             TAILORING:<span>{{ material.tailoring }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             CONVAYANCE:<span>{{ material.convayance }}</span>
           </h2>
         </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
+        <div class="col-span-1 md:inline-block">
+          <h2 class="inline-block p-2 w-full">
             OVERHEADS:<span>{{ material.overheads }}</span>
           </h2>
         </div>
+      </div>
+      <hr />
+      <!-- TOTAL PRICE -->
+      <div
+        class="w-full grid col-span-1 justify-items-center pb-6 px-8 space-y-2 text-gray-500 md:space-y-0"
+      >
+        <div class="col-span-1 md:inline-block">
+            <h2 class="inline-block text-xl font-bold p-2">
+              TOTAL COST : <span>{{ totalCost }} ₹</span>
+            </h2>
+          </div>
       </div>
     </div>
   </div>
@@ -153,9 +163,21 @@ export default {
       isLoading: false,
       errorOccured: false,
       toastMsg: "",
-      isSuccessMsg: false
+      isSuccessMsg: false,
     };
   },
+  
+  computed: {
+    totalCost: function(){
+      let sum = 0;
+      for (const item in this.material) {
+        if(item === "client_name" || item === "last_updated" || item === "id" || item === "created_on" || this.material[item] === "") {continue;}
+        sum += parseFloat(this.material[item]);
+      }
+      return sum;
+    }
+  },
+
   methods: {
     displayToast(isSuccessMsg, msg) {
       this.isSuccessMsg = isSuccessMsg;
@@ -178,7 +200,7 @@ export default {
 
       if (status === 204) {
         this.isLoading = false;
-        this.displayToast(true, "Material deleted successfully.");
+        this.displayToast(true, "Cost List deleted successfully.");
         setTimeout(() => this.$router.push({ name: "seeMaterials" }), 3000);
       } else if (status === 401) {
         this.displayToast(false, "You are not authorized.");

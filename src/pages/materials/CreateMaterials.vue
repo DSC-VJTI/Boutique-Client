@@ -7,14 +7,14 @@
       :show="errorOccured"
     ></toast-message>
     <form
-      class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
+      class="container max-w-4xl mx-auto sm:my-8 shadow-md md:w-3/4"
       @submit.prevent="newMaterial"
     >
       <div class="space-y-6 bg-white">
         <div
           class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
         >
-          <h2 class="mx-auto text-2xl text-gray-700">Create New Material</h2>
+          <h2 class="mx-auto text-2xl text-gray-700">Create New Cost List</h2>
         </div>
         <!-- Personal Info -->
         <h2 class="px-8 text-xl text-gray-800">Personal info</h2>
@@ -179,7 +179,6 @@
             />
           </div>
         </div>
-        <hr />
 
         <!-- SAVE -->
         <div
@@ -258,7 +257,7 @@ export default {
 
       if (status === 201) {
         this.isLoading = false;
-        this.displayToast(true, "Material created successfully.");
+        this.displayToast(true, "Cost List created successfully.");
         setTimeout(() => this.$router.push({ name: "seeMaterials" }), 3000);
       } else if (status === 401) {
         this.displayToast(false, "You are not authorized.");
