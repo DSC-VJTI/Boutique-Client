@@ -14,12 +14,12 @@ async function uploadToCloudinary(img, name) {
   let preset = process.env.VUE_APP_PRESET;
   let api_key = process.env.VUE_APP_API_KEY;
 
-  let public_id = "carousel/" + name;
-  let signature = `overwrite=true&public_id=${public_id}&tags=slide_cover&timestamp=${timeStamp}&upload_preset=${preset}${process.env.VUE_APP_API_SECRET}`;
+  let public_id = "collections/" + name;
+  let signature = `overwrite=true&public_id=${public_id}&tags=collection_img&timestamp=${timeStamp}&upload_preset=${preset}${process.env.VUE_APP_API_SECRET}`;
 
   const formData = new FormData();
   formData.append("file", img);
-  formData.append("tags", "slide_cover");
+  formData.append("tags", "collection_img");
   formData.append("public_id", public_id);
   formData.append("overwrite", true);
   formData.append("signature", getSignature(signature));
@@ -40,10 +40,10 @@ async function uploadToCloudinary(img, name) {
 }
 
 export default {
-  async createNewSlide(context, payload) {
+  async createCollection(context, payload) {
     if (payload.image) {
       let imgurl = await uploadToCloudinary(payload.image, payload.body.title);
-      if (NaN(imgurl)) payload.body.image = imgurl;
+      if (isNaN(imgurl)) payload.body.image = imgurl;
       else return imgurl;
     } else {
       payload.body.image = null;
@@ -51,7 +51,7 @@ export default {
 
     try {
       const response = await axios.post(
-        context.rootGetters.getUrl + "api/admin/carousel/",
+        context.rootGetters.getUrl + "api/admin/collections/",
         payload.body,
         {
           headers: {
@@ -61,10 +61,10 @@ export default {
         }
       );
       if (response.status == 201 && response.data) {
-        const slides = context.getters.getSlides;
-        slides.push(response.data);
-        context.commit("setSlides", {
-          slides: slides
+        const collections = context.getters.getCollections;
+        collections.push(response.data);
+        context.commit("setCollections", {
+          collections: collections
         });
       }
       return response.status;
@@ -73,30 +73,30 @@ export default {
     }
   },
 
-  async getAllSlides(context) {
-    const slides = context.getters.getSlides;
-    if (slides.length !== 0) return slides;
+  async getAllCollections(context) {
+    const collections = context.getters.getCollections;
+    if (collections.length !== 0) return collections;
     //In case store is empty
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + "api/admin/carousel/",
+        context.rootGetters.getUrl + "api/admin/collections/",
         context.rootGetters.getConfig
       );
-      context.commit("setSlides", { slides: response.data });
+      context.commit("setCollections", { collections: response.data });
       return response.data;
     } catch (error) {
       return error.response ? error.response.status : 500;
     }
   },
 
-  async getASlide(context, payload) {
-    const slides = context.getters.getSlides;
-    const slide = slides.filter(s => s.id == payload.slide_id);
-    if (slide.length) return slide[0];
+  async getACollection(context, payload) {
+    const collections = context.getters.getCollections;
+    const collection = collections.filter(s => s.id == payload.c_id);
+    if (collection.length) return collection[0];
 
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}/`,
+        context.rootGetters.getUrl + `api/admin/collections/${payload.c_id}/`,
         {
           headers: {
             ContentType: "application/json"
@@ -109,7 +109,7 @@ export default {
     }
   },
 
-  async updateSlide(context, payload) {
+  async updateCollection(context, payload) {
     if (payload.image) {
       let imgurl = await uploadToCloudinary(payload.image, payload.body.title);
       if (imgurl) payload.body.image = imgurl;
@@ -117,7 +117,7 @@ export default {
     }
     try {
       const response = await axios.put(
-        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}/`,
+        context.rootGetters.getUrl + `api/admin/collections/${payload.c_id}/`,
         payload.body,
         {
           headers: {
@@ -127,13 +127,15 @@ export default {
         }
       );
       if (response.status == 200 && response.data) {
-        const slides = context.getters.getSlides;
-        const slideIndex = slides.findIndex(s => s.id == payload.slide_id);
-        if (slideIndex !== -1) {
-          slides[slideIndex] = response.data;
+        const collections = context.getters.getCollections;
+        const collectionIndex = collections.findIndex(
+          s => s.id == payload.c_id
+        );
+        if (collectionIndex !== -1) {
+          collections[collectionIndex] = response.data;
         }
-        context.commit("setSlides", {
-          slides: slides
+        context.commit("setCollections", {
+          collections: collections
         });
       }
       return response.status;
@@ -142,10 +144,10 @@ export default {
     }
   },
 
-  async deleteSlide(context, payload) {
+  async deleteCollection(context, payload) {
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}/`,
+        context.rootGetters.getUrl + `api/admin/collections/${payload.c_id}/`,
         {
           headers: {
             ContentType: "application/json",
@@ -155,13 +157,15 @@ export default {
       );
 
       if (response.status == 204) {
-        const slides = context.getters.getSlides;
-        const slideIndex = slides.findIndex(s => s.id == payload.slide_id);
+        const collections = context.getters.getCollections;
+        const collectionIndex = collections.findIndex(
+          s => s.id == payload.c_id
+        );
 
-        if (slideIndex !== -1) {
-          slides.splice(slideIndex, 1);
-          context.commit("setSlides", {
-            slides: slides
+        if (collectionIndex !== -1) {
+          collections.splice(collectionIndex, 1);
+          context.commit("setCollections", {
+            collections: collections
           });
         }
       }

@@ -21,7 +21,7 @@
       <div
         class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
       >
-        <h2 class="mx-auto text-2xl text-gray-700">Create New Slide</h2>
+        <h2 class="mx-auto text-2xl text-gray-700">Update Collection</h2>
       </div>
       <div class="p-5 text-center">
         <label
@@ -50,24 +50,16 @@
           >X</span
         >
       </div>
-      <form class="mx-5" @submit.prevent="newSlide">
+      <form class="mx-5" @submit.prevent="updateCollection">
         <div class="form-group">
           <input
             class="form-control"
             type="text"
-            placeholder="Title of slide"
+            placeholder="Title of collection"
             v-model.trim="title"
             required
           />
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
-        </div>
-        <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Tag"
-            v-model.trim="tag"
-          />
         </div>
         <div class="form-group">
           <textarea
@@ -88,13 +80,14 @@
 
 <script>
 export default {
+  props: ["cId"],
   data() {
     return {
       title: "",
       titleError: "",
-      tag: "",
       description: "",
       isValid: true,
+      file: null,
       image: null,
       imageData: null,
       isLoading: false,
@@ -104,22 +97,19 @@ export default {
     };
   },
   methods: {
-    displayToast(isSuccessMsg, msg) {
-      this.isSuccessMsg = isSuccessMsg;
-      this.toastMsg = msg;
-      this.errorOccured = true;
-      setTimeout(() => (this.errorOccured = false), 3000);
-    },
     removeFile() {
+      this.file = null;
       this.image = null;
       this.imageData = null;
     },
     selectImage() {
+      this.file = null;
       this.imageData = null;
 
       let uploadedFile = this.$refs.files.files[0];
-      this.image = uploadedFile;
+      this.file = uploadedFile;
 
+      // for (let img of this.images) {
       if (uploadedFile && uploadedFile.name) {
         let reader = new FileReader();
         reader.addEventListener(
@@ -140,11 +130,15 @@ export default {
         this.isValid = false;
       } else this.titleError = "";
     },
-
-    async newSlide() {
+    displayToast(isSuccessMsg, msg) {
+      this.isSuccessMsg = isSuccessMsg;
+      this.toastMsg = msg;
+      this.errorOccured = true;
+      setTimeout(() => (this.errorOccured = false), 3000);
+    },
+    async updateCollection() {
       this.isLoading = true;
       this.validate();
-
       if (!this.isValid) {
         this.isLoading = false;
         return;
@@ -153,29 +147,29 @@ export default {
       let payload = {
         body: {
           title: this.title,
-          tag: this.tag,
-          description: this.description
+          description: this.description,
+          image: this.image
         },
-        image: this.image,
-        token: JSON.parse(localStorage.getItem("user")).access_token
+        image: this.file,
+        token: JSON.parse(localStorage.getItem("user")).access_token,
+        c_id: this.cId
       };
 
       const status = await this.$store.dispatch(
-        "carousel/createNewSlide",
+        "collections/updateCollection",
         payload
       );
 
-      if (status === 201) {
+      if (status === 200) {
         this.resetInputs();
         this.resetErrors();
         this.isLoading = false;
-        this.displayToast(true, "Carousel slide created successfully.");
+        this.displayToast(true, "Collection updated successfully.");
         setTimeout(() => this.$router.push({ path: "/" }), 3000);
       } else if (status === 401) {
         this.displayToast(false, "You are not authorized.");
         setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
       } else {
-        console.log(status);
         this.displayToast(false, "Something went wrong.");
       }
       this.isLoading = false;
@@ -185,12 +179,12 @@ export default {
     },
     resetInputs() {
       this.title = "";
-      this.tag = "";
       this.description = "";
-      this.imageData = [];
+      this.imageData = "";
     }
   },
-  created() {
+
+  async created() {
     if (!this.$store.getters["user/getRole"]) {
       const payload = JSON.parse(localStorage.getItem("user"));
       if (!payload || !payload.is_admin) this.$router.replace("/admin/login");
@@ -199,6 +193,18 @@ export default {
         this.$store.commit("user/setUser", payload);
       }
     }
+    this.isLoading = true;
+    const collection = await this.$store.dispatch(
+      "collections/getACollection",
+      {
+        c_id: this.cId
+      }
+    );
+    this.title = collection.title;
+    this.description = collection.description;
+    this.image = collection.image;
+    this.imageData = collection.image;
+    this.isLoading = false;
   }
 };
 </script>

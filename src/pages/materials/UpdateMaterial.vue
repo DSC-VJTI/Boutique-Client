@@ -197,12 +197,12 @@
           class="w-full grid col-span-1 justify-items-center pb-6 px-8 space-y-2 text-gray-500 md:space-y-0"
         >
           <div class="col-span-1 md:inline-block">
-              <h2 class="inline-block text-xl font-bold p-2">
-                TOTAL COST : <span>{{ totalCost }} ₹</span>
-              </h2>
-            </div>
+            <h2 class="inline-block text-xl font-bold p-2">
+              TOTAL COST : <span>{{ totalCost }} ₹</span>
+            </h2>
+          </div>
         </div>
-        
+
         <!-- SAVE -->
         <div
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -237,11 +237,19 @@ export default {
   },
 
   computed: {
-    totalCost: function(){
+    totalCost: function() {
       let sum = 0;
       for (const item in this.material) {
-        if(item === "client_name" || item === "last_updated" || item === "id" || item === "created_on" || this.material[item] === "") {continue;}
-        
+        if (
+          item === "client_name" ||
+          item === "last_updated" ||
+          item === "id" ||
+          item === "created_on" ||
+          this.material[item] === ""
+        ) {
+          continue;
+        }
+
         sum += parseFloat(this.material[item]);
       }
       return sum;

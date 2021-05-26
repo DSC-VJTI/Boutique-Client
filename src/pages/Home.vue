@@ -23,44 +23,20 @@
       </flickity>
     </div>
 
-    <div
-      class="grid sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 gap-4 my-10 mx-6"
-    >
-      <div class="justify-self-center">
-        <img
-          class="h-screen w-auto"
-          src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGhlc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        />
-      </div>
-      <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
-        <h1
-          class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4"
-        >
-          Spring - Summer Collection 2021
-        </h1>
-        <router-link to="/shop" class="blackButton" style="width:160px;">
-          SHOP NOW
-        </router-link>
-      </div>
-      <div>
-        <div class="absolute sm:relative sm:pt-52 sm:pl-20 mt-10 ml-6">
-          <h1
-            class="font-extrabold font-serif text-5xl text-white sm:text-black mb-5 w-full p-4"
-          >
-            Spring - Summer Collection 2021
-          </h1>
-          <router-link to="/shop" class="blackButton" style="width:160px;">
-            SHOP NOW
-          </router-link>
-        </div>
-      </div>
-      <div class="justify-self-center">
-        <img
-          class="h-screen"
-          src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTh8fGNsb3RoZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        />
-      </div>
-    </div>
+    <section class="my-10">
+      <collection
+        class="m-4 md:m-10 px-8 md:px-20 flex flex-col md:flex-row w-full justify-evenly h-96"
+        @loading="setIsLoading"
+        @toast="displayToast"
+        v-for="(cell, ind) in collections"
+        :key="ind"
+        :id="cell.id"
+        :image="cell.image"
+        :title="cell.title"
+        :description="cell.description"
+      >
+      </collection>
+    </section>
 
     <section class="bg-gray-200 p-5">
       <h1
@@ -108,13 +84,15 @@
 import Flickity from "../components/home/Flickity.vue";
 import CarouselCell from "../components/home/CarouselCell.vue";
 import GridItem from "../components/home/GridItem.vue";
+import Collection from "../components/home/Collection.vue";
 
 export default {
   name: "App",
   components: {
     Flickity,
     CarouselCell,
-    GridItem
+    GridItem,
+    Collection
   },
   data() {
     return {
@@ -130,6 +108,7 @@ export default {
         autoPlay: 2500
       },
       carouselCells: [],
+      collections: [],
       gridImages: [
         {
           id: 1,
@@ -164,6 +143,14 @@ export default {
       ]
     };
   },
+  computed: {
+    isAdmin() {
+      return JSON.parse(localStorage.getItem("user"))
+        ? this.$store.getters["user/getRole"] ||
+            JSON.parse(localStorage.getItem("user")).is_admin
+        : false;
+    }
+  },
   methods: {
     setIsLoading(value) {
       this.isLoading = value;
@@ -180,7 +167,11 @@ export default {
   async created() {
     this.isLoading = true;
     const slides = await this.$store.dispatch("carousel/getAllSlides");
+    const collections = await this.$store.dispatch(
+      "collections/getAllCollections"
+    );
     this.carouselCells = slides;
+    this.collections = collections;
     this.$nextTick(() => {
       this.$refs.flickity.destroy();
       this.$refs.flickity.init();
