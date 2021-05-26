@@ -36,6 +36,9 @@ import UpdateMaterial from "./pages/materials/UpdateMaterial.vue";
 import CreateCarouselSlide from "./pages/landing/carousel/CreateSlide.vue";
 import UpdateCarouselSlide from "./pages/landing/carousel/UpdateSlide.vue";
 
+import CreateCollection from "./pages/landing/collections/CreateCollection.vue";
+import UpdateCollection from "./pages/landing/collections/UpdateCollection.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -152,6 +155,19 @@ const router = createRouter({
       name: "updateSlide",
       path: "/landing/carousel/update/:slideId",
       component: UpdateCarouselSlide,
+      props: true
+    },
+
+    // Collections
+    {
+      name: "createCollection",
+      path: "/landing/collections/new",
+      component: CreateCollection
+    },
+    {
+      name: "UpdateCollection",
+      path: "/landing/collections/update/:cId",
+      component: UpdateCollection,
       props: true
     },
 

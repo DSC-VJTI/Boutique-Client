@@ -102,6 +102,7 @@
                 v-if="isAdmin"
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
                 to="/categories"
+                @click="toggleNavbar"
                 >Categories</router-link
               >
             </div>
@@ -118,6 +119,12 @@
                 to="/landing/carousel/new"
                 @click="toggleNavbar"
                 >Add to Carousel</router-link
+              >
+              <router-link
+                class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
+                to="/landing/collections/new"
+                @click="toggleNavbar"
+                >Add to Collections</router-link
               >
             </div>
           </div>

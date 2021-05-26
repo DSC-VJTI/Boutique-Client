@@ -21,7 +21,7 @@
       <div
         class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
       >
-        <h2 class="mx-auto text-2xl text-gray-700">Create New Slide</h2>
+        <h2 class="mx-auto text-2xl text-gray-700">Create Collection</h2>
       </div>
       <div class="p-5 text-center">
         <label
@@ -50,24 +50,16 @@
           >X</span
         >
       </div>
-      <form class="mx-5" @submit.prevent="newSlide">
+      <form class="mx-5" @submit.prevent="newCollection">
         <div class="form-group">
           <input
             class="form-control"
             type="text"
-            placeholder="Title of slide"
+            placeholder="Title of collection"
             v-model.trim="title"
             required
           />
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
-        </div>
-        <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Tag"
-            v-model.trim="tag"
-          />
         </div>
         <div class="form-group">
           <textarea
@@ -92,7 +84,6 @@ export default {
     return {
       title: "",
       titleError: "",
-      tag: "",
       description: "",
       isValid: true,
       image: null,
@@ -141,7 +132,7 @@ export default {
       } else this.titleError = "";
     },
 
-    async newSlide() {
+    async newCollection() {
       this.isLoading = true;
       this.validate();
 
@@ -153,7 +144,6 @@ export default {
       let payload = {
         body: {
           title: this.title,
-          tag: this.tag,
           description: this.description
         },
         image: this.image,
@@ -161,7 +151,7 @@ export default {
       };
 
       const status = await this.$store.dispatch(
-        "carousel/createNewSlide",
+        "collections/createCollection",
         payload
       );
 
@@ -169,7 +159,7 @@ export default {
         this.resetInputs();
         this.resetErrors();
         this.isLoading = false;
-        this.displayToast(true, "Carousel slide created successfully.");
+        this.displayToast(true, "Collection created successfully.");
         setTimeout(() => this.$router.push({ path: "/" }), 3000);
       } else if (status === 401) {
         this.displayToast(false, "You are not authorized.");
@@ -185,7 +175,6 @@ export default {
     },
     resetInputs() {
       this.title = "";
-      this.tag = "";
       this.description = "";
       this.imageData = [];
     }

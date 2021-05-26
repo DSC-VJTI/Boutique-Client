@@ -8,7 +8,7 @@
     ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
-      to="/blogs"
+      to="/"
     >
       <img
         class="transform rotate-90 inline-block"
@@ -21,7 +21,7 @@
       <div
         class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
       >
-        <h2 class="mx-auto text-2xl text-gray-700">Create New Slide</h2>
+        <h2 class="mx-auto text-2xl text-gray-700">Update Slide</h2>
       </div>
       <div class="p-5 text-center">
         <label

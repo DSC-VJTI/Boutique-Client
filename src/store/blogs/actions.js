@@ -43,7 +43,7 @@ export default {
   async createNewBlog(context, payload) {
     if (payload.image) {
       let imgurl = await uploadToCloudinary(payload.image, payload.body.title);
-      if (imgurl) payload.body.image = imgurl;
+      if (isNaN(imgurl)) payload.body.image = imgurl;
       else return imgurl;
     } else {
       payload.body.image = null;
