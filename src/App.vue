@@ -73,9 +73,9 @@
               >
               <router-link
                 class="bg-white text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
-                to="/materials"
+                to="/costlist"
                 @click="toggleNavbar"
-                >Materials</router-link
+                >Cost List</router-link
               >
               <router-link
                 v-if="isAdmin"

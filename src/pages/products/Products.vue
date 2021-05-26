@@ -28,7 +28,7 @@
       <!-- SIDEBAR -->
       <div class="col-span-1 md:col-span-3 p-5">
         <!-- search bar -->
-        <div class="mb-8 p-0 8text-sm text-gray-700">
+        <div class="mb-8 p-0 text-sm text-gray-700">
           <form
             @submit.prevent="null"
             class="px-4 py-2 relative border border-gray-400 rounded-md"

@@ -31,7 +31,7 @@ export default {
   props: ["id", "name", "dateCreated"],
   computed: {
     materialLink() {
-      return "/materials/" + this.id;
+      return "/costlist/" + this.id;
     }
   }
 };
