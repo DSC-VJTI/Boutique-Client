@@ -23,7 +23,7 @@
       </flickity>
     </div>
 
-    <section class="my-10">
+    <section class="my-16">
       <collection
         class="m-4 md:m-10 px-8 md:px-20 flex flex-col md:flex-row w-full justify-evenly h-96"
         @loading="setIsLoading"
@@ -34,29 +34,15 @@
         :image="cell.image"
         :title="cell.title"
         :description="cell.description"
+        :reverse="ind % 2 === 0"
       >
       </collection>
     </section>
 
-    <section class="bg-gray-200 p-5">
-      <h1
-        class="font-extrabold font-serif sm:text-3xl md:text-5xl text-center text-black my-5"
-      >
-        New Arrivals
-      </h1>
-      <div
-        class="grid grid-flow-row grid-rows-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-8 gap-4"
-      >
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-        <grid-item></grid-item>
-      </div>
-    </section>
+    <new-arrivals-grid
+      :newArrivals="newArrivals"
+      v-if="this.newArrivals.length > 0"
+    />
 
     <div class="grid lg:grid-cols-3 lg:grid-rows-1 sm:px-40">
       <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 sm:m-0">
@@ -83,16 +69,16 @@
 <script>
 import Flickity from "../components/home/Flickity.vue";
 import CarouselCell from "../components/home/CarouselCell.vue";
-import GridItem from "../components/home/GridItem.vue";
 import Collection from "../components/home/Collection.vue";
+import NewArrivalsGrid from "../components/home/NewArrivals/NewArrivalsGrid.vue";
 
 export default {
   name: "App",
   components: {
     Flickity,
     CarouselCell,
-    GridItem,
-    Collection
+    Collection,
+    NewArrivalsGrid
   },
   data() {
     return {
@@ -109,6 +95,7 @@ export default {
       },
       carouselCells: [],
       collections: [],
+      newArrivals: [],
       gridImages: [
         {
           id: 1,
@@ -170,6 +157,14 @@ export default {
     const collections = await this.$store.dispatch(
       "collections/getAllCollections"
     );
+    const products = await this.$store.dispatch("products/getAllProducts");
+    this.newArrivals = products
+      .sort((a, b) => {
+        if (a.id > b.id) return -1;
+        else if (a.id < b.id) return 1;
+        return 0;
+      })
+      .slice(0, 3);
     this.carouselCells = slides;
     this.collections = collections;
     this.$nextTick(() => {

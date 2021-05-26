@@ -38,18 +38,21 @@
           />
         </label>
       </div>
-      <div
-        v-if="imageData"
-        class="col-span-3 file-listing sketchPreview"
-        :style="{ 'background-image': `url(${imageData})` }"
-      >
-        <span
+      <div class="w-full text-center">
+        <div
           v-if="imageData"
-          class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
-          @click="removeFile()"
-          >X</span
+          class="col-span-3 file-listing sketchPreview"
+          :style="{ 'background-image': `url(${imageData})` }"
         >
+          <span
+            v-if="imageData"
+            class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
+            @click="removeFile()"
+            >X</span
+          >
+        </div>
       </div>
+
       <form class="mx-5" @submit.prevent="newSlide">
         <div class="form-group">
           <input
