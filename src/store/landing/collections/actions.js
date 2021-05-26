@@ -128,7 +128,9 @@ export default {
       );
       if (response.status == 200 && response.data) {
         const collections = context.getters.getCollections;
-        const collectionIndex = collections.findIndex(s => s.id == payload.c_id);
+        const collectionIndex = collections.findIndex(
+          s => s.id == payload.c_id
+        );
         if (collectionIndex !== -1) {
           collections[collectionIndex] = response.data;
         }
@@ -156,7 +158,9 @@ export default {
 
       if (response.status == 204) {
         const collections = context.getters.getCollections;
-        const collectionIndex = collections.findIndex(s => s.id == payload.c_id);
+        const collectionIndex = collections.findIndex(
+          s => s.id == payload.c_id
+        );
 
         if (collectionIndex !== -1) {
           collections.splice(collectionIndex, 1);

@@ -194,9 +194,12 @@ export default {
       }
     }
     this.isLoading = true;
-    const collection = await this.$store.dispatch("collections/getACollection", {
-      c_id: this.cId
-    });
+    const collection = await this.$store.dispatch(
+      "collections/getACollection",
+      {
+        c_id: this.cId
+      }
+    );
     this.title = collection.title;
     this.description = collection.description;
     this.image = collection.image;

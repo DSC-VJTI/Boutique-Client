@@ -23,7 +23,6 @@
       </flickity>
     </div>
 
-
     <section class="my-10">
       <collection
         class="m-4 md:m-10 px-8 md:px-20 flex flex-col md:flex-row w-full justify-evenly h-96"
@@ -38,7 +37,6 @@
       >
       </collection>
     </section>
-
 
     <section class="bg-gray-200 p-5">
       <h1
@@ -86,7 +84,7 @@
 import Flickity from "../components/home/Flickity.vue";
 import CarouselCell from "../components/home/CarouselCell.vue";
 import GridItem from "../components/home/GridItem.vue";
-import Collection from "../components/home/Collection.vue"
+import Collection from "../components/home/Collection.vue";
 
 export default {
   name: "App",
@@ -169,7 +167,9 @@ export default {
   async created() {
     this.isLoading = true;
     const slides = await this.$store.dispatch("carousel/getAllSlides");
-    const collections = await this.$store.dispatch("collections/getAllCollections");
+    const collections = await this.$store.dispatch(
+      "collections/getAllCollections"
+    );
     this.carouselCells = slides;
     this.collections = collections;
     this.$nextTick(() => {
