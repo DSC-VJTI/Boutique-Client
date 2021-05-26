@@ -5,6 +5,7 @@ import productsModule from "./products/index";
 import measurementsModule from "./measurements/index";
 import materialsModule from "./materials/index";
 import categoriesModule from "./categories/index";
+import carousel from "./landing/carousel/index";
 
 const store = createStore({
   modules: {
@@ -13,11 +14,11 @@ const store = createStore({
     products: productsModule,
     measurements: measurementsModule,
     materials: materialsModule,
-    categories: categoriesModule
+    categories: categoriesModule,
+    carousel: carousel
   },
   state() {
     return {
-      // url: process.env.VUE_APP_API_BASE_URL,
       url:
         process.env.VUE_APP_API_BASE_URL ||
         "https://boutique-server.herokuapp.com/",

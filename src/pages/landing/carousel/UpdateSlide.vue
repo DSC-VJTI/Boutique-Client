@@ -8,7 +8,7 @@
     ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
-      :to="`/blogs/${blogId}`"
+      to="/blogs"
     >
       <img
         class="transform rotate-90 inline-block"
@@ -16,14 +16,16 @@
       />
     </router-link>
   </div>
-  <div class="mb-5 text-center">
-    <h1 class="text-gray-800 text-3xl md:text-5xl font-bold font-serif mb-12">
-      Update Blog
-    </h1>
-    <div>
+  <div class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4">
+    <div class="space-y-6 bg-white">
+      <div
+        class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
+      >
+        <h2 class="mx-auto text-2xl text-gray-700">Create New Slide</h2>
+      </div>
       <div class="p-5 text-center">
         <label
-          class="bg-gray-900 text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
+          class="bg-gray-900 cursor-pointer text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
           style="width: 100%;"
           for="file-input"
           >Add Cover Photo
@@ -37,6 +39,7 @@
         </label>
       </div>
       <div
+        v-if="imageData"
         class="col-span-3 file-listing sketchPreview"
         :style="{ 'background-image': `url(${imageData})` }"
       >
@@ -47,27 +50,36 @@
           >X</span
         >
       </div>
-      <form class="mx-5" @submit.prevent="updateBlog">
-        <div class="form-group mb-8">
+      <form class="mx-5" @submit.prevent="updateSlide">
+        <div class="form-group">
           <input
             class="form-control"
             type="text"
-            placeholder="Title of the Blog"
+            placeholder="Title of slide"
             v-model.trim="title"
             required
           />
           <br /><span class="text-red-600 font-bold">{{ titleError }}</span>
         </div>
         <div class="form-group">
-          <ckeditor
-            :editor="editor"
-            v-model="editorData"
-            :config="editorConfig"
-          ></ckeditor>
-          <br /><span class="text-red-600 font-bold">{{ contentError }}</span>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Tag"
+            v-model.trim="tag"
+          />
         </div>
         <div class="form-group">
-          <button class="mt-3" style="width:100px;">Update</button>
+          <textarea
+            class="form-control"
+            type="text"
+            placeholder="Description"
+            v-model.trim="description"
+            rows="5"
+          ></textarea>
+        </div>
+        <div class="mx-auto w-4/5 md:w-1/4 form-group">
+          <button type="submit">Save</button>
         </div>
       </form>
     </div>
@@ -75,75 +87,15 @@
 </template>
 
 <script>
-import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
-import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
-import Autoformat from "@ckeditor/ckeditor5-autoformat/src/autoformat";
-import BlockQuote from "@ckeditor/ckeditor5-block-quote/src/blockquote";
-import Heading from "@ckeditor/ckeditor5-heading/src/heading";
-import Font from "@ckeditor/ckeditor5-font/src/font";
-import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
-import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic";
-import Underline from "@ckeditor/ckeditor5-basic-styles/src/underline";
-import Strikethrough from "@ckeditor/ckeditor5-basic-styles/src/strikethrough";
-import Link from "@ckeditor/ckeditor5-link/src/link";
-import List from "@ckeditor/ckeditor5-list/src/list";
-import ListStyle from "@ckeditor/ckeditor5-list/src/liststyle";
-import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
-import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
-
 export default {
-  props: ["blogId"],
+  props: ["slideId"],
   data() {
     return {
       title: "",
       titleError: "",
-      contentError: "",
+      tag: "",
+      description: "",
       isValid: true,
-      editor: ClassicEditor,
-      editorData: "",
-      editorConfig: {
-        plugins: [
-          Essentials,
-          Autoformat,
-          BlockQuote,
-          Heading,
-          List,
-          ListStyle,
-          Alignment,
-          Font,
-          Bold,
-          Italic,
-          Underline,
-          Strikethrough,
-          Link,
-          Paragraph
-        ],
-        toolbar: {
-          items: [
-            "heading",
-            "|",
-            "fontFamily",
-            "fontColor",
-            "fontBackgroundColor",
-            "|",
-            "bold",
-            "italic",
-            "underline",
-            "strikethrough",
-            "alignment",
-            "|",
-            "bulletedList",
-            "numberedList",
-            "|",
-            "link",
-            "blockQuote",
-            "|",
-            "undo",
-            "redo"
-          ],
-          shouldNotGroupWhenFull: true
-        }
-      },
       file: null,
       image: null,
       imageData: null,
@@ -186,11 +138,6 @@ export default {
         this.titleError = "Title cannot be empty.";
         this.isValid = false;
       } else this.titleError = "";
-
-      if (this.editorData === "") {
-        this.contentError = "Content cannot be empty.";
-        this.isValid = false;
-      } else this.contentError = "";
     },
     displayToast(isSuccessMsg, msg) {
       this.isSuccessMsg = isSuccessMsg;
@@ -198,37 +145,37 @@ export default {
       this.errorOccured = true;
       setTimeout(() => (this.errorOccured = false), 3000);
     },
-    async updateBlog() {
+    async updateSlide() {
       this.isLoading = true;
       this.validate();
       if (!this.isValid) {
         this.isLoading = false;
         return;
       }
-      const status = await this.$store.dispatch("blogs/updateCurrentBlog", {
+
+      let payload = {
         body: {
-          content: this.editorData,
           title: this.title,
+          tag: this.tag,
+          description: this.description,
           image: this.image
         },
         image: this.file,
         token: JSON.parse(localStorage.getItem("user")).access_token,
-        blog_id: this.blogId
-      });
+        slide_id: this.slideId
+      };
+
+      const status = await this.$store.dispatch(
+        "carousel/updateSlide",
+        payload
+      );
 
       if (status === 200) {
         this.resetInputs();
         this.resetErrors();
         this.isLoading = false;
-        this.displayToast(true, "Blog updated successfully.");
-        setTimeout(
-          () =>
-            this.$router.push({
-              name: "seeBlog",
-              params: { blogId: this.blogId }
-            }),
-          3000
-        );
+        this.displayToast(true, "Slide updated successfully.");
+        setTimeout(() => this.$router.push({ path: "/" }), 3000);
       } else if (status === 401) {
         this.displayToast(false, "You are not authorized.");
         setTimeout(() => this.$store.dispatch("user/unauthorize"), 3000);
@@ -238,12 +185,13 @@ export default {
       this.isLoading = false;
     },
     resetErrors() {
-      this.contentError = "";
       this.titleError = "";
     },
     resetInputs() {
-      this.editorData = "";
       this.title = "";
+      this.tag = "";
+      this.description = "";
+      this.imageData = "";
     }
   },
 
@@ -257,15 +205,14 @@ export default {
       }
     }
     this.isLoading = true;
-    const blog = await this.$store.dispatch("blogs/getABlog", {
-      blog_id: this.blogId
+    const slide = await this.$store.dispatch("carousel/getASlide", {
+      slide_id: this.slideId
     });
-    this.title = blog.title;
-    setTimeout(() => {
-      this.editorData = blog.content;
-    }, 100);
-    this.image = blog.image;
-    this.imageData = blog.image;
+    this.title = slide.title;
+    this.tag = slide.tag;
+    this.description = slide.description;
+    this.image = slide.image;
+    this.imageData = slide.image;
     this.isLoading = false;
   }
 };

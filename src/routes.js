@@ -33,6 +33,9 @@ import CreateMaterial from "./pages/materials/CreateMaterials.vue";
 import ViewMaterial from "./pages/materials/ViewMaterial.vue";
 import UpdateMaterial from "./pages/materials/UpdateMaterial.vue";
 
+import CreateCarouselSlide from "./pages/landing/carousel/CreateSlide.vue";
+import UpdateCarouselSlide from "./pages/landing/carousel/UpdateSlide.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -112,6 +115,8 @@ const router = createRouter({
       component: UpdateProduct,
       props: true
     },
+
+    // Categories and Subcategories
     {
       path: "/categories",
       component: ViewCatSubcat
@@ -134,6 +139,19 @@ const router = createRouter({
       name: "ModifySubcat",
       path: "/subcategory/update/:subcat_id",
       component: UpdateSubcategory,
+      props: true
+    },
+
+    // Carousel
+    {
+      name: "createSlide",
+      path: "/landing/carousel/new",
+      component: CreateCarouselSlide
+    },
+    {
+      name: "updateSlide",
+      path: "/landing/carousel/update/:slideId",
+      component: UpdateCarouselSlide,
       props: true
     },
 
