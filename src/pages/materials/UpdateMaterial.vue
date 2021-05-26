@@ -8,7 +8,7 @@
     ></toast-message>
     <router-link
       class="text-sm text-gray-400 mx-4 inline-block relative hover:text-gray-800"
-      :to="`/materials/${materialId}`"
+      :to="`/costlist/${materialId}`"
     >
       <img
         class="transform rotate-90 inline-block"
@@ -25,7 +25,7 @@
         <div
           class="w-full bg-gray-100 p-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
         >
-          <h2 class="mx-auto text-2xl text-gray-700">Update Material</h2>
+          <h2 class="mx-auto text-2xl text-gray-700">Update Cost List</h2>
         </div>
         <!-- Personal Info -->
         <h2 class="px-8 text-xl text-gray-800">Personal info</h2>
@@ -192,6 +192,17 @@
         </div>
         <hr />
 
+        <!-- TOTAL PRICE -->
+        <div
+          class="w-full grid col-span-1 justify-items-center pb-6 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
+          <div class="col-span-1 md:inline-block">
+              <h2 class="inline-block text-xl font-bold p-2">
+                TOTAL COST : <span>{{ totalCost }} ₹</span>
+              </h2>
+            </div>
+        </div>
+        
         <!-- SAVE -->
         <div
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -223,6 +234,18 @@ export default {
       toastMsg: "",
       isSuccessMsg: false
     };
+  },
+
+  computed: {
+    totalCost: function(){
+      let sum = 0;
+      for (const item in this.material) {
+        if(item === "client_name" || item === "last_updated" || item === "id" || item === "created_on" || this.material[item] === "") {continue;}
+        
+        sum += parseFloat(this.material[item]);
+      }
+      return sum;
+    }
   },
 
   methods: {
@@ -261,9 +284,9 @@ export default {
 
       if (status === 200) {
         this.isLoading = false;
-        this.displayToast(true, "Material updated successfully.");
+        this.displayToast(true, "Cost List updated successfully.");
         setTimeout(
-          () => this.$router.push(`/materials/${this.materialId}`),
+          () => this.$router.push(`/costlist/${this.materialId}`),
           3000
         );
       } else if (status === 401) {

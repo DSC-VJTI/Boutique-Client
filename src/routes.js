@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/pages/Home.vue";
 import About from "@/pages/About.vue";
+import Credits from "@/pages/Credits.vue";
 import NotFound from "@/pages/Error404.vue";
 
 import Login from "./pages/admin/Login.vue";
@@ -41,6 +42,7 @@ const router = createRouter({
   routes: [
     { path: "/", component: Home },
     { path: "/about", component: About },
+    { path: "/credits", component: Credits },
 
     // admin login
     { path: "/admin/login", component: Login },
@@ -82,14 +84,14 @@ const router = createRouter({
     { path: "/measurements/:mId", component: ViewMeasurement, props: true },
 
     // Materials
-    { path: "/materials", component: Materials, name: "seeMaterials" },
-    { path: "/materials/new", component: CreateMaterial },
+    { path: "/costlist", component: Materials, name: "seeMaterials" },
+    { path: "/costlist/new", component: CreateMaterial },
     {
-      path: "/materials/:materialId/update",
+      path: "/costlist/:materialId/update",
       component: UpdateMaterial,
       props: true
     },
-    { path: "/materials/:materialId", component: ViewMaterial, props: true },
+    { path: "/costlist/:materialId", component: ViewMaterial, props: true },
 
     // Products Page
     {
