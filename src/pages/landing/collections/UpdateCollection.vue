@@ -208,13 +208,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.ck,
-.ck p {
-  @apply bg-transparent;
-}
-.ck-content {
-  height: 450px;
-}
-</style>

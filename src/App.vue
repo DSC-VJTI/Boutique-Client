@@ -225,4 +225,8 @@ export default {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+body {
+  height: 100vh;
+}
 </style>
