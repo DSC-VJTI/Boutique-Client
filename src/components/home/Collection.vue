@@ -3,7 +3,7 @@
     <div
       :style="{ backgroundImage: `url(${image})` }"
       class="bg-no-repeat bg-cover bg-center sm:w-96 h-96"
-      :class="{ 'order-last': reverse }"
+      :class="{ 'order-last': false, 'md:order-last': reverse }"
     ></div>
     <div
       class="sm:p-4 lg:p-0 flex flex-col items-center sm:items-start w-96 sm:my-10"

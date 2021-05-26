@@ -1,9 +1,9 @@
 <template>
-  <div class="mb-10 px-5">
+  <div class="mb-10 shadow-xl">
     <router-link :to="`/shop/${id}`">
-      <img :src="image" class="h-96" />
+      <img :src="image" class="h-72 mx-auto" />
     </router-link>
-    <div class="mt-4">
+    <div class="my-4 px-5">
       <div class="flex justify-between">
         <p class="font-medium text-2xl text-black">
           {{ name }}
@@ -18,17 +18,14 @@
           <span class="text-3xl font-light">₹ {{ discountPrice }}</span>
         </div>
       </div>
-      <div class="flex justify-between mt-5 mb-3 align-middle">
-        <div class="text-lg text-gray-600 font-normal">
-          {{ description.substring(0, 30) + "..." }}
-        </div>
+      <!-- <div class="flex justify-between mt-5 mb-3 align-middle">
         <router-link
-          class="mx-0 bg-gray-900 text-white py-2 px-4 hover:bg-gray-50 hover:text-gray-900 
+          class="mx-0 bg-gray-900 w-full text-center text-xl text-white py-2 px-4 hover:bg-gray-50 hover:text-gray-900 
         border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
           :to="`/shop/${id}`"
           >View More</router-link
         >
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
