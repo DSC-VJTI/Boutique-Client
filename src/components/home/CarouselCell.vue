@@ -18,7 +18,7 @@
           class="p-2 inline-block w-11/12 md:w-3/4 mx-0 text-sm"
           style="width:100px;"
         >
-          <button @click="updateSlide" class="update">
+          <button v-if="isAdmin" @click="updateSlide" class="update">
             Update
           </button>
         </div>
@@ -26,7 +26,7 @@
           class="p-2 inline-block w-11/12 md:w-3/4 mx-0 text-sm"
           style="width:100px;"
         >
-          <button @click="deleteSlide" class="delete">
+          <button v-if="isAdmin" @click="deleteSlide" class="delete">
             Delete
           </button>
         </div>
@@ -68,6 +68,14 @@ export default {
           msg: "Something went wrong."
         });
       }
+    }
+  },
+  computed: {
+    isAdmin() {
+      return JSON.parse(localStorage.getItem("user"))
+        ? this.$store.getters["user/getRole"] ||
+            JSON.parse(localStorage.getItem("user")).is_admin
+        : false;
     }
   }
 };

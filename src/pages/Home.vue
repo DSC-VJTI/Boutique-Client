@@ -178,11 +178,13 @@ export default {
     }
   },
   async created() {
+    this.isLoading = true;
     const slides = await this.$store.dispatch("carousel/getAllSlides");
     this.carouselCells = slides;
     this.$nextTick(() => {
       this.$refs.flickity.destroy();
       this.$refs.flickity.init();
+      this.isLoading = false;
     });
   }
 };
