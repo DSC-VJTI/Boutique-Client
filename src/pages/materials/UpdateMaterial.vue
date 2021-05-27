@@ -313,10 +313,11 @@ export default {
 
   async created() {
     this.isLoading = true;
-    this.material = await this.$store.dispatch("materials/getAMaterial", {
+    const material = await this.$store.dispatch("materials/getAMaterial", {
       material_id: this.materialId,
       token: JSON.parse(localStorage.getItem("user")).access_token
     });
+    this.material = { ...material };
     this.isLoading = false;
   }
 };
