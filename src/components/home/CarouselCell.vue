@@ -2,20 +2,20 @@
   <div class="carousel-cell">
     <img :src="imageURL" alt="" />
     <div
-      class="carousel-text hidden absolute sm:inset-y-1/3 left-50 md:left-10 w-full h-full"
+      class="carousel-text hidden absolute inset-y-1/3 top-10 lg:top-40 md:left-50 w-1/3 sm:w-2/3 lg:w-full"
     >
-      <p class="text-red-300 text-base font-mono p-2 tracking-widest">
+      <p class="text-red-300 text-base font-mono w-5/6 sm:ml-16">
         {{ tag }}
       </p>
-      <h1 class="font-extrabold font-serif text-5xl text-white mb-5 w-1/2">
+      <h1 class="font-extrabold font-serif text-5xl text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16">
         {{ title }}
       </h1>
-      <p class="font-sans text-base text-white mb-5 w-1/2">
+      <p class="font-sans text-base text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16">
         {{ description }}
       </p>
       <div class="">
         <div
-          class="p-2 inline-block w-11/12 md:w-3/4 mx-0 text-sm"
+          class="inline-block w-11/12 md:w-3/4 sm:ml-16 text-sm"
           style="width:100px;"
         >
           <button v-if="isAdmin" @click="updateSlide" class="update">
@@ -23,7 +23,7 @@
           </button>
         </div>
         <div
-          class="p-2 inline-block w-11/12 md:w-3/4 mx-0 text-sm"
+          class="inline-block w-11/12 md:w-3/4 ml-4 text-sm"
           style="width:100px;"
         >
           <button v-if="isAdmin" @click="deleteSlide" class="delete">
