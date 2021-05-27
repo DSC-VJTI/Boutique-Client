@@ -6,9 +6,9 @@
       Credits
     </h1>
     <p class="w-4/5 text-gray-800 text-center text-2xl font-light my-8">
-      This website is developed by members of 
+      This website is developed by
       <a class="text-green-500 italic font-semibold" href="https://www.dscvjti.tech/" target="blank_"
-        >DSC-VJTI</a
+        >Google Developer Student Clubs, VJTI</a
       >
     </p>
 

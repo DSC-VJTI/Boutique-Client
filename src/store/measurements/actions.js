@@ -62,7 +62,7 @@ export default {
       if (imgs && imgs[0]) payload.body.images = imgs;
       else return imgs;
     } else {
-      payload.body.images = null;
+      payload.body.images = [];
     }
 
     try {

@@ -490,11 +490,6 @@ export default {
         this.nameError = "*Name cannot be empty. Please enter a valid name.";
         this.isValid = false;
       } else this.nameError = "";
-
-      if (this.images.length === 0) {
-        this.isValid = false;
-        this.displayToast(false, "Please add sketches to measurement.");
-      }
     },
     async newMeasurement() {
       this.isLoading = true;
