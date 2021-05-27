@@ -40,6 +40,8 @@ import UpdateCarouselSlide from "./pages/landing/carousel/UpdateSlide.vue";
 import CreateCollection from "./pages/landing/collections/CreateCollection.vue";
 import UpdateCollection from "./pages/landing/collections/UpdateCollection.vue";
 
+import CreateItem from "./pages/landing/instagram/CreateItem.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -171,6 +173,13 @@ const router = createRouter({
       path: "/landing/collections/update/:cId",
       component: UpdateCollection,
       props: true
+    },
+
+    // Instagram
+    {
+      name: "CreateItem",
+      path: "/landing/instagram/new",
+      component: CreateItem
     },
 
     // 404

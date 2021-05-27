@@ -44,14 +44,19 @@
       v-if="this.newArrivals.length > 0"
     />
 
-    <div class="grid lg:grid-cols-3 lg:grid-rows-1 sm:px-40">
+    <div class="grid lg:grid-cols-3 lg:grid-rows-1">
       <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 sm:m-0">
-        <div v-for="image in gridImages" :key="image.id">
-          <img :src="image.url" />
-        </div>
+        <insta-item
+          @loading="setIsLoading"
+          @toast="displayToast"
+          v-for="(cell, ind) in instaImages"
+          :key="ind"
+          :id="cell.id"
+          :image="cell.image"
+        ></insta-item>
       </div>
       <div class="self-center md:m-10 m-5 sm:m-10">
-        <h1 class="font-extrabold font-serif text-5xl mb-5">
+        <h1 class="font-extrabold font-serif text-5xl mb-5 text-gray-800 ">
           Instagram
         </h1>
         <p class="font-sans text-base mb-5">
@@ -71,6 +76,7 @@ import Flickity from "../components/home/Flickity.vue";
 import CarouselCell from "../components/home/CarouselCell.vue";
 import Collection from "../components/home/Collection.vue";
 import NewArrivalsGrid from "../components/home/NewArrivals/NewArrivalsGrid.vue";
+import InstaItem from "../components/home/InstaItem.vue";
 
 export default {
   name: "App",
@@ -78,7 +84,8 @@ export default {
     Flickity,
     CarouselCell,
     Collection,
-    NewArrivalsGrid
+    NewArrivalsGrid,
+    InstaItem
   },
   data() {
     return {
@@ -96,38 +103,7 @@ export default {
       carouselCells: [],
       collections: [],
       newArrivals: [],
-      gridImages: [
-        {
-          id: 1,
-          url:
-            "https://images.unsplash.com/photo-1601460588655-109bd38204db?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        },
-        {
-          id: 2,
-          url:
-            "https://images.unsplash.com/photo-1519167130418-c3640bd21b7e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        },
-        {
-          id: 3,
-          url:
-            "https://images.unsplash.com/photo-1519167130418-c3640bd21b7e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        },
-        {
-          id: 4,
-          url:
-            "https://images.unsplash.com/photo-1601460588655-109bd38204db?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        },
-        {
-          id: 5,
-          url:
-            "https://images.unsplash.com/photo-1601460588655-109bd38204db?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        },
-        {
-          id: 6,
-          url:
-            "https://images.unsplash.com/photo-1519167130418-c3640bd21b7e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
-        }
-      ]
+      instaImages: []
     };
   },
   computed: {
@@ -157,6 +133,7 @@ export default {
     const collections = await this.$store.dispatch(
       "collections/getAllCollections"
     );
+    const instaItems = await this.$store.dispatch("instagram/getAllItems");
     const products = await this.$store.dispatch("products/getAllProducts");
     this.newArrivals = products
       .sort((a, b) => {
@@ -167,6 +144,13 @@ export default {
       .slice(0, 4);
     this.carouselCells = slides;
     this.collections = collections;
+    this.instaImages = instaItems
+      .sort((a, b) => {
+        if (a.id > b.id) return -1;
+        else if (a.id < b.id) return 1;
+        return 0;
+      })
+      .slice(0, 6);
     this.$nextTick(() => {
       this.$refs.flickity.destroy();
       this.$refs.flickity.init();

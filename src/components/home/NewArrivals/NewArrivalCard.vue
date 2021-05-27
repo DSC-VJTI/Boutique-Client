@@ -16,9 +16,12 @@
         >
         <div class="text-lg font-bold text-right">
           <div>
-            <strike v-if="isDiscounted" class="text-gray-400 text-md font-light">
-              ₹ {{ price }}
-            </strike>&nbsp;&nbsp;
+            <strike
+              v-if="isDiscounted"
+              class="text-gray-400 text-md font-light"
+            >
+              ₹ {{ price }} </strike
+            >&nbsp;&nbsp;
             <span class="text-3xl font-light">₹ {{ discountPrice }}</span>
           </div>
         </div>
