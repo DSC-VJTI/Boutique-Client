@@ -543,13 +543,14 @@ export default {
 
   async created() {
     this.isLoading = true;
-    this.measurement = await this.$store.dispatch(
+    const measurement = await this.$store.dispatch(
       "measurements/getAMeasurement",
       {
         measurement_id: this.mId,
         token: JSON.parse(localStorage.getItem("user")).access_token
       }
     );
+    this.measurement = { ...measurement };
     console.log(this.measurement);
     this.isLoading = false;
     this.imageData = this.measurement.images;
