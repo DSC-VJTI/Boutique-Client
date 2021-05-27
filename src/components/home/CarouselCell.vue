@@ -4,7 +4,7 @@
     <div
       class="carousel-text hidden absolute inset-y-1/3 top-10 lg:top-40 md:left-50 w-1/3 sm:w-2/3 lg:w-full"
     >
-      <p class="text-red-300 text-base font-mono w-5/6 tracking-widest sm:ml-16">
+      <p class="text-red-300 text-base font-mono w-5/6 sm:ml-16">
         {{ tag }}
       </p>
       <h1 class="font-extrabold font-serif text-5xl text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16">
