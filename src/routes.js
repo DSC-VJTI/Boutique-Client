@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "@/pages/Home.vue";
-import About from "@/pages/About.vue";
-import Credits from "@/pages/Credits.vue";
-import NotFound from "@/pages/Error404.vue";
+import Home from "./pages/Home.vue";
+import About from "./pages/miscellaneous/About.vue";
+import Credits from "./pages/miscellaneous/Credits.vue";
+import NotFound from "./pages/miscellaneous/Error404.vue";
 
 import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";

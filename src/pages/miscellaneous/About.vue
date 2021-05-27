@@ -31,7 +31,7 @@
           >
             <img
               class="w-12 h-12 mr-4"
-              src="../assets/images/instagram.png"
+              src="../../assets/images/instagram.png"
               alt="Instagram of Owner"
             />
           </router-link>
@@ -41,7 +41,7 @@
           >
             <img
               class="w-12 h-12 mr-4"
-              src="../assets/images/gmail.png"
+              src="../../assets/images/gmail.png"
               alt="Gmail of Owner"
             />
           </router-link>

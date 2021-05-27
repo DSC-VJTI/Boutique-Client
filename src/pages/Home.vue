@@ -164,7 +164,7 @@ export default {
         else if (a.id < b.id) return 1;
         return 0;
       })
-      .slice(0, 3);
+      .slice(0, 4);
     this.carouselCells = slides;
     this.collections = collections;
     this.$nextTick(() => {

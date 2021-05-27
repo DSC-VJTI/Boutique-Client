@@ -23,7 +23,7 @@
         <!-- PROFILE PIC -->
         <img
           class="object-cover rounded-full w-28 h-28 shadow-sm absolute -top-10 transform md:scale-110 duration-700"
-          src="../assets/images/saif.jpeg"
+          src="../../assets/images/saif.jpeg"
           alt="Saif's Photo"
         />
 
@@ -39,7 +39,7 @@
           >
             <img
               class="w-8 h-8"
-              src="../assets/images/github.png"
+              src="../../assets/images/github.png"
               alt="Saif's Github"
             />
           </a>
@@ -49,7 +49,7 @@
           >
             <img
               class="w-7 h-7 mx-auto mt-1"
-              src="../assets/images/linkedin.png"
+              src="../../assets/images/linkedin.png"
               alt="Saif's Linkedin"
             />
           </a>
@@ -59,7 +59,7 @@
           >
             <img
               class="w-6 h-6 mt-1 mx-auto"
-              src="../assets/images/twitter.png"
+              src="../../assets/images/twitter.png"
               alt="Saif's Twitter"
             />
           </a>
@@ -74,7 +74,7 @@
         <!-- PROFILE PIC -->
         <img
           class="object-cover rounded-full w-28 h-28 shadow-sm absolute -top-10 transform md:scale-110 duration-700"
-          src="../assets/images/devanshi.jpeg"
+          src="../../assets/images/devanshi.jpeg"
           alt="Devanshi's Photo"
         />
 
@@ -90,7 +90,7 @@
           >
             <img
               class="w-8 h-8"
-              src="../assets/images/github.png"
+              src="../../assets/images/github.png"
               alt="Devanshi's Github"
             />
           </a>
@@ -100,7 +100,7 @@
           >
             <img
               class="w-7 h-7 mx-auto mt-1"
-              src="../assets/images/linkedin.png"
+              src="../../assets/images/linkedin.png"
               alt="Devanshi's Linkedin"
             />
           </a>
@@ -110,7 +110,7 @@
           >
             <img
               class="w-6 h-6 mt-1 mx-auto"
-              src="../assets/images/twitter.png"
+              src="../../assets/images/twitter.png"
               alt="Devanshi's Twitter"
             />
           </a>
@@ -125,7 +125,7 @@
         <!-- PROFILE PIC -->
         <img
           class="object-cover rounded-full w-28 h-28 shadow-sm absolute -top-10 transform md:scale-110 duration-700"
-          src="../assets/images/parth.jpeg"
+          src="../../assets/images/parth.jpeg"
           alt="Parth's Photo"
         />
 
@@ -141,7 +141,7 @@
           >
             <img
               class="w-8 h-8"
-              src="../assets/images/github.png"
+              src="../../assets/images/github.png"
               alt="Parth's Github"
             />
           </a>
@@ -151,7 +151,7 @@
           >
             <img
               class="w-7 h-7 mx-auto mt-1"
-              src="../assets/images/linkedin.png"
+              src="../../assets/images/linkedin.png"
               alt="Parth's Linkedin"
             />
           </a>
@@ -161,7 +161,7 @@
           >
             <img
               class="w-6 h-6 mt-1 mx-auto"
-              src="../assets/images/twitter.png"
+              src="../../assets/images/twitter.png"
               alt="Parth's Twitter"
             />
           </a>
@@ -176,7 +176,7 @@
         <!-- PROFILE PIC -->
         <img
           class="object-cover rounded-full w-28 h-28 shadow-sm absolute -top-10 transform md:scale-110 duration-700"
-          src="../assets/images/vishal.jpg"
+          src="../../assets/images/vishal.jpg"
           alt="Vishal's Photo"
         />
 
@@ -192,7 +192,7 @@
           >
             <img
               class="w-8 h-8"
-              src="../assets/images/github.png"
+              src="../../assets/images/github.png"
               alt="Vishal's Github"
             />
           </a>
@@ -202,7 +202,7 @@
           >
             <img
               class="w-7 h-7 mx-auto mt-1"
-              src="../assets/images/linkedin.png"
+              src="../../assets/images/linkedin.png"
               alt="Vishal's Linkedin"
             />
           </a>
@@ -212,7 +212,7 @@
           >
             <img
               class="w-6 h-6 mt-1 mx-auto"
-              src="../assets/images/twitter.png"
+              src="../../assets/images/twitter.png"
               alt="Vishal's Twitter"
             />
           </a>

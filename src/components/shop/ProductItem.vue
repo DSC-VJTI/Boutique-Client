@@ -16,9 +16,6 @@
         >{{ name }}</router-link
       >
       <div class="mt-2 text-lg font-bold">
-        <div class="text-base text-gray-600 font-normal mb-3">
-          {{ description.substring(0, 30) + "..." }}
-        </div>
         <div>
           <span class="text-3xl font-light">₹ {{ discount_price }}</span>
           &nbsp;&nbsp;
