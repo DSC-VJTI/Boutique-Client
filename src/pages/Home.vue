@@ -25,7 +25,7 @@
 
     <section class="my-16">
       <collection
-        class="m-4 md:m-10 px-8 md:px-20 flex flex-col md:flex-row w-full justify-evenly h-96"
+        class="m-4 md:m-10 px-8 sm:px-0 flex flex-col md:flex-row justify-evenly h-96"
         @loading="setIsLoading"
         @toast="displayToast"
         v-for="(cell, ind) in collections"

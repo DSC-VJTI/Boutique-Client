@@ -31,7 +31,7 @@
           />
           <br /><span class="text-red-600 font-bold">{{ passwordError }}</span>
         </div>
-        <div class="form-group text-left" style="width:370px;">
+        <div class="form-group text-center" style="width:370px;">
           <input
             id="remember"
             type="checkbox"
