@@ -6,7 +6,7 @@
       :class="{ 'order-last': false, 'md:order-last': reverse }"
     ></div>
     <div
-      class="sm:p-4 lg:p-0 flex flex-col items-center sm:items-start w-96 sm:my-10"
+      class="sm:p-4 lg:p-0 flex flex-col items-center sm:items-start w-full sm:w-80 sm:my-10"
     >
       <h1
         class="font-extrabold font-serif text-3xl md:text-5xl text-gray-800 sm:mt-5 md:mb-5 w-full"
