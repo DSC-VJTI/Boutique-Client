@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "@/pages/Home.vue";
-import About from "@/pages/About.vue";
-import Credits from "@/pages/Credits.vue";
-import NotFound from "@/pages/Error404.vue";
+import Home from "./pages/Home.vue";
+import About from "./pages/miscellaneous/About.vue";
+import Credits from "./pages/miscellaneous/Credits.vue";
+import NotFound from "./pages/miscellaneous/Error404.vue";
 
 import Login from "./pages/admin/Login.vue";
 import Register from "./pages/admin/Register.vue";
@@ -39,6 +39,8 @@ import UpdateCarouselSlide from "./pages/landing/carousel/UpdateSlide.vue";
 
 import CreateCollection from "./pages/landing/collections/CreateCollection.vue";
 import UpdateCollection from "./pages/landing/collections/UpdateCollection.vue";
+
+import CreateItem from "./pages/landing/instagram/CreateItem.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -171,6 +173,13 @@ const router = createRouter({
       path: "/landing/collections/update/:cId",
       component: UpdateCollection,
       props: true
+    },
+
+    // Instagram
+    {
+      name: "CreateItem",
+      path: "/landing/instagram/new",
+      component: CreateItem
     },
 
     // 404

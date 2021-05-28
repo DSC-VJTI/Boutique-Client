@@ -1,32 +1,32 @@
 <template>
-  <div class="mb-10 shadow-xl">
+  <div class="col-span-1 w-11/12 my-4 productCard shadow-lg hover:opacity-90">
     <router-link :to="`/shop/${id}`">
-      <img :src="image" class="h-72 mx-auto" />
-    </router-link>
-    <div class="my-4 px-5">
-      <div class="flex justify-between">
-        <p class="font-medium text-2xl text-black">
-          {{ name }}
-        </p>
-        <div class="mx-2">
-          <strike
-            v-if="isDiscounted"
-            class="text-gray-400 text-3xl mr-3 font-light"
-          >
-            ₹ {{ price }}
-          </strike>
-          <span class="text-3xl font-light">₹ {{ discountPrice }}</span>
+      <div class="pt-2 relative h-64 w-full">
+        <div
+          class="productImage"
+          :style="{ backgroundImage: `url(${image})` }"
+        ></div>
+      </div>
+      <div class="p-4 relative">
+        <router-link
+          title="Product 1"
+          :to="`/shop/${id}`"
+          class="text-gray-900 text-2xl font-medium mb-1 transition-all duration-300"
+          >{{ name }}</router-link
+        >
+        <div class="text-lg font-bold text-right">
+          <div>
+            <strike
+              v-if="isDiscounted"
+              class="text-gray-400 text-md font-light"
+            >
+              ₹ {{ price }} </strike
+            >&nbsp;&nbsp;
+            <span class="text-3xl font-light">₹ {{ discountPrice }}</span>
+          </div>
         </div>
       </div>
-      <!-- <div class="flex justify-between mt-5 mb-3 align-middle">
-        <router-link
-          class="mx-0 bg-gray-900 w-full text-center text-xl text-white py-2 px-4 hover:bg-gray-50 hover:text-gray-900 
-        border hover:border-gray-700 shadow-md transform transition duration-200 hover:shadow-sm"
-          :to="`/shop/${id}`"
-          >View More</router-link
-        >
-      </div> -->
-    </div>
+    </router-link>
   </div>
 </template>
 

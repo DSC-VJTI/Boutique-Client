@@ -46,10 +46,10 @@
         >
           <span
             v-if="imageData"
-            class="float-right px-2 m-2 text-white bg-red-500 rounded-full"
+            class="float-right text-red-500 bg-transparent m-2 text-2xl hover:opacity-80"
             @click="removeFile()"
-            >X</span
-          >
+            ><i class="fas fa-times-circle"></i
+          ></span>
         </div>
       </div>
 

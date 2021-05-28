@@ -1,12 +1,12 @@
 <template>
   <section class="bg-gray-100 py-5 px-10">
     <h1
-      class="font-extrabold font-serif text-2xl sm:text-3xl md:text-5xl text-center text-black my-10"
+      class="font-extrabold text-gray-800 font-serif text-5xl text-center text-black my-10"
     >
       New Arrivals
     </h1>
     <div
-      class="grid grid-flow-row grid-rows-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-8 gap-8"
+      class="grid grid-flow-row grid-rows-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-rows-8 gap-8 mb-16"
     >
       <new-arrival-card
         v-for="p in newArrivals"
@@ -30,9 +30,6 @@ export default {
   },
   props: {
     newArrivals: Array
-  },
-  created() {
-    console.log(this.newArrivals);
   }
 };
 </script>

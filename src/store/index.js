@@ -7,6 +7,7 @@ import materialsModule from "./materials/index";
 import categoriesModule from "./categories/index";
 import carousel from "./landing/carousel/index";
 import collections from "./landing/collections/index";
+import instagram from "./landing/instagram/index";
 
 const store = createStore({
   modules: {
@@ -17,7 +18,8 @@ const store = createStore({
     materials: materialsModule,
     categories: categoriesModule,
     carousel: carousel,
-    collections: collections
+    collections: collections,
+    instagram: instagram
   },
   state() {
     return {
