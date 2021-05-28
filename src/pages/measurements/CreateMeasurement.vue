@@ -7,7 +7,7 @@
       :show="errorOccured"
     ></toast-message>
     <form
-      class="container max-w-4xl mx-auto mb-12 shadow-md md:w-3/4"
+      class="container max-w-4xl mx-auto sm:my-8 shadow-md md:w-3/4"
       @submit.prevent="newMeasurement"
     >
       <div class="space-y-6 bg-white">
@@ -35,7 +35,7 @@
           </div>
         </div>
         <hr />
-        <!-- DL AC C -->
+        <!-- DL -->
         <div
           class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
         >
@@ -47,26 +47,6 @@
               class="measurementInput"
               placeholder="DL"
               v-model="measurement.dl"
-            />
-          </div>
-          <div class="col-span-1 md:inline-block mr-4">
-            <h2 class="inline-block text-center p-2 w-10 mr-4">AC</h2>
-            <input
-              type="text"
-              id="name"
-              class="measurementInput"
-              placeholder="AC"
-              v-model="measurement.ac"
-            />
-          </div>
-          <div class="col-span-1 md:inline-block mr-4">
-            <h2 class="inline-block p-2 w-10 text-center mr-4">C</h2>
-            <input
-              type="text"
-              id="name"
-              class="measurementInput"
-              placeholder="C"
-              v-model="measurement.c"
             />
           </div>
         </div>
@@ -104,6 +84,32 @@
               class="measurementInput"
               placeholder="HALF"
               v-model="measurement.l.half"
+            />
+          </div>
+        </div>
+        <hr />
+        <!-- AC C -->
+        <div
+          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
+          <div class="col-span-1 md:inline-block mr-4">
+            <h2 class="inline-block text-center p-2 w-10 mr-4">AC</h2>
+            <input
+              type="text"
+              id="name"
+              class="measurementInput"
+              placeholder="AC"
+              v-model="measurement.ac"
+            />
+          </div>
+          <div class="col-span-1 md:inline-block mr-4">
+            <h2 class="inline-block p-2 w-10 text-center mr-4">C</h2>
+            <input
+              type="text"
+              id="name"
+              class="measurementInput"
+              placeholder="C"
+              v-model="measurement.c"
             />
           </div>
         </div>
@@ -252,7 +258,17 @@
           class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
         >
           <div class="col-span-1 md:inline-block mr-4">
-            <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
+            <h2 class="inline-block text-center p-2 w-10 mr-4">W</h2>
+            <input
+              type="text"
+              id=""
+              class="measurementInput"
+              placeholder="W"
+              v-model="measurement.bottom_l"
+            />
+          </div>
+          <div class="col-span-1 md:inline-block mr-4">
+            <h2 class="inline-block text-center p-2 w-10 mr-4">L:F</h2>
             <input
               type="text"
               id=""
@@ -271,6 +287,11 @@
               v-model="measurement.bottom_w.three_fourth"
             />
           </div>
+        </div>
+        <!-- HALF - TH - K -->
+        <div
+          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
           <div class="col-span-1 md:inline-block mr-4">
             <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
             <input
@@ -279,21 +300,6 @@
               class="measurementInput"
               placeholder="HALF"
               v-model="measurement.bottom_w.half"
-            />
-          </div>
-        </div>
-        <!-- BOTTOM L - TH - C -->
-        <div
-          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
-        >
-          <div class="col-span-1 md:inline-block mr-4">
-            <h2 class="inline-block text-center p-2 w-10 mr-4">L</h2>
-            <input
-              type="text"
-              id=""
-              class="measurementInput"
-              placeholder="Bottom L"
-              v-model="measurement.bottom_l"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4">
@@ -307,21 +313,6 @@
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4">
-            <h2 class="inline-block text-center p-2 w-10 mr-4">C</h2>
-            <input
-              type="text"
-              id=""
-              class="measurementInput"
-              placeholder="Bottom C"
-              v-model="measurement.bottom_c"
-            />
-          </div>
-        </div>
-        <!-- BOTTOM K - R -->
-        <div
-          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
-        >
-          <div class="col-span-1 md:inline-block mr-4">
             <h2 class="inline-block text-center p-2 w-10 mr-4">K</h2>
             <input
               type="text"
@@ -329,6 +320,21 @@
               class="measurementInput"
               placeholder="Bottom K"
               v-model="measurement.bottom_k"
+            />
+          </div>
+        </div>
+        <!-- BOTTOM C - R -->
+        <div
+          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
+          <div class="col-span-1 md:inline-block mr-4">
+            <h2 class="inline-block text-center p-2 w-10 mr-4">C</h2>
+            <input
+              type="text"
+              id=""
+              class="measurementInput"
+              placeholder="Bottom C"
+              v-model="measurement.bottom_c"
             />
           </div>
           <div class="col-span-1 md:inline-block mr-4">
