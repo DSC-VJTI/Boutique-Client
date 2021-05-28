@@ -204,9 +204,16 @@
             W:<span>{{ measurement.bottom_l }}</span>
           </h2>
         </div>
+      </div>
+      <hr />
+      <!-- L - F ANKLE HALF -->
+      <h2 class="px-8 text-xl text-gray-800">L</h2>
+      <div
+        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+      >
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
-            L:F:<span>{{ measurement.bottom_w.full }}</span>
+            F:<span>{{ measurement.bottom_w.full }}</span>
           </h2>
         </div>
         <div class="col-span-1 md:inline-block mr-4">
@@ -214,16 +221,17 @@
             Ankle:<span>{{ measurement.bottom_w.three_fourth }}</span>
           </h2>
         </div>
-      </div>
-      <!-- HALF - TH - K -->
-      <div
-        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
-      >
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
             Half:<span>{{ measurement.bottom_w.half }}</span>
           </h2>
         </div>
+      </div>
+      <hr />
+      <!-- TH - K -->
+      <div
+        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+      >
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
             TH:<span>{{ measurement.bottom_th }}</span>
@@ -235,6 +243,7 @@
           </h2>
         </div>
       </div>
+      <hr />
       <!-- BOTTOM C - R -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"

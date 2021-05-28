@@ -335,8 +335,15 @@
               v-model="measurement.bottom_l"
             />
           </div>
+        </div>
+        <hr />
+        <!-- L - F ANKLE HALF -->
+        <h2 class="px-8 text-xl text-gray-800">L</h2>
+        <div
+          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
           <div class="col-span-1 md:inline-block mr-4">
-            <h2 class="inline-block text-center p-2 w-10 mr-4">L:F</h2>
+            <h2 class="inline-block text-center p-2 w-10 mr-4">F</h2>
             <input
               type="text"
               id=""
@@ -355,11 +362,6 @@
               v-model="measurement.bottom_w.three_fourth"
             />
           </div>
-        </div>
-        <!-- HALF - TH - K -->
-        <div
-          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
-        >
           <div class="col-span-1 md:inline-block mr-4">
             <h2 class="inline-block text-center p-2 w-10 mr-4">Half</h2>
             <input
@@ -370,6 +372,12 @@
               v-model="measurement.bottom_w.half"
             />
           </div>
+        </div>
+        <hr />
+        <!-- TH - K -->
+        <div
+          class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+        >
           <div class="col-span-1 md:inline-block mr-4">
             <h2 class="inline-block text-center p-2 w-10 mr-4">TH</h2>
             <input
@@ -391,6 +399,7 @@
             />
           </div>
         </div>
+        <hr />
         <!-- BOTTOM C - R -->
         <div
           class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
