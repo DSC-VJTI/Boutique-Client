@@ -16,19 +16,19 @@
         <div class="mb-8">
           <div class="text-black text-3xl mb-4">Who are we?</div>
           <p class="text-grey-darker font-light">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, nulla! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.<br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, nulla! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.
+            We at Fashion.o.Phile are obsessed with all things stylish! We define fashion with every garment, accessory and knick-knack that we conjure. 
+            <br><br>
+            You have the sass, we have the spunk! While we create and curate our own designs with our brilliant minded designers, we’re always open to pandering to your quirky ideas… Feel free to reach out to us for translating ideas in your head into real designs. Together we can make it happen.
+            <br><br>
+            Designer clothes, eye-catching masks, accessories with your initials or your name, mix-and-match brooches, bespoke evil-eye clutches, embroidered purses… anything and everything that will make your style quotient soar!
           </p>
         </div>
         <div class="text-4xl flex flex-row items-center">
-          <div class="text-black text-3xl inline-block">Follow Us:</div>
+          <div class="text-black text-2xl inline-block">Follow Us:</div>
           <a
-            class="px-8 hover:scale-110 transform duration-200 hover:text-gray-300"
+            class="px-4 md:px-8 hover:scale-110 transform duration-200 hover:text-gray-300"
             href="https://instagram.com/fashion.o.phile"
+            target="_blank"
           >
             <i class="fab fa-instagram"></i>
           </a>

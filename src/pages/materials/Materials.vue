@@ -1,7 +1,7 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div
-    class="container flex flex-col mx-auto w-11/12 md:w-3/5 lg:w-2/5 items-center justify-center"
+    class="container flex flex-col mx-auto w-11/12 items-center justify-center"
   >
     <h1 class="text-gray-800 text-center text-5xl font-bold font-serif my-8">
       Cost List
@@ -32,7 +32,7 @@
         </form>
       </div>
     </div>
-    <div class="grid grid-flow-col gap-8">
+    <div class="grid grid-flow-col gap-8 sr-only md:not-sr-only">
       <ul
         v-if="materials.length !== 0"
         class="flex flex-col mx-auto mb-4 w-full sm:w-96"
@@ -60,6 +60,19 @@
         ></material-item>
       </ul>
     </div>
+    <ul
+      v-if="materials.length !== 0"
+      class="flex flex-col mx-auto mb-4 w-full sm:w-96 not-sr-only md:sr-only"
+    >
+      <material-item
+        class="border-gray-400 flex flex-row mb-6 w-full"
+        v-for="material in materials.slice(0, materials.length)"
+        :key="material.id"
+        :name="material.client_name"
+        :dateCreated="material.created_on"
+        :id="material.id"
+      ></material-item>
+    </ul>
     <h3
       v-if="materials.length === 0"
       class="text-2xl mt-8 font-light text-gray-900"
