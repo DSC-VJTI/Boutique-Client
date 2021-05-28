@@ -23,13 +23,14 @@
       </flickity>
     </div>
 
+    <!-- Collections -->
     <section class="my-16">
       <collection
         class="m-4 md:m-10 px-8 sm:px-0 flex flex-col md:flex-row justify-evenly h-96"
         @loading="setIsLoading"
         @toast="displayToast"
-        v-for="(cell, ind) in collections"
-        :key="ind"
+        v-for="cell in collections"
+        :key="cell.id"
         :id="cell.id"
         :image="cell.image"
         :title="cell.title"
@@ -39,23 +40,28 @@
       </collection>
     </section>
 
+    <!-- New Arrivals -->
     <new-arrivals-grid
       :newArrivals="newArrivals"
       v-if="this.newArrivals.length > 0"
     />
 
+    <!-- Instagram -->
     <div class="grid lg:grid-cols-3 lg:grid-rows-1">
       <div class="col-span-2 grid grid-flow-col grid-cols-3 grid-rows-2 sm:m-0">
         <insta-item
           @loading="setIsLoading"
           @toast="displayToast"
-          v-for="(cell, ind) in instaImages"
-          :key="ind"
+          v-for="cell in instaImages"
+          :key="`${cell.id}`"
           :id="cell.id"
           :image="cell.image"
         ></insta-item>
       </div>
-      <div class="self-center md:m-10 m-5 sm:m-10">
+      <div
+        class="self-center md:m-10 m-5 sm:m-10"
+        v-if="this.instaImages.length > 0"
+      >
         <h1 class="font-extrabold font-serif text-5xl mb-5 text-gray-800 ">
           Instagram
         </h1>

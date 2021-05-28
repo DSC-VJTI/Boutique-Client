@@ -28,7 +28,7 @@
           class="bg-gray-900 cursor-pointer text-green-500 py-2 px-4 hover:bg-gray-50 hover:border-green-500 border transform transition duration-200 hover:-translate-y-1 hover:shadow-md"
           style="width: 100%;"
           for="file-input"
-          >Add Cover Photo
+          >Upload Image
           <input
             id="file-input"
             type="file"
@@ -52,8 +52,10 @@
           ></span>
         </div>
       </div>
-      <div class="mx-auto w-4/5 md:w-1/4 form-group">
-        <button @click="addItem()" type="submit">Save</button>
+      <div class="mx-5">
+        <div class="mx-auto w-4/5 md:w-1/4 form-group">
+          <button @click="addItem()" type="submit">Save</button>
+        </div>
       </div>
     </div>
   </div>

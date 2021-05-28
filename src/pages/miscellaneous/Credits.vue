@@ -74,7 +74,7 @@
               </li>
             </ul>
           </div>
-          <div class="w-full p-4">
+          <div class="w-full py-4">
             <h3 class="font-light text-gray-800 text-3xl">Devanshi Shah</h3>
             <p class="font-light text-gray-800 text-lg">Team Member</p>
           </div>

@@ -546,7 +546,6 @@ export default {
       }
     );
     this.measurement = { ...measurement };
-    console.log(this.measurement);
     this.isLoading = false;
     this.imageData = this.measurement.images;
   }

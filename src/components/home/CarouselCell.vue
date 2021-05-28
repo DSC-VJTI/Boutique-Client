@@ -7,10 +7,14 @@
       <p class="text-red-300 text-base font-mono w-5/6 sm:ml-16">
         {{ tag }}
       </p>
-      <h1 class="font-extrabold font-serif text-5xl text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16">
+      <h1
+        class="font-extrabold font-serif text-5xl text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16"
+      >
         {{ title }}
       </h1>
-      <p class="font-sans text-base text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16">
+      <p
+        class="font-sans text-base text-white mb-5 w-5/6 sm:w-2/3 lg:w-1/2 sm:ml-16"
+      >
         {{ description }}
       </p>
       <div class="">

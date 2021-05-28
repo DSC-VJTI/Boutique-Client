@@ -102,7 +102,7 @@ export default {
 
       if (response.status == 204) {
         const items = context.getters.getItems;
-        const itemIndex = items.findIndex(s => s.id == payload.c_id);
+        const itemIndex = items.findIndex(s => s.id == payload.image_id);
 
         if (itemIndex !== -1) {
           items.splice(itemIndex, 1);
