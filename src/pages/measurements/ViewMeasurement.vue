@@ -62,23 +62,13 @@
         ></div>
       </div>
       <hr />
-      <!-- DL AC C -->
+      <!-- DL -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block p-2 w-10 mr-4 text-center">
             DL:<span>{{ measurement.dl }}</span>
-          </h2>
-        </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
-            AC:<span>{{ measurement.ac }}</span>
-          </h2>
-        </div>
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block p-2 w-10 text-center mr-4">
-            C:<span>{{ measurement.c }}</span>
           </h2>
         </div>
       </div>
@@ -105,6 +95,22 @@
         </div>
       </div>
       <hr />
+      <!-- AC C -->
+      <div
+        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+      >
+        <div class="col-span-1 md:inline-block mr-4">
+          <h2 class="inline-block text-center p-2 w-10 mr-4">
+            AC:<span>{{ measurement.ac }}</span>
+          </h2>
+        </div>
+        <div class="col-span-1 md:inline-block mr-4">
+          <h2 class="inline-block p-2 w-10 text-center mr-4">
+            C:<span>{{ measurement.c }}</span>
+          </h2>
+        </div>
+      </div>
+      <hr />
       <!-- BC W LW -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
@@ -127,7 +133,7 @@
       </div>
       <hr />
 
-      <!-- SH ARM -->
+      <!-- H SH ARM -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
@@ -195,6 +201,18 @@
       >
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
+            W:<span>{{ measurement.bottom_l }}</span>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      <!-- L - F ANKLE HALF -->
+      <h2 class="px-8 text-xl text-gray-800">L</h2>
+      <div
+        class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
+      >
+        <div class="col-span-1 md:inline-block mr-4">
+          <h2 class="inline-block text-center p-2 w-10 mr-4">
             F:<span>{{ measurement.bottom_w.full }}</span>
           </h2>
         </div>
@@ -209,15 +227,11 @@
           </h2>
         </div>
       </div>
-      <!-- BOTTOM L - TH - C -->
+      <hr />
+      <!-- TH - K -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
-        <div class="col-span-1 md:inline-block mr-4">
-          <h2 class="inline-block text-center p-2 w-10 mr-4">
-            L:<span>{{ measurement.bottom_l }}</span>
-          </h2>
-        </div>
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
             TH:<span>{{ measurement.bottom_th }}</span>
@@ -225,17 +239,18 @@
         </div>
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
-            C:<span>{{ measurement.bottom_c }}</span>
+            K:<span>{{ measurement.bottom_k }}</span>
           </h2>
         </div>
       </div>
-      <!-- BOTTOM K - R -->
+      <hr />
+      <!-- BOTTOM C - R -->
       <div
         class="w-full grid col-span-1 justify-items-center md:grid-cols-3 px-8 space-y-2 text-gray-500 md:space-y-0"
       >
         <div class="col-span-1 md:inline-block mr-4">
           <h2 class="inline-block text-center p-2 w-10 mr-4">
-            K:<span>{{ measurement.bottom_k }}</span>
+            C:<span>{{ measurement.bottom_c }}</span>
           </h2>
         </div>
         <div class="col-span-1 md:inline-block mr-4">
