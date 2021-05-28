@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full">
     <nav
-      class="py-4 relative flex-none flex-wrap content-evenly text-right bg-gray-50"
+      class="relative flex-none flex-wrap content-evenly text-right bg-gray-50"
     >
       <div
         class="container sm:px-20 mx-auto flex flex-wrap items-center justify-between"
@@ -9,11 +9,11 @@
         <div
           class="w-full relative flex flex-no-shrink justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start"
         >
-          <!-- <router-link to="/">
-            <img src="./assets/logo.png" class="w-7 h-7" alt="" />
-          </router-link> -->
+          <router-link to="/">
+            <img src="./assets/logo.png" class="w-13 h-16 py-2" alt="" />
+          </router-link>
           <button
-            class="text-gray-800 cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none"
+            class="text-gray-800 text-right cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none"
             type="button"
             @click="toggleNavbar"
           >
@@ -34,26 +34,27 @@
           class="flex-col sm:flex-row list-none sm:flex-grow w-full sm:flex sm:w-4/5 sm:bg-transparent"
         >
           <router-link
-            class="text-center px-3 py-2 mr-0 md:mr-8 font-bold text-xl"
+            class="text-center px-3 py-4 mr-0 md:mr-8 font-bold text-xl"
             to="/"
             @click="toggleNavbar"
-            ><span>THE </span>
-            <span class="text-green-500">BOUTIQUE</span></router-link
+            ><span class="pr-2 text-gray-800">FASHION</span>
+            <span class="pr-2 text-gray-800">O</span>
+            <span class="pr-2 text-gray-800">PHILE</span></router-link
           >
           <router-link
-            class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
+            class="text-center px-3 py-4 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/shop"
             @click="toggleNavbar"
             >Shop</router-link
           >
           <router-link
-            class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
+            class="text-center px-3 py-4 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/about"
             @click="toggleNavbar"
             >About</router-link
           >
           <router-link
-            class="text-center px-3 py-2 border-b-2 border-transparent hover:border-gray-800 duration-200"
+            class="text-center px-3 py-4 border-b-2 border-transparent hover:border-gray-800 duration-200"
             to="/blogs"
             @click="toggleNavbar"
             >Blogs</router-link
@@ -61,7 +62,7 @@
 
           <div
             v-if="isAuthenticated"
-            class="dropdown px-3 py-2 mx-auto sm:mx-0"
+            class="dropdown px-3 py-4 mx-auto sm:mx-0"
           >
             <router-link class="text-center" to="/">Admin</router-link>
             <div class="dropdown-content">
@@ -110,7 +111,7 @@
 
           <div
             v-if="isAuthenticated"
-            class="dropdown px-3 py-2 mx-auto sm:mx-0"
+            class="dropdown px-3 py-4 mx-auto sm:mx-0"
           >
             <router-link class="text-center" to="/">Landing Page</router-link>
             <div class="dropdown-content">
@@ -136,16 +137,17 @@
           </div>
 
           <div
-            class="mx-auto sm:mr-0 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
+            class="mx-auto sm:mr-0 py-2 text-right"
           >
             <button
               v-if="isAuthenticated"
               @click="logout"
-              class="focus:outline-none font-medium px-3 py-2 text-white bg-gray-800 hover:bg-gray-50 hover:text-gray-800 transform transition duration-200 border hover:border-gray-800 float-right w-full h-full sm:w-24"
+              class="focus:outline-none font-medium px-3 py-2 text-white bg-gray-800 hover:bg-gray-50 hover:text-gray-800 transform transition duration-200 border hover:border-gray-800 float-right w-full h-full sm:w-24 hover:bg-white hover:-translate-y-0.5 transform transition duration-200 hover:shadow-xl"
             >
               Logout
             </button>
           </div>
+            
         </div>
       </div>
     </nav>
@@ -223,10 +225,6 @@ export default {
   display: block;
   text-align: left;
 }
-
-/* .dropdown-content a:hover {
-  background-color: #ddd;
-} */
 
 .dropdown:hover .dropdown-content {
   display: block;

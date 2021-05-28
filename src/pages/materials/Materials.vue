@@ -32,24 +32,39 @@
         </form>
       </div>
     </div>
-    <ul
-      v-if="materials.length !== 0"
-      class="flex flex-col mx-auto mb-4 w-full sm:w-96"
-    >
-      <material-item
-        class="border-gray-400 flex flex-row mb-6 w-full"
-        v-for="material in materials"
-        :key="material.id"
-        :name="material.client_name"
-        :dateCreated="material.created_on"
-        :id="material.id"
-      ></material-item>
-    </ul>
+    <div class="grid grid-flow-col gap-8">
+      <ul
+        v-if="materials.length !== 0"
+        class="flex flex-col mx-auto mb-4 w-full sm:w-96"
+      >
+        <material-item
+          class="border-gray-400 flex flex-row mb-6 w-full"
+          v-for="material in materials.slice(materials.length/2, materials.length)"
+          :key="material.id"
+          :name="material.client_name"
+          :dateCreated="material.created_on"
+          :id="material.id"
+        ></material-item>
+      </ul>
+      <ul
+        v-if="materials.length !== 0"
+        class="flex flex-col mx-auto mb-4 w-full sm:w-96"
+      >
+        <material-item
+          class="border-gray-400 flex flex-row mb-6 w-full"
+          v-for="material in materials.slice(0, materials.length/2)"
+          :key="material.id"
+          :name="material.client_name"
+          :dateCreated="material.created_on"
+          :id="material.id"
+        ></material-item>
+      </ul>
+    </div>
     <h3
       v-if="materials.length === 0"
       class="text-2xl mt-8 font-light text-gray-900"
     >
-      You haven't added any Cost List yet! Add some..
+      You haven't added any Cost Lists yet!
     </h3>
   </div>
 </template>
