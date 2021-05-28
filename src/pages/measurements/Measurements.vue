@@ -1,7 +1,7 @@
 <template>
   <base-spinner :show="isLoading"></base-spinner>
   <div
-    class="container flex flex-col mx-auto w-11/12 md:w-3/5 lg:w-2/5 items-center justify-center"
+    class="container flex flex-col mx-auto w-11/12 items-center justify-center"
   >
     <h1 class="text-gray-800 text-center text-5xl font-bold font-serif my-8">
       Measurements
@@ -32,13 +32,44 @@
         </form>
       </div>
     </div>
+    <div class="grid grid-flow-col gap-8 sr-only md:not-sr-only">
+      <ul
+        v-if="measurements.length !== 0"
+        class="flex flex-col mx-auto mb-4 w-full sm:w-96"
+      >
+        <measurement-item
+          class="border-gray-400 flex flex-row mb-6 w-full"
+          v-for="measurement in measurements.slice(
+            measurements.length / 2,
+            measurements.length
+          )"
+          :key="measurement.id"
+          :name="measurement.client_name"
+          :dateCreated="measurement.created_on"
+          :id="measurement.id"
+        ></measurement-item>
+      </ul>
+      <ul
+        v-if="measurements.length !== 0"
+        class="flex flex-col mx-auto mb-4 w-full sm:w-96"
+      >
+        <measurement-item
+          class="border-gray-400 flex flex-row mb-6 w-full"
+          v-for="measurement in measurements.slice(0, measurements.length / 2)"
+          :key="measurement.id"
+          :name="measurement.client_name"
+          :dateCreated="measurement.created_on"
+          :id="measurement.id"
+        ></measurement-item>
+      </ul>
+    </div>
     <ul
       v-if="measurements.length !== 0"
-      class="flex flex-col mx-auto mb-4 w-full sm:w-96"
+      class="flex flex-col mx-auto mb-4 w-full sm:w-96 not-sr-only md:sr-only"
     >
       <measurement-item
         class="border-gray-400 flex flex-row mb-6 w-full"
-        v-for="measurement in measurements"
+        v-for="measurement in measurements.slice(0, measurements.length)"
         :key="measurement.id"
         :name="measurement.client_name"
         :dateCreated="measurement.created_on"

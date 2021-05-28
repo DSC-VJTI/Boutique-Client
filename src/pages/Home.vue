@@ -29,7 +29,7 @@
         class="m-4 md:m-10 px-8 sm:px-0 flex flex-col md:flex-row justify-evenly h-96"
         @loading="setIsLoading"
         @toast="displayToast"
-        v-for="cell in collections"
+        v-for="(cell, ind) in collections"
         :key="cell.id"
         :id="cell.id"
         :image="cell.image"
@@ -69,9 +69,12 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
           scelerisque rutrum ultrices.
         </p>
-        <h1 class="font-extrabold font-mono text-4xl text-gray-500 my-10">
-          #The_Boutique
-        </h1>
+        <a
+          href="https://instagram.com/fashion.o.phile"
+          class="font-extrabold font-mono text-4xl text-gray-400 hover:opacity-80 my-10"
+        >
+          @fashion.o.phile
+        </a>
       </div>
     </div>
   </div>

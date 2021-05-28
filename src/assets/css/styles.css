@@ -266,5 +266,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scrollable-element {
-    scrollbar-color: dark;
-  }
+  scrollbar-color: dark;
+}
+
+.text-graypink {
+    color: #E6D0D3;
+}
+
+.bg-graypink {
+    background-color: #E6D0D3;
+}
