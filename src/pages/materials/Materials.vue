@@ -39,7 +39,10 @@
       >
         <material-item
           class="border-gray-400 flex flex-row mb-6 w-full"
-          v-for="material in materials.slice(materials.length/2, materials.length)"
+          v-for="material in materials.slice(
+            materials.length / 2,
+            materials.length
+          )"
           :key="material.id"
           :name="material.client_name"
           :dateCreated="material.created_on"
@@ -52,7 +55,7 @@
       >
         <material-item
           class="border-gray-400 flex flex-row mb-6 w-full"
-          v-for="material in materials.slice(0, materials.length/2)"
+          v-for="material in materials.slice(0, materials.length / 2)"
           :key="material.id"
           :name="material.client_name"
           :dateCreated="material.created_on"

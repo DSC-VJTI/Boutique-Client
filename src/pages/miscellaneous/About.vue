@@ -3,9 +3,7 @@
     <h1 class="text-gray-800 text-center text-5xl font-bold font-serif my-8">
       About Us
     </h1>
-    <div
-      class="w-5/6 sm:w-2/3 md:flex mx-auto m-5 my-10 md:my-0 shadow-2xl"
-    >
+    <div class="w-5/6 sm:w-2/3 md:flex mx-auto m-5 my-10 md:my-0 shadow-2xl">
       <div
         class="h-48 w-full md:h-auto md:w-1/3 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
         style="background-image: url('https://images.unsplash.com/photo-1519167130418-c3640bd21b7e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjZ8fGNsb3RoZXN8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60')"
@@ -16,11 +14,20 @@
         <div class="mb-8">
           <div class="text-black text-3xl mb-4">Who are we?</div>
           <p class="text-grey-darker font-light">
-            We at Fashion.o.Phile are obsessed with all things stylish! We define fashion with every garment, accessory and knick-knack that we conjure. 
-            <br><br>
-            You have the sass, we have the spunk! While we create and curate our own designs with our brilliant minded designers, we’re always open to pandering to your quirky ideas… Feel free to reach out to us for translating ideas in your head into real designs. Together we can make it happen.
-            <br><br>
-            Designer clothes, eye-catching masks, accessories with your initials or your name, mix-and-match brooches, bespoke evil-eye clutches, embroidered purses… anything and everything that will make your style quotient soar!
+            We at Fashion.o.Phile are obsessed with all things stylish! We
+            define fashion with every garment, accessory and knick-knack that we
+            conjure.
+            <br /><br />
+            You have the sass, we have the spunk! While we create and curate our
+            own designs with our brilliant minded designers, we’re always open
+            to pandering to your quirky ideas… Feel free to reach out to us for
+            translating ideas in your head into real designs. Together we can
+            make it happen.
+            <br /><br />
+            Designer clothes, eye-catching masks, accessories with your initials
+            or your name, mix-and-match brooches, bespoke evil-eye clutches,
+            embroidered purses… anything and everything that will make your
+            style quotient soar!
           </p>
         </div>
         <div class="text-4xl flex flex-row items-center">

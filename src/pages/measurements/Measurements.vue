@@ -32,14 +32,17 @@
         </form>
       </div>
     </div>
-    <div class="grid grid-flow-col gap-8">
+    <div class="grid grid-flow-col gap-8 sr-only md:not-sr-only">
       <ul
         v-if="measurements.length !== 0"
         class="flex flex-col mx-auto mb-4 w-full sm:w-96"
       >
         <measurement-item
           class="border-gray-400 flex flex-row mb-6 w-full"
-          v-for="measurement in measurements.slice(measurements.length/2, measurements.length)"
+          v-for="measurement in measurements.slice(
+            measurements.length / 2,
+            measurements.length
+          )"
           :key="measurement.id"
           :name="measurement.client_name"
           :dateCreated="measurement.created_on"
@@ -52,7 +55,7 @@
       >
         <measurement-item
           class="border-gray-400 flex flex-row mb-6 w-full"
-          v-for="measurement in measurements.slice(0, measurements.length/2)"
+          v-for="measurement in measurements.slice(0, measurements.length / 2)"
           :key="measurement.id"
           :name="measurement.client_name"
           :dateCreated="measurement.created_on"
@@ -60,6 +63,19 @@
         ></measurement-item>
       </ul>
     </div>
+    <ul
+      v-if="measurements.length !== 0"
+      class="flex flex-col mx-auto mb-4 w-full sm:w-96 not-sr-only md:sr-only"
+    >
+      <measurement-item
+        class="border-gray-400 flex flex-row mb-6 w-full"
+        v-for="measurement in measurements.slice(0, measurements.length)"
+        :key="measurement.id"
+        :name="measurement.client_name"
+        :dateCreated="measurement.created_on"
+        :id="measurement.id"
+      ></measurement-item>
+    </ul>
     <h3
       v-if="measurements.length === 0"
       class="text-2xl mt-8 font-light text-gray-900"

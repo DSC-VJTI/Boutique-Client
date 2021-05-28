@@ -13,7 +13,7 @@
             <img src="./assets/logo.png" class="w-13 h-16 py-2" alt="" />
           </router-link>
           <button
-            class="text-gray-800 text-right cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none"
+            class="text-gray-800 text-right cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
             @click="toggleNavbar"
           >
@@ -31,10 +31,10 @@
         </div>
         <div
           :class="showMenu ? 'flex' : 'hidden'"
-          class="flex-col sm:flex-row list-none sm:flex-grow w-full sm:flex sm:w-4/5 sm:bg-transparent"
+          class="flex-col lg:flex-row list-none lg:flex-grow w-full lg:flex lg:w-4/5 lg:bg-transparent"
         >
           <router-link
-            class="text-center px-3 py-4 mr-0 md:mr-8 font-bold text-xl"
+            class="text-center px-3 py-4 mr-0 lg:mr-8 font-bold text-xl"
             to="/"
             @click="toggleNavbar"
             ><span class="pr-2 text-gray-800">FASHION</span>
@@ -62,7 +62,7 @@
 
           <div
             v-if="isAuthenticated"
-            class="dropdown px-3 py-4 mx-auto sm:mx-0"
+            class="dropdown px-3 py-4 mx-auto lg:mx-0"
           >
             <router-link class="text-center" to="/">Admin</router-link>
             <div class="dropdown-content">
@@ -111,7 +111,7 @@
 
           <div
             v-if="isAuthenticated"
-            class="dropdown px-3 py-4 mx-auto sm:mx-0"
+            class="dropdown px-3 py-4 mx-auto lg:mx-0"
           >
             <router-link class="text-center" to="/">Landing Page</router-link>
             <div class="dropdown-content">
@@ -136,9 +136,7 @@
             </div>
           </div>
 
-          <div
-            class="mx-auto sm:mr-0 py-2 text-right"
-          >
+          <div class="mx-auto lg:mr-0 py-2 text-right">
             <button
               v-if="isAuthenticated"
               @click="logout"
@@ -147,7 +145,6 @@
               Logout
             </button>
           </div>
-            
         </div>
       </div>
     </nav>
