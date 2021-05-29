@@ -260,6 +260,14 @@
         </div>
       </div>
       <hr />
+      <!-- NOTES -->
+      <h2 class="px-8 text-xl text-gray-800">NOTES</h2>
+      <div class="w-full px-8 text-gray-500">
+        <div class="mr-4">
+          {{ measurement.notes }}
+        </div>
+      </div>
+      <hr />
     </div>
   </div>
 </template>

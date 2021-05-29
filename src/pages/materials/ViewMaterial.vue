@@ -150,6 +150,15 @@
           </h2>
         </div>
       </div>
+
+      <!-- NOTES -->
+      <h2 class="px-8 text-xl text-gray-800">NOTES</h2>
+      <div class="w-full px-8 text-gray-500">
+        <div class="mr-4">
+          {{ material.notes }}
+        </div>
+      </div>
+      <hr />
     </div>
   </div>
 </template>
@@ -176,6 +185,7 @@ export default {
           item === "last_updated" ||
           item === "id" ||
           item === "created_on" ||
+          item === "notes" ||
           this.material[item] === ""
         ) {
           continue;

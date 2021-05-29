@@ -184,6 +184,25 @@ button {
     @apply focus:border-transparent;
 }
 
+.notes{
+    @apply border-transparent;
+    @apply flex-1;
+    @apply appearance-none;
+    @apply border;
+    @apply border-gray-300;
+    @apply py-2;
+    @apply px-4;
+    @apply bg-white;
+    @apply text-gray-700;
+    @apply placeholder-gray-400;
+    @apply shadow-sm;
+    @apply text-sm;
+    @apply focus:outline-none;
+    @apply focus:ring-2;
+    @apply focus:ring-gray-800;
+    @apply focus:border-transparent;
+}
+
 .blogCover {
     width: 100%;
     height: 400px;
