@@ -395,6 +395,20 @@
             <br />
           </div>
         </div>
+        <!-- NOTES -->
+        <h2 class="px-8 text-xl text-gray-800">NOTES</h2>
+        <div class="w-full px-8 text-gray-500">
+          <div class="mr-4">
+            <textarea
+              type="text"
+              class="notes w-full"
+              rows="5"
+              placeholder="Notes"
+              v-model="measurement.notes"
+            ></textarea>
+          </div>
+        </div>
+        <hr />
         <!-- SAVE -->
         <div
           class="w-full grid bg-gray-100 py-6 px-16 md:px-4 md:inline-flex shadow-md justify-items-end md:space-y-0"
@@ -419,6 +433,7 @@ export default {
     return {
       measurement: {
         client_name: "",
+        notes: "",
         dl: "",
         ac: "",
         c: "",

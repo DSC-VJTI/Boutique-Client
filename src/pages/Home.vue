@@ -65,10 +65,6 @@
         <h1 class="font-extrabold font-serif text-5xl mb-5 text-gray-800 ">
           Instagram
         </h1>
-        <p class="font-sans text-base mb-5">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          scelerisque rutrum ultrices.
-        </p>
         <a
           href="https://instagram.com/fashion.o.phile"
           class="font-extrabold font-mono text-4xl text-gray-400 hover:opacity-80 my-10"

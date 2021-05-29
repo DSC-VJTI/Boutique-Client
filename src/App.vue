@@ -10,7 +10,11 @@
           class="w-full relative flex flex-no-shrink justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start"
         >
           <router-link to="/">
-            <img src="./assets/logo.png" class="w-13 h-16 py-2" alt="" />
+            <img
+              src="./assets/black_bg_logo.png"
+              class="w-13 h-16 py-2"
+              alt=""
+            />
           </router-link>
           <button
             class="text-gray-800 text-right cursor-pointer text-xl leading-none px-3 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
@@ -37,9 +41,11 @@
             class="text-center px-3 py-4 mr-0 lg:mr-8 font-bold text-xl"
             to="/"
             @click="toggleNavbar"
-            ><span class="pr-2 text-gray-800">FASHION</span>
-            <span class="pr-2 text-gray-800">O</span>
-            <span class="pr-2 text-gray-800">PHILE</span></router-link
+            ><span class="text-gray-800">FASHION</span>
+            <span class="px-0.5 text-gray-800 font-extrabold">&#183;</span>
+            <span class="text-gray-800">O</span>
+            <span class="px-0.5 text-gray-800 font-extrabold">&#183;</span>
+            <span class="text-gray-800">PHILE</span></router-link
           >
           <router-link
             class="text-center px-3 py-4 border-b-2 border-transparent hover:border-gray-800 duration-200"
