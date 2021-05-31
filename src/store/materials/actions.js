@@ -54,7 +54,7 @@ export default {
     try {
       const response = await axios.get(
         context.rootGetters.getUrl +
-          `api/admin/materials/${payload.material_id}/`,
+          `api/admin/materials/${payload.material_id}`,
         {
           headers: {
             ContentType: "application/json",
@@ -72,7 +72,7 @@ export default {
     try {
       const response = await axios.put(
         context.rootGetters.getUrl +
-          `api/admin/materials/${payload.material_id}/`,
+          `api/admin/materials/${payload.material_id}`,
         payload.material,
         {
           headers: {
@@ -103,7 +103,7 @@ export default {
     try {
       const response = await axios.delete(
         context.rootGetters.getUrl +
-          `api/admin/materials/${payload.material_id}/`,
+          `api/admin/materials/${payload.material_id}`,
         {
           headers: {
             ContentType: "application/json",

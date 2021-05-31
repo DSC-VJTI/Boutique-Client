@@ -96,7 +96,7 @@ export default {
 
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}/`,
+        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
         {
           headers: {
             ContentType: "application/json"
@@ -112,12 +112,12 @@ export default {
   async updateCurrentBlog(context, payload) {
     if (payload.image) {
       let imgurl = await uploadToCloudinary(payload.image, payload.body.title);
-      if (imgurl) payload.body.image = imgurl;
+      if (isNaN(imgurl)) payload.body.image = imgurl;
       else return imgurl;
     }
     try {
       const response = await axios.put(
-        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}/`,
+        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
         payload.body,
         {
           headers: {
@@ -145,7 +145,7 @@ export default {
   async deleteCurrentBlog(context, payload) {
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}/`,
+        context.rootGetters.getUrl + `api/blogs/${payload.blog_id}`,
         {
           headers: {
             ContentType: "application/json",

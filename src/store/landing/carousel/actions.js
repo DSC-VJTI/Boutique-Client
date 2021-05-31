@@ -96,7 +96,7 @@ export default {
 
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}/`,
+        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}`,
         {
           headers: {
             ContentType: "application/json"
@@ -112,12 +112,12 @@ export default {
   async updateSlide(context, payload) {
     if (payload.image) {
       let imgurl = await uploadToCloudinary(payload.image, payload.body.title);
-      if (imgurl) payload.body.image = imgurl;
+      if (isNaN(imgurl)) payload.body.image = imgurl;
       else return imgurl;
     }
     try {
       const response = await axios.put(
-        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}/`,
+        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}`,
         payload.body,
         {
           headers: {
@@ -145,7 +145,7 @@ export default {
   async deleteSlide(context, payload) {
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}/`,
+        context.rootGetters.getUrl + `api/admin/carousel/${payload.slide_id}`,
         {
           headers: {
             ContentType: "application/json",

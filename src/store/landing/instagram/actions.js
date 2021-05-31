@@ -91,7 +91,7 @@ export default {
   async deleteItem(context, payload) {
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/admin/instagram/${payload.image_id}/`,
+        context.rootGetters.getUrl + `api/admin/instagram/${payload.image_id}`,
         {
           headers: {
             ContentType: "application/json",

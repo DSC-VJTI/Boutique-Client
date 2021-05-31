@@ -104,7 +104,7 @@ export default {
     try {
       const response = await axios.get(
         context.rootGetters.getUrl +
-          `api/admin/products/${payload.product_id}/`,
+          `api/admin/products/${payload.product_id}`,
         {
           headers: {
             ContentType: "application/json"
@@ -165,7 +165,7 @@ export default {
     try {
       const response = await axios.put(
         context.rootGetters.getUrl +
-          `api/admin/products/${payload.product_id}/`,
+          `api/admin/products/${payload.product_id}`,
         payload.body,
         {
           headers: {
@@ -196,7 +196,7 @@ export default {
     try {
       const response = await axios.delete(
         context.rootGetters.getUrl +
-          `api/admin/products/${payload.product_id}/`,
+          `api/admin/products/${payload.product_id}`,
         {
           headers: {
             ContentType: "application/json",
