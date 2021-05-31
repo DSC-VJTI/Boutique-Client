@@ -35,7 +35,7 @@ export default {
     try {
       const response = await axios.get(
         context.rootGetters.getUrl +
-          `api/admin/sub_categories/${payload.subcat_id}/`,
+          `api/admin/sub_categories/${payload.subcat_id}`,
         context.rootGetters.getConfig
       );
       return response.data;
@@ -50,7 +50,7 @@ export default {
     if (cat.length) return cat[0];
     try {
       const response = await axios.get(
-        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}/`,
+        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}`,
         context.rootGetters.getConfig
       );
       return response.data;
@@ -112,7 +112,7 @@ export default {
   async updateCategory(context, payload) {
     try {
       const response = await axios.put(
-        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}/`,
+        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}`,
         payload.body,
         {
           headers: {
@@ -142,7 +142,7 @@ export default {
     try {
       const response = await axios.put(
         context.rootGetters.getUrl +
-          `api/admin/sub_categories/${payload.subcat_id}/`,
+          `api/admin/sub_categories/${payload.subcat_id}`,
         payload.body,
         {
           headers: {
@@ -184,7 +184,7 @@ export default {
 
     try {
       const response = await axios.delete(
-        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}/`,
+        context.rootGetters.getUrl + `api/admin/categories/${payload.cat_id}`,
         {
           headers: {
             ContentType: "application/json",
@@ -216,7 +216,7 @@ export default {
     try {
       const response = await axios.delete(
         context.rootGetters.getUrl +
-          `api/admin/sub_categories/${payload.subcat_id}/`,
+          `api/admin/sub_categories/${payload.subcat_id}`,
         {
           headers: {
             ContentType: "application/json",
